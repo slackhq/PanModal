@@ -1,0 +1,669 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */; };
+		743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */; };
+		743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */; };
+		743CABB62225FEEE00634A5A /* UserGroupHeaderPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB52225FEEE00634A5A /* UserGroupHeaderPresentable.swift */; };
+		743CABB8222600C600634A5A /* UserGroupMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB7222600C600634A5A /* UserGroupMemberCell.swift */; };
+		743CABBC22260A0300634A5A /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 743CABBA22260A0300634A5A /* Lato-Bold.ttf */; };
+		743CABBD22260A0300634A5A /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 743CABBB22260A0300634A5A /* Lato-Regular.ttf */; };
+		743CABC72226171500634A5A /* PanModalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABC62226171500634A5A /* PanModalTests.swift */; };
+		743CABD322265F2E00634A5A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABD222265F2E00634A5A /* ProfileViewController.swift */; };
+		743CB2AA222660D100665A55 /* StackedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CB2A9222660D100665A55 /* StackedProfileViewController.swift */; };
+		74C072A3220BA6E500124CE1 /* PanModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A2220BA6E500124CE1 /* PanModalAnimator.swift */; };
+		74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A4220BA76D00124CE1 /* PanModalHeight.swift */; };
+		74C072A7220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A6220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift */; };
+		74C072AA220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */; };
+		943904EB2226354100859537 /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EA2226354100859537 /* BasicViewController.swift */; };
+		943904ED2226366700859537 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EC2226366700859537 /* AlertViewController.swift */; };
+		943904EF2226383700859537 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EE2226383700859537 /* NavigationController.swift */; };
+		943904F32226484F00859537 /* UserGroupStackedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904F22226484F00859537 /* UserGroupStackedViewController.swift */; };
+		94795C9B21F0335D008045A0 /* PanModalPresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9A21F0335D008045A0 /* PanModalPresentationDelegate.swift */; };
+		94795C9D21F03368008045A0 /* PanContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9C21F03368008045A0 /* PanContainerView.swift */; };
+		DC13905E216D90D5007A3E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC13905D216D90D5007A3E64 /* Assets.xcassets */; };
+		DC139061216D93ED007A3E64 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139060216D93ED007A3E64 /* SampleViewController.swift */; };
+		DC139070216D9458007A3E64 /* PanModalPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139066216D9458007A3E64 /* PanModalPresentationAnimator.swift */; };
+		DC139071216D9458007A3E64 /* PanModalPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139068216D9458007A3E64 /* PanModalPresentable.swift */; };
+		DC139072216D9458007A3E64 /* PanModalPresentable+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139069216D9458007A3E64 /* PanModalPresentable+UIViewController.swift */; };
+		DC139073216D9458007A3E64 /* PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906A216D9458007A3E64 /* PanModalPresenter.swift */; };
+		DC139074216D9458007A3E64 /* PanModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906C216D9458007A3E64 /* PanModalPresentationController.swift */; };
+		DC139075216D9458007A3E64 /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906E216D9458007A3E64 /* DimmedView.swift */; };
+		DCA741AE216D90410021F2F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA741AD216D90410021F2F2 /* AppDelegate.swift */; };
+		DCC0EE7C21917F2500208DBC /* PanModalPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		743CABC92226171500634A5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCA741A2216D90410021F2F2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DCA741A9216D90410021F2F2;
+			remoteInfo = PanModal;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
+		743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupHeaderView.swift; sourceTree = "<group>"; };
+		743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupMemberPresentable.swift; sourceTree = "<group>"; };
+		743CABB52225FEEE00634A5A /* UserGroupHeaderPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupHeaderPresentable.swift; sourceTree = "<group>"; };
+		743CABB7222600C600634A5A /* UserGroupMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupMemberCell.swift; sourceTree = "<group>"; };
+		743CABBA22260A0300634A5A /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		743CABBB22260A0300634A5A /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		743CABC42226171500634A5A /* PanModalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PanModalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		743CABC62226171500634A5A /* PanModalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalTests.swift; sourceTree = "<group>"; };
+		743CABC82226171500634A5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		743CABD222265F2E00634A5A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		743CB2A9222660D100665A55 /* StackedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedProfileViewController.swift; sourceTree = "<group>"; };
+		74C072A2220BA6E500124CE1 /* PanModalAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalAnimator.swift; sourceTree = "<group>"; };
+		74C072A4220BA76D00124CE1 /* PanModalHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalHeight.swift; sourceTree = "<group>"; };
+		74C072A6220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+LayoutHelpers.swift"; sourceTree = "<group>"; };
+		74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PanModalPresenter.swift"; sourceTree = "<group>"; };
+		943904EA2226354100859537 /* BasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
+		943904EC2226366700859537 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		943904EE2226383700859537 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		943904F22226484F00859537 /* UserGroupStackedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupStackedViewController.swift; sourceTree = "<group>"; };
+		94795C9A21F0335D008045A0 /* PanModalPresentationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresentationDelegate.swift; sourceTree = "<group>"; };
+		94795C9C21F03368008045A0 /* PanContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanContainerView.swift; sourceTree = "<group>"; };
+		DC13905D216D90D5007A3E64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DC139060216D93ED007A3E64 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
+		DC139066216D9458007A3E64 /* PanModalPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresentationAnimator.swift; sourceTree = "<group>"; };
+		DC139068216D9458007A3E64 /* PanModalPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresentable.swift; sourceTree = "<group>"; };
+		DC139069216D9458007A3E64 /* PanModalPresentable+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+UIViewController.swift"; sourceTree = "<group>"; };
+		DC13906A216D9458007A3E64 /* PanModalPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresenter.swift; sourceTree = "<group>"; };
+		DC13906C216D9458007A3E64 /* PanModalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresentationController.swift; sourceTree = "<group>"; };
+		DC13906E216D9458007A3E64 /* DimmedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmedView.swift; sourceTree = "<group>"; };
+		DCA741AA216D90410021F2F2 /* PanModal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PanModal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA741AD216D90410021F2F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DCA741B9216D90420021F2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+Defaults.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		743CABC12226171500634A5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA741A7216D90410021F2F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		743CABAE2225FC4A00634A5A /* User Groups */ = {
+			isa = PBXGroup;
+			children = (
+				743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */,
+				743CABBF2226105700634A5A /* Presentables */,
+				743CABBE2226105200634A5A /* Views */,
+			);
+			path = "User Groups";
+			sourceTree = "<group>";
+		};
+		743CABB92226093700634A5A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				743CABBA22260A0300634A5A /* Lato-Bold.ttf */,
+				743CABBB22260A0300634A5A /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		743CABBE2226105200634A5A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */,
+				743CABB7222600C600634A5A /* UserGroupMemberCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		743CABBF2226105700634A5A /* Presentables */ = {
+			isa = PBXGroup;
+			children = (
+				743CABB52225FEEE00634A5A /* UserGroupHeaderPresentable.swift */,
+				743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */,
+			);
+			path = Presentables;
+			sourceTree = "<group>";
+		};
+		743CABC52226171500634A5A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				743CABC62226171500634A5A /* PanModalTests.swift */,
+				743CABC82226171500634A5A /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		743CABD122265F0400634A5A /* User Groups (Navigation Controller) */ = {
+			isa = PBXGroup;
+			children = (
+				943904EE2226383700859537 /* NavigationController.swift */,
+				743CABD222265F2E00634A5A /* ProfileViewController.swift */,
+			);
+			path = "User Groups (Navigation Controller)";
+			sourceTree = "<group>";
+		};
+		743CB2AB222661EA00665A55 /* User Groups (Stacked) */ = {
+			isa = PBXGroup;
+			children = (
+				943904F22226484F00859537 /* UserGroupStackedViewController.swift */,
+				743CB2A9222660D100665A55 /* StackedProfileViewController.swift */,
+			);
+			path = "User Groups (Stacked)";
+			sourceTree = "<group>";
+		};
+		74C072A8220BA80700124CE1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				DC13906A216D9458007A3E64 /* PanModalPresenter.swift */,
+				74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		DC13905F216D93AB007A3E64 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				743CABB92226093700634A5A /* Fonts */,
+				DC13905D216D90D5007A3E64 /* Assets.xcassets */,
+				DCA741B9216D90420021F2F2 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DC139062216D9431007A3E64 /* PanModal */ = {
+			isa = PBXGroup;
+			children = (
+				DC139065216D9458007A3E64 /* Animator */,
+				DC13906B216D9458007A3E64 /* Controller */,
+				DC139063216D9458007A3E64 /* Delegate */,
+				DC139067216D9458007A3E64 /* Presentable */,
+				74C072A8220BA80700124CE1 /* Presenter */,
+				DC13906D216D9458007A3E64 /* View */,
+			);
+			path = PanModal;
+			sourceTree = "<group>";
+		};
+		DC139063216D9458007A3E64 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				94795C9A21F0335D008045A0 /* PanModalPresentationDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		DC139065216D9458007A3E64 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				74C072A2220BA6E500124CE1 /* PanModalAnimator.swift */,
+				DC139066216D9458007A3E64 /* PanModalPresentationAnimator.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		DC139067216D9458007A3E64 /* Presentable */ = {
+			isa = PBXGroup;
+			children = (
+				74C072A4220BA76D00124CE1 /* PanModalHeight.swift */,
+				DC139068216D9458007A3E64 /* PanModalPresentable.swift */,
+				DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */,
+				DC139069216D9458007A3E64 /* PanModalPresentable+UIViewController.swift */,
+				74C072A6220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift */,
+			);
+			path = Presentable;
+			sourceTree = "<group>";
+		};
+		DC13906B216D9458007A3E64 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DC13906C216D9458007A3E64 /* PanModalPresentationController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DC13906D216D9458007A3E64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DC13906E216D9458007A3E64 /* DimmedView.swift */,
+				94795C9C21F03368008045A0 /* PanContainerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DC139079216D9AAA007A3E64 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				943904EC2226366700859537 /* AlertViewController.swift */,
+				943904EA2226354100859537 /* BasicViewController.swift */,
+				743CB2AB222661EA00665A55 /* User Groups (Stacked) */,
+				743CABD122265F0400634A5A /* User Groups (Navigation Controller) */,
+				743CABAE2225FC4A00634A5A /* User Groups */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		DCA741A1216D90410021F2F2 = {
+			isa = PBXGroup;
+			children = (
+				DCA741AC216D90410021F2F2 /* Sample */,
+				DC139062216D9431007A3E64 /* PanModal */,
+				743CABC52226171500634A5A /* Tests */,
+				DCA741AB216D90410021F2F2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DCA741AB216D90410021F2F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCA741AA216D90410021F2F2 /* PanModal.app */,
+				743CABC42226171500634A5A /* PanModalTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCA741AC216D90410021F2F2 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				DCA741AD216D90410021F2F2 /* AppDelegate.swift */,
+				DC139060216D93ED007A3E64 /* SampleViewController.swift */,
+				DC139079216D9AAA007A3E64 /* View Controllers */,
+				DC13905F216D93AB007A3E64 /* Resources */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		743CABC32226171500634A5A /* PanModalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 743CABCB2226171500634A5A /* Build configuration list for PBXNativeTarget "PanModalTests" */;
+			buildPhases = (
+				743CABC02226171500634A5A /* Sources */,
+				743CABC12226171500634A5A /* Frameworks */,
+				743CABC22226171500634A5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				743CABCA2226171500634A5A /* PBXTargetDependency */,
+			);
+			name = PanModalTests;
+			productName = PanModalTests;
+			productReference = 743CABC42226171500634A5A /* PanModalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DCA741A9216D90410021F2F2 /* PanModal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCA741BC216D90420021F2F2 /* Build configuration list for PBXNativeTarget "PanModal" */;
+			buildPhases = (
+				DCA741A6216D90410021F2F2 /* Sources */,
+				DCA741A7216D90410021F2F2 /* Frameworks */,
+				DCA741A8216D90410021F2F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PanModal;
+			productName = PanModal;
+			productReference = DCA741AA216D90410021F2F2 /* PanModal.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCA741A2216D90410021F2F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = Detail;
+				TargetAttributes = {
+					743CABC32226171500634A5A = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = DCA741A9216D90410021F2F2;
+					};
+					DCA741A9216D90410021F2F2 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+				};
+			};
+			buildConfigurationList = DCA741A5216D90410021F2F2 /* Build configuration list for PBXProject "PanModal" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DCA741A1216D90410021F2F2;
+			productRefGroup = DCA741AB216D90410021F2F2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCA741A9216D90410021F2F2 /* PanModal */,
+				743CABC32226171500634A5A /* PanModalTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		743CABC22226171500634A5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA741A8216D90410021F2F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC13905E216D90D5007A3E64 /* Assets.xcassets in Resources */,
+				743CABBD22260A0300634A5A /* Lato-Regular.ttf in Resources */,
+				743CABBC22260A0300634A5A /* Lato-Bold.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		743CABC02226171500634A5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				743CABC72226171500634A5A /* PanModalTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA741A6216D90410021F2F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */,
+				74C072A3220BA6E500124CE1 /* PanModalAnimator.swift in Sources */,
+				743CABB8222600C600634A5A /* UserGroupMemberCell.swift in Sources */,
+				743CABB62225FEEE00634A5A /* UserGroupHeaderPresentable.swift in Sources */,
+				743CB2AA222660D100665A55 /* StackedProfileViewController.swift in Sources */,
+				943904EB2226354100859537 /* BasicViewController.swift in Sources */,
+				DC139073216D9458007A3E64 /* PanModalPresenter.swift in Sources */,
+				943904EF2226383700859537 /* NavigationController.swift in Sources */,
+				74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */,
+				94795C9B21F0335D008045A0 /* PanModalPresentationDelegate.swift in Sources */,
+				943904F32226484F00859537 /* UserGroupStackedViewController.swift in Sources */,
+				74C072AA220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift in Sources */,
+				943904ED2226366700859537 /* AlertViewController.swift in Sources */,
+				743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */,
+				DC139072216D9458007A3E64 /* PanModalPresentable+UIViewController.swift in Sources */,
+				DC139074216D9458007A3E64 /* PanModalPresentationController.swift in Sources */,
+				DC139071216D9458007A3E64 /* PanModalPresentable.swift in Sources */,
+				DC139061216D93ED007A3E64 /* SampleViewController.swift in Sources */,
+				743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */,
+				DCC0EE7C21917F2500208DBC /* PanModalPresentable+Defaults.swift in Sources */,
+				94795C9D21F03368008045A0 /* PanContainerView.swift in Sources */,
+				74C072A7220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift in Sources */,
+				DC139075216D9458007A3E64 /* DimmedView.swift in Sources */,
+				743CABD322265F2E00634A5A /* ProfileViewController.swift in Sources */,
+				DC139070216D9458007A3E64 /* PanModalPresentationAnimator.swift in Sources */,
+				DCA741AE216D90410021F2F2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		743CABCA2226171500634A5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DCA741A9216D90410021F2F2 /* PanModal */;
+			targetProxy = 743CABC92226171500634A5A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		743CABCC2226171500634A5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = slack.PanModalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanModal.app/PanModal";
+			};
+			name = Debug;
+		};
+		743CABCD2226171500634A5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = slack.PanModalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanModal.app/PanModal";
+			};
+			name = Release;
+		};
+		DCA741BA216D90420021F2F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DCA741BB216D90420021F2F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCA741BD216D90420021F2F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6UF7FN999R;
+				INFOPLIST_FILE = "$(SRCROOT)/Sample/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.PanModal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCA741BE216D90420021F2F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6UF7FN999R;
+				INFOPLIST_FILE = "$(SRCROOT)/Sample/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.PanModal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		743CABCB2226171500634A5A /* Build configuration list for PBXNativeTarget "PanModalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				743CABCC2226171500634A5A /* Debug */,
+				743CABCD2226171500634A5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCA741A5216D90410021F2F2 /* Build configuration list for PBXProject "PanModal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA741BA216D90420021F2F2 /* Debug */,
+				DCA741BB216D90420021F2F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCA741BC216D90420021F2F2 /* Build configuration list for PBXNativeTarget "PanModal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCA741BD216D90420021F2F2 /* Debug */,
+				DCA741BE216D90420021F2F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCA741A2216D90410021F2F2 /* Project object */;
+}
