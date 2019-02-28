@@ -23,7 +23,7 @@
 
 ## Features
 
-* Supports any subclass of `UIViewController`
+* Supports any type of `UIViewController`
 * Seamless transition between modal and content
 * Maintains 60 fps performance
 
