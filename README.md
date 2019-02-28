@@ -126,7 +126,7 @@ Option + click on any of PanModal's methods or notes for detailed documentation.
 
 We're glad to be open sourcing this library. We use it in numerous places within the slack app and expect it to be easy to use as well as modify; we've added extensive documentation within the code to support that.
 
-We will only be fixing critical bugs, thus, for any non-critical issues or feature requests we hope to be able to rely on the community using the library to add what they need. We encourage folks to create forks and are willing to review PR’s created by the community. For more information, please read the [contributing guidelines](https://github.com/slackhq/PanModal/blob/master/CONTRIBUTING.md).
+We will only be fixing critical bugs, thus, for any non-critical issues or feature requests we hope to be able to rely on the community using the library to add what they need. For more information, please read the [contributing guidelines](https://github.com/slackhq/PanModal/blob/master/CONTRIBUTING.md).
 
 ## Authors
 
