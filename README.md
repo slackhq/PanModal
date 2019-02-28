@@ -66,7 +66,7 @@ extension YourViewController: PanModalPresentable {
 
 ### PanScrollable
 
-If your view controller has an embedded `UIScrollView` e.g. as is the case with `UITableViewController`, panModal will seamlessly transition pan gestures between the modal and the scroll view
+If the presented view controller has an embedded `UIScrollView` e.g. as is the case with `UITableViewController`, panModal will seamlessly transition pan gestures between the modal and the scroll view
 
 ```swift
 class TableViewController: UITableViewController, PanModalPresentable {
