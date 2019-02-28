@@ -50,13 +50,13 @@ github "slack/PanModal"
 PanModal was designed to be used effortlessly. Simply call `presentPanModal` in the same way you would expect to present a `UIViewController`
 
 ```swift
-viewControllerA.presentPanModal(viewControllerB)
+.presentPanModal(yourViewController)
 ```
 
 The presented view controller must conform to `PanModalPresentable` to take advantage of the customizable options
 
 ```swift
-extension ViewControllerB: PanModalPresentable {
+extension YourViewController: PanModalPresentable {
 
     var panScrollable: UIScrollView? {
         return nil
@@ -69,7 +69,7 @@ extension ViewControllerB: PanModalPresentable {
 If your view controller has an embedded `UIScrollView` e.g. as is the case with `UITableViewController`, panModal will seamlessly transition pan gestures between the modal and the scroll view
 
 ```swift
-class ViewControllerC: UITableViewController, PanModalPresentable {
+class TableViewController: UITableViewController, PanModalPresentable {
 
     var panScrollable: UIScrollView? {
         return tableView
@@ -82,15 +82,12 @@ class ViewControllerC: UITableViewController, PanModalPresentable {
 Height values of the panModal can be adjusted by overriding `shortFormHeight` or `longFormHeight`
 
 ```swift
-extension ViewControllerC: PanModalPresentable {
+var shortFormHeight: PanModalHeight {
+    return .contentHeight(300)
+}
 
-    var shortFormHeight: PanModalHeight {
-        return .contentHeight(300)
-    }
-
-    var longFormHeight: PanModalHeight {
-        return .maxHeightWithTopInset(40)
-    }
+var longFormHeight: PanModalHeight {
+    return .maxHeightWithTopInset(40)
 }
 ```
 
@@ -99,19 +96,19 @@ extension ViewControllerC: PanModalPresentable {
 Values are stored during presentation, so when adjusting at runtime you should call `panModalSetNeedsLayoutUpdate()`
 
 ```swift
-  func viewDidLoad() {
-      hasLoaded = true
+func viewDidLoad() {
+    hasLoaded = true
 
-      panModalSetNeedsLayoutUpdate()
-      panModalTransition(to: .shortForm)
-  }
+    panModalSetNeedsLayoutUpdate()
+    panModalTransition(to: .shortForm)
+}
 
-  var shortFormHeight: PanModalHeight {
-      if hasLoaded {
-          return .contentHeight(200)
-      }
-      return .maxHeight
-  }
+var shortFormHeight: PanModalHeight {
+    if hasLoaded {
+        return .contentHeight(200)
+    }
+    return .maxHeight
+}
 ```
 
 ### Sample App
