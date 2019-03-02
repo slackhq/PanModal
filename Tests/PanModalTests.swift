@@ -10,7 +10,7 @@ import XCTest
 @testable import PanModal
 
 /**
- ⚠️ Run tests on iPhone 8 Sim
+ ⚠️ Run tests on iPhone 8 iOS (12.1) Sim
  */
 
 class PanModalTests: XCTestCase {
@@ -54,6 +54,7 @@ class PanModalTests: XCTestCase {
         XCTAssertEqual(vc.allowsExtendedPanScrolling, false)
         XCTAssertEqual(vc.allowsDragToDismiss, true)
         XCTAssertEqual(vc.isPanScrollEnabled, true)
+        XCTAssertEqual(vc.isUserInteractionEnabled, true)
         XCTAssertEqual(vc.isHapticFeedbackEnabled, true)
         XCTAssertEqual(vc.shouldRoundTopCorners, false)
         XCTAssertEqual(vc.showDragIndicator, false)
