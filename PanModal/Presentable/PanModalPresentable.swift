@@ -115,6 +115,15 @@ public protocol PanModalPresentable {
     var isPanScrollEnabled: Bool { get }
 
     /**
+     A flag to toggle user interactions on the container view.
+
+     - Note: Return false to forward touches to the presentingViewController.
+
+     Default is true.
+    */
+    var isUserInteractionEnabled: Bool { get }
+
+    /**
      A flag to determine if haptic feedback should be enabled during presentation.
 
      Default value is true.

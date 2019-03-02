@@ -53,20 +53,22 @@ class SampleViewController: UITableViewController {
         guard let rowType = RowType(rawValue: indexPath.row) else {
             return
         }
+        dismiss(animated: true, completion: nil)
         presentPanModal(rowType.presentable.rowVC)
     }
 }
 
 protocol RowPresentable {
     var string: String { get }
-    var rowVC: PanModalPresentable.LayoutType { get }
+    var rowVC: UIViewController & PanModalPresentable { get }
 }
 
 private extension SampleViewController {
 
     enum RowType: Int, CaseIterable {
         case basic
-        case transparent
+        case alert
+        case transientAlert
         case userGroups
         case stacked
         case navController
@@ -75,7 +77,8 @@ private extension SampleViewController {
         var presentable: RowPresentable {
             switch self {
             case .basic: return Basic()
-            case .transparent: return Transparent()
+            case .alert: return Alert()
+            case .transientAlert: return TransientAlert()
             case .userGroups: return UserGroup()
             case .stacked: return Stacked()
             case .navController: return Navigation()
@@ -87,9 +90,14 @@ private extension SampleViewController {
             var rowVC: PanModalPresentable.LayoutType { return BasicViewController() }
         }
 
-        struct Transparent: RowPresentable {
+        struct Alert: RowPresentable {
             var string: String { return "Alert" }
             var rowVC: PanModalPresentable.LayoutType { return AlertViewController() }
+        }
+
+        struct TransientAlert: RowPresentable {
+            var string: String { return "Alert (Transient)"}
+            var rowVC: PanModalPresentable.LayoutType { return TransientAlertViewController() }
         }
 
         struct UserGroup: RowPresentable {

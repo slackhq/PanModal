@@ -394,6 +394,8 @@ private extension PanModalPresentationController {
         longFormYPosition = layoutPresentable.longFormYPos
         anchorModalToLongForm = layoutPresentable.anchorModalToLongForm
         extendsPanScrolling = layoutPresentable.allowsExtendedPanScrolling
+
+        containerView?.isUserInteractionEnabled = layoutPresentable.isUserInteractionEnabled
     }
 
     /**

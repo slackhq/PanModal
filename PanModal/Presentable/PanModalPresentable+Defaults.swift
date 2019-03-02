@@ -65,6 +65,10 @@ public extension PanModalPresentable where Self: UIViewController {
         return true
     }
 
+    var isUserInteractionEnabled: Bool {
+        return true
+    }
+
     var isHapticFeedbackEnabled: Bool {
         return true
     }
