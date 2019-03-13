@@ -23,11 +23,9 @@ Filling out the following details about bugs will help us solve your issue soone
 
 #### Reproducible in:
 
-{project_name} version:
+PanModal version:
 
-{platform_name} version:
-
-OS version(s):
+iOS version:
 
 #### Steps to reproduce:
 
