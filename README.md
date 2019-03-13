@@ -21,6 +21,8 @@
   • <a href="#license">License</a>
 </p>
 
+DON'T MERGE THIS - Just trying to kick the CLA monitoring service.
+
 ## Features
 
 * Supports any type of `UIViewController`
