@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F2A2C552239C119003BDB2F /* PanModal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2A2C532239C119003BDB2F /* PanModal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F2A2C582239C119003BDB2F /* PanModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2A2C512239C119003BDB2F /* PanModal.framework */; };
+		0F2A2C592239C119003BDB2F /* PanModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2A2C512239C119003BDB2F /* PanModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0F2A2C5E2239C137003BDB2F /* PanModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A2220BA6E500124CE1 /* PanModalAnimator.swift */; };
+		0F2A2C5F2239C139003BDB2F /* PanModalPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139066216D9458007A3E64 /* PanModalPresentationAnimator.swift */; };
+		0F2A2C602239C13C003BDB2F /* PanModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906C216D9458007A3E64 /* PanModalPresentationController.swift */; };
+		0F2A2C612239C140003BDB2F /* PanModalPresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9A21F0335D008045A0 /* PanModalPresentationDelegate.swift */; };
+		0F2A2C622239C148003BDB2F /* PanModalHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A4220BA76D00124CE1 /* PanModalHeight.swift */; };
+		0F2A2C632239C14B003BDB2F /* PanModalPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139068216D9458007A3E64 /* PanModalPresentable.swift */; };
+		0F2A2C642239C14E003BDB2F /* PanModalPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */; };
+		0F2A2C652239C151003BDB2F /* PanModalPresentable+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139069216D9458007A3E64 /* PanModalPresentable+UIViewController.swift */; };
+		0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A6220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift */; };
+		0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906A216D9458007A3E64 /* PanModalPresenter.swift */; };
+		0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */; };
+		0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906E216D9458007A3E64 /* DimmedView.swift */; };
+		0F2A2C6A2239C165003BDB2F /* PanContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9C21F03368008045A0 /* PanContainerView.swift */; };
 		743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */; };
 		743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */; };
 		743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */; };
@@ -42,6 +58,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0F2A2C562239C119003BDB2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCA741A2216D90410021F2F2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0F2A2C502239C119003BDB2F;
+			remoteInfo = PanModal;
+		};
 		743CABC92226171500634A5A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DCA741A2216D90410021F2F2 /* Project object */;
@@ -51,7 +74,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0F2A2C5D2239C119003BDB2F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0F2A2C592239C119003BDB2F /* PanModal.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0F2A2C512239C119003BDB2F /* PanModal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PanModal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F2A2C532239C119003BDB2F /* PanModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PanModal.h; sourceTree = "<group>"; };
+		0F2A2C542239C119003BDB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
 		743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupHeaderView.swift; sourceTree = "<group>"; };
 		743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupMemberPresentable.swift; sourceTree = "<group>"; };
@@ -84,13 +124,20 @@
 		DC13906E216D9458007A3E64 /* DimmedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmedView.swift; sourceTree = "<group>"; };
 		DC3B2EB9222A560A000C8A4A /* TransientAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransientAlertViewController.swift; sourceTree = "<group>"; };
 		DC3B2EBD222A58C9000C8A4A /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
-		DCA741AA216D90410021F2F2 /* PanModal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PanModal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCA741AA216D90410021F2F2 /* PanModalDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PanModalDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA741AD216D90410021F2F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCA741B9216D90420021F2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+Defaults.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0F2A2C4E2239C119003BDB2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		743CABC12226171500634A5A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -102,12 +149,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F2A2C582239C119003BDB2F /* PanModal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F2A2C522239C119003BDB2F /* PanModal */ = {
+			isa = PBXGroup;
+			children = (
+				0F2A2C532239C119003BDB2F /* PanModal.h */,
+				0F2A2C542239C119003BDB2F /* Info.plist */,
+			);
+			path = PanModal;
+			sourceTree = "<group>";
+		};
 		743CABAE2225FC4A00634A5A /* User Groups */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +343,7 @@
 				DCA741AC216D90410021F2F2 /* Sample */,
 				DC139062216D9431007A3E64 /* PanModal */,
 				743CABC52226171500634A5A /* Tests */,
+				0F2A2C522239C119003BDB2F /* PanModal */,
 				DCA741AB216D90410021F2F2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -293,8 +351,9 @@
 		DCA741AB216D90410021F2F2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DCA741AA216D90410021F2F2 /* PanModal.app */,
+				DCA741AA216D90410021F2F2 /* PanModalDemo.app */,
 				743CABC42226171500634A5A /* PanModalTests.xctest */,
+				0F2A2C512239C119003BDB2F /* PanModal.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -312,7 +371,36 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		0F2A2C4C2239C119003BDB2F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2A2C552239C119003BDB2F /* PanModal.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		0F2A2C502239C119003BDB2F /* PanModal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F2A2C5A2239C119003BDB2F /* Build configuration list for PBXNativeTarget "PanModal" */;
+			buildPhases = (
+				0F2A2C4C2239C119003BDB2F /* Headers */,
+				0F2A2C4D2239C119003BDB2F /* Sources */,
+				0F2A2C4E2239C119003BDB2F /* Frameworks */,
+				0F2A2C4F2239C119003BDB2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PanModal;
+			productName = PanModal;
+			productReference = 0F2A2C512239C119003BDB2F /* PanModal.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		743CABC32226171500634A5A /* PanModalTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 743CABCB2226171500634A5A /* Build configuration list for PBXNativeTarget "PanModalTests" */;
@@ -331,21 +419,23 @@
 			productReference = 743CABC42226171500634A5A /* PanModalTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DCA741A9216D90410021F2F2 /* PanModal */ = {
+		DCA741A9216D90410021F2F2 /* PanModalDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DCA741BC216D90420021F2F2 /* Build configuration list for PBXNativeTarget "PanModal" */;
+			buildConfigurationList = DCA741BC216D90420021F2F2 /* Build configuration list for PBXNativeTarget "PanModalDemo" */;
 			buildPhases = (
 				DCA741A6216D90410021F2F2 /* Sources */,
 				DCA741A7216D90410021F2F2 /* Frameworks */,
 				DCA741A8216D90410021F2F2 /* Resources */,
+				0F2A2C5D2239C119003BDB2F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0F2A2C572239C119003BDB2F /* PBXTargetDependency */,
 			);
-			name = PanModal;
+			name = PanModalDemo;
 			productName = PanModal;
-			productReference = DCA741AA216D90410021F2F2 /* PanModal.app */;
+			productReference = DCA741AA216D90410021F2F2 /* PanModalDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -358,6 +448,9 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Detail;
 				TargetAttributes = {
+					0F2A2C502239C119003BDB2F = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					743CABC32226171500634A5A = {
 						CreatedOnToolsVersion = 10.1;
 						TestTargetID = DCA741A9216D90410021F2F2;
@@ -367,7 +460,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DCA741A5216D90410021F2F2 /* Build configuration list for PBXProject "PanModal" */;
+			buildConfigurationList = DCA741A5216D90410021F2F2 /* Build configuration list for PBXProject "PanModalDemo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -380,13 +473,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DCA741A9216D90410021F2F2 /* PanModal */,
+				DCA741A9216D90410021F2F2 /* PanModalDemo */,
 				743CABC32226171500634A5A /* PanModalTests */,
+				0F2A2C502239C119003BDB2F /* PanModal */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0F2A2C4F2239C119003BDB2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		743CABC22226171500634A5A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -407,6 +508,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0F2A2C4D2239C119003BDB2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F2A2C5E2239C137003BDB2F /* PanModalAnimator.swift in Sources */,
+				0F2A2C5F2239C139003BDB2F /* PanModalPresentationAnimator.swift in Sources */,
+				0F2A2C602239C13C003BDB2F /* PanModalPresentationController.swift in Sources */,
+				0F2A2C612239C140003BDB2F /* PanModalPresentationDelegate.swift in Sources */,
+				0F2A2C622239C148003BDB2F /* PanModalHeight.swift in Sources */,
+				0F2A2C632239C14B003BDB2F /* PanModalPresentable.swift in Sources */,
+				0F2A2C642239C14E003BDB2F /* PanModalPresentable+Defaults.swift in Sources */,
+				0F2A2C652239C151003BDB2F /* PanModalPresentable+UIViewController.swift in Sources */,
+				0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */,
+				0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */,
+				0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */,
+				0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */,
+				0F2A2C6A2239C165003BDB2F /* PanContainerView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		743CABC02226171500634A5A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,14 +574,77 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0F2A2C572239C119003BDB2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0F2A2C502239C119003BDB2F /* PanModal */;
+			targetProxy = 0F2A2C562239C119003BDB2F /* PBXContainerItemProxy */;
+		};
 		743CABCA2226171500634A5A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DCA741A9216D90410021F2F2 /* PanModal */;
+			target = DCA741A9216D90410021F2F2 /* PanModalDemo */;
 			targetProxy = 743CABC92226171500634A5A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0F2A2C5B2239C119003BDB2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 6UF7FN999R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PanModal/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.slack.PanModal;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0F2A2C5C2239C119003BDB2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 6UF7FN999R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PanModal/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.slack.PanModal;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		743CABCC2226171500634A5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -620,6 +804,7 @@
 		DCA741BD216D90420021F2F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
@@ -640,6 +825,7 @@
 		DCA741BE216D90420021F2F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
@@ -660,6 +846,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0F2A2C5A2239C119003BDB2F /* Build configuration list for PBXNativeTarget "PanModal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F2A2C5B2239C119003BDB2F /* Debug */,
+				0F2A2C5C2239C119003BDB2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		743CABCB2226171500634A5A /* Build configuration list for PBXNativeTarget "PanModalTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -669,7 +864,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCA741A5216D90410021F2F2 /* Build configuration list for PBXProject "PanModal" */ = {
+		DCA741A5216D90410021F2F2 /* Build configuration list for PBXProject "PanModalDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCA741BA216D90420021F2F2 /* Debug */,
@@ -678,7 +873,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DCA741BC216D90420021F2F2 /* Build configuration list for PBXNativeTarget "PanModal" */ = {
+		DCA741BC216D90420021F2F2 /* Build configuration list for PBXNativeTarget "PanModalDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DCA741BD216D90420021F2F2 /* Debug */,

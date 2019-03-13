@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DCA741A9216D90410021F2F2"
-               BuildableName = "PanModal.app"
-               BlueprintName = "PanModal"
-               ReferencedContainer = "container:PanModal.xcodeproj">
+               BuildableName = "PanModalDemo.app"
+               BlueprintName = "PanModalDemo"
+               ReferencedContainer = "container:PanModalDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,24 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "743CABC32226171500634A5A"
-               BuildableName = "PanModalTests.xctest"
-               BlueprintName = "PanModalTests"
-               ReferencedContainer = "container:PanModal.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DCA741A9216D90410021F2F2"
-            BuildableName = "PanModal.app"
-            BlueprintName = "PanModal"
-            ReferencedContainer = "container:PanModal.xcodeproj">
+            BuildableName = "PanModalDemo.app"
+            BlueprintName = "PanModalDemo"
+            ReferencedContainer = "container:PanModalDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DCA741A9216D90410021F2F2"
-            BuildableName = "PanModal.app"
-            BlueprintName = "PanModal"
-            ReferencedContainer = "container:PanModal.xcodeproj">
+            BuildableName = "PanModalDemo.app"
+            BlueprintName = "PanModalDemo"
+            ReferencedContainer = "container:PanModalDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DCA741A9216D90410021F2F2"
-            BuildableName = "PanModal.app"
-            BlueprintName = "PanModal"
-            ReferencedContainer = "container:PanModal.xcodeproj">
+            BuildableName = "PanModalDemo.app"
+            BlueprintName = "PanModalDemo"
+            ReferencedContainer = "container:PanModalDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
