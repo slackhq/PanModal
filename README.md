@@ -42,7 +42,7 @@ pod 'PanModal'
 * <a href="https://github.com/Carthage/Carthage" target="_blank">Carthage</a>:
 
 ```ruby
-github "slack/PanModal"
+github "slackhq/PanModal"
 ```
 
 ## Usage
