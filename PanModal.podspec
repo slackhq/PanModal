@@ -17,17 +17,12 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-PanModal is an elegant and highly customizable presentation API for constructing bottom sheet modals on iOS.
-                       DESC
-
+  s.description      = 'PanModal is an elegant and highly customizable presentation API for constructing bottom sheet modals on iOS.'
   s.homepage         = 'https://github.com/slackhq/PanModal'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'slack' => 'opensource@slack.com' }
   s.source           = { :git => 'https://github.com/slackhq/PanModal.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/slackhq
-
+  s.social_media_url = 'https://twitter.com/slackhq'
   s.ios.deployment_target = '10.0'
-
   s.source_files = 'PanModal/**/*'
 end
