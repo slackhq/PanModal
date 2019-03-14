@@ -661,7 +661,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanModal.app/PanModal";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanModalDemo.app/PanModalDemo";
 			};
 			name = Debug;
 		};
@@ -681,7 +681,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanModal.app/PanModal";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanModalDemo.app/PanModalDemo";
 			};
 			name = Release;
 		};
