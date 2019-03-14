@@ -12,6 +12,10 @@ class NavigationController: UINavigationController, PanModalPresentable {
 
     private let navGroups = NavUserGroups()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pushViewController(navGroups, animated: false)

@@ -14,6 +14,10 @@ class StackedProfileViewController: UIViewController, PanModalPresentable {
 
     let presentable: UserGroupMemberPresentable
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     // MARK: - Views
 
     let avatarView: UIView = {

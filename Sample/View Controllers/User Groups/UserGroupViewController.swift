@@ -34,6 +34,10 @@ class UserGroupViewController: UITableViewController, PanModalPresentable, UIGes
 
     var isShortFormEnabled = true
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     let headerView = UserGroupHeaderView()
 
     let headerPresentable = UserGroupHeaderPresentable.init(handle: "ios-engs", description: "iOS Engineers", memberCount: 10)
