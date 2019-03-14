@@ -72,6 +72,11 @@ public class PanModalPresentationController: UIPresentationController {
      */
     private var scrollObserver: NSKeyValueObservation?
 
+    /**
+     An observer for the scroll view content size
+     */
+    private var scrollContentSizeObserver: NSKeyValueObservation?
+
     // store the y positions so we don't have to keep re-calculating
 
     /**
@@ -161,6 +166,7 @@ public class PanModalPresentationController: UIPresentationController {
 
     deinit {
         scrollObserver?.invalidate()
+        scrollContentSizeObserver?.invalidate()
     }
 
     // MARK: - Lifecycle
@@ -642,8 +648,8 @@ private extension PanModalPresentationController {
 private extension PanModalPresentationController {
 
     /**
-     Creates & stores an observer on the given scroll view's content offset.
-     This allows us to track scrolling without overriding the scrollView delegate
+     Creates & stores an observer on the given scroll view's content offset and content size.
+     This allows us to track scrolling without overriding the scrollView delegate and react to content size changes
      */
     func observe(scrollView: UIScrollView?) {
         scrollObserver?.invalidate()
@@ -657,6 +663,10 @@ private extension PanModalPresentationController {
 
             self?.didPanOnScrollView(scrollView, change: change)
         }
+        scrollContentSizeObserver?.invalidate()
+        scrollContentSizeObserver = scrollView?.observe(\.contentSize, changeHandler: { [weak self] scrollView, change in
+            self?.setNeedsLayoutUpdate()
+        })
     }
 
     /**
