@@ -798,7 +798,7 @@ private extension PanModalPresentationController {
     func addRoundedCorners(to view: UIView) {
         let radius = presentable?.cornerRadius ?? 0
         let path = UIBezierPath(roundedRect: view.bounds,
-                                byRoundingCorners: [.topRight, .topLeft],
+                                byRoundingCorners: [.topLeft, .topRight],
                                 cornerRadii: CGSize(width: radius, height: radius))
 
         // Draw around the drag indicator view, if displayed
