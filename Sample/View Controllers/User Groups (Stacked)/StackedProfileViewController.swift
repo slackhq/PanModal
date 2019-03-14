@@ -85,6 +85,7 @@ class StackedProfileViewController: UIViewController, PanModalPresentable {
 
         roleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         roleLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4.0).isActive = true
+        bottomLayoutGuide.topAnchor.constraint(greaterThanOrEqualTo: roleLabel.bottomAnchor).isActive = true
     }
 
     // MARK: - Pan Modal Presentable
@@ -94,7 +95,7 @@ class StackedProfileViewController: UIViewController, PanModalPresentable {
     }
 
     var longFormHeight: PanModalHeight {
-        return .contentHeight(300)
+        return .intrinsicHeight
     }
 
     var anchorModalToLongForm: Bool {
