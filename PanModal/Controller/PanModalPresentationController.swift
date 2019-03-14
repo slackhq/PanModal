@@ -36,7 +36,6 @@ public class PanModalPresentationController: UIPresentationController {
      Constants
      */
     struct Constants {
-        static let cornerRadius = CGFloat(8.0)
         static let indicatorYOffset = CGFloat(8.0)
         static let snapMovementSensitivity = CGFloat(0.7)
         static let dragIndicatorSize = CGSize(width: 36.0, height: 5.0)
@@ -797,30 +796,16 @@ private extension PanModalPresentationController {
      because we render the dragIndicator outside of view bounds
      */
     func addRoundedCorners(to view: UIView) {
-
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: Constants.cornerRadius))
-
-        // 1. Draw left rounded corner
-        path.addArc(withCenter: CGPoint(x: path.currentPoint.x + Constants.cornerRadius, y: path.currentPoint.y),
-                    radius: Constants.cornerRadius, startAngle: .pi, endAngle: 3.0 * .pi/2.0, clockwise: true)
+        let radius = presentable?.cornerRadius ?? 0
+        let path = UIBezierPath(roundedRect: view.bounds,
+                                byRoundingCorners:[.topRight, .topLeft],
+                                cornerRadii: CGSize(width: radius, height: radius))
 
         // 2. Draw around the drag indicator view, if displayed
         if presentable?.showDragIndicator == true {
             let indicatorLeftEdgeXPos = view.bounds.width/2.0 - Constants.dragIndicatorSize.width/2.0
             drawAroundDragIndicator(currentPath: path, indicatorLeftEdgeXPos: indicatorLeftEdgeXPos)
         }
-
-        // 3. Draw line to right side of presented view, leaving space to draw rounded corner
-        path.addLine(to: CGPoint(x: view.bounds.width - Constants.cornerRadius, y: path.currentPoint.y))
-
-        // 4. Draw right rounded corner
-        path.addArc(withCenter: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y + Constants.cornerRadius),
-                    radius: Constants.cornerRadius, startAngle: 3.0 * .pi/2.0, endAngle: 0, clockwise: true)
-
-        // 5. Draw around final edges of view
-        path.addLine(to: CGPoint(x: path.currentPoint.x, y: view.bounds.height))
-        path.addLine(to: CGPoint(x: 0, y: path.currentPoint.y))
 
         // 6. Set path as a mask to display optional drag indicator view & rounded corners
         let mask = CAShapeLayer()
