@@ -138,6 +138,13 @@ public protocol PanModalPresentable {
     var shouldRoundTopCorners: Bool { get }
 
     /**
+     The corner radius used when `shouldRoundTopCorners` is enabled.
+     
+     Default Value is `8.0`
+     */
+    var cornerRadius: CGFloat { get }
+
+    /**
      A flag to determine if a drag indicator should be shown
      above the pan modal container view.
 
