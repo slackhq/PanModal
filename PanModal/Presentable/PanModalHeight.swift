@@ -35,4 +35,8 @@ public enum PanModalHeight: Equatable {
      */
     case contentHeightIgnoringSafeArea(CGFloat)
 
+    /**
+     Sets the height to be the intrinsic content height
+     */
+    case intrinsicHeight
 }
