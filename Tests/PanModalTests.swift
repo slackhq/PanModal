@@ -59,7 +59,7 @@ class PanModalTests: XCTestCase {
         XCTAssertEqual(vc.shouldRoundTopCorners, false)
         XCTAssertEqual(vc.showDragIndicator, false)
         XCTAssertEqual(vc.shouldRoundTopCorners, false)
-        XCTAssertEqual(vc.cornerRadius, 8)
+        XCTAssertEqual(vc.cornerRadius, 8.0)
     }
 
     func testPresentableYValues() {

@@ -809,12 +809,12 @@ private extension PanModalPresentationController {
             drawAroundDragIndicator(currentPath: path, indicatorLeftEdgeXPos: indicatorLeftEdgeXPos)
         }
 
-        // 6. Set path as a mask to display optional drag indicator view & rounded corners
+        // Set path as a mask to display optional drag indicator view & rounded corners
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         view.layer.mask = mask
 
-        // 7. Improve performance by rasterizing the layer
+        // Improve performance by rasterizing the layer
         view.layer.shouldRasterize = true
         view.layer.rasterizationScale = UIScreen.main.scale
     }

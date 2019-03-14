@@ -78,7 +78,7 @@ public extension PanModalPresentable where Self: UIViewController {
     }
 
     var cornerRadius: CGFloat {
-        return 8
+        return 8.0
     }
 
     var showDragIndicator: Bool {

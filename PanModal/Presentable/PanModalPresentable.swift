@@ -140,7 +140,7 @@ public protocol PanModalPresentable {
     /**
      The corner radius used when `shouldRoundTopCorners` is enabled.
      
-     Default Value is `8.0`
+     Default Value is 8.0
      */
     var cornerRadius: CGFloat { get }
 
