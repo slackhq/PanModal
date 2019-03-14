@@ -35,7 +35,7 @@ Issues labelled `good first contribution`.
 
 For your contribution to be accepted:
 
-- [x] You must have signed the [Contributor License Agreement (CLA)](https://cla-assistant.io/PanModal).
+- [x] You must have signed the [Contributor License Agreement (CLA)](https://cla-assistant.io/slackHQ/PanModal).
 - [x] The test suite must be complete and pass.
 - [x] The changes must be approved by code review.
 - [x] Commits should be atomic and messages must be descriptive. Related issues should be mentioned by Issue number.
