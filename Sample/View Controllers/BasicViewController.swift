@@ -18,6 +18,10 @@ class BasicViewController: UIViewController {
 
 extension BasicViewController: PanModalPresentable {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     var panScrollable: UIScrollView? {
         return nil
     }
