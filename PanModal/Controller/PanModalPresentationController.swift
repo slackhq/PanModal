@@ -550,7 +550,7 @@ private extension PanModalPresentationController {
          Allow api consumers to override the internal conditions &
          decide if the pan gesture recognizer should be prioritized.
 
-         ⚠️ This is the only time we should be cancelling a recognizer,
+         ⚠️ This is the only time we should be cancelling the panScrollable recognizer,
          for the purpose of ensuring we're no longer tracking the scrollView
          */
         guard !shouldPrioritize(panGestureRecognizer: panGestureRecognizer) else {
@@ -577,7 +577,7 @@ private extension PanModalPresentationController {
      */
     func shouldPrioritize(panGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return panGestureRecognizer.state == .began &&
-            presentable?.shouldPrioritize(panModalGestureRecognizer: panGestureRecognizer) ?? false
+            presentable?.shouldPrioritize(panModalGestureRecognizer: panGestureRecognizer) == true
     }
 
     /**

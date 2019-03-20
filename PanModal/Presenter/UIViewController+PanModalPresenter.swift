@@ -1,6 +1,6 @@
 //
 //  UIViewController+PanModalPresenterProtocol.swift
-//  SlackUI
+//  PanModal
 //
 //  Copyright © 2019 Tiny Speck, Inc. All rights reserved.
 //

@@ -13,7 +13,7 @@ import UIKit
 
  Usage:
  ```
- extension UIViewController: PanModalPresentable {
+ extension YourViewController: PanModalPresentable {
     func shouldRoundTopCorners: Bool { return false }
  }
  ```
@@ -55,6 +55,13 @@ public protocol PanModalPresentable {
     var longFormHeight: PanModalHeight { get }
 
     /**
+     The corner radius used when `shouldRoundTopCorners` is enabled.
+
+     Default Value is 8.0.
+     */
+    var cornerRadius: CGFloat { get }
+
+    /**
      The springDamping value used to determine the amount of 'bounce'
      seen when transitioning to short/long form.
 
@@ -91,13 +98,13 @@ public protocol PanModalPresentable {
      A flag to determine if scrolling should seamlessly transition from the pan modal container view to
      the embedded scroll view once the scroll limit has been reached.
 
-     Default value is false.
-     Unless a scrollView is provided and the content exceeds the longForm height
+     Default value is false. Unless a scrollView is provided and the content height exceeds the longForm height.
      */
     var allowsExtendedPanScrolling: Bool { get }
 
     /**
      A flag to determine if dismissal should be initiated when swiping down on the presented view.
+
      Return false to fallback to the short form state instead of dismissing.
 
      Default value is true.
@@ -138,13 +145,6 @@ public protocol PanModalPresentable {
     var shouldRoundTopCorners: Bool { get }
 
     /**
-     The corner radius used when `shouldRoundTopCorners` is enabled.
-     
-     Default Value is 8.0.
-     */
-    var cornerRadius: CGFloat { get }
-
-    /**
      A flag to determine if a drag indicator should be shown
      above the pan modal container view.
 
@@ -161,7 +161,7 @@ public protocol PanModalPresentable {
 
      Default value is an empty implementation.
      */
-    func willRespond(to panGestureRecognizer: UIPanGestureRecognizer)
+    func willRespond(to panModalGestureRecognizer: UIPanGestureRecognizer)
 
     /**
      Asks the delegate if the pan modal gesture recognizer should be prioritized.
@@ -169,8 +169,8 @@ public protocol PanModalPresentable {
      For example, you can use this to define a region
      where you would like to restrict where the pan gesture can start.
 
-     If false, then we rely on the internal conditions of when a pan gesture
-     should succeed or fail, such as, if we're actively scrolling on the scrollView
+     If false, then we rely solely on the internal conditions of when a pan gesture
+     should succeed or fail, such as, if we're actively scrolling on the scrollView.
 
      Default return value is false.
      */

@@ -2,7 +2,6 @@
 //  PanModalPresentable+Defaults.swift
 //  PanModal
 //
-//  Created by Stephen Sowole on 11/5/18.
 //  Copyright © 2018 Tiny Speck, Inc. All rights reserved.
 //
 
@@ -29,6 +28,10 @@ public extension PanModalPresentable where Self: UIViewController {
         // called once during presentation and stored
         scrollView.layoutIfNeeded()
         return .contentHeight(scrollView.contentSize.height)
+    }
+
+    var cornerRadius: CGFloat {
+        return 8.0
     }
 
     var springDamping: CGFloat {
@@ -75,10 +78,6 @@ public extension PanModalPresentable where Self: UIViewController {
 
     var shouldRoundTopCorners: Bool {
         return isPanModalPresented
-    }
-
-    var cornerRadius: CGFloat {
-        return 8.0
     }
 
     var showDragIndicator: Bool {
