@@ -414,7 +414,6 @@ private extension PanModalPresentationController {
          to avoid visual bugs
          */
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.isScrollEnabled = presentable?.isPanScrollEnabled ?? true
         scrollView.scrollIndicatorInsets = presentable?.scrollIndicatorInsets ?? .zero
 
         /**
@@ -444,8 +443,7 @@ private extension PanModalPresentationController {
     @objc func didPanOnPresentedView(_ recognizer: UIPanGestureRecognizer) {
 
         guard
-            presentable?.isPanScrollEnabled == true,
-            !shouldFail(panGestureRecognizer: recognizer),
+            shouldRespond(to: panGestureRecognizer),
             let containerView = containerView
             else {
                 recognizer.setTranslation(.zero, in: recognizer.view)
@@ -513,6 +511,26 @@ private extension PanModalPresentationController {
                 }
             }
         }
+    }
+
+    /**
+     Determine if the pan modal should respond to the gesture recognizer.
+
+     If the pan modal is already being dragged & the delegate returns false, ignore until
+     the recognizer is back to it's original state (.began)
+
+     ⚠️ This is the only time we should be cancelling the pan modal gesture recognizer
+     */
+    func shouldRespond(to panGestureRecognizer: UIPanGestureRecognizer) -> Bool {
+        guard
+            presentable?.shouldRespond(to: panGestureRecognizer) == true ||
+                !(panGestureRecognizer.state == .began || panGestureRecognizer.state == .cancelled)
+            else {
+                panGestureRecognizer.isEnabled = false
+                panGestureRecognizer.isEnabled = true
+                return false
+        }
+        return !shouldFail(panGestureRecognizer: panGestureRecognizer)
     }
 
     /**

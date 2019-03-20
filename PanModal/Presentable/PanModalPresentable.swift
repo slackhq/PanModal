@@ -112,16 +112,6 @@ public protocol PanModalPresentable {
     var allowsDragToDismiss: Bool { get }
 
     /**
-     A flag to determine if scrolling should be enabled on the entire view.
-
-     - Note: Returning false will disable scrolling on the embedded scrollview as well as on the
-     pan modal container view.
-
-     Default value is true.
-     */
-    var isPanScrollEnabled: Bool { get }
-
-    /**
      A flag to toggle user interactions on the container view.
 
      - Note: Return false to forward touches to the presentingViewController.
@@ -151,6 +141,15 @@ public protocol PanModalPresentable {
      Default value is true.
      */
     var showDragIndicator: Bool { get }
+
+    /**
+     Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.
+     
+     Return false to disable movement on the pan modal but maintain gestures on the presented view.
+
+     Default value is true.
+     */
+    func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool
 
     /**
      Notifies the delegate when the pan modal gesture recognizer state is either

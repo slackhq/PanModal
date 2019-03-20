@@ -64,10 +64,6 @@ public extension PanModalPresentable where Self: UIViewController {
         return true
     }
 
-    var isPanScrollEnabled: Bool {
-        return true
-    }
-
     var isUserInteractionEnabled: Bool {
         return true
     }
@@ -84,7 +80,11 @@ public extension PanModalPresentable where Self: UIViewController {
         return shouldRoundTopCorners
     }
 
-    func willRespond(to panGestureRecognizer: UIPanGestureRecognizer) {
+    func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
+        return false
+    }
+
+    func willRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) {
 
     }
 
