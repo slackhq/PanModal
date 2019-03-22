@@ -198,7 +198,7 @@ public class PanModalPresentationController: UIPresentationController {
 
         /**
          Drag indicator is drawn outside of view bounds
-         so hiding it on view dismiss means avoids visual bugs
+         so hiding it on view dismiss means avoiding visual bugs
          */
         coordinator.animate(alongsideTransition: { [weak self] _ in
             self?.dragIndicatorView.alpha = 0.0
@@ -244,7 +244,7 @@ public extension PanModalPresentationController {
      Due to content offset observation, its not possible to programmatically
      set the content offset directly on the scroll view while in the short form.
 
-     This method pauses the content offset KVO, performs the content offset chnage
+     This method pauses the content offset KVO, performs the content offset change
      and then resumes content offset observation.
      */
     public func setContentOffset(offset: CGPoint) {
@@ -273,7 +273,7 @@ public extension PanModalPresentationController {
 
     /**
      Updates the PanModalPresentationController layout
-     based on values in the PanModalPresentabls
+     based on values in the PanModalPresentable
 
      - Note: This should be called whenever any
      pan modal presentable value changes after the initial presentation
@@ -443,7 +443,7 @@ private extension PanModalPresentationController {
     @objc func didPanOnPresentedView(_ recognizer: UIPanGestureRecognizer) {
 
         guard
-            shouldRespond(to: panGestureRecognizer),
+            shouldRespond(to: recognizer),
             let containerView = containerView
             else {
                 recognizer.setTranslation(.zero, in: recognizer.view)
@@ -484,7 +484,7 @@ private extension PanModalPresentationController {
                 if velocity.y < 0 {
                     transition(to: .longForm)
 
-                } else if (nearestDistance(to: presentedView.frame.minY, inDistances: [longFormYPosition, containerView.bounds.height]) == longFormYPosition
+                } else if (nearest(to: presentedView.frame.minY, inValues: [longFormYPosition, containerView.bounds.height]) == longFormYPosition
                     && presentedView.frame.minY < shortFormYPosition) || presentable?.allowsDragToDismiss == false {
                     transition(to: .shortForm)
 
@@ -498,7 +498,7 @@ private extension PanModalPresentationController {
                  The `containerView.bounds.height` is used to determine
                  how close the presented view is to the bottom of the screen
                  */
-                let position = nearestDistance(to: presentedView.frame.minY, inDistances: [containerView.bounds.height, shortFormYPosition, longFormYPosition])
+                let position = nearest(to: presentedView.frame.minY, inValues: [containerView.bounds.height, shortFormYPosition, longFormYPosition])
 
                 if position == longFormYPosition {
                     transition(to: .longForm)
@@ -635,16 +635,16 @@ private extension PanModalPresentationController {
     }
 
     /**
-     Finds the nearest distance to a given position out of a given array of distance values
+     Finds the nearest value to a given number out of a given array of float values
 
      - Parameters:
-        - position: reference postion we are trying to find the closest distance to
-        - distances: array of positions we would like to compare against
+        - number: reference float we are trying to find the closest value to
+        - values: array of floats we would like to compare against
      */
-    func nearestDistance(to position: CGFloat, inDistances distances: [CGFloat]) -> CGFloat {
-        guard let nearestDistance = distances.min(by: { abs(position - $0) < abs(position - $1) })
-            else { return position }
-        return nearestDistance
+    func nearest(to number: CGFloat, inValues values: [CGFloat]) -> CGFloat {
+        guard let nearestVal = values.min(by: { abs(number - $0) < abs(number - $1) })
+            else { return number }
+        return nearestVal
     }
 
     /**
