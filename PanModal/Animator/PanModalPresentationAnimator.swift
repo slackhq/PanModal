@@ -124,7 +124,7 @@ extension PanModalPresentationAnimator: UIViewControllerAnimatedTransitioning {
     }
 
     /**
-     Perfroms the appropriate animation based on the transition style
+     Performs the appropriate animation based on the transition style
      */
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         switch transitionStyle {
