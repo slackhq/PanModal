@@ -220,7 +220,7 @@ public class PanModalPresentationController: UIPresentationController {
 public extension PanModalPresentationController {
 
     /**
-     Tranisition the PanModalPresentationController
+     Transition the PanModalPresentationController
      to the given presentation state
      */
     public func transition(to state: PresentationState) {
@@ -384,7 +384,7 @@ private extension PanModalPresentationController {
     }
 
     /**
-     Caluclates & stores the layout anchor points & options
+     Calculates & stores the layout anchor points & options
      */
     func configureViewLayout() {
 

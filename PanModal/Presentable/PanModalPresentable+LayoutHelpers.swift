@@ -38,7 +38,7 @@ extension PanModalPresentable where Self: UIViewController {
     }
 
     /**
-     Returns the short form Y postion
+     Returns the short form Y position
 
      - Note: If voiceover is on, the `longFormYPos` is returned.
      We do not support short form when voiceover is on as it would make it difficult for user to navigate.
@@ -55,7 +55,7 @@ extension PanModalPresentable where Self: UIViewController {
     }
 
     /**
-     Returns the long form Y postion
+     Returns the long form Y position
 
      - Note: We cap this value to the max possible height
      to ensure content is not rendered outside of the view bounds
