@@ -213,6 +213,26 @@ public class PanModalPresentationController: UIPresentationController {
         backgroundView.removeFromSuperview()
     }
 
+    /**
+     Update presented view size in response to size class changes
+     */
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            guard
+                let self = self,
+                let presentable = self.presentable
+                else { return }
+
+            self.adjustPresentedViewFrame()
+
+            if presentable.shouldRoundTopCorners {
+                self.addRoundedCorners(to: self.presentedView)
+            }
+        })
+    }
+
 }
 
 // MARK: - Public Methods
@@ -343,8 +363,9 @@ private extension PanModalPresentationController {
      */
     func adjustPresentedViewFrame() {
         let frame = containerView?.frame ?? .zero
-        let size = CGSize(width: frame.size.width, height: frame.height - anchoredYPosition)
-        presentedViewController.view.frame = CGRect(origin: .zero, size: size)
+        let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
+        presentedView.frame.size = frame.size
+        presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
     }
 
     /**
