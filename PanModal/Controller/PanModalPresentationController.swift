@@ -362,9 +362,12 @@ private extension PanModalPresentationController {
      Reduce height of presentedView so that it sits at the bottom of the screen
      */
     func adjustPresentedViewFrame() {
-        let frame = containerView?.frame ?? .zero
+
+        guard let frame = containerView?.frame
+            else { return }
+
         let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
-        presentedView.frame.size = frame.size
+        panContainerView.frame.size = frame.size
         presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
     }
 
