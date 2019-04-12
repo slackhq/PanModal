@@ -121,13 +121,6 @@ public protocol PanModalPresentable {
     var isUserInteractionEnabled: Bool { get }
 
     /**
-     A flag to determine if haptic feedback should be enabled during presentation.
-
-     Default value is true.
-     */
-    var isHapticFeedbackEnabled: Bool { get }
-
-    /**
      A flag to determine if the top corners should be rounded.
 
      Default value is true.

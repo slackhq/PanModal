@@ -54,7 +54,6 @@ class PanModalTests: XCTestCase {
         XCTAssertEqual(vc.allowsExtendedPanScrolling, false)
         XCTAssertEqual(vc.allowsDragToDismiss, true)
         XCTAssertEqual(vc.isUserInteractionEnabled, true)
-        XCTAssertEqual(vc.isHapticFeedbackEnabled, true)
         XCTAssertEqual(vc.shouldRoundTopCorners, false)
         XCTAssertEqual(vc.showDragIndicator, false)
         XCTAssertEqual(vc.shouldRoundTopCorners, false)

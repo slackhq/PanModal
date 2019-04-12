@@ -68,10 +68,6 @@ public extension PanModalPresentable where Self: UIViewController {
         return true
     }
 
-    var isHapticFeedbackEnabled: Bool {
-        return true
-    }
-
     var shouldRoundTopCorners: Bool {
         return isPanModalPresented
     }
