@@ -43,6 +43,8 @@
 		943904F32226484F00859537 /* UserGroupStackedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904F22226484F00859537 /* UserGroupStackedViewController.swift */; };
 		94795C9B21F0335D008045A0 /* PanModalPresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9A21F0335D008045A0 /* PanModalPresentationDelegate.swift */; };
 		94795C9D21F03368008045A0 /* PanContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9C21F03368008045A0 /* PanContainerView.swift */; };
+		D134CC7122641B350022AA29 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D134CC7022641B350022AA29 /* IndicatorView.swift */; };
+		D134CC7222641B6E0022AA29 /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D134CC7022641B350022AA29 /* IndicatorView.swift */; };
 		DC13905E216D90D5007A3E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC13905D216D90D5007A3E64 /* Assets.xcassets */; };
 		DC139061216D93ED007A3E64 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139060216D93ED007A3E64 /* SampleViewController.swift */; };
 		DC139070216D9458007A3E64 /* PanModalPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139066216D9458007A3E64 /* PanModalPresentationAnimator.swift */; };
@@ -114,6 +116,7 @@
 		943904F22226484F00859537 /* UserGroupStackedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupStackedViewController.swift; sourceTree = "<group>"; };
 		94795C9A21F0335D008045A0 /* PanModalPresentationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresentationDelegate.swift; sourceTree = "<group>"; };
 		94795C9C21F03368008045A0 /* PanContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanContainerView.swift; sourceTree = "<group>"; };
+		D134CC7022641B350022AA29 /* IndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		DC13905D216D90D5007A3E64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC139060216D93ED007A3E64 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		DC139066216D9458007A3E64 /* PanModalPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresentationAnimator.swift; sourceTree = "<group>"; };
@@ -303,6 +306,7 @@
 			children = (
 				DC13906E216D9458007A3E64 /* DimmedView.swift */,
 				94795C9C21F03368008045A0 /* PanContainerView.swift */,
+				D134CC7022641B350022AA29 /* IndicatorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -522,6 +526,7 @@
 				0F2A2C652239C151003BDB2F /* PanModalPresentable+UIViewController.swift in Sources */,
 				0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */,
 				0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */,
+				D134CC7122641B350022AA29 /* IndicatorView.swift in Sources */,
 				0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */,
 				0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */,
 				0F2A2C6A2239C165003BDB2F /* PanContainerView.swift in Sources */,
@@ -541,6 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3B2EBA222A560A000C8A4A /* TransientAlertViewController.swift in Sources */,
+				D134CC7222641B6E0022AA29 /* IndicatorView.swift in Sources */,
 				743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */,
 				74C072A3220BA6E500124CE1 /* PanModalAnimator.swift in Sources */,
 				743CABB8222600C600634A5A /* UserGroupMemberCell.swift in Sources */,
