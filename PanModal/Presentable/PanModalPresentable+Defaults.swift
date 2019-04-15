@@ -30,10 +30,6 @@ public extension PanModalPresentable where Self: UIViewController {
         return .contentHeight(scrollView.contentSize.height)
     }
 
-    var cornerRadius: CGFloat {
-        return 8.0
-    }
-
     var springDamping: CGFloat {
         return 0.8
     }
@@ -43,8 +39,7 @@ public extension PanModalPresentable where Self: UIViewController {
     }
 
     var scrollIndicatorInsets: UIEdgeInsets {
-        let top = shouldRoundTopCorners ? cornerRadius : 0
-        return UIEdgeInsets(top: CGFloat(top), left: 0, bottom: bottomLayoutOffset, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: bottomLayoutOffset, right: 0)
     }
 
     var anchorModalToLongForm: Bool {
@@ -68,12 +63,8 @@ public extension PanModalPresentable where Self: UIViewController {
         return true
     }
 
-    var shouldRoundTopCorners: Bool {
-        return isPanModalPresented
-    }
-
     var showDragIndicator: Bool {
-        return shouldRoundTopCorners
+        return true
     }
 
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {

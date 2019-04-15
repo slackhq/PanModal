@@ -84,7 +84,7 @@ public class PanModalPresentationAnimator: NSObject {
         let panView: UIView = transitionContext.containerView.panContainerView ?? fromVC.view
 
         PanModalAnimator.animate({
-            panView.frame.origin.y = transitionContext.containerView.frame.height
+            panView.frame.origin.y = transitionContext.containerView.frame.height + PanModalPresentationController.Constants.dragIndicatorHeight
         }, config: presentable) { didComplete in
             fromVC.view.removeFromSuperview()
             transitionContext.completeTransition(didComplete)

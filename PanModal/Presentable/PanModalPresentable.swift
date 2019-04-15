@@ -14,7 +14,7 @@ import UIKit
  Usage:
  ```
  extension YourViewController: PanModalPresentable {
-    func shouldRoundTopCorners: Bool { return false }
+    func showDragIndicator: Bool { return false }
  }
  ```
  */
@@ -53,13 +53,6 @@ public protocol PanModalPresentable {
      Default value is .max.
      */
     var longFormHeight: PanModalHeight { get }
-
-    /**
-     The corner radius used when `shouldRoundTopCorners` is enabled.
-
-     Default Value is 8.0.
-     */
-    var cornerRadius: CGFloat { get }
 
     /**
      The springDamping value used to determine the amount of 'bounce'
@@ -119,13 +112,6 @@ public protocol PanModalPresentable {
      Default is true.
     */
     var isUserInteractionEnabled: Bool { get }
-
-    /**
-     A flag to determine if the top corners should be rounded.
-
-     Default value is true.
-     */
-    var shouldRoundTopCorners: Bool { get }
 
     /**
      A flag to determine if a drag indicator should be shown
