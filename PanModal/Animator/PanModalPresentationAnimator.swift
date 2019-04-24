@@ -63,11 +63,15 @@ public class PanModalPresentationAnimator: NSObject {
      */
     private func animatePresentation(transitionContext: UIViewControllerContextTransitioning) {
 
-        guard let toVC = transitionContext.viewController(forKey: .to)
+        guard let toVC = transitionContext.viewController(forKey: .to), let fromVC = transitionContext.viewController(forKey: .from)
             else { return }
 
         let presentable = toVC as? PanModalPresentable.LayoutType
 
+        // Calls viewWillAppear and viewWillDisappear
+        fromVC.beginAppearanceTransition(false, animated: true)
+        toVC.beginAppearanceTransition(true, animated: true)
+        
         // Presents the view in shortForm position, initially
         let yPos: CGFloat = presentable?.shortFormYPos ?? 0.0
 
@@ -86,6 +90,9 @@ public class PanModalPresentationAnimator: NSObject {
         PanModalAnimator.animate({
             panView.frame.origin.y = yPos
         }, config: presentable) { [weak self] didComplete in
+            // Calls viewDidAppear and viewDidDisappear
+            fromVC.endAppearanceTransition()
+            toVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
             self?.feedbackGenerator = nil
         }
@@ -96,9 +103,13 @@ public class PanModalPresentationAnimator: NSObject {
      */
     private func animateDismissal(transitionContext: UIViewControllerContextTransitioning) {
 
-        guard let fromVC = transitionContext.viewController(forKey: .from)
+        guard let fromVC = transitionContext.viewController(forKey: .from), let toVC = transitionContext.viewController(forKey: .to)
             else { return }
 
+        // Calls viewWillAppear and viewWillDisappear
+        fromVC.beginAppearanceTransition(false, animated: true)
+        toVC.beginAppearanceTransition(true, animated: true)
+        
         let presentable = fromVC as? PanModalPresentable.LayoutType
         let panView: UIView = transitionContext.containerView.panContainerView ?? fromVC.view
 
@@ -106,6 +117,9 @@ public class PanModalPresentationAnimator: NSObject {
             panView.frame.origin.y = transitionContext.containerView.frame.height
         }, config: presentable) { didComplete in
             fromVC.view.removeFromSuperview()
+            // Calls viewDidAppear and viewDidDisappear
+            fromVC.endAppearanceTransition()
+            toVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
         }
     }
