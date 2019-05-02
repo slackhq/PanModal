@@ -67,6 +67,7 @@ private extension SampleViewController {
 
     enum RowType: Int, CaseIterable {
         case basic
+        case fullScreen
         case alert
         case transientAlert
         case userGroups
@@ -77,6 +78,7 @@ private extension SampleViewController {
         var presentable: RowPresentable {
             switch self {
             case .basic: return Basic()
+            case .fullScreen: return FullScreen()
             case .alert: return Alert()
             case .transientAlert: return TransientAlert()
             case .userGroups: return UserGroup()
@@ -86,33 +88,38 @@ private extension SampleViewController {
         }
 
         struct Basic: RowPresentable {
-            var string: String { return "Basic" }
-            var rowVC: PanModalPresentable.LayoutType { return BasicViewController() }
+            let string: String = "Basic"
+            let rowVC: PanModalPresentable.LayoutType = BasicViewController()
+        }
+
+        struct FullScreen: RowPresentable {
+            let string: String = "Full Screen"
+            let rowVC: PanModalPresentable.LayoutType = FullScreenViewController()
         }
 
         struct Alert: RowPresentable {
-            var string: String { return "Alert" }
-            var rowVC: PanModalPresentable.LayoutType { return AlertViewController() }
+            let string: String = "Alert"
+            let rowVC: PanModalPresentable.LayoutType = AlertViewController()
         }
 
         struct TransientAlert: RowPresentable {
-            var string: String { return "Alert (Transient)"}
-            var rowVC: PanModalPresentable.LayoutType { return TransientAlertViewController() }
+            let string: String = "Alert (Transient)"
+            let rowVC: PanModalPresentable.LayoutType = TransientAlertViewController()
         }
 
         struct UserGroup: RowPresentable {
-            var string: String { return "User Groups" }
-            var rowVC: PanModalPresentable.LayoutType { return UserGroupViewController() }
+            let string: String = "User Groups"
+            let rowVC: PanModalPresentable.LayoutType = UserGroupViewController()
         }
 
         struct Navigation: RowPresentable {
-            var string: String { return "User Groups (NavigationController)" }
-            var rowVC: PanModalPresentable.LayoutType { return NavigationController() }
+            let string: String = "User Groups (NavigationController)"
+            let rowVC: PanModalPresentable.LayoutType = NavigationController()
         }
 
         struct Stacked: RowPresentable {
-            var string: String { return "User Groups (Stacked)" }
-            var rowVC: PanModalPresentable.LayoutType { return UserGroupStackedViewController() }
+            let string: String = "User Groups (Stacked)"
+            let rowVC: PanModalPresentable.LayoutType = UserGroupStackedViewController()
         }
     }
 }
