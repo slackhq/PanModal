@@ -94,7 +94,7 @@ private extension SampleViewController {
 
         struct FullScreen: RowPresentable {
             let string: String = "Full Screen"
-            let rowVC: PanModalPresentable.LayoutType = FullScreenViewController()
+            let rowVC: PanModalPresentable.LayoutType = FullScreenNavController()
         }
 
         struct Alert: RowPresentable {
