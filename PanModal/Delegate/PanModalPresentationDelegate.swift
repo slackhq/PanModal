@@ -73,7 +73,6 @@ extension PanModalPresentationDelegate: UIAdaptivePresentationControllerDelegate
      Dismisses the presented view controller
      */
     public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        controller.presentedViewController.dismiss(animated: false, completion: nil)
         return .none
     }
 
