@@ -30,6 +30,14 @@ extension FullScreenNavController: PanModalPresentable {
         return 1.0
     }
 
+    var transitionDuration: Double {
+        return 0.4
+    }
+
+    var transitionAnimationOptions: UIView.AnimationOptions {
+        return [.allowUserInteraction, .beginFromCurrentState]
+    }
+
     var shouldRoundTopCorners: Bool {
         return false
     }
