@@ -70,6 +70,22 @@ public protocol PanModalPresentable {
     var springDamping: CGFloat { get }
 
     /**
+     The transitionDuration value is used to set the speed of animation during a transition,
+     including initial presentation.
+
+     Default value is 0.5.
+    */
+    var transitionDuration: Double { get }
+
+    /**
+     The animation options used when performing animations on the PanModal, utilized mostly
+     during a transition.
+
+     Default value is [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState].
+    */
+    var transitionAnimationOptions: UIView.AnimationOptions { get }
+
+    /**
      The background view alpha.
 
      - Note: This is only utilized at the very start of the transition.
