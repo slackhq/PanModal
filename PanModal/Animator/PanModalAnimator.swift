@@ -16,18 +16,22 @@ struct PanModalAnimator {
      Constant Animation Properties
      */
     struct Constants {
-        static let transitionDuration: TimeInterval = 0.5
+        static let defaultTransitionDuration: TimeInterval = 0.5
     }
 
     static func animate(_ animations: @escaping PanModalPresentable.AnimationBlockType,
                         config: PanModalPresentable?,
                         _ completion: PanModalPresentable.AnimationCompletionType? = nil) {
 
-        UIView.animate(withDuration: Constants.transitionDuration,
+        let transitionDuration = config?.transitionDuration ?? Constants.defaultTransitionDuration
+        let springDamping = config?.springDamping ?? 1.0
+        let animationOptions = config?.transitionAnimationOptions ?? []
+
+        UIView.animate(withDuration: transitionDuration,
                        delay: 0,
-                       usingSpringWithDamping: config?.springDamping ?? 1.0,
+                       usingSpringWithDamping: springDamping,
                        initialSpringVelocity: 0,
-                       options: [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState],
+                       options: animationOptions,
                        animations: animations,
                        completion: completion)
     }
