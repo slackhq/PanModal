@@ -243,7 +243,7 @@ public extension PanModalPresentationController {
      Transition the PanModalPresentationController
      to the given presentation state
      */
-    public func transition(to state: PresentationState) {
+    func transition(to state: PresentationState) {
 
         guard presentable?.shouldTransition(to: state) == true
             else { return }
@@ -267,7 +267,7 @@ public extension PanModalPresentationController {
      This method pauses the content offset KVO, performs the content offset change
      and then resumes content offset observation.
      */
-    public func setContentOffset(offset: CGPoint) {
+    func setContentOffset(offset: CGPoint) {
 
         guard let scrollView = presentable?.panScrollable
             else { return }
@@ -298,7 +298,7 @@ public extension PanModalPresentationController {
      - Note: This should be called whenever any
      pan modal presentable value changes after the initial presentation
      */
-    public func setNeedsLayoutUpdate() {
+    func setNeedsLayoutUpdate() {
         configureViewLayout()
         adjustPresentedViewFrame()
         observe(scrollView: presentable?.panScrollable)
