@@ -38,6 +38,14 @@ public extension PanModalPresentable where Self: UIViewController {
         return 0.8
     }
 
+    var transitionDuration: Double {
+        return PanModalAnimator.Constants.defaultTransitionDuration
+    }
+
+    var transitionAnimationOptions: UIView.AnimationOptions {
+        return [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState]
+    }
+
     var backgroundAlpha: CGFloat {
         return 0.7
     }
