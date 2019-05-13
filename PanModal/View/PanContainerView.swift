@@ -20,8 +20,9 @@ class PanContainerView: UIView {
         addSubview(presentedView)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
