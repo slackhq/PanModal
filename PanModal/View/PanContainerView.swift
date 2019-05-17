@@ -20,8 +20,9 @@ class PanContainerView: UIView {
         addSubview(presentedView)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
@@ -33,7 +34,9 @@ extension UIView {
      from the view hierachy
      */
     var panContainerView: PanContainerView? {
-        return subviews.compactMap({ $0 as? PanContainerView }).first
+        return subviews.first(where: { view -> Bool in
+            view is PanContainerView
+        }) as? PanContainerView
     }
 
 }
