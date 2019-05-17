@@ -15,7 +15,7 @@ struct PanModalAnimator {
     /**
      Constant Animation Properties
      */
-    enum Constants {
+    struct Constants {
         static let defaultTransitionDuration: TimeInterval = 0.5
     }
 
