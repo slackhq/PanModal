@@ -71,6 +71,10 @@ public extension PanModalPresentable where Self: UIViewController {
     var allowsDragToDismiss: Bool {
         return true
     }
+    
+    var alwaysForcePanModal: Bool {
+        return false
+    }
 
     var isUserInteractionEnabled: Bool {
         return true

@@ -126,6 +126,15 @@ public protocol PanModalPresentable: AnyObject {
      Default value is true.
      */
     var allowsDragToDismiss: Bool { get }
+    
+    /**
+     A flag to determine if a pan modal should be used on iPad or UIPopover
+     
+     - Note: Return true to use always use a pan modal
+     
+     Default is false.
+     */
+    var alwaysForcePanModal: Bool { get }
 
     /**
      A flag to toggle user interactions on the container view.

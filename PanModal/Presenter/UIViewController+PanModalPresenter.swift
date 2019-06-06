@@ -43,7 +43,7 @@ extension UIViewController: PanModalPresenter {
          Here, we deliberately do not check for size classes. More info in `PanModalPresentationDelegate`
          */
 
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if UIDevice.current.userInterfaceIdiom == .pad && !viewControllerToPresent.alwaysForcePanModal {
             viewControllerToPresent.modalPresentationStyle = .popover
             viewControllerToPresent.popoverPresentationController?.sourceRect = sourceRect
             viewControllerToPresent.popoverPresentationController?.sourceView = sourceView ?? view
