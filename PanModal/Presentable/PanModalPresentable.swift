@@ -128,11 +128,11 @@ public protocol PanModalPresentable: AnyObject {
     var allowsDragToDismiss: Bool { get }
     
     /**
-     A flag to determine if a pan modal should be used on iPad or UIPopover
+     A flag to determine if the UIViewController should always be presented as Pan Modal.
      
-     - Note: Return true to use always use a pan modal
+     - Note: Return true to always be a Pan Modal
      
-     Default is false.
+     Default is false. Which means that on iPad, it will be presented as a popover & as Pan Modal on iPhone.
      */
     var alwaysForcePanModal: Bool { get }
 
