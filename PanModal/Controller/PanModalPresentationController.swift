@@ -826,7 +826,7 @@ extension PanModalPresentationController: UIGestureRecognizerDelegate {
      is a pan gesture recognizer
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.self)
+        return otherGestureRecognizer == panGestureRecognizer
     }
 }
 
