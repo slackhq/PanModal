@@ -105,6 +105,11 @@ public protocol PanModalPresentable {
     var allowsDragToDismiss: Bool { get }
 
     /**
+     Default value is true
+     */
+    var allowScrollViewDragToDismiss: Bool { get }
+    
+    /**
      A flag to toggle user interactions on the container view.
 
      - Note: Return false to forward touches to the presentingViewController.
