@@ -822,11 +822,11 @@ extension PanModalPresentationController: UIGestureRecognizerDelegate {
     }
 
     /**
-     Allow simultaneous gesture recognizers only when the other gesture recognizer
-     is a pan gesture recognizer
+     Allow simultaneous gesture recognizers only when the other gesture recognizer's view
+     is the pan scrollable view
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return otherGestureRecognizer == panGestureRecognizer
+        return otherGestureRecognizer.view == presentable?.panScrollable
     }
 }
 
