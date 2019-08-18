@@ -3,6 +3,7 @@
 //  PanModalTests
 //
 //  Created by Tosin Afolabi on 2/26/19.
+//  Updated by Nikita Nikitsky on 16/08/2019.
 //  Copyright © 2019 PanModal. All rights reserved.
 //
 
@@ -48,7 +49,7 @@ class PanModalTests: XCTestCase {
         XCTAssertEqual(vc.shortFormHeight, PanModalHeight.maxHeight)
         XCTAssertEqual(vc.longFormHeight, PanModalHeight.maxHeight)
         XCTAssertEqual(vc.springDamping, 0.8)
-        XCTAssertEqual(vc.backgroundAlpha, 0.7)
+        XCTAssertEqual(vc.backgroundStyle, PanModalBackgroundStyle.solid(color: .black, alpha: 0.7))
         XCTAssertEqual(vc.scrollIndicatorInsets, .zero)
         XCTAssertEqual(vc.anchorModalToLongForm, true)
         XCTAssertEqual(vc.allowsExtendedPanScrolling, false)

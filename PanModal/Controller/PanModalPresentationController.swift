@@ -2,6 +2,7 @@
 //  PanModalPresentationController.swift
 //  PanModal
 //
+//  Updated by Nikita Nikitsky on 16/08/2019.
 //  Copyright © 2019 Tiny Speck, Inc. All rights reserved.
 //
 
@@ -105,10 +106,17 @@ public class PanModalPresentationController: UIPresentationController {
      */
     private lazy var backgroundView: DimmedView = {
         let view: DimmedView
-        if let alpha = presentable?.backgroundAlpha {
-            view = DimmedView(dimAlpha: alpha)
-        } else {
-            view = DimmedView()
+        switch presentable?.backgroundStyle {
+        case let .solid(color, alpha)?:
+            view = SolidDimmedView(color: color, alpha: alpha)
+        case let .gradient(colors, startPoint, endPoint, type, alpha)?:
+            view = GradientDimmedView(colors: colors, startPoint: startPoint, endPoint: endPoint, type: type, alpha: alpha)
+        case let .blur(style, degree)?:
+            view = BlurDimmedView(style: style, degree: degree)
+        case let .custom(dimmedView)?:
+            view = dimmedView
+        default:
+            view = SolidDimmedView(color: .black, alpha: 0.7)
         }
         view.didTap = { [weak self] _ in
             self?.dismissPresentedViewController()
@@ -653,7 +661,7 @@ private extension PanModalPresentationController {
 
         /**
          Once presentedView is translated below shortForm, calculate yPos relative to bottom of screen
-         and apply percentage to backgroundView alpha
+         and apply percentage to backgroundView state
          */
         backgroundView.dimState = .percent(1.0 - (yDisplacementFromShortForm / presentedView.frame.height))
     }

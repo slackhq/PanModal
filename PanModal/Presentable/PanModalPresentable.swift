@@ -2,6 +2,7 @@
 //  PanModalPresentable.swift
 //  PanModal
 //
+//  Updated by Nikita Nikitsky on 16/08/2019.
 //  Copyright © 2017 Tiny Speck, Inc. All rights reserved.
 //
 
@@ -92,7 +93,17 @@ public protocol PanModalPresentable: AnyObject {
 
      Default Value is 0.7.
      */
+    @available(*, deprecated, message: "Replace to the background style.")
     var backgroundAlpha: CGFloat { get }
+
+    /**
+     The background view style.
+
+     - Note: This is only utilized at the very start of the transition.
+
+     Default Value is solid black with alpha 0.7.
+     */
+    var backgroundStyle: PanModalBackgroundStyle { get }
 
     /**
      We configure the panScrollable's scrollIndicatorInsets interally so override this value

@@ -2,6 +2,7 @@
 //  PanModalPresentable+Defaults.swift
 //  PanModal
 //
+//  Updated by Nikita Nikitsky on 16/08/2019.
 //  Copyright © 2018 Tiny Speck, Inc. All rights reserved.
 //
 
@@ -48,6 +49,10 @@ public extension PanModalPresentable where Self: UIViewController {
 
     var backgroundAlpha: CGFloat {
         return 0.7
+    }
+
+    var backgroundStyle: PanModalBackgroundStyle {
+        return .solid(color: .black, alpha: 0.7)
     }
 
     var scrollIndicatorInsets: UIEdgeInsets {
