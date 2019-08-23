@@ -1,3 +1,8 @@
+
+### PanModal is an elegant and highly customizable presentation API for constructing bottom sheet modals on iOS.
+
+Read our <a href="https://slack.engineering/panmodal-better-support-for-thumb-accessibility-on-slack-mobile-52b2a7596031" target="_blank">blog</a> on how Slack is getting more :thumbsup: with PanModal
+
 <p align="center">
     <img src="https://github.com/slackhq/PanModal/raw/master/Screenshots/panModal.gif" width="30%" height="30%" alt="Screenshot Preview" />
 </p>
