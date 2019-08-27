@@ -212,4 +212,10 @@ public protocol PanModalPresentable: AnyObject {
      */
     func panModalWillDismiss()
 
+    /**
+     Notifies the delegate after the pan modal is dismissed.
+
+     Default value is an empty implementation.
+     */
+    func panModalDismissCompleted()
 }
