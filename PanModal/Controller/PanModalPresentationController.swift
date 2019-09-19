@@ -362,13 +362,22 @@ private extension PanModalPresentationController {
      Reduce height of presentedView so that it sits at the bottom of the screen
      */
     func adjustPresentedViewFrame() {
-
-        guard let frame = containerView?.frame
+        
+        guard let containerView = containerView
             else { return }
-
-        let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
+        let frame = containerView.frame
+        var adjustedSize : CGSize = .zero
+        
         panContainerView.frame.size = frame.size
-        presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
+        if #available(iOS 11.0, *) {
+            let origin = containerView.safeAreaLayoutGuide.layoutFrame.origin
+            adjustedSize = CGSize(width: containerView.safeAreaLayoutGuide.layoutFrame.width, height:  containerView.safeAreaLayoutGuide.layoutFrame.height - anchoredYPosition)
+            presentedViewController.view.frame = CGRect(origin: origin, size: adjustedSize)
+        }
+        else{
+            adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
+            presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
+        }
     }
 
     /**
