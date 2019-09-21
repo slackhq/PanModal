@@ -677,7 +677,7 @@ private extension PanModalPresentationController {
     func dismissPresentedViewController() {
         presentable?.panModalWillDismiss()
         presentedViewController.dismiss(animated: true) { [weak self] in
-            self?.presentable?.panModalDismissCompleted()
+            self?.presentable?.panModalDidDismiss()
         }
     }
 }

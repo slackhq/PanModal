@@ -217,5 +217,5 @@ public protocol PanModalPresentable: AnyObject {
 
      Default value is an empty implementation.
      */
-    func panModalDismissCompleted()
+    func panModalDidDismiss()
 }
