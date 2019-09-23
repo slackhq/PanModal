@@ -226,6 +226,15 @@ public class PanModalPresentationController: UIPresentationController {
                 else { return }
 
             self.adjustPresentedViewFrame()
+            
+            let position = self.nearest(to: self.presentedView.frame.minY, inValues: [self.shortFormYPosition, self.longFormYPosition])
+            
+            if position == self.longFormYPosition {
+                self.transition(to: .longForm)
+                
+            } else if position == self.shortFormYPosition {
+                self.transition(to: .shortForm)
+            }
 
             if presentable.shouldRoundTopCorners {
                 self.addRoundedCorners(to: self.presentedView)
