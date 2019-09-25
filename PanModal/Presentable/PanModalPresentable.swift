@@ -86,13 +86,13 @@ public protocol PanModalPresentable: AnyObject {
     var transitionAnimationOptions: UIView.AnimationOptions { get }
 
     /**
-     The background view alpha.
+     The background view color.
 
      - Note: This is only utilized at the very start of the transition.
 
-     Default Value is 0.7.
-     */
-    var backgroundAlpha: CGFloat { get }
+     Default Value is black with alpha component 0.7.
+    */
+    var panModalBackgroundColor: UIColor { get }
 
     /**
      We configure the panScrollable's scrollIndicatorInsets interally so override this value
