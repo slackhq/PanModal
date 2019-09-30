@@ -72,7 +72,6 @@ public class PanModalPresentationAnimator: NSObject {
 
         // Calls viewWillAppear and viewWillDisappear
         fromVC.beginAppearanceTransition(false, animated: true)
-        toVC.beginAppearanceTransition(true, animated: true)
         
         // Presents the view in shortForm position, initially
         let yPos: CGFloat = presentable?.shortFormYPos ?? 0.0
@@ -94,7 +93,6 @@ public class PanModalPresentationAnimator: NSObject {
         }, config: presentable) { [weak self] didComplete in
             // Calls viewDidAppear and viewDidDisappear
             fromVC.endAppearanceTransition()
-            toVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
             self?.feedbackGenerator = nil
         }
@@ -111,7 +109,6 @@ public class PanModalPresentationAnimator: NSObject {
             else { return }
 
         // Calls viewWillAppear and viewWillDisappear
-        fromVC.beginAppearanceTransition(false, animated: true)
         toVC.beginAppearanceTransition(true, animated: true)
         
         let presentable = panModalLayoutType(from: transitionContext)
@@ -122,7 +119,6 @@ public class PanModalPresentationAnimator: NSObject {
         }, config: presentable) { didComplete in
             fromVC.view.removeFromSuperview()
             // Calls viewDidAppear and viewDidDisappear
-            fromVC.endAppearanceTransition()
             toVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
         }
