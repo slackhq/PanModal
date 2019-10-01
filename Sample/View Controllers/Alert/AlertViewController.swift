@@ -46,8 +46,8 @@ class AlertViewController: UIViewController, PanModalPresentable {
         return shortFormHeight
     }
 
-    var backgroundAlpha: CGFloat {
-        return 0.1
+    var panModalBackgroundColor: UIColor {
+        return UIColor.black.withAlphaComponent(0.1)
     }
 
     var shouldRoundTopCorners: Bool {
