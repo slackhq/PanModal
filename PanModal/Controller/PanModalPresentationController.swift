@@ -259,35 +259,27 @@ public extension PanModalPresentationController {
     }
 
     /**
-     Set the content offset of the scroll view
+     Operations on the scroll view, such as content height changes,
+     or when inserting/deleting rows can cause the pan modal to jump,
+     caused by the pan modal responding to content offset changes.
 
-     Due to content offset observation, its not possible to programmatically
-     set the content offset directly on the scroll view while in the short form.
-
-     This method pauses the content offset KVO, performs the content offset change
-     and then resumes content offset observation.
+     To avoid this, you can call this method to perform scroll view updates,
+     with scroll observation temporarily disabled.
      */
-    func setContentOffset(offset: CGPoint) {
+    func performUpdates(_ updates: () -> Void) {
 
         guard let scrollView = presentable?.panScrollable
             else { return }
 
-        /**
-         Invalidate scroll view observer
-         to prevent its overriding the content offset change
-         */
+        // Pause scroll observer
         scrollObserver?.invalidate()
         scrollObserver = nil
 
-        /**
-         Set scroll view offset & track scrolling
-         */
-        scrollView.setContentOffset(offset, animated:false)
-        trackScrolling(scrollView)
+        // Perform updates
+        updates()
 
-        /**
-         Add the scroll view observer
-         */
+        // Resume scroll observer
+        trackScrolling(scrollView)
         observe(scrollView: scrollView)
     }
 
