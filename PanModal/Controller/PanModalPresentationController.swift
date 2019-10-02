@@ -226,16 +226,6 @@ public class PanModalPresentationController: UIPresentationController {
                 else { return }
 
             self.adjustPresentedViewFrame()
-            
-            let position = self.nearest(to: self.presentedView.frame.minY, inValues: [self.shortFormYPosition, self.longFormYPosition])
-            
-            if position == self.longFormYPosition {
-                self.transition(to: .longForm)
-                
-            } else if position == self.shortFormYPosition {
-                self.transition(to: .shortForm)
-            }
-
             if presentable.shouldRoundTopCorners {
                 self.addRoundedCorners(to: self.presentedView)
             }
@@ -376,7 +366,13 @@ private extension PanModalPresentationController {
             else { return }
 
         let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
+        let panFrame = panContainerView.frame
         panContainerView.frame.size = frame.size
+        
+        if ![shortFormYPosition, longFormYPosition].contains(panFrame.origin.y) {
+            adjust(toYPosition: panFrame.origin.y - panFrame.height + frame.height)
+        }
+        panContainerView.frame.origin.x = frame.origin.x
         presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
     }
 
