@@ -784,7 +784,7 @@ private extension PanModalPresentationController {
      */
     func handleScrollViewTopBounce(scrollView: UIScrollView, change: NSKeyValueObservedChange<CGPoint>) {
 
-        guard let oldYValue = change.oldValue?.y
+        guard let oldYValue = change.oldValue?.y, scrollView.isDecelerating
             else { return }
 
         let yOffset = scrollView.contentOffset.y
