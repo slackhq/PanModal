@@ -362,6 +362,8 @@ private extension PanModalPresentationController {
         panContainerView.frame.size = frame.size
         
         if ![shortFormYPosition, longFormYPosition].contains(panFrame.origin.y) {
+            // if the container is already in the correct position, no need to adjust positioning
+            // (rotations & size changes cause positioning to be out of sync)
             adjust(toYPosition: panFrame.origin.y - panFrame.height + frame.height)
         }
         panContainerView.frame.origin.x = frame.origin.x
