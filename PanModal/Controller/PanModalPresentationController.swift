@@ -258,35 +258,27 @@ public extension PanModalPresentationController {
     }
 
     /**
-     Set the content offset of the scroll view
+     Operations on the scroll view, such as content height changes,
+     or when inserting/deleting rows can cause the pan modal to jump,
+     caused by the pan modal responding to content offset changes.
 
-     Due to content offset observation, its not possible to programmatically
-     set the content offset directly on the scroll view while in the short form.
-
-     This method pauses the content offset KVO, performs the content offset change
-     and then resumes content offset observation.
+     To avoid this, you can call this method to perform scroll view updates,
+     with scroll observation temporarily disabled.
      */
-    func setContentOffset(offset: CGPoint) {
+    func performUpdates(_ updates: () -> Void) {
 
         guard let scrollView = presentable?.panScrollable
             else { return }
 
-        /**
-         Invalidate scroll view observer
-         to prevent its overriding the content offset change
-         */
+        // Pause scroll observer
         scrollObserver?.invalidate()
         scrollObserver = nil
 
-        /**
-         Set scroll view offset & track scrolling
-         */
-        scrollView.setContentOffset(offset, animated:false)
-        trackScrolling(scrollView)
+        // Perform updates
+        updates()
 
-        /**
-         Add the scroll view observer
-         */
+        // Resume scroll observer
+        trackScrolling(scrollView)
         observe(scrollView: scrollView)
     }
 
@@ -370,6 +362,8 @@ private extension PanModalPresentationController {
         panContainerView.frame.size = frame.size
         
         if ![shortFormYPosition, longFormYPosition].contains(panFrame.origin.y) {
+            // if the container is already in the correct position, no need to adjust positioning
+            // (rotations & size changes cause positioning to be out of sync)
             adjust(toYPosition: panFrame.origin.y - panFrame.height + frame.height)
         }
         panContainerView.frame.origin.x = frame.origin.x
@@ -789,7 +783,7 @@ private extension PanModalPresentationController {
      */
     func handleScrollViewTopBounce(scrollView: UIScrollView, change: NSKeyValueObservedChange<CGPoint>) {
 
-        guard let oldYValue = change.oldValue?.y
+        guard let oldYValue = change.oldValue?.y, scrollView.isDecelerating
             else { return }
 
         let yOffset = scrollView.contentOffset.y
