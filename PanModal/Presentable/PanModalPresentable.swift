@@ -128,6 +128,13 @@ public protocol PanModalPresentable: AnyObject {
     var allowsDragToDismiss: Bool { get }
 
     /**
+     A flag to determine if dismissal should be initiated when tapping on the dimmed background view.
+
+     Default value is true.
+     */
+    var allowsTapToDismiss: Bool { get }
+
+    /**
      A flag to toggle user interactions on the container view.
 
      - Note: Return false to forward touches to the presentingViewController.
