@@ -22,7 +22,7 @@ import UIKit
  By conforming to the PanModalPresentable protocol & overriding values
  the presented view can define its layout configuration & presentation.
  */
-public class PanModalPresentationController: UIPresentationController {
+open class PanModalPresentationController: UIPresentationController {
 
     /**
      Enum representing the possible presentation states
