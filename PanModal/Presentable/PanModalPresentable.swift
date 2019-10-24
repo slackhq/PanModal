@@ -97,7 +97,7 @@ public protocol PanModalPresentable: AnyObject {
     /**
      The drag indicator view color.
 
-     Default Value is light gray.
+     Default value is light gray.
     */
     var dragIndicatorBackgroundColor: UIColor { get }
 
