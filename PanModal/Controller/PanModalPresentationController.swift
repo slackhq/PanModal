@@ -133,7 +133,7 @@ open class PanModalPresentationController: UIPresentationController {
      */
     private lazy var dragIndicatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = presentable?.dragIndicatorBackgroundColor
         view.layer.cornerRadius = Constants.dragIndicatorSize.height / 2.0
         return view
     }()

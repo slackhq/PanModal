@@ -49,6 +49,7 @@ class PanModalTests: XCTestCase {
         XCTAssertEqual(vc.longFormHeight, PanModalHeight.maxHeight)
         XCTAssertEqual(vc.springDamping, 0.8)
         XCTAssertEqual(vc.panModalBackgroundColor, UIColor.black.withAlphaComponent(0.7))
+        XCTAssertEqual(vc.dragIndicatorBackgroundColor, UIColor.lightGray)
         XCTAssertEqual(vc.scrollIndicatorInsets, .zero)
         XCTAssertEqual(vc.anchorModalToLongForm, true)
         XCTAssertEqual(vc.allowsExtendedPanScrolling, false)

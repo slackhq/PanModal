@@ -95,6 +95,13 @@ public protocol PanModalPresentable: AnyObject {
     var panModalBackgroundColor: UIColor { get }
 
     /**
+     The drag indicator view color.
+
+     Default value is light gray.
+    */
+    var dragIndicatorBackgroundColor: UIColor { get }
+
+    /**
      We configure the panScrollable's scrollIndicatorInsets interally so override this value
      to set custom insets.
 
