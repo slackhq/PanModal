@@ -445,7 +445,7 @@ private extension PanModalPresentationController {
          Set the appropriate contentInset as the configuration within this class
          offsets it
          */
-        scrollView.contentInset.bottom = presentingViewController.bottomLayoutGuide.length
+        scrollView.contentInset = presentable?.scrollContentInsets ?? UIEdgeInsets(top: 0, left: 0, bottom: presentingViewController.bottomLayoutGuide.length, right: 0)
 
         /**
          As we adjust the bounds during `handleScrollViewTopBounce`
