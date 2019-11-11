@@ -1,15 +1,13 @@
 
 ### PanModal is an elegant and highly customizable presentation API for constructing bottom sheet modals on iOS.
 
-Read our <a href="https://slack.engineering/panmodal-better-support-for-thumb-accessibility-on-slack-mobile-52b2a7596031" target="_blank">blog</a> on how Slack is getting more :thumbsup: with PanModal
-
 <p align="center">
     <img src="https://github.com/slackhq/PanModal/raw/master/Screenshots/panModal.gif" width="30%" height="30%" alt="Screenshot Preview" />
 </p>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Platform-iOS_10+-green.svg" alt="Platform: iOS 10.0+" />
-    <a href="https://developer.apple.com/swift" target="_blank"><img src="https://img.shields.io/badge/Language-Swift_4-blueviolet.svg" alt="Language: Swift 4" /></a>
+    <a href="https://developer.apple.com/swift" target="_blank"><img src="https://img.shields.io/badge/Language-Swift_5-blueviolet.svg" alt="Language: Swift 5" /></a>
     <a href="https://cocoapods.org/pods/PanModal" target="_blank"><img src="https://img.shields.io/badge/CocoaPods-v1.0-red.svg" alt="CocoaPods compatible" /></a>
     <a href="https://github.com/Carthage/Carthage" target="_blank"><img src="https://img.shields.io/badge/Carthage-compatible-blue.svg" alt="Carthage compatible" /></a>
     <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT" />
@@ -24,6 +22,12 @@ Read our <a href="https://slack.engineering/panmodal-better-support-for-thumb-ac
   • <a href="#contributing">Contributing</a>
   • <a href="#authors">Authors</a>
   • <a href="#license">License</a>
+</p>
+
+<p align="center">
+Read our <a href="https://slack.engineering/panmodal-better-support-for-thumb-accessibility-on-slack-mobile-52b2a7596031" target="_blank">blog</a> on how Slack is getting more :thumbsup: with PanModal
+
+Swift 4.2 support can be found on the `Swift4.2` branch.
 </p>
 
 ## Features
