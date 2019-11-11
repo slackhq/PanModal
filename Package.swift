@@ -18,5 +18,5 @@ let package = Package(
             dependencies: [],
             path: "PanModal")
     ],
-    swiftLanguageVersions: [.version("4.2")]
+    swiftLanguageVersions: [.version("5.0")]
 )

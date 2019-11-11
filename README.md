@@ -54,6 +54,14 @@ pod 'PanModal'
 github "slackhq/PanModal"
 ```
 
+* Swift Package Manager, add the following line to your Package.swift:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/slackhq/PanModal.git", .exact("1.2.6")),
+],
+```
+
 ## Usage
 
 PanModal was designed to be used effortlessly. Simply call `presentPanModal` in the same way you would expect to present a `UIViewController`
