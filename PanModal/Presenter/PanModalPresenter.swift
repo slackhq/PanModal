@@ -5,6 +5,7 @@
 //  Copyright © 2019 Tiny Speck, Inc. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
 
 /**
@@ -31,3 +32,4 @@ protocol PanModalPresenter: AnyObject {
     func presentPanModal(_ viewControllerToPresent: PanModalPresentable.LayoutType, sourceView: UIView?, sourceRect: CGRect)
 
 }
+#endif

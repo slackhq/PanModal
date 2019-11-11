@@ -5,6 +5,7 @@
 //  Copyright © 2019 Tiny Speck, Inc. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
 
 /**
@@ -890,3 +891,4 @@ private extension UIScrollView {
         return isDragging && !isDecelerating || isTracking
     }
 }
+#endif
