@@ -104,8 +104,8 @@ public class PanModalPresentationController: UIPresentationController {
      */
     private lazy var backgroundView: DimmedView = {
         let view: DimmedView
-        if let alpha = presentable?.backgroundAlpha {
-            view = DimmedView(dimAlpha: alpha)
+        if let color = presentable?.panModalBackgroundColor {
+            view = DimmedView(dimColor: color)
         } else {
             view = DimmedView()
         }

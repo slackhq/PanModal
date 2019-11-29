@@ -34,8 +34,8 @@ public extension PanModalPresentable where Self: UIViewController {
         return 0.8
     }
 
-    var backgroundAlpha: CGFloat {
-        return 0.7
+    var panModalBackgroundColor: UIColor {
+        return UIColor.black.withAlphaComponent(0.7)
     }
 
     var scrollIndicatorInsets: UIEdgeInsets {

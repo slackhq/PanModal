@@ -57,8 +57,8 @@ class TransientAlertViewController: AlertViewController {
         return true
     }
 
-    override var backgroundAlpha: CGFloat {
-        return 0.0
+    override var panModalBackgroundColor: UIColor {
+        return .clear
     }
 
     override var isUserInteractionEnabled: Bool {
