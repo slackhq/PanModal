@@ -365,7 +365,6 @@ private extension PanModalPresentationController {
     func adjustPanContainerBackgroundColor() {
         panContainerView.backgroundColor = presentedViewController.view.backgroundColor
             ?? presentable?.panScrollable?.backgroundColor
-        dragIndicatorView.backgroundColor = panContainerView.backgroundColor
     }
 
     /**
@@ -387,6 +386,7 @@ private extension PanModalPresentationController {
      */
     func addDragIndicatorView(to view: UIView) {
         view.addSubview(dragIndicatorView)
+        dragIndicatorView.backgroundColor = presentable?.dragIndicatorBackgroundColor
         dragIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         dragIndicatorView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0.5).isActive = true
         dragIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true

@@ -38,6 +38,10 @@ public extension PanModalPresentable where Self: UIViewController {
         return UIColor.black.withAlphaComponent(0.7)
     }
 
+    var dragIndicatorBackgroundColor: UIColor {
+        return UIColor.clear
+    }
+    
     var scrollIndicatorInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: bottomLayoutOffset, right: 0)
     }
