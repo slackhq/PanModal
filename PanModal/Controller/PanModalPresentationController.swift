@@ -305,6 +305,12 @@ public extension PanModalPresentationController {
         configureScrollViewInsets()
     }
 
+    /**
+     Set a background color to the pan container view
+    */
+    func setPanContainerBackgroundColor(_ backgroundColor: UIColor) {
+        panContainerView.backgroundColor = backgroundColor
+    }
 }
 
 // MARK: - Presented View Layout Configuration

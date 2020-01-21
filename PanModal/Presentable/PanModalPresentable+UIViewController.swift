@@ -58,4 +58,10 @@ public extension PanModalPresentable where Self: UIViewController {
         PanModalAnimator.animate(animationBlock, config: self, completion)
     }
 
+    /**
+     Set a background color to the pan container view
+     */
+    func setPanContainerBackgroundColor(_ backgroundColor: UIColor) {
+        presentedVC?.setPanContainerBackgroundColor(backgroundColor)
+    }
 }
