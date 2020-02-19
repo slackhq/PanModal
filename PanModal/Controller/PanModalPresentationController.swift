@@ -78,7 +78,7 @@ open class PanModalPresentationController: UIPresentationController {
      The y value for the short form presentation state
      */
     private var shortFormYPosition: CGFloat = 0
-
+    
     /**
      The y value for the long form presentation state
      */
@@ -87,17 +87,12 @@ open class PanModalPresentationController: UIPresentationController {
     /**
      The y value for the form presentation state when keyboard is shown
      */
-    private var onShowKeyboardFormYPosition: CGFloat?
+    private var keyboardShownYPosition: CGFloat?
     
     /**
-    The value for the keyboard height when shown, this is used to add to scroll inset when needed
-    */
+     The value for the keyboard height when shown, this is used to add to scroll inset when needed and then subtracted from the scroll inset when not needed
+     */
     private var keyboardHeight: CGFloat = 0
-    
-    /**
-    The value of the current scroll content inset when adding to keyboard height, we need to store this so we can later remove the keyboard height from scroll content inset when keyboard hides
-    */
-    private var currentScrollContentInset: CGFloat = 0
     
     /**
      Determine anchored Y postion based on the `anchorModalToLongForm` flag
@@ -267,22 +262,28 @@ open class PanModalPresentationController: UIPresentationController {
         //if the presented view is already at max height and is scrollable then scroll to above the keyboard when keyboard is shown if needed
         
         if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            keyboardHeight = keyboardSize.height
+            
+            if #available(iOS 11.0, *) {
+                let safeAreaOffset = presentedView.safeAreaInsets.bottom
+                keyboardHeight = keyboardSize.height
+                keyboardHeight -= safeAreaOffset
+            }
             
             if let scrollView = presentable?.panScrollable, pannedToMax {
-                currentScrollContentInset = scrollView.contentInset.bottom + keyboardHeight
-                scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: currentScrollContentInset, right: 0.0);
+                scrollView.contentInset.bottom = keyboardHeight
+                scrollView.scrollIndicatorInsets.bottom = scrollView.scrollIndicatorInsets.bottom - keyboardHeight
+                keyboardHeight = 0
                 return
             }
             
-            if onShowKeyboardFormYPosition == nil {
-                onShowKeyboardFormYPosition = presentedView.frame.origin.y - keyboardHeight
+            if keyboardShownYPosition == nil {
+                keyboardShownYPosition = presentedView.frame.origin.y - keyboardHeight
             }
             
-            guard let onShowKeyboardFormYPosition = onShowKeyboardFormYPosition else { return }
-            shortFormYPosition = onShowKeyboardFormYPosition
-            longFormYPosition = onShowKeyboardFormYPosition
-            snap(toYPosition: onShowKeyboardFormYPosition)
+            guard let keyboardShownYPosition = keyboardShownYPosition else { return }
+            shortFormYPosition = keyboardShownYPosition
+            longFormYPosition = keyboardShownYPosition
+            snap(toYPosition: keyboardShownYPosition)
         }
     }
     
@@ -290,8 +291,7 @@ open class PanModalPresentationController: UIPresentationController {
      Update long form height and short form height back to original values once keyboard is hidden
      */
     @objc func keyboardWillHide(notification: Notification){
-        onShowKeyboardFormYPosition = nil
-        keyboardHeight = 0
+        keyboardShownYPosition = nil
         
         guard let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType else { return }
         
@@ -299,10 +299,12 @@ open class PanModalPresentationController: UIPresentationController {
         longFormYPosition = layoutPresentable.longFormYPos
         
         if let scrollView = presentable?.panScrollable {
-            scrollView.contentInset.bottom = currentScrollContentInset - keyboardHeight
+            scrollView.contentInset.bottom = scrollView.contentInset.bottom - keyboardHeight
+            scrollView.scrollIndicatorInsets.bottom = scrollView.scrollIndicatorInsets.bottom + keyboardHeight
         }
         
         transition(to: .shortForm)
+        keyboardHeight = 0
     }
 }
 
