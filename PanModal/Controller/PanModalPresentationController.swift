@@ -256,12 +256,13 @@ open class PanModalPresentationController: UIPresentationController {
         
         //if the presented view is already at max height and is scrollable then scroll to above the keyboard when keyboard is shown if needed
         
-        if let scrollView = presentable?.panScrollable, pannedToMax {
-            scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 216.0, right: 0.0);
-            return
-        }
-        
         if let keyboardSize = (notification.userInfo?  [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if let scrollView = presentable?.panScrollable, pannedToMax {
+                scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0);
+                return
+            }
+            
             if onShowKeyboardFormYPosition == nil {
                 onShowKeyboardFormYPosition = presentedView.frame.origin.y - keyboardSize.height
             }
