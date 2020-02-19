@@ -90,6 +90,16 @@ open class PanModalPresentationController: UIPresentationController {
     private var onShowKeyboardFormYPosition: CGFloat?
     
     /**
+    The value for the keyboard height when shown, this is used to add to scroll inset when needed
+    */
+    private var keyboardHeight: CGFloat = 0
+    
+    /**
+    The value of the current scroll content inset when adding to keyboard height, we need to store this so we can later remove the keyboard height from scroll content inset when keyboard hides
+    */
+    private var currentScrollContentInset: CGFloat = 0
+    
+    /**
      Determine anchored Y postion based on the `anchorModalToLongForm` flag
      */
     private var anchoredYPosition: CGFloat {
@@ -256,15 +266,17 @@ open class PanModalPresentationController: UIPresentationController {
         
         //if the presented view is already at max height and is scrollable then scroll to above the keyboard when keyboard is shown if needed
         
-        if let keyboardSize = (notification.userInfo?  [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            keyboardHeight = keyboardSize.height
             
             if let scrollView = presentable?.panScrollable, pannedToMax {
-                scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0);
+                currentScrollContentInset = scrollView.contentInset.bottom + keyboardHeight
+                scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: currentScrollContentInset, right: 0.0);
                 return
             }
             
             if onShowKeyboardFormYPosition == nil {
-                onShowKeyboardFormYPosition = presentedView.frame.origin.y - keyboardSize.height
+                onShowKeyboardFormYPosition = presentedView.frame.origin.y - keyboardHeight
             }
             
             guard let onShowKeyboardFormYPosition = onShowKeyboardFormYPosition else { return }
@@ -284,6 +296,11 @@ open class PanModalPresentationController: UIPresentationController {
         
         shortFormYPosition = layoutPresentable.shortFormYPos
         longFormYPosition = layoutPresentable.longFormYPos
+        
+        if let scrollView = presentable?.panScrollable {
+            scrollView.contentInset.bottom = currentScrollContentInset - keyboardHeight
+            keyboardHeight = 0
+        }
         
         transition(to: .shortForm)
     }
