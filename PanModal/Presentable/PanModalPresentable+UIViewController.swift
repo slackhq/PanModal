@@ -58,6 +58,14 @@ public extension PanModalPresentable where Self: UIViewController {
     func panModalAnimate(_ animationBlock: @escaping AnimationBlockType, _ completion: AnimationCompletionType? = nil) {
         PanModalAnimator.animate(animationBlock, config: self, completion)
     }
+    
+    /**
+    A function wrapper over the `observeKeyboard()` function in PanModalPresentationController.
 
+    This can be used to handle keyboard support  and scrolling to the correct position when keyboard is shown on views within the presented view controller.
+    */
+    func observeKeyboard() {
+        presentedVC?.observeKeyboard()
+    }
 }
 #endif
