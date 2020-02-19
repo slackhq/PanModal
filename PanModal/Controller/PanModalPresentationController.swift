@@ -106,7 +106,7 @@ open class PanModalPresentationController: UIPresentationController {
      Determine if presented view is at the max height
      */
     private var pannedToMax: Bool {
-        longFormYPosition == presentedView.frame.origin.y
+        longFormYPosition >= presentedView.frame.origin.y
     }
     
     /**
