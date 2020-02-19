@@ -291,6 +291,7 @@ open class PanModalPresentationController: UIPresentationController {
      */
     @objc func keyboardWillHide(notification: Notification){
         onShowKeyboardFormYPosition = nil
+        keyboardHeight = 0
         
         guard let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType else { return }
         
@@ -299,7 +300,6 @@ open class PanModalPresentationController: UIPresentationController {
         
         if let scrollView = presentable?.panScrollable {
             scrollView.contentInset.bottom = currentScrollContentInset - keyboardHeight
-            keyboardHeight = 0
         }
         
         transition(to: .shortForm)
