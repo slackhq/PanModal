@@ -78,12 +78,22 @@ open class PanModalPresentationController: UIPresentationController {
      The y value for the short form presentation state
      */
     private var shortFormYPosition: CGFloat = 0
-
+    
     /**
      The y value for the long form presentation state
      */
     private var longFormYPosition: CGFloat = 0
-
+    
+    /**
+     The y value for the form presentation state when keyboard is shown
+     */
+    private var keyboardShownYPosition: CGFloat?
+    
+    /**
+     The value for the keyboard height when shown, this is used to add to scroll inset when needed and then subtracted from the scroll inset when not needed
+     */
+    private var keyboardHeight: CGFloat = 0
+    
     /**
      Determine anchored Y postion based on the `anchorModalToLongForm` flag
      */
@@ -91,7 +101,14 @@ open class PanModalPresentationController: UIPresentationController {
         let defaultTopOffset = presentable?.topOffset ?? 0
         return anchorModalToLongForm ? longFormYPosition : defaultTopOffset
     }
-
+    
+    /**
+     Determine if presented view is at the max height
+     */
+    private var pannedToMax: Bool {
+        longFormYPosition >= presentedView.frame.origin.y
+    }
+    
     /**
      Configuration object for PanModalPresentationController
      */
@@ -234,12 +251,71 @@ open class PanModalPresentationController: UIPresentationController {
             }
         })
     }
-
+    
+    // MARK: - Actions
+    
+    /**
+     Update long form height and short form height when the keyboard is showing/scrolling and scroll to correct position above the keyboard if keyboard is showing
+     */
+    @objc func keyboardWillShow(notification: Notification) {
+        
+        //if the presented view is already at max height and is scrollable then scroll to above the keyboard when keyboard is shown if needed
+        
+        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            
+            if #available(iOS 11.0, *) {
+                let safeAreaOffset = presentedView.safeAreaInsets.bottom
+                keyboardHeight = keyboardSize.height
+                keyboardHeight -= safeAreaOffset
+            }
+            
+            if let scrollView = presentable?.panScrollable, pannedToMax {
+                scrollView.contentInset.bottom = keyboardHeight
+                scrollView.scrollIndicatorInsets.bottom = scrollView.scrollIndicatorInsets.bottom - keyboardHeight
+                keyboardHeight = 0
+                return
+            }
+            
+            if keyboardShownYPosition == nil {
+                keyboardShownYPosition = presentedView.frame.origin.y - keyboardHeight
+            }
+            
+            guard let keyboardShownYPosition = keyboardShownYPosition else { return }
+            shortFormYPosition = keyboardShownYPosition
+            longFormYPosition = keyboardShownYPosition
+            snap(toYPosition: keyboardShownYPosition)
+        }
+    }
+    
+    /**
+     Update long form height and short form height back to original values once keyboard is hidden
+     */
+    @objc func keyboardWillHide(notification: Notification){
+        keyboardShownYPosition = nil
+        
+        guard let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType else { return }
+        
+        shortFormYPosition = layoutPresentable.shortFormYPos
+        longFormYPosition = layoutPresentable.longFormYPos
+        
+        if let scrollView = presentable?.panScrollable {
+            scrollView.contentInset.bottom = scrollView.contentInset.bottom - keyboardHeight
+            scrollView.scrollIndicatorInsets.bottom = scrollView.scrollIndicatorInsets.bottom + keyboardHeight
+        }
+        
+        transition(to: .shortForm)
+        keyboardHeight = 0
+    }
 }
 
 // MARK: - Public Methods
 
 public extension PanModalPresentationController {
+    
+    func observeKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
 
     /**
      Transition the PanModalPresentationController
