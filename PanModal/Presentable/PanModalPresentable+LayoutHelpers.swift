@@ -27,10 +27,11 @@ extension PanModalPresentable where Self: UIViewController {
      Gives us the safe area inset from the top.
      */
     var topLayoutOffset: CGFloat {
-        guard let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication else {
-            return 0
-        }
-        return application.keyWindow?.rootViewController?.topLayoutGuide.length ?? 0
+
+        guard let rootVC = rootViewController
+            else { return 0}
+
+        if #available(iOS 11.0, *) { return rootVC.view.safeAreaInsets.top } else { return rootVC.topLayoutGuide.length }
     }
 
     /**
@@ -38,10 +39,11 @@ extension PanModalPresentable where Self: UIViewController {
      Gives us the safe area inset from the bottom.
      */
     var bottomLayoutOffset: CGFloat {
-        guard let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication else {
-            return 0
-        }
-        return application.keyWindow?.rootViewController?.bottomLayoutGuide.length ?? 0
+
+       guard let rootVC = rootViewController
+            else { return 0}
+
+        if #available(iOS 11.0, *) { return rootVC.view.safeAreaInsets.bottom } else { return rootVC.bottomLayoutGuide.length }
     }
 
     /**
@@ -104,6 +106,14 @@ extension PanModalPresentable where Self: UIViewController {
             let intrinsicHeight = view.systemLayoutSizeFitting(targetSize).height
             return bottomYPos - (intrinsicHeight + bottomLayoutOffset)
         }
+    }
+
+    private var rootViewController: UIViewController? {
+
+        guard let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication
+            else { return nil }
+
+        return application.keyWindow?.rootViewController
     }
 
 }
