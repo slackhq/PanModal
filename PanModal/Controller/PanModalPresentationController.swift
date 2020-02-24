@@ -367,7 +367,8 @@ private extension PanModalPresentationController {
         if ![shortFormYPosition, longFormYPosition].contains(panFrame.origin.y) {
             // if the container is already in the correct position, no need to adjust positioning
             // (rotations & size changes cause positioning to be out of sync)
-            adjust(toYPosition: panFrame.origin.y - panFrame.height + frame.height)
+            let yPosition = panFrame.origin.y - panFrame.height + frame.height
+            presentedView.frame.origin.y = max(yPosition, anchoredYPosition)
         }
         panContainerView.frame.origin.x = frame.origin.x
         presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
