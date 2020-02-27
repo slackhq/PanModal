@@ -263,16 +263,17 @@ open class PanModalPresentationController: UIPresentationController {
         
         if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             
-            if #available(iOS 11.0, *) {
-                let safeAreaOffset = presentedView.safeAreaInsets.bottom
-                keyboardHeight = keyboardSize.height
-                keyboardHeight -= safeAreaOffset
-            }
+            keyboardHeight = keyboardSize.height
             
             if let scrollView = presentable?.panScrollable, pannedToMax {
-                scrollView.contentInset.bottom = keyboardHeight
-                scrollView.scrollIndicatorInsets.bottom = scrollView.scrollIndicatorInsets.bottom - keyboardHeight
+                
+                var contentInset: UIEdgeInsets = scrollView.contentInset
+                contentInset.bottom = keyboardHeight + 20
+                scrollView.contentInset = contentInset
+                scrollView.scrollIndicatorInsets = scrollView.contentInset
+               
                 keyboardHeight = 0
+               
                 return
             }
             
@@ -299,11 +300,14 @@ open class PanModalPresentationController: UIPresentationController {
         longFormYPosition = layoutPresentable.longFormYPos
         
         if let scrollView = presentable?.panScrollable {
-            scrollView.contentInset.bottom = scrollView.contentInset.bottom - keyboardHeight
-            scrollView.scrollIndicatorInsets.bottom = scrollView.scrollIndicatorInsets.bottom + keyboardHeight
+            scrollView.contentInset = UIEdgeInsets.zero
+            scrollView.scrollIndicatorInsets = scrollView.contentInset
         }
         
-        transition(to: .shortForm)
+        if !pannedToMax {
+            transition(to: .shortForm)
+        }
+        
         keyboardHeight = 0
     }
 }
@@ -968,3 +972,4 @@ private extension UIScrollView {
     }
 }
 #endif
+
