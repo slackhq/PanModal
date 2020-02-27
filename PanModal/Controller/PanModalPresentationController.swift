@@ -314,9 +314,7 @@ open class PanModalPresentationController: UIPresentationController {
             scrollView.scrollIndicatorInsets = scrollView.contentInset
         }
         
-        if !pannedToMax {
-            transition(to: .shortForm)
-        }
+        transition(to: .shortForm)
     }
 }
 
