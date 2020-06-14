@@ -20,6 +20,19 @@ import UIKit
  ```
  */
 public protocol PanModalPresentable: AnyObject {
+    /**
+     The *inset* (not *margin*) between the bottom of the screen and the bottom of the pan modal container view.
+
+     Default value is the safeAreaLayout.bottom on iOS 11 and above, and zero on older iOS versions.
+     */
+    var bottomInset: CGFloat { get }
+
+    /**
+     A flag to determine if the top shadow should be shown
+
+     Default value is true.
+     */
+    var showTopShadow: Bool { get }
 
     /**
      The scroll view embedded in the view controller.

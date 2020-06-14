@@ -387,7 +387,7 @@ private extension PanModalPresentationController {
      during initial view presentation in longForm (when view bounces)
      */
     func adjustPanContainerBackgroundColor() {
-        panContainerView.backgroundColor = presentedViewController.view.backgroundColor
+        panContainerView.presentedView.backgroundColor = presentedViewController.view.backgroundColor
             ?? presentable?.panScrollable?.backgroundColor
     }
 
@@ -842,7 +842,25 @@ private extension PanModalPresentationController {
      because we render the dragIndicator outside of view bounds
      */
     func addRoundedCorners(to view: UIView) {
+        view.backgroundColor = nil
         let radius = presentable?.cornerRadius ?? 0
+        let presentedView = (view as? PanContainerView)?.presentedView
+        presentedView?.layer.cornerRadius = radius
+        presentedView?.layer.masksToBounds = true
+        if #available(iOS 11.0, *) {
+            presentedView?.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+
+        // Shadow
+        if presentable?.showTopShadow == true {
+            let shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: radius)
+            view.layer.shadowColor = UIColor.black.cgColor
+            view.layer.shadowOffset = CGSize(width: 0, height: -4)
+            view.layer.shadowOpacity = 0.25
+            view.layer.shadowRadius = 8
+            view.layer.shadowPath = shadowPath.cgPath
+        }
+
         let path = UIBezierPath(roundedRect: view.bounds,
                                 byRoundingCorners: [.topLeft, .topRight],
                                 cornerRadii: CGSize(width: radius, height: radius))
@@ -852,11 +870,6 @@ private extension PanModalPresentationController {
             let indicatorLeftEdgeXPos = view.bounds.width/2.0 - Constants.dragIndicatorSize.width/2.0
             drawAroundDragIndicator(currentPath: path, indicatorLeftEdgeXPos: indicatorLeftEdgeXPos)
         }
-
-        // Set path as a mask to display optional drag indicator view & rounded corners
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        view.layer.mask = mask
 
         // Improve performance by rasterizing the layer
         view.layer.shouldRasterize = true

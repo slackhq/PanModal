@@ -15,8 +15,10 @@ import UIKit
  having to do those changes directly on the view
  */
 class PanContainerView: UIView {
+    let presentedView: UIView
 
     init(presentedView: UIView, frame: CGRect) {
+        self.presentedView = presentedView
         super.init(frame: frame)
         addSubview(presentedView)
     }

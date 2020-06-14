@@ -12,6 +12,13 @@ import UIKit
  Default values for the PanModalPresentable.
  */
 public extension PanModalPresentable where Self: UIViewController {
+    var bottomInset: CGFloat {
+        return bottomLayoutOffset
+    }
+
+    var showTopShadow: Bool {
+        return true
+    }
 
     var topOffset: CGFloat {
         return topLayoutOffset + 21.0
