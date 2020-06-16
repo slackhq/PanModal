@@ -322,7 +322,7 @@ open class PanModalPresentationController: UIPresentationController {
 
 public extension PanModalPresentationController {
     
-    public func observeKeyboard() {
+    func observeKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
