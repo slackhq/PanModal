@@ -42,7 +42,21 @@ public class PanModalPresentationAnimator: NSObject {
     /**
      Haptic feedback generator (during presentation)
      */
-    private var feedbackGenerator: UISelectionFeedbackGenerator?
+    private var _feedbackGenerator: Any? = nil
+    @available(iOS 10.0, *)
+    fileprivate var feedbackGenerator: UISelectionFeedbackGenerator? {
+        
+        set {
+            _feedbackGenerator = newValue
+        }
+        
+        get {
+            if _feedbackGenerator == nil {
+                _feedbackGenerator = UISelectionFeedbackGenerator()
+            }
+            return _feedbackGenerator as? UISelectionFeedbackGenerator
+        }
+    }
 
     // MARK: - Initializers
 
@@ -54,8 +68,11 @@ public class PanModalPresentationAnimator: NSObject {
          Prepare haptic feedback, only during the presentation state
          */
         if case .presentation = transitionStyle {
-            feedbackGenerator = UISelectionFeedbackGenerator()
-            feedbackGenerator?.prepare()
+            
+            if #available(iOS 10.0, *) {
+                feedbackGenerator = UISelectionFeedbackGenerator()
+                feedbackGenerator?.prepare()
+            }
         }
     }
 
@@ -85,8 +102,10 @@ public class PanModalPresentationAnimator: NSObject {
         panView.frame.origin.y = transitionContext.containerView.frame.height
 
         // Haptic feedback
-        if presentable?.isHapticFeedbackEnabled == true {
-            feedbackGenerator?.selectionChanged()
+        if #available(iOS 10.0, *) {
+            if presentable?.isHapticFeedbackEnabled == true {
+                feedbackGenerator?.selectionChanged()
+            }
         }
 
         PanModalAnimator.animate({
@@ -95,7 +114,10 @@ public class PanModalPresentationAnimator: NSObject {
             // Calls viewDidAppear and viewDidDisappear
             fromVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
-            self?.feedbackGenerator = nil
+            
+            if #available(iOS 10.0, *) {
+                self?.feedbackGenerator = nil
+            }
         }
     }
 
