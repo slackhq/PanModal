@@ -454,7 +454,7 @@ private extension PanModalPresentationController {
          Set the appropriate contentInset as the configuration within this class
          offsets it
          */
-        scrollView.contentInset.bottom = presentingViewController.bottomLayoutGuide.length
+        scrollView.contentInset.bottom = presentable?.bottomScrollInset ?? presentingViewController.bottomLayoutGuide.length
 
         /**
          As we adjust the bounds during `handleScrollViewTopBounce`
@@ -769,7 +769,7 @@ private extension PanModalPresentationController {
      */
     func trackScrolling(_ scrollView: UIScrollView) {
         scrollViewYOffset = max(scrollView.contentOffset.y, 0)
-        scrollView.showsVerticalScrollIndicator = true
+        scrollView.showsVerticalScrollIndicator = presentable?.shouldShowScrollIndicator ?? true
     }
 
     /**
