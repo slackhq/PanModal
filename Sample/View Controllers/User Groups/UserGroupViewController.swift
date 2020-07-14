@@ -118,5 +118,4 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
         isShortFormEnabled = false
         panModalSetNeedsLayoutUpdate()
     }
-
 }
