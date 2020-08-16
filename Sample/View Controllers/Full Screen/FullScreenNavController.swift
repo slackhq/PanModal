@@ -49,6 +49,10 @@ extension FullScreenNavController: PanModalPresentable {
     var shouldConfigureScrollViewInsets: Bool {
         return true
     }
+    
+    var shouldHaltScroll: Bool {
+        return true
+    }
 }
 
 private class FullScreenViewController: UIViewController {

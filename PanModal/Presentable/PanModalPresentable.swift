@@ -244,5 +244,7 @@ public protocol PanModalPresentable: AnyObject {
      Default value is true.
      */
     var shouldConfigureScrollViewInsets: Bool { get }
+    
+    var shouldHaltScroll: Bool { get }
 }
 #endif
