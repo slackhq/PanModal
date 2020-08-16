@@ -235,9 +235,13 @@ public protocol PanModalPresentable: AnyObject {
     func panModalDidDismiss()
     
     /**
-     Notifies the delegate after the pan modal is dismissed.
+     A flag to determine if the scroll view embedded in the pan modal should have
+     its insets configured automatically.
      
-     Default value is an empty implementation.
+     For example, scroll views that do not occupy the bounds of the pan modal may
+     need different insets set instead of the defaults.
+     
+     Default value is true.
      */
     var shouldConfigureScrollViewInsets: Bool { get }
 }
