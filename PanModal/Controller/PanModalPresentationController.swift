@@ -440,7 +440,7 @@ private extension PanModalPresentationController {
 
         guard
             let scrollView = presentable?.panScrollable,
-            !scrollView.isScrolling
+            !scrollView.isScrolling && presentable?.shouldConfigureScrollViewInsets == true
             else { return }
 
         /**
