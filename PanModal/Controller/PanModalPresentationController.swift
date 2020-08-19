@@ -111,9 +111,21 @@ open class PanModalPresentationController: UIPresentationController {
         } else {
             view = DimmedView()
         }
-        view.didTap = { [weak self] _ in
-            if self?.presentable?.allowsTapToDismiss == true {
-                self?.presentedViewController.dismiss(animated: true)
+        
+        if let backgroundInteraction = self.presentable?.backgroundInteraction {
+            switch backgroundInteraction {
+            case .forward:
+                view.hitTestHandler = { [weak self] (point, event) in
+                    return self?.presentingViewController.view.hitTest(point, with: event)
+                }
+                
+            case .dismiss:
+                view.didTap = { [weak self] _ in
+                    self?.presentedViewController.dismiss(animated: true)
+                }
+                
+            default:
+                break
             }
         }
         return view
