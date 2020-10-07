@@ -68,7 +68,7 @@ open class PanModalPresentationController: UIPresentationController {
     private var scrollViewYOffset: CGFloat = 0.0
     
     /**
-     The y content offset value of the embedded scroll view
+     The x content offset value of the embedded scroll view
      */
     private var scrollViewXOffset: CGFloat = 0.0
 
