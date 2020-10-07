@@ -66,6 +66,11 @@ open class PanModalPresentationController: UIPresentationController {
      The y content offset value of the embedded scroll view
      */
     private var scrollViewYOffset: CGFloat = 0.0
+    
+    /**
+     The x content offset value of the embedded scroll view
+     */
+    private var scrollViewXOffset: CGFloat = 0.0
 
     /**
      An observer for the scroll view content offset
@@ -440,7 +445,7 @@ private extension PanModalPresentationController {
 
         guard
             let scrollView = presentable?.panScrollable,
-            !scrollView.isScrolling
+            !scrollView.isScrolling && presentable?.shouldConfigureScrollViewInsets == true
             else { return }
 
         /**
@@ -759,7 +764,8 @@ private extension PanModalPresentationController {
      Halts the scroll of a given scroll view & anchors it at the `scrollViewYOffset`
      */
     func haltScrolling(_ scrollView: UIScrollView) {
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollViewYOffset), animated: false)
+        guard presentable?.shouldHaltScroll != false else { return }
+        scrollView.setContentOffset(CGPoint(x: scrollViewXOffset, y: scrollViewYOffset), animated: false)
         scrollView.showsVerticalScrollIndicator = false
     }
 
@@ -769,7 +775,11 @@ private extension PanModalPresentationController {
      */
     func trackScrolling(_ scrollView: UIScrollView) {
         scrollViewYOffset = max(scrollView.contentOffset.y, 0)
-        scrollView.showsVerticalScrollIndicator = true
+        scrollViewXOffset = max(scrollView.contentOffset.x, 0)
+        
+        if presentable?.shouldConfigureScrollViewInsets == true {
+            scrollView.showsVerticalScrollIndicator = true
+        }
     }
 
     /**
