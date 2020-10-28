@@ -4,19 +4,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "PanModal",
+    name: "GSPanModal",
     platforms: [.iOS(.v10)],
     products: [
         .library(
-            name: "PanModal",
-            targets: ["PanModal"]),
+            name: "GSPanModal",
+            targets: ["GSPanModal"]),
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "PanModal",
+            name: "GSPanModal",
             dependencies: [],
-            path: "PanModal")
+            path: "GSPanModal")
     ],
     swiftLanguageVersions: [.version("5.0")]
 )
