@@ -242,7 +242,7 @@ public protocol PanModalPresentable: AnyObject {
 
     /**
      The inset for scroll view which will override default one (bottomLayoutGuide.height)
-     Default value is bottomLayoutGuide.length
+     Default value is nil
      */
     var bottomScrollInset: CGFloat? { get }
 }
