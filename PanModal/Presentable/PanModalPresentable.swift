@@ -233,5 +233,17 @@ public protocol PanModalPresentable: AnyObject {
      Default value is an empty implementation.
      */
     func panModalDidDismiss()
+    
+    /**
+     A flag to determine should we show scroll indicator in normal state for scroll view
+     Default value is true.
+     */
+    var shouldShowScrollIndicator: Bool { get }
+
+    /**
+     The inset for scroll view which will override default one (bottomLayoutGuide.height)
+     Default value is bottomLayoutGuide.length
+     */
+    var bottomScrollInset: CGFloat? { get }
 }
 #endif
