@@ -138,10 +138,19 @@ public protocol PanModalPresentable: AnyObject {
     /**
      A flag to determine if dismissal should be initiated when tapping on the dimmed background view.
 
+     - Note: This parameter id deprecated. Use `backgroundInteraction` instead.
+     
      Default value is true.
      */
     var allowsTapToDismiss: Bool { get }
 
+    /**
+     Describes what happens when the user interacts the background view.
+
+     Default value is .dismiss.
+     */
+    var backgroundInteraction: PanModalBackgroundInteraction { get }
+    
     /**
      A flag to toggle user interactions on the container view.
 

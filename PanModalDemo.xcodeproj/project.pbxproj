@@ -56,6 +56,7 @@
 		DC3B2EBE222A58C9000C8A4A /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3B2EBD222A58C9000C8A4A /* AlertView.swift */; };
 		DCA741AE216D90410021F2F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA741AD216D90410021F2F2 /* AppDelegate.swift */; };
 		DCC0EE7C21917F2500208DBC /* PanModalPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */; };
+		F31828BE24ED570600E3867B /* PanModalBackgroundInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31828BD24ED570600E3867B /* PanModalBackgroundInteraction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		DCA741AD216D90410021F2F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCA741B9216D90420021F2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+Defaults.swift"; sourceTree = "<group>"; };
+		F31828BD24ED570600E3867B /* PanModalBackgroundInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalBackgroundInteraction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				74C072A4220BA76D00124CE1 /* PanModalHeight.swift */,
+				F31828BD24ED570600E3867B /* PanModalBackgroundInteraction.swift */,
 				DC139068216D9458007A3E64 /* PanModalPresentable.swift */,
 				DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */,
 				DC139069216D9458007A3E64 /* PanModalPresentable+UIViewController.swift */,
@@ -531,6 +534,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F31828BE24ED570600E3867B /* PanModalBackgroundInteraction.swift in Sources */,
 				0F2A2C5E2239C137003BDB2F /* PanModalAnimator.swift in Sources */,
 				0F2A2C5F2239C139003BDB2F /* PanModalPresentationAnimator.swift in Sources */,
 				0F2A2C602239C13C003BDB2F /* PanModalPresentationController.swift in Sources */,
