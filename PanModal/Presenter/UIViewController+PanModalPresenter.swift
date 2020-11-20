@@ -49,5 +49,4 @@ extension UIViewController: PanModalPresenter {
         
         present(viewControllerToPresent, animated: true, completion: nil)
     }
-
 }

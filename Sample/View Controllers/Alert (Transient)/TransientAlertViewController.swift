@@ -33,7 +33,11 @@ class TransientAlertViewController: AlertViewController {
         countdown -= 1
         guard countdown > 0 else {
             invalidateTimer()
-            dismiss(animated: true, completion: nil)
+            if presentingViewController != nil {
+                dismiss(animated: true, completion: nil)
+            } else {
+                navigationController?.popViewController(animated: true)
+            }
             return
         }
         alertView.message.text = "Message disppears in \(countdown) seconds"

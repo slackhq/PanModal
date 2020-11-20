@@ -171,14 +171,14 @@ public protocol PanModalPresentable {
 
      Default value is true.
      */
-    func shouldTransition(to state: PanModalPresentationController.PresentationState) -> Bool
+    func shouldTransition(to state: PresentationState) -> Bool
 
     /**
      Notifies the delegate that the pan modal is about to transition to a new state.
 
      Default value is an empty implementation.
      */
-    func willTransition(to state: PanModalPresentationController.PresentationState)
+    func willTransition(to state: PresentationState)
 
     /**
      Notifies the delegate that the pan modal is about to be dismissed.

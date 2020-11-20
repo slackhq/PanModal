@@ -1,37 +1,6 @@
-//
-//  PanModalPresentationController.swift
-//  PanModal
-//
-//  Copyright © 2019 Tiny Speck, Inc. All rights reserved.
-//
-
 import UIKit
 
-/**
- The PanModalPresentationController is the middle layer between the presentingViewController
- and the presentedViewController.
-
- It controls the coordination between the individual transition classes as well as
- provides an abstraction over how the presented view is presented & displayed.
-
- For example, we add a drag indicator view above the presented view and
- a background overlay between the presenting & presented view.
-
- The presented view's layout configuration & presentation is defined using the PanModalPresentable.
-
- By conforming to the PanModalPresentable protocol & overriding values
- the presented view can define its layout configuration & presentation.
- */
-
-/**
- Enum representing the possible presentation states
- */
-public enum PresentationState {
-    case shortForm
-    case longForm
-}
-
-public class PanModalPresentationController: UIPresentationController {
+public class PanModalWrappedView: UIView {
     /**
      Constants
      */
@@ -41,6 +10,16 @@ public class PanModalPresentationController: UIPresentationController {
     }
 
     // MARK: - Properties
+
+    /**
+     PanModal 애니메이션이 실행될 Container View
+     */
+    private weak var containerView: UIView!
+
+    /**
+     PanModal 로 띄워질 ViewController
+     */
+    private weak var panModalVC: PanModalPresentable.LayoutType!
 
     /**
      A flag to track if the presented view is animating
@@ -83,6 +62,11 @@ public class PanModalPresentationController: UIPresentationController {
     private var longFormYPosition: CGFloat = 0
 
     /**
+     The y value for the current presentation state
+     */
+    public var yPosition: CGFloat = 0
+
+    /**
      Determine anchored Y postion based on the `anchorModalToLongForm` flag
      */
     private var anchoredYPosition: CGFloat {
@@ -94,8 +78,13 @@ public class PanModalPresentationController: UIPresentationController {
      Configuration object for PanModalPresentationController
      */
     private var presentable: PanModalPresentable? {
-        return presentedViewController as? PanModalPresentable
+        return panModalVC
     }
+
+    /**
+        애니메이션 여부 flag
+     */
+    public var isAnimating: Bool = false
 
     // MARK: - Views
 
@@ -120,9 +109,8 @@ public class PanModalPresentationController: UIPresentationController {
      the presented view apperance without changing
      the presented view's properties
      */
-    private lazy var panContainerView: PanContainerView = {
-        let frame = containerView?.frame ?? .zero
-        return PanContainerView(presentedView: presentedViewController.view, frame: frame)
+    private lazy var panWrappedView: PanContainerView = {
+        return PanContainerView(presentedView: panModalVC.view, frame: frame)
     }()
 
     /**
@@ -133,9 +121,10 @@ public class PanModalPresentationController: UIPresentationController {
     /**
      Override presented view to return the pan container wrapper
      */
-    public override var presentedView: UIView {
-        return panContainerView
+    public var presentedView: UIView {
+        return panWrappedView
     }
+
 
     // MARK: - Gesture Recognizers
 
@@ -150,80 +139,52 @@ public class PanModalPresentationController: UIPresentationController {
         return gesture
     }()
 
-    // MARK: - Deinitializers
+    // MARK: - Life Cycle
+    init(containerView: UIView,
+         panModalVC: PanModalPresentable.LayoutType,
+         frame: CGRect) {
+        self.containerView = containerView
+        self.panModalVC = panModalVC
+
+        super.init(frame: frame)
+
+        setupUI()
+        backgroundColor = .clear
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     deinit {
         scrollObserver?.invalidate()
     }
 
-    // MARK: - Lifecycle
-
-    override public func containerViewWillLayoutSubviews() {
-        super.containerViewWillLayoutSubviews()
-        configureViewLayout()
-    }
-
-    override public func presentationTransitionWillBegin() {
-
-        guard let containerView = containerView
-            else { return }
-
-        layoutBackgroundView(in: containerView)
-        layoutPresentedView(in: containerView)
+    private func setupUI() {
+        layoutBackgroundView(in: self)
+        layoutPresentedView(in: self)
         configureScrollViewInsets()
-
-        guard let coordinator = presentedViewController.transitionCoordinator else {
-            backgroundView.dimState = .max
-            return
-        }
-
-        coordinator.animate(alongsideTransition: { [weak self] _ in
-            self?.backgroundView.dimState = .max
-            self?.presentedViewController.setNeedsStatusBarAppearanceUpdate()
-        })
     }
 
-    override public func dismissalTransitionWillBegin() {
-
-        guard let coordinator = presentedViewController.transitionCoordinator else {
-            backgroundView.dimState = .off
-            return
-        }
-
-        /**
-         Drag indicator is drawn outside of view bounds
-         so hiding it on view dismiss means avoiding visual bugs
-         */
-        coordinator.animate(alongsideTransition: { [weak self] _ in
-            self?.dragIndicatorView.alpha = 0.0
-            self?.backgroundView.dimState = .off
-            self?.presentingViewController.setNeedsStatusBarAppearanceUpdate()
-        })
+    public func present(to yPos: CGFloat) {
+        backgroundView.dimState = .max
+        yPosition = yPos
     }
 
-    override public func presentationTransitionDidEnd(_ completed: Bool) {
-        if completed { return }
-
-        backgroundView.removeFromSuperview()
+    public func dissmiss() {
+        backgroundView.dimState = .off
     }
 
-    /**
-     Update presented view size in response to size class changes
-     */
-    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
+    public override func layoutSubviews() {
+        super.layoutSubviews()
 
-        coordinator.animate(alongsideTransition: { [weak self] _ in
-            self?.adjustPresentedViewFrame()
-        })
+        configureViewLayout(panModalVC)
     }
-
 }
 
 // MARK: - Public Methods
 
-public extension PanModalPresentationController {
-
+public extension PanModalWrappedView {
     /**
      Transition the PanModalPresentationController
      to the given presentation state
@@ -242,7 +203,6 @@ public extension PanModalPresentationController {
             snap(toYPosition: longFormYPosition)
         }
     }
-
     /**
      Set the content offset of the scroll view
 
@@ -284,17 +244,16 @@ public extension PanModalPresentationController {
      pan modal presentable value changes after the initial presentation
      */
     func setNeedsLayoutUpdate() {
-        configureViewLayout()
+        configureViewLayout(panModalVC)
         adjustPresentedViewFrame()
         observe(scrollView: presentable?.panScrollable)
         configureScrollViewInsets()
     }
-
 }
 
 // MARK: - Presented View Layout Configuration
 
-private extension PanModalPresentationController {
+private extension PanModalWrappedView {
 
     /**
      Boolean flag to determine if the presented view is anchored
@@ -348,13 +307,10 @@ private extension PanModalPresentationController {
      Reduce height of presentedView so that it sits at the bottom of the screen
      */
     func adjustPresentedViewFrame() {
-
-        guard let frame = containerView?.frame
-            else { return }
-
+        let frame = containerView.frame
         let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
-        panContainerView.frame.size = frame.size
-        presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
+        panWrappedView.frame.size = frame.size
+        panModalVC.view.frame = CGRect(origin: .zero, size: adjustedSize)
     }
 
     /**
@@ -363,8 +319,7 @@ private extension PanModalPresentationController {
      during initial view presentation in longForm (when view bounces)
      */
     func adjustPanContainerBackgroundColor() {
-        panContainerView.backgroundColor = presentedViewController.view.backgroundColor
-            ?? presentable?.panScrollable?.backgroundColor
+        panWrappedView.backgroundColor = presentable?.panScrollable?.backgroundColor
     }
 
     /**
@@ -397,17 +352,15 @@ private extension PanModalPresentationController {
     /**
      Calculates & stores the layout anchor points & options
      */
-    func configureViewLayout() {
-
-        guard let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType
-            else { return }
+    func configureViewLayout(_ presentedViewController: UIViewController?) {
+        guard let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType else { return }
 
         shortFormYPosition = layoutPresentable.shortFormYPos
         longFormYPosition = layoutPresentable.longFormYPos
         anchorModalToLongForm = layoutPresentable.anchorModalToLongForm
         extendsPanScrolling = layoutPresentable.allowsExtendedPanScrolling
 
-        containerView?.isUserInteractionEnabled = layoutPresentable.isUserInteractionEnabled
+        containerView.isUserInteractionEnabled = layoutPresentable.isUserInteractionEnabled
     }
 
     /**
@@ -431,7 +384,10 @@ private extension PanModalPresentationController {
          Set the appropriate contentInset as the configuration within this class
          offsets it
          */
-        scrollView.contentInset.bottom = presentingViewController.bottomLayoutGuide.length
+
+        if #available(iOS 11.0, *) {
+            scrollView.contentInset.bottom = safeAreaInsets.bottom
+        }
 
         /**
          As we adjust the bounds during `handleScrollViewTopBounce`
@@ -446,7 +402,7 @@ private extension PanModalPresentationController {
 
 // MARK: - Pan Gesture Event Handler
 
-private extension PanModalPresentationController {
+private extension PanModalWrappedView {
 
     /**
      The designated function for handling pan gesture events
@@ -454,8 +410,7 @@ private extension PanModalPresentationController {
     @objc func didPanOnPresentedView(_ recognizer: UIPanGestureRecognizer) {
 
         guard
-            shouldRespond(to: recognizer),
-            let containerView = containerView
+            shouldRespond(to: recognizer)
             else {
                 recognizer.setTranslation(.zero, in: recognizer.view)
                 return
@@ -512,7 +467,7 @@ private extension PanModalPresentationController {
                 let position = nearest(to: presentedView.frame.minY, inValues: [containerView.bounds.height, shortFormYPosition, longFormYPosition])
 
                 if position == longFormYPosition {
-                    transition(to: .longForm)
+                    transition(to: .shortForm)
 
                 } else if position == shortFormYPosition || presentable?.allowsDragToDismiss == false {
                     transition(to: .shortForm)
@@ -630,7 +585,7 @@ private extension PanModalPresentationController {
      */
     func adjust(toYPosition yPos: CGFloat) {
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
-        
+        yPosition = presentedView.frame.origin.y
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max
             return
@@ -663,13 +618,13 @@ private extension PanModalPresentationController {
      */
     func dismissPresentedViewController() {
         presentable?.panModalWillDismiss()
-        presentedViewController.dismiss(animated: true, completion: nil)
+        panModalVC.navigationController?.popViewController(animated: true)
     }
 }
 
 // MARK: - UIScrollView Observer
 
-private extension PanModalPresentationController {
+private extension PanModalWrappedView {
 
     /**
      Creates & stores an observer on the given scroll view's content offset.
@@ -678,7 +633,6 @@ private extension PanModalPresentationController {
     func observe(scrollView: UIScrollView?) {
         scrollObserver?.invalidate()
         scrollObserver = scrollView?.observe(\.contentOffset, options: .old) { [weak self] scrollView, change in
-
             /**
              Incase we have a situation where we have two containerViews in the same presentation
              */
@@ -700,10 +654,7 @@ private extension PanModalPresentationController {
      */
     func didPanOnScrollView(_ scrollView: UIScrollView, change: NSKeyValueObservedChange<CGPoint>) {
 
-        guard
-            !presentedViewController.isBeingDismissed,
-            !presentedViewController.isBeingPresented
-            else { return }
+        guard !isAnimating else { return }
 
         if !isPresentedViewAnchored && scrollView.contentOffset.y > 0 {
 
@@ -727,7 +678,7 @@ private extension PanModalPresentationController {
                 haltScrolling(scrollView)
             }
 
-        } else if presentedViewController.view.isKind(of: UIScrollView.self)
+        } else if panModalVC.view.isKind(of: UIScrollView.self)
             && !isPresentedViewAnimating && scrollView.contentOffset.y <= 0 {
 
             /**
@@ -773,7 +724,7 @@ private extension PanModalPresentationController {
             else { return }
 
         let yOffset = scrollView.contentOffset.y
-        let presentedSize = containerView?.frame.size ?? .zero
+        let presentedSize = containerView.frame.size
 
         /**
          Decrease the view bounds by the y offset so the scroll view stays in place
@@ -799,7 +750,7 @@ private extension PanModalPresentationController {
 
 // MARK: - UIGestureRecognizerDelegate
 
-extension PanModalPresentationController: UIGestureRecognizerDelegate {
+extension PanModalWrappedView: UIGestureRecognizerDelegate {
 
     /**
      Do not require any other gesture recognizers to fail
