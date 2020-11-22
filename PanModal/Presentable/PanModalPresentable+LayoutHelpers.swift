@@ -18,7 +18,12 @@ extension PanModalPresentable where Self: UIViewController {
      so we can access PanModalPresentationController properties and methods
      */
     var presentedVC: PanModalPresentationController? {
-        return presentationController as? PanModalPresentationController
+        switch presentStyle {
+        case .present:
+            return presentationController as? PanModalPresentationController
+        case .embed:
+            return nil
+        }
     }
 
     /**
@@ -57,7 +62,6 @@ extension PanModalPresentable where Self: UIViewController {
             else { return longFormYPos }
 
         let shortFormYPos = topMargin(from: shortFormHeight) + topOffset
-
         // shortForm shouldn't exceed longForm
         return max(shortFormYPos, longFormYPos)
     }
@@ -77,9 +81,16 @@ extension PanModalPresentable where Self: UIViewController {
      is adjusted in PanModalPresentationController
      */
     var bottomYPos: CGFloat {
-
         guard let container = presentedVC?.containerView
-            else { return view.bounds.height }
+            else {
+            switch presentStyle {
+            case .embed:
+                return view.bounds.height - topOffset
+            default:
+                return view.bounds.height
+            }
+
+        }
 
         return container.bounds.size.height - topOffset
     }

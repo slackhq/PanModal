@@ -26,7 +26,7 @@ import UIKit
 /**
  Enum representing the possible presentation states
  */
-public enum PresentationState {
+public enum PanModalPresentationState {
     case shortForm
     case longForm
 }
@@ -228,7 +228,7 @@ public extension PanModalPresentationController {
      Transition the PanModalPresentationController
      to the given presentation state
      */
-    func transition(to state: PresentationState) {
+    func transition(to state: PanModalPresentationState) {
 
         guard presentable?.shouldTransition(to: state) == true
             else { return }

@@ -1,6 +1,6 @@
 import UIKit
 
-public class PanModalWrappedView: UIView {
+public class PanModalWrappedViewController: UIViewController {
     /**
      Constants
      */
@@ -14,12 +14,12 @@ public class PanModalWrappedView: UIView {
     /**
      PanModal 애니메이션이 실행될 Container View
      */
-    private weak var containerView: UIView!
+    private weak var containerVC: UIViewController!
 
     /**
      PanModal 로 띄워질 ViewController
      */
-    private weak var panModalVC: PanModalPresentable.LayoutType!
+    private weak var presentedVC: PanModalPresentable.LayoutType!
 
     /**
      A flag to track if the presented view is animating
@@ -75,16 +75,16 @@ public class PanModalWrappedView: UIView {
     }
 
     /**
-     Configuration object for PanModalPresentationController
+     타겟 PanModal
      */
     private var presentable: PanModalPresentable? {
-        return panModalVC
+        return presentedVC
     }
 
     /**
         애니메이션 여부 flag
      */
-    public var isAnimating: Bool = false
+    private var isAnimating: Bool = false
 
     // MARK: - Views
 
@@ -105,15 +105,6 @@ public class PanModalWrappedView: UIView {
     }()
 
     /**
-     A wrapper around the presented view so that we can modify
-     the presented view apperance without changing
-     the presented view's properties
-     */
-    private lazy var panWrappedView: PanContainerView = {
-        return PanContainerView(presentedView: panModalVC.view, frame: frame)
-    }()
-
-    /**
      Drag Indicator View
      */
     private let dragIndicatorView = IndicatorView()
@@ -121,8 +112,8 @@ public class PanModalWrappedView: UIView {
     /**
      Override presented view to return the pan container wrapper
      */
-    public var presentedView: UIView {
-        return panWrappedView
+    private var presentedView: UIView {
+        return presentedVC.view
     }
 
 
@@ -138,58 +129,97 @@ public class PanModalWrappedView: UIView {
         gesture.delegate = self
         return gesture
     }()
+    
+    deinit {
+        scrollObserver?.invalidate()
+    }
 
-    // MARK: - Life Cycle
-    init(containerView: UIView,
-         panModalVC: PanModalPresentable.LayoutType,
-         frame: CGRect) {
-        self.containerView = containerView
-        self.panModalVC = panModalVC
+    public init(panModal: PanModalPresentable.LayoutType, container: UIViewController) {
+        presentedVC = panModal
+        containerVC = container
 
-        super.init(frame: frame)
-
-        setupUI()
-        backgroundColor = .clear
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    deinit {
-        scrollObserver?.invalidate()
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupUI()
     }
 
     private func setupUI() {
-        layoutBackgroundView(in: self)
-        layoutPresentedView(in: self)
+        layoutBackgroundView(in: self.view)
+        layoutPresentedView(in: self.view)
         configureScrollViewInsets()
     }
 
-    public func present(to yPos: CGFloat) {
-        backgroundView.dimState = .max
-        yPosition = yPos
-    }
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
 
-    public func dissmiss() {
-        backgroundView.dimState = .off
-    }
-
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-
-        configureViewLayout(panModalVC)
+        configureViewLayout(presentedVC)
     }
 }
 
 // MARK: - Public Methods
 
-public extension PanModalWrappedView {
+public extension PanModalWrappedViewController {
+    private func removeParent(_ viewController: UIViewController) {
+        viewController.willMove(toParent: nil)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParent()
+    }
     /**
-     Transition the PanModalPresentationController
+     Dismiss presented view
+     */
+    func dismissPresentedViewController() {
+        presentable?.panModalWillDismiss()
+
+        let yPos = view.frame.height + Constants.dragIndicatorHeight
+
+        PanModalAnimator.animate({ [weak self] in
+            guard let self = self else { return }
+
+            self.presentedView.frame.origin.y = yPos
+            self.backgroundView.dimState = .off
+        }, config: presentable) { [weak self] _ in
+            guard let self = self else { return }
+
+            self.removeParent(self)
+        }
+    }
+
+    /**
+     Present presented view
+     */
+
+    func presentPresentedViewController() {
+        layoutContainer()
+
+        presentedView.frame = containerVC.view.frame
+        presentedView.frame.origin.y = containerVC.view.frame.height
+
+        let yPos: CGFloat = presentedVC.shortFormYPos
+        isAnimating = true
+
+        PanModalAnimator.animate({ [weak self] in
+            guard let self = self else { return }
+
+            self.presentedView.frame.origin.y = yPos
+            self.backgroundView.dimState = .max
+        }, config: presentable) { [weak self] _ in
+            self?.yPosition = yPos
+        }
+    }
+
+    /**
+     Transition the PanModal
      to the given presentation state
      */
-    func transition(to state: PresentationState) {
+    func transition(to state: PanModalPresentationState) {
 
         guard presentable?.shouldTransition(to: state) == true
             else { return }
@@ -244,7 +274,7 @@ public extension PanModalWrappedView {
      pan modal presentable value changes after the initial presentation
      */
     func setNeedsLayoutUpdate() {
-        configureViewLayout(panModalVC)
+        configureViewLayout(presentedVC)
         adjustPresentedViewFrame()
         observe(scrollView: presentable?.panScrollable)
         configureScrollViewInsets()
@@ -253,7 +283,7 @@ public extension PanModalWrappedView {
 
 // MARK: - Presented View Layout Configuration
 
-private extension PanModalWrappedView {
+private extension PanModalWrappedViewController {
 
     /**
      Boolean flag to determine if the presented view is anchored
@@ -274,52 +304,47 @@ private extension PanModalWrappedView {
      based on the pan modal presentable.
      */
     func layoutPresentedView(in containerView: UIView) {
-
-        /**
-         If the presented view controller does not conform to pan modal presentable
-         don't configure
-         */
-        guard let presentable = presentable
-            else { return }
-
+        addChild(presentedVC)
+        view.addSubview(presentedView)
+        presentedVC.didMove(toParent: self)
         /**
          ⚠️ If this class is NOT used in conjunction with the PanModalPresentationAnimator
          & PanModalPresentable, the presented view should be added to the container view
          in the presentation animator instead of here
          */
-        containerView.addSubview(presentedView)
-
-        if presentable.allowScrollViewDragToDismiss {
+        if presentedVC.allowScrollViewDragToDismiss {
             containerView.addGestureRecognizer(panGestureRecognizer)
         } else {
             backgroundView.addGestureRecognizer(panGestureRecognizer)
         }
 
-        if presentable.showDragIndicator {
+        if presentedVC.showDragIndicator {
             addDragIndicatorView(to: presentedView)
         }
 
         setNeedsLayoutUpdate()
-        adjustPanContainerBackgroundColor()
     }
 
     /**
      Reduce height of presentedView so that it sits at the bottom of the screen
      */
     func adjustPresentedViewFrame() {
-        let frame = containerView.frame
+        let frame = containerVC.view.frame
         let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
-        panWrappedView.frame.size = frame.size
-        panModalVC.view.frame = CGRect(origin: .zero, size: adjustedSize)
+        presentedVC.view.frame = CGRect(origin: .zero, size: adjustedSize)
     }
 
-    /**
-     Adds a background color to the pan container view
-     in order to avoid a gap at the bottom
-     during initial view presentation in longForm (when view bounces)
-     */
-    func adjustPanContainerBackgroundColor() {
-        panWrappedView.backgroundColor = presentable?.panScrollable?.backgroundColor
+    func layoutContainer() {
+        containerVC.addChild(self)
+        containerVC.view.addSubview(view)
+
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: containerVC.view.topAnchor, constant: 0).isActive = true
+        view.bottomAnchor.constraint(equalTo: containerVC.view.bottomAnchor, constant: 0).isActive = true
+        view.leadingAnchor.constraint(equalTo: containerVC.view.leadingAnchor, constant: 0).isActive = true
+        view.trailingAnchor.constraint(equalTo: containerVC.view.trailingAnchor, constant: 0).isActive = true
+
+        self.didMove(toParent: containerVC)
     }
 
     /**
@@ -360,7 +385,7 @@ private extension PanModalWrappedView {
         anchorModalToLongForm = layoutPresentable.anchorModalToLongForm
         extendsPanScrolling = layoutPresentable.allowsExtendedPanScrolling
 
-        containerView.isUserInteractionEnabled = layoutPresentable.isUserInteractionEnabled
+        containerVC.view.isUserInteractionEnabled = layoutPresentable.isUserInteractionEnabled
     }
 
     /**
@@ -386,7 +411,7 @@ private extension PanModalWrappedView {
          */
 
         if #available(iOS 11.0, *) {
-            scrollView.contentInset.bottom = safeAreaInsets.bottom
+            scrollView.contentInset.bottom = view.safeAreaInsets.bottom
         }
 
         /**
@@ -402,7 +427,7 @@ private extension PanModalWrappedView {
 
 // MARK: - Pan Gesture Event Handler
 
-private extension PanModalWrappedView {
+private extension PanModalWrappedViewController {
 
     /**
      The designated function for handling pan gesture events
@@ -450,7 +475,7 @@ private extension PanModalWrappedView {
                 if velocity.y < 0 {
                     transition(to: .longForm)
 
-                } else if (nearest(to: presentedView.frame.minY, inValues: [longFormYPosition, containerView.bounds.height]) == longFormYPosition
+                } else if (nearest(to: presentedView.frame.minY, inValues: [longFormYPosition, containerVC.view.bounds.height]) == longFormYPosition
                     && presentedView.frame.minY < shortFormYPosition) || presentable?.allowsDragToDismiss == false {
                     transition(to: .shortForm)
 
@@ -464,7 +489,7 @@ private extension PanModalWrappedView {
                  The `containerView.bounds.height` is used to determine
                  how close the presented view is to the bottom of the screen
                  */
-                let position = nearest(to: presentedView.frame.minY, inValues: [containerView.bounds.height, shortFormYPosition, longFormYPosition])
+                let position = nearest(to: presentedView.frame.minY, inValues: [containerVC.view.bounds.height, shortFormYPosition, longFormYPosition])
 
                 if position == longFormYPosition {
                     transition(to: .shortForm)
@@ -612,19 +637,11 @@ private extension PanModalWrappedView {
             else { return number }
         return nearestVal
     }
-
-    /**
-     Dismiss presented view
-     */
-    func dismissPresentedViewController() {
-        presentable?.panModalWillDismiss()
-        panModalVC.navigationController?.popViewController(animated: true)
-    }
 }
 
 // MARK: - UIScrollView Observer
 
-private extension PanModalWrappedView {
+private extension PanModalWrappedViewController {
 
     /**
      Creates & stores an observer on the given scroll view's content offset.
@@ -636,7 +653,7 @@ private extension PanModalWrappedView {
             /**
              Incase we have a situation where we have two containerViews in the same presentation
              */
-            guard self?.containerView != nil
+            guard self?.containerVC != nil
                 else { return }
 
             self?.didPanOnScrollView(scrollView, change: change)
@@ -678,7 +695,7 @@ private extension PanModalWrappedView {
                 haltScrolling(scrollView)
             }
 
-        } else if panModalVC.view.isKind(of: UIScrollView.self)
+        } else if presentedVC.view.isKind(of: UIScrollView.self)
             && !isPresentedViewAnimating && scrollView.contentOffset.y <= 0 {
 
             /**
@@ -724,7 +741,7 @@ private extension PanModalWrappedView {
             else { return }
 
         let yOffset = scrollView.contentOffset.y
-        let presentedSize = containerView.frame.size
+        let presentedSize = containerVC.view.frame.size
 
         /**
          Decrease the view bounds by the y offset so the scroll view stays in place
@@ -750,7 +767,7 @@ private extension PanModalWrappedView {
 
 // MARK: - UIGestureRecognizerDelegate
 
-extension PanModalWrappedView: UIGestureRecognizerDelegate {
+extension PanModalWrappedViewController: UIGestureRecognizerDelegate {
 
     /**
      Do not require any other gesture recognizers to fail

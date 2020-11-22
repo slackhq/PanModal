@@ -17,8 +17,11 @@ import UIKit
                                              sourceRect: .zero)
  ```
  */
-public protocol PanModalPresenter {
+public enum PanModalPresentStyle {
+    case present, embed
+}
 
+public protocol PanModalPresenter {
     /**
      A flag that returns true if the current presented view controller
      is using the PanModalPresentationDelegate

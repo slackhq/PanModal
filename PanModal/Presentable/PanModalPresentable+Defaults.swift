@@ -11,7 +11,10 @@ import UIKit
  Default values for the PanModalPresentable.
  */
 public extension PanModalPresentable where Self: UIViewController {
-
+    var presentStyle: PanModalPresentStyle {
+        return .present
+    }
+    
     var topOffset: CGFloat {
         return topLayoutOffset + 21.0
     }
@@ -83,7 +86,7 @@ public extension PanModalPresentable where Self: UIViewController {
 
     }
 
-    func shouldTransition(to state: PresentationState) -> Bool {
+    func shouldTransition(to state: PanModalPresentationState) -> Bool {
         return true
     }
 
@@ -91,7 +94,7 @@ public extension PanModalPresentable where Self: UIViewController {
         return false
     }
 
-    func willTransition(to state: PresentationState) {
+    func willTransition(to state: PanModalPresentationState) {
 
     }
 
