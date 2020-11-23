@@ -54,10 +54,7 @@ class PanModalTests: XCTestCase {
         XCTAssertEqual(vc.allowsExtendedPanScrolling, false)
         XCTAssertEqual(vc.allowsDragToDismiss, true)
         XCTAssertEqual(vc.isUserInteractionEnabled, true)
-        XCTAssertEqual(vc.shouldRoundTopCorners, false)
         XCTAssertEqual(vc.showDragIndicator, false)
-        XCTAssertEqual(vc.shouldRoundTopCorners, false)
-        XCTAssertEqual(vc.cornerRadius, 8.0)
     }
 
     func testPresentableYValues() {

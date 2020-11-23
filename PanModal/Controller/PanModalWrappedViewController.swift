@@ -1,4 +1,9 @@
 import UIKit
+/**
+ PanModalPresentable 을 상속받은 View Controller 를 embed 하여 Parent ViewController에 embed 됨
+ Presented되는 PanModalPresentable 의 PanGesture, transition 을 관리
+ PanModalPresentationController 와 동일한 로직을 수행하지만 Parent ViewController의 Navigation flow에 포함되려는 목적이 있음
+ */
 
 public class PanModalWrappedViewController: UIViewController {
     /**
@@ -80,11 +85,6 @@ public class PanModalWrappedViewController: UIViewController {
     private var presentable: PanModalPresentable? {
         return presentedVC
     }
-
-    /**
-        애니메이션 여부 flag
-     */
-    private var isAnimating: Bool = false
 
     // MARK: - Views
 
@@ -203,15 +203,16 @@ public extension PanModalWrappedViewController {
         presentedView.frame.origin.y = containerVC.view.frame.height
 
         let yPos: CGFloat = presentedVC.shortFormYPos
-        isAnimating = true
 
         PanModalAnimator.animate({ [weak self] in
             guard let self = self else { return }
 
             self.presentedView.frame.origin.y = yPos
             self.backgroundView.dimState = .max
+            self.isPresentedViewAnimating = true
         }, config: presentable) { [weak self] _ in
             self?.yPosition = yPos
+            self?.isPresentedViewAnimating = false
         }
     }
 
@@ -337,14 +338,8 @@ private extension PanModalWrappedViewController {
     func layoutContainer() {
         containerVC.addChild(self)
         containerVC.view.addSubview(view)
-
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.topAnchor.constraint(equalTo: containerVC.view.topAnchor, constant: 0).isActive = true
-        view.bottomAnchor.constraint(equalTo: containerVC.view.bottomAnchor, constant: 0).isActive = true
-        view.leadingAnchor.constraint(equalTo: containerVC.view.leadingAnchor, constant: 0).isActive = true
-        view.trailingAnchor.constraint(equalTo: containerVC.view.trailingAnchor, constant: 0).isActive = true
-
-        self.didMove(toParent: containerVC)
+        view.frame = containerVC.view.bounds
+        didMove(toParent: containerVC)
     }
 
     /**
@@ -384,7 +379,7 @@ private extension PanModalWrappedViewController {
         longFormYPosition = layoutPresentable.longFormYPos
         anchorModalToLongForm = layoutPresentable.anchorModalToLongForm
         extendsPanScrolling = layoutPresentable.allowsExtendedPanScrolling
-
+        
         containerVC.view.isUserInteractionEnabled = layoutPresentable.isUserInteractionEnabled
     }
 
@@ -671,7 +666,7 @@ private extension PanModalWrappedViewController {
      */
     func didPanOnScrollView(_ scrollView: UIScrollView, change: NSKeyValueObservedChange<CGPoint>) {
 
-        guard !isAnimating else { return }
+        guard !isPresentedViewAnimating else { return }
 
         if !isPresentedViewAnchored && scrollView.contentOffset.y > 0 {
 
@@ -773,7 +768,7 @@ extension PanModalWrappedViewController: UIGestureRecognizerDelegate {
      Do not require any other gesture recognizers to fail
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
+        return true
     }
 
     /**
