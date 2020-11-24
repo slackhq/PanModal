@@ -111,7 +111,7 @@ class UserGroupViewController: UITableViewController, PanModalPresentable, UIGes
         return headerView.frame.contains(location)
     }
 
-    func willTransition(to state: PanModalPresentationController.PresentationState) {
+    func willTransition(to state: PanModalPresentationState) {
         guard isShortFormEnabled, case .longForm = state
             else { return }
 

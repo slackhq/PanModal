@@ -20,6 +20,7 @@ import UIKit
  */
 public protocol PanModalPresentable {
 
+    var presentStyle: PanModalPresentStyle { get }
     /**
      The scroll view embedded in the view controller.
      Setting this value allows for seamless transition scrolling between the embedded scroll view
@@ -171,14 +172,14 @@ public protocol PanModalPresentable {
 
      Default value is true.
      */
-    func shouldTransition(to state: PanModalPresentationController.PresentationState) -> Bool
+    func shouldTransition(to state: PanModalPresentationState) -> Bool
 
     /**
      Notifies the delegate that the pan modal is about to transition to a new state.
 
      Default value is an empty implementation.
      */
-    func willTransition(to state: PanModalPresentationController.PresentationState)
+    func willTransition(to state: PanModalPresentationState)
 
     /**
      Notifies the delegate that the pan modal is about to be dismissed.

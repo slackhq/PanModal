@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,9 @@
 		0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */; };
 		0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906E216D9458007A3E64 /* DimmedView.swift */; };
 		0F2A2C6A2239C165003BDB2F /* PanContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9C21F03368008045A0 /* PanContainerView.swift */; };
+		638A9380256B4DC500A5E00B /* PanModalWrappedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */; };
+		638A9383256B4E3F00A5E00B /* PanModalWrappedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */; };
+		638A938D256BB26E00A5E00B /* EmbedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A9387256BB21800A5E00B /* EmbedViewController.swift */; };
 		743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */; };
 		743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */; };
 		743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */; };
@@ -94,6 +97,8 @@
 		0F2A2C512239C119003BDB2F /* PanModal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PanModal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2A2C532239C119003BDB2F /* PanModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PanModal.h; sourceTree = "<group>"; };
 		0F2A2C542239C119003BDB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalWrappedViewController.swift; sourceTree = "<group>"; };
+		638A9387256BB21800A5E00B /* EmbedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedViewController.swift; sourceTree = "<group>"; };
 		743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
 		743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupHeaderView.swift; sourceTree = "<group>"; };
 		743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupMemberPresentable.swift; sourceTree = "<group>"; };
@@ -166,6 +171,14 @@
 				0F2A2C542239C119003BDB2F /* Info.plist */,
 			);
 			path = PanModal;
+			sourceTree = "<group>";
+		};
+		638A9386256BB20400A5E00B /* Embed */ = {
+			isa = PBXGroup;
+			children = (
+				638A9387256BB21800A5E00B /* EmbedViewController.swift */,
+			);
+			path = Embed;
 			sourceTree = "<group>";
 		};
 		743CABAE2225FC4A00634A5A /* User Groups */ = {
@@ -296,6 +309,7 @@
 		DC13906B216D9458007A3E64 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */,
 				DC13906C216D9458007A3E64 /* PanModalPresentationController.swift */,
 			);
 			path = Controller;
@@ -315,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				943904EA2226354100859537 /* BasicViewController.swift */,
+				638A9386256BB20400A5E00B /* Embed */,
 				DC3B2EBB222A5882000C8A4A /* Alert */,
 				DC3B2EBC222A5893000C8A4A /* Alert (Transient) */,
 				743CB2AB222661EA00665A55 /* User Groups (Stacked) */,
@@ -468,7 +483,7 @@
 				};
 			};
 			buildConfigurationList = DCA741A5216D90410021F2F2 /* Build configuration list for PBXProject "PanModalDemo" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -530,6 +545,7 @@
 				0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */,
 				0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */,
 				D134CC7122641B350022AA29 /* IndicatorView.swift in Sources */,
+				638A9380256B4DC500A5E00B /* PanModalWrappedViewController.swift in Sources */,
 				0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */,
 				0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */,
 				0F2A2C6A2239C165003BDB2F /* PanContainerView.swift in Sources */,
@@ -570,10 +586,12 @@
 				DC139071216D9458007A3E64 /* PanModalPresentable.swift in Sources */,
 				DC139061216D93ED007A3E64 /* SampleViewController.swift in Sources */,
 				743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */,
+				638A938D256BB26E00A5E00B /* EmbedViewController.swift in Sources */,
 				DCC0EE7C21917F2500208DBC /* PanModalPresentable+Defaults.swift in Sources */,
 				94795C9D21F03368008045A0 /* PanContainerView.swift in Sources */,
 				74C072A7220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift in Sources */,
 				DC139075216D9458007A3E64 /* DimmedView.swift in Sources */,
+				638A9383256B4E3F00A5E00B /* PanModalWrappedViewController.swift in Sources */,
 				743CABD322265F2E00634A5A /* ProfileViewController.swift in Sources */,
 				DC139070216D9458007A3E64 /* PanModalPresentationAnimator.swift in Sources */,
 				DCA741AE216D90410021F2F2 /* AppDelegate.swift in Sources */,
@@ -609,7 +627,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PanModal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -638,7 +656,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PanModal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -821,7 +839,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6UF7FN999R;
 				INFOPLIST_FILE = "$(SRCROOT)/Sample/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -842,7 +860,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6UF7FN999R;
 				INFOPLIST_FILE = "$(SRCROOT)/Sample/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

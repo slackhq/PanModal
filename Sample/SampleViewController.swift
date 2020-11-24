@@ -1,3 +1,4 @@
+import PanModal
 //
 //  SampleViewController.swift
 //  PanModal
@@ -50,9 +51,7 @@ class SampleViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard let rowType = RowType(rawValue: indexPath.row) else {
-            return
-        }
+        guard let rowType = RowType(rawValue: indexPath.row) else { return }
         dismiss(animated: true, completion: nil)
         presentPanModal(rowType.presentable.rowVC)
     }
@@ -72,7 +71,7 @@ private extension SampleViewController {
         case userGroups
         case stacked
         case navController
-
+        case embed
 
         var presentable: RowPresentable {
             switch self {
@@ -82,6 +81,7 @@ private extension SampleViewController {
             case .userGroups: return UserGroup()
             case .stacked: return Stacked()
             case .navController: return Navigation()
+            case .embed: return Embed()
             }
         }
 
@@ -113,6 +113,11 @@ private extension SampleViewController {
         struct Stacked: RowPresentable {
             var string: String { return "User Groups (Stacked)" }
             var rowVC: PanModalPresentable.LayoutType { return UserGroupStackedViewController() }
+        }
+
+        struct Embed: RowPresentable {
+            var string: String { return "Embed" }
+            var rowVC: PanModalPresentable.LayoutType { return EmbedViewController() }
         }
     }
 }

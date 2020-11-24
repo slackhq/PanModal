@@ -24,7 +24,8 @@ extension UIViewController: PanModalPresenter {
      a strong reference to this view controller and in turn, creating a memory leak.
      */
     public var isPanModalPresented: Bool {
-        return (transitioningDelegate as? PanModalPresentationDelegate) != nil
+        return children.first(where: { $0.isKind(of: PanModalWrappedViewController.self) }) != nil
+            || (transitioningDelegate as? PanModalPresentationDelegate) != nil
     }
 
     /**
@@ -39,15 +40,22 @@ extension UIViewController: PanModalPresenter {
      */
     public func presentPanModal(_ viewControllerToPresent: PanModalPresentable.LayoutType, sourceView: UIView? = nil, sourceRect: CGRect = .zero) {
 
-        /**
-         Here, we deliberately do not check for size classes. More info in `PanModalPresentationDelegate`
-         */
-        
-        viewControllerToPresent.modalPresentationStyle = .custom
-        viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
-        viewControllerToPresent.transitioningDelegate = PanModalPresentationDelegate.default
-        
-        present(viewControllerToPresent, animated: true, completion: nil)
-    }
+        switch viewControllerToPresent.presentStyle {
+        case .present:
+            /**
+             Here, we deliberately do not check for size classes. More info in `PanModalPresentationDelegate`
+             */
 
+            viewControllerToPresent.modalPresentationStyle = .custom
+            viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
+            viewControllerToPresent.transitioningDelegate = PanModalPresentationDelegate.default
+
+            present(viewControllerToPresent, animated: true, completion: nil)
+        case .embed:
+            let wrappedVC = PanModalWrappedViewController(panModal: viewControllerToPresent,
+                                                          container: self)
+            wrappedVC.presentPresentedViewController()
+        }
+
+    }
 }
