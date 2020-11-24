@@ -67,11 +67,6 @@ public class PanModalWrappedViewController: UIViewController {
     private var longFormYPosition: CGFloat = 0
 
     /**
-     The y value for the current presentation state
-     */
-    public var yPosition: CGFloat = 0
-
-    /**
      Determine anchored Y postion based on the `anchorModalToLongForm` flag
      */
     private var anchoredYPosition: CGFloat {
@@ -185,10 +180,12 @@ public extension PanModalWrappedViewController {
 
             self.presentedView.frame.origin.y = yPos
             self.backgroundView.dimState = .off
+            self.isPresentedViewAnimating = true
         }, config: presentable) { [weak self] _ in
             guard let self = self else { return }
 
             self.removeParent(self)
+            self.isPresentedViewAnimating = false
         }
     }
 
@@ -211,7 +208,6 @@ public extension PanModalWrappedViewController {
             self.backgroundView.dimState = .max
             self.isPresentedViewAnimating = true
         }, config: presentable) { [weak self] _ in
-            self?.yPosition = yPos
             self?.isPresentedViewAnimating = false
         }
     }
@@ -405,17 +401,13 @@ private extension PanModalWrappedViewController {
          offsets it
          */
 
-        if #available(iOS 11.0, *) {
-            scrollView.contentInset.bottom = view.safeAreaInsets.bottom
-        }
+        scrollView.contentInset.bottom = view.safeAreaInsets.bottom
 
         /**
          As we adjust the bounds during `handleScrollViewTopBounce`
          we should assume that contentInsetAdjustmentBehavior will not be correct
          */
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        }
+        scrollView.contentInsetAdjustmentBehavior = .never
     }
 
 }
@@ -605,7 +597,7 @@ private extension PanModalWrappedViewController {
      */
     func adjust(toYPosition yPos: CGFloat) {
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
-        yPosition = presentedView.frame.origin.y
+
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max
             return
