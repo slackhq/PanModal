@@ -174,6 +174,14 @@ public protocol PanModalPresentable: AnyObject {
     var showDragIndicator: Bool { get }
 
     /**
+     A flag to determine if form dismiss from long form,
+     it does not stop in short form height when value is true.
+
+     Default value is false.
+     */
+    var shouldDismissWhenLongForm: Bool { get }
+
+    /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.
      
      Return false to disable movement on the pan modal but maintain gestures on the presented view.

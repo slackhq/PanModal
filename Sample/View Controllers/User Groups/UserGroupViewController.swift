@@ -32,8 +32,6 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
         UserGroupMemberPresentable(name: "Naida Schill", role: "Staff Engineer - Mobile DevXP", avatarBackgroundColor: #colorLiteral(red: 0.7215686275, green: 0.9098039216, blue: 0.5607843137, alpha: 1))
     ]
 
-    var isShortFormEnabled = true
-
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -94,7 +92,7 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     }
 
     var shortFormHeight: PanModalHeight {
-        return isShortFormEnabled ? .contentHeight(300.0) : longFormHeight
+        return .contentHeight(300.0)
     }
 
     var scrollIndicatorInsets: UIEdgeInsets {
@@ -102,21 +100,12 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
         return UIEdgeInsets(top: headerView.frame.size.height, left: 0, bottom: bottomOffset, right: 0)
     }
 
-    var anchorModalToLongForm: Bool {
-        return false
+    var shouldDismissWhenLongForm: Bool {
+        return true
     }
 
     func shouldPrioritize(panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         let location = panModalGestureRecognizer.location(in: view)
         return headerView.frame.contains(location)
     }
-
-    func willTransition(to state: PanModalPresentationController.PresentationState) {
-        guard isShortFormEnabled, case .longForm = state
-            else { return }
-
-        isShortFormEnabled = false
-        panModalSetNeedsLayoutUpdate()
-    }
-
 }
