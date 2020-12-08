@@ -36,7 +36,7 @@ public class DimmedView: UIView {
             case .off:
                 alpha = 0.0
             case .percent(let percentage):
-                alpha = max(0.0, min(1.0, percentage))
+                alpha = 0.4
             }
         }
     }
