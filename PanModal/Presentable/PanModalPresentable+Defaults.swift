@@ -35,6 +35,10 @@ public extension PanModalPresentable where Self: UIViewController {
         return 8.0
     }
 
+    var fastCorner: Bool {
+        return true
+    }
+
     var springDamping: CGFloat {
         return 0.8
     }
