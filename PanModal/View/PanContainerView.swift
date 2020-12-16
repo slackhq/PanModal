@@ -18,6 +18,9 @@ class PanContainerView: UIView {
 
     init(presentedView: UIView, frame: CGRect) {
         super.init(frame: frame)
+        var alpha: CGFloat = 1.0
+        presentedView.backgroundColor?.getRed(nil, green: nil, blue: nil, alpha: &alpha)
+        isOpaque = alpha == 1.0
         addSubview(presentedView)
     }
 

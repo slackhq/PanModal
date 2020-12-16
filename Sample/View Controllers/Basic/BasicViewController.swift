@@ -12,7 +12,14 @@ class BasicViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.isOpaque = true
         view.backgroundColor = #colorLiteral(red: 0.1019607843, green: 0.1137254902, blue: 0.1294117647, alpha: 1)
+        let label = UILabel(frame: view.frame)
+        label.isOpaque = true
+        label.text = "Text"
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        view.addSubview(label)
     }
 }
 
