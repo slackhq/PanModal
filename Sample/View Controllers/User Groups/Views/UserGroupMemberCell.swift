@@ -23,12 +23,14 @@ class UserGroupMemberCell: UITableViewCell {
 
     let avatarView: UIView = {
         let view = UIView()
+        view.isOpaque = true
         view.layer.cornerRadius = 8.0
         return view
     }()
 
     let nameLabel: UILabel = {
         let label = UILabel()
+        label.isOpaque = true
         label.textColor = #colorLiteral(red: 0.8196078431, green: 0.8235294118, blue: 0.8274509804, alpha: 1)
         label.font = UIFont(name: "Lato-Bold", size: 17.0)
         label.backgroundColor = .clear
@@ -37,6 +39,7 @@ class UserGroupMemberCell: UITableViewCell {
 
     let roleLabel: UILabel = {
         let label = UILabel()
+        label.isOpaque = true
         label.textColor = #colorLiteral(red: 0.7019607843, green: 0.7058823529, blue: 0.7137254902, alpha: 1)
         label.backgroundColor = .clear
         label.font = UIFont(name: "Lato-Regular", size: 13.0)
@@ -45,6 +48,7 @@ class UserGroupMemberCell: UITableViewCell {
 
     lazy var memberDetailsStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [nameLabel, roleLabel])
+        stackView.isOpaque = true
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,6 +57,7 @@ class UserGroupMemberCell: UITableViewCell {
 
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [avatarView, memberDetailsStackView])
+        stackView.isOpaque = true
         stackView.alignment = .center
         stackView.spacing = 16.0
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +73,7 @@ class UserGroupMemberCell: UITableViewCell {
         isAccessibilityElement = true
 
         let backgroundView = UIView()
+        backgroundView.isOpaque = true
         backgroundView.backgroundColor = #colorLiteral(red: 0.8196078431, green: 0.8235294118, blue: 0.8274509804, alpha: 1).withAlphaComponent(0.11)
         selectedBackgroundView = backgroundView
 

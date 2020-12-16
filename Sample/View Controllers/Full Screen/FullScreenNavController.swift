@@ -51,6 +51,7 @@ private class FullScreenViewController: UIViewController {
 
     let textLabel: UILabel = {
         let label = UILabel()
+        label.isOpaque = true
         label.text = "Drag downwards to dismiss"
         label.font = UIFont(name: "Lato-Bold", size: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +61,7 @@ private class FullScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Full Screen"
+        view.isOpaque = true
         view.backgroundColor = .white
         setupConstraints()
     }

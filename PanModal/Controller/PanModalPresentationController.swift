@@ -135,7 +135,13 @@ open class PanModalPresentationController: UIPresentationController {
     private lazy var dragIndicatorView: UIView = {
         let view = UIView()
         view.backgroundColor = presentable?.dragIndicatorBackgroundColor
+        var alpha: CGFloat = 1.0
+        view.backgroundColor?.getRed(nil, green: nil, blue: nil, alpha: &alpha)
+        view.isOpaque = alpha == 1.0
         view.layer.cornerRadius = Constants.dragIndicatorSize.height / 2.0
+        if #available(iOS 13.0, *) {
+          view.layer.cornerCurve = .continuous
+        }
         return view
     }()
 
@@ -188,6 +194,7 @@ open class PanModalPresentationController: UIPresentationController {
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
             self?.backgroundView.dimState = .max
+            self?.dragIndicatorView.layoutIfNeeded()
             self?.presentedViewController.setNeedsStatusBarAppearanceUpdate()
         })
     }
@@ -347,12 +354,12 @@ private extension PanModalPresentationController {
         containerView.addSubview(presentedView)
         containerView.addGestureRecognizer(panGestureRecognizer)
 
-        if presentable.showDragIndicator {
-            addDragIndicatorView(to: presentedView)
-        }
-
         if presentable.shouldRoundTopCorners {
             addRoundedCorners(to: presentedView)
+        }
+
+        if presentable.showDragIndicator {
+            addDragIndicatorView(to: containerView, on: presentedView)
         }
 
         setNeedsLayoutUpdate()
@@ -376,6 +383,7 @@ private extension PanModalPresentationController {
             // (rotations & size changes cause positioning to be out of sync)
             let yPosition = panFrame.origin.y - panFrame.height + frame.height
             presentedView.frame.origin.y = max(yPosition, anchoredYPosition)
+            dragIndicatorView.frame.origin.y = presentedView.frame.origin.y - Constants.indicatorYOffset
         }
         panContainerView.frame.origin.x = frame.origin.x
         presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
@@ -396,8 +404,8 @@ private extension PanModalPresentationController {
      & configures its layout constraints.
      */
     func layoutBackgroundView(in containerView: UIView) {
-        containerView.addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(backgroundView)
         backgroundView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         backgroundView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         backgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
@@ -408,10 +416,10 @@ private extension PanModalPresentationController {
      Adds the drag indicator view to the view hierarchy
      & configures its layout constraints.
      */
-    func addDragIndicatorView(to view: UIView) {
-        view.addSubview(dragIndicatorView)
+    func addDragIndicatorView(to view: UIView, on pinEdgeView: UIView) {
         dragIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        dragIndicatorView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: -Constants.indicatorYOffset).isActive = true
+        view.addSubview(dragIndicatorView)
+        dragIndicatorView.bottomAnchor.constraint(equalTo: pinEdgeView.topAnchor, constant: -Constants.indicatorYOffset).isActive = true
         dragIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         dragIndicatorView.widthAnchor.constraint(equalToConstant: Constants.dragIndicatorSize.width).isActive = true
         dragIndicatorView.heightAnchor.constraint(equalToConstant: Constants.dragIndicatorSize.height).isActive = true
@@ -641,7 +649,7 @@ private extension PanModalPresentationController {
 
     func snap(toYPosition yPos: CGFloat) {
         PanModalAnimator.animate({ [weak self] in
-            self?.adjust(toYPosition: yPos)
+            self?.adjust(toYPosition: yPos, updateDragIndicatorView: true)
             self?.isPresentedViewAnimating = true
         }, config: presentable) { [weak self] didComplete in
             self?.isPresentedViewAnimating = !didComplete
@@ -651,8 +659,11 @@ private extension PanModalPresentationController {
     /**
      Sets the y position of the presentedView & adjusts the backgroundView.
      */
-    func adjust(toYPosition yPos: CGFloat) {
+    func adjust(toYPosition yPos: CGFloat, updateDragIndicatorView: Bool = false) {
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
+      if updateDragIndicatorView {
+        dragIndicatorView.frame.origin.y = presentedView.frame.origin.y - Constants.indicatorYOffset
+      }
         
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max
@@ -803,6 +814,7 @@ private extension PanModalPresentationController {
              as if we're transferring the scrollView drag momentum to the entire view
              */
             presentedView.frame.origin.y = longFormYPosition - yOffset
+//            dragIndicatorView.frame.origin.y = presentedView.frame.origin.y - Constants.indicatorYOffset
         } else {
             scrollViewYOffset = 0
             snap(toYPosition: longFormYPosition)
@@ -865,37 +877,26 @@ private extension PanModalPresentationController {
 
     }
 
-    enum Corner:Int {
-         case bottomRight = 0,
-         topRight,
-         bottomLeft,
-         topLeft
-     }
-
-     private func parseCorner(corner: Corner) -> CACornerMask.Element {
-         let corners: [CACornerMask.Element] = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner]
-         return corners[corner.rawValue]
-     }
-
-     private func createMask(corners: [Corner]) -> UInt {
-         return corners.reduce(0, { (a, b) -> UInt in
-             return a + parseCorner(corner: b).rawValue
-         })
-     }
-
-    /**
-     Draws a path around the drag indicator view
-     */
-    func drawAroundDragIndicator(currentPath path: UIBezierPath, indicatorLeftEdgeXPos: CGFloat) {
-
-        let totalIndicatorOffset = Constants.indicatorYOffset + Constants.dragIndicatorSize.height
-
-        // Draw around drag indicator starting from the left
-        path.addLine(to: CGPoint(x: indicatorLeftEdgeXPos, y: path.currentPoint.y))
-        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y - totalIndicatorOffset))
-        path.addLine(to: CGPoint(x: path.currentPoint.x + Constants.dragIndicatorSize.width, y: path.currentPoint.y))
-        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y + totalIndicatorOffset))
+    enum Corner: Int {
+        case bottomRight = 0,
+        topRight,
+        bottomLeft,
+        topLeft
     }
+
+    private func parseCorner(corner: Corner) -> CACornerMask.Element {
+        let corners: [CACornerMask.Element] = [
+          .layerMaxXMaxYCorner,
+          .layerMaxXMinYCorner,
+          .layerMinXMaxYCorner,
+          .layerMinXMinYCorner]
+        return corners[corner.rawValue]
+    }
+
+    private func createMask(corners: [Corner]) -> UInt {
+        corners.reduce(0, { (a, b) -> UInt in a + parseCorner(corner: b).rawValue })
+    }
+
 }
 
 // MARK: - Helper Extensions

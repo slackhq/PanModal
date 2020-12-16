@@ -62,8 +62,6 @@ public protocol PanModalPresentable: AnyObject {
      */
     var cornerRadius: CGFloat { get }
 
-    var fastCorner: Bool { get }
-
     /**
      The springDamping value used to determine the amount of 'bounce'
      seen when transitioning to short/long form.

@@ -18,6 +18,7 @@ class UserGroupHeaderView: UIView {
 
     let titleLabel: UILabel = {
         let label = UILabel()
+        label.isOpaque = true
         label.font = UIFont(name: "Lato-Bold", size: 17.0)
         label.textColor = #colorLiteral(red: 0.8196078431, green: 0.8235294118, blue: 0.8274509804, alpha: 1)
         return label
@@ -25,6 +26,7 @@ class UserGroupHeaderView: UIView {
 
     let subtitleLabel: UILabel = {
         let label = UILabel()
+        label.isOpaque = true
         label.numberOfLines = 2
         label.textColor = #colorLiteral(red: 0.7019607843, green: 0.7058823529, blue: 0.7137254902, alpha: 1)
         label.font = UIFont(name: "Lato-Regular", size: 13.0)
@@ -33,6 +35,7 @@ class UserGroupHeaderView: UIView {
 
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
+        stackView.isOpaque = true
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.spacing = 4.0
@@ -42,6 +45,7 @@ class UserGroupHeaderView: UIView {
 
     let seperatorView: UIView = {
         let view = UIView()
+        view.isOpaque = true
         view.backgroundColor = #colorLiteral(red: 0.8196078431, green: 0.8235294118, blue: 0.8274509804, alpha: 1).withAlphaComponent(0.11)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -53,6 +57,7 @@ class UserGroupHeaderView: UIView {
         super.init(frame: frame)
 
         backgroundColor = #colorLiteral(red: 0.1019607843, green: 0.1137254902, blue: 0.1294117647, alpha: 1)
+        isOpaque = true
 
         addSubview(stackView)
         addSubview(seperatorView)
