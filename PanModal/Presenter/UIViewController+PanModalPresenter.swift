@@ -33,6 +33,7 @@ extension UIViewController: PanModalPresenter {
 
      - Parameters:
         - viewControllerToPresent: The view controller to be presented
+        - userInterfaceIdiom: The user interface idiom deciding to use the popover presentation style or not.
         - sourceView: The view containing the anchor rectangle for the popover.
         - sourceRect: The rectangle in the specified view in which to anchor the popover.
         - completion: The block to execute after the presentation finishes. You may specify nil for this parameter.
@@ -40,6 +41,7 @@ extension UIViewController: PanModalPresenter {
      - Note: sourceView & sourceRect are only required for presentation on an iPad.
      */
     public func presentPanModal(_ viewControllerToPresent: PanModalPresentable.LayoutType,
+                                userInterfaceIdiom: UIUserInterfaceIdiom = UIDevice.current.userInterfaceIdiom,
                                 sourceView: UIView? = nil,
                                 sourceRect: CGRect = .zero,
                                 completion: (() -> Void)? = nil) {
@@ -48,7 +50,7 @@ extension UIViewController: PanModalPresenter {
          Here, we deliberately do not check for size classes. More info in `PanModalPresentationDelegate`
          */
 
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if userInterfaceIdiom == .pad {
             viewControllerToPresent.modalPresentationStyle = .popover
             viewControllerToPresent.popoverPresentationController?.sourceRect = sourceRect
             viewControllerToPresent.popoverPresentationController?.sourceView = sourceView ?? view
