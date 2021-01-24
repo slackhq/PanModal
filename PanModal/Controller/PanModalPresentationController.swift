@@ -817,6 +817,14 @@ private extension PanModalPresentationController {
 extension PanModalPresentationController: UIGestureRecognizerDelegate {
 
     /**
+     Asks the delegate if the pan modal should begin to track the pan gesture
+     */
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer == panGestureRecognizer else { return true }
+        return presentable?.shouldBeginPanGesture(panGestureRecognizer) ?? true
+    }
+    
+    /**
      Do not require any other gesture recognizers to fail
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
