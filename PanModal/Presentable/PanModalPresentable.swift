@@ -174,6 +174,15 @@ public protocol PanModalPresentable: AnyObject {
     var showDragIndicator: Bool { get }
 
     /**
+     Asks the delegate if the pan modal should begin to track the pan gesture.
+     
+     Return false to not track the pan gesture and possibly let other observers track the gesture
+     
+     Default value is true.
+     */
+    func shouldBeginPanGesture(_ panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool
+    
+    /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.
      
      Return false to disable movement on the pan modal but maintain gestures on the presented view.
