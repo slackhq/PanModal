@@ -63,30 +63,6 @@ public protocol PanModalPresentable: AnyObject {
     var cornerRadius: CGFloat { get }
 
     /**
-     The springDamping value used to determine the amount of 'bounce'
-     seen when transitioning to short/long form.
-
-     Default Value is 0.8.
-     */
-    var springDamping: CGFloat { get }
-
-    /**
-     The transitionDuration value is used to set the speed of animation during a transition,
-     including initial presentation.
-
-     Default value is 0.5.
-    */
-    var transitionDuration: Double { get }
-
-    /**
-     The animation options used when performing animations on the PanModal, utilized mostly
-     during a transition.
-
-     Default value is [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState].
-    */
-    var transitionAnimationOptions: UIView.AnimationOptions { get }
-
-    /**
      The background view color.
 
      - Note: This is only utilized at the very start of the transition.
@@ -172,6 +148,13 @@ public protocol PanModalPresentable: AnyObject {
      Default value is true.
      */
     var showDragIndicator: Bool { get }
+
+    /**
+     Asks the delegate to create a property animator to use when transitioning to short/long form.
+
+     Default implementation creates an animator with the default UISpringTimingParameters, which matches iOS system animations.
+     */
+    func makeAnimator() -> UIViewPropertyAnimator
 
     /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.

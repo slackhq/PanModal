@@ -47,7 +47,6 @@ class PanModalTests: XCTestCase {
         XCTAssertEqual(vc.topOffset, 41.0)
         XCTAssertEqual(vc.shortFormHeight, PanModalHeight.maxHeight)
         XCTAssertEqual(vc.longFormHeight, PanModalHeight.maxHeight)
-        XCTAssertEqual(vc.springDamping, 0.8)
         XCTAssertEqual(vc.panModalBackgroundColor, UIColor.black.withAlphaComponent(0.7))
         XCTAssertEqual(vc.dragIndicatorBackgroundColor, UIColor.lightGray)
         XCTAssertEqual(vc.scrollIndicatorInsets, .zero)
@@ -61,8 +60,6 @@ class PanModalTests: XCTestCase {
         XCTAssertEqual(vc.showDragIndicator, false)
         XCTAssertEqual(vc.shouldRoundTopCorners, false)
         XCTAssertEqual(vc.cornerRadius, 8.0)
-        XCTAssertEqual(vc.transitionDuration, PanModalAnimator.Constants.defaultTransitionDuration)
-        XCTAssertEqual(vc.transitionAnimationOptions, [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState])
     }
 
     func testPresentableYValues() {
