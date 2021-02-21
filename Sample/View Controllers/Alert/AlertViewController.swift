@@ -65,4 +65,10 @@ class AlertViewController: UIViewController, PanModalPresentable {
     var isUserInteractionEnabled: Bool {
         return true
     }
+
+    func makeAnimator() -> UIViewPropertyAnimator {
+        let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.7, animations: nil)
+        animator.isUserInteractionEnabled = true
+        return animator
+    }
 }

@@ -13,28 +13,29 @@ import UIKit
  */
 struct PanModalAnimator {
 
-    /**
-     Constant Animation Properties
-     */
-    struct Constants {
-        static let defaultTransitionDuration: TimeInterval = 0.5
+    static func makeDefaultAnimator() -> UIViewPropertyAnimator {
+        // Note that `duration` is ignored when using timing parameters.
+        // The duration is derived from the parameters.
+        let animator = UIViewPropertyAnimator(duration: 0, timingParameters: UISpringTimingParameters())
+        animator.isUserInteractionEnabled = true
+        return animator
     }
 
     static func animate(_ animations: @escaping PanModalPresentable.AnimationBlockType,
                         config: PanModalPresentable?,
                         _ completion: PanModalPresentable.AnimationCompletionType? = nil) {
 
-        let transitionDuration = config?.transitionDuration ?? Constants.defaultTransitionDuration
-        let springDamping = config?.springDamping ?? 1.0
-        let animationOptions = config?.transitionAnimationOptions ?? []
+        let animator = config?.makeAnimator() ?? makeDefaultAnimator()
 
-        UIView.animate(withDuration: transitionDuration,
-                       delay: 0,
-                       usingSpringWithDamping: springDamping,
-                       initialSpringVelocity: 0,
-                       options: animationOptions,
-                       animations: animations,
-                       completion: completion)
+        animator.addAnimations(animations)
+
+        if let completion = completion {
+            animator.addCompletion { position in
+                completion(position == .end)
+            }
+        }
+
+        animator.startAnimation()
     }
 }
 #endif

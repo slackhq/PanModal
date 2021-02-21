@@ -35,18 +35,6 @@ public extension PanModalPresentable where Self: UIViewController {
         return 8.0
     }
 
-    var springDamping: CGFloat {
-        return 0.8
-    }
-
-    var transitionDuration: Double {
-        return PanModalAnimator.Constants.defaultTransitionDuration
-    }
-
-    var transitionAnimationOptions: UIView.AnimationOptions {
-        return [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState]
-    }
-
     var panModalBackgroundColor: UIColor {
         return UIColor.black.withAlphaComponent(0.7)
     }
@@ -95,6 +83,10 @@ public extension PanModalPresentable where Self: UIViewController {
 
     var showDragIndicator: Bool {
         return shouldRoundTopCorners
+    }
+
+    func makeAnimator() -> UIViewPropertyAnimator {
+        PanModalAnimator.makeDefaultAnimator()
     }
 
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
