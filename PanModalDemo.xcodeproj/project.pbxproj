@@ -44,6 +44,7 @@
 		944EBA2E227BB7F400C4C97B /* FullScreenNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944EBA2D227BB7F400C4C97B /* FullScreenNavController.swift */; };
 		94795C9B21F0335D008045A0 /* PanModalPresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9A21F0335D008045A0 /* PanModalPresentationDelegate.swift */; };
 		94795C9D21F03368008045A0 /* PanContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9C21F03368008045A0 /* PanContainerView.swift */; };
+		C256B8A225E326430044BB4D /* AnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C256B89C25E3260D0044BB4D /* AnimatorTests.swift */; };
 		DC13905E216D90D5007A3E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC13905D216D90D5007A3E64 /* Assets.xcassets */; };
 		DC139061216D93ED007A3E64 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139060216D93ED007A3E64 /* SampleViewController.swift */; };
 		DC139070216D9458007A3E64 /* PanModalPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC139066216D9458007A3E64 /* PanModalPresentationAnimator.swift */; };
@@ -116,6 +117,7 @@
 		944EBA2D227BB7F400C4C97B /* FullScreenNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenNavController.swift; sourceTree = "<group>"; };
 		94795C9A21F0335D008045A0 /* PanModalPresentationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresentationDelegate.swift; sourceTree = "<group>"; };
 		94795C9C21F03368008045A0 /* PanContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanContainerView.swift; sourceTree = "<group>"; };
+		C256B89C25E3260D0044BB4D /* AnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorTests.swift; sourceTree = "<group>"; };
 		DC13905D216D90D5007A3E64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC139060216D93ED007A3E64 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		DC139066216D9458007A3E64 /* PanModalPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalPresentationAnimator.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				743CABC62226171500634A5A /* PanModalTests.swift */,
+				C256B89C25E3260D0044BB4D /* AnimatorTests.swift */,
 				743CABC82226171500634A5A /* Info.plist */,
 			);
 			path = Tests;
@@ -551,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C256B8A225E326430044BB4D /* AnimatorTests.swift in Sources */,
 				743CABC72226171500634A5A /* PanModalTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
