@@ -62,6 +62,23 @@ extension PanModalPresentable where Self: UIViewController {
         // shortForm shouldn't exceed longForm
         return max(shortFormYPos, longFormYPos)
     }
+    
+    /**
+     Returns the medium form Y position
+
+     - Note: If voiceover is on, the `longFormYPos` is returned.
+     We do not support medium form when voiceover is on as it would make it difficult for user to navigate.
+     */
+    var mediumFormYPos: CGFloat {
+        
+        guard !UIAccessibility.isVoiceOverRunning
+            else { return longFormYPos }
+
+        let mediumFormYPos = topMargin(from: mediumFormHeight) + topOffset
+
+        // shortForm shouldn't exceed longForm
+        return max(mediumFormYPos, longFormYPos)
+    }
 
     /**
      Returns the long form Y position

@@ -20,6 +20,10 @@ public extension PanModalPresentable where Self: UIViewController {
     var shortFormHeight: PanModalHeight {
         return longFormHeight
     }
+    
+    var mediumFormHeight:  PanModalHeight {
+        return longFormHeight
+    }
 
     var longFormHeight: PanModalHeight {
 
@@ -81,10 +85,14 @@ public extension PanModalPresentable where Self: UIViewController {
         return true
     }
 
+    var backgroundInteraction: PanModalBackgroundInteraction {
+        return self.allowsTapToDismiss ? .dismiss : .none
+    }
+    
     var isUserInteractionEnabled: Bool {
         return true
     }
-
+    
     var isHapticFeedbackEnabled: Bool {
         return true
     }

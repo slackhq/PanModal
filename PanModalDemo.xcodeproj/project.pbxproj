@@ -23,6 +23,8 @@
 		0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */; };
 		0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906E216D9458007A3E64 /* DimmedView.swift */; };
 		0F2A2C6A2239C165003BDB2F /* PanContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9C21F03368008045A0 /* PanContainerView.swift */; };
+		48EE033725FA8E160069DE6C /* PanModalBackgroundInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE033625FA8E160069DE6C /* PanModalBackgroundInteraction.swift */; };
+		48EE034025FA8E320069DE6C /* PanModalBackgroundInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE033625FA8E160069DE6C /* PanModalBackgroundInteraction.swift */; };
 		743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */; };
 		743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */; };
 		743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */; };
@@ -93,6 +95,7 @@
 		0F2A2C512239C119003BDB2F /* PanModal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PanModal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2A2C532239C119003BDB2F /* PanModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PanModal.h; sourceTree = "<group>"; };
 		0F2A2C542239C119003BDB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48EE033625FA8E160069DE6C /* PanModalBackgroundInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalBackgroundInteraction.swift; sourceTree = "<group>"; };
 		743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
 		743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupHeaderView.swift; sourceTree = "<group>"; };
 		743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupMemberPresentable.swift; sourceTree = "<group>"; };
@@ -300,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				74C072A4220BA76D00124CE1 /* PanModalHeight.swift */,
+				48EE033625FA8E160069DE6C /* PanModalBackgroundInteraction.swift */,
 				DC139068216D9458007A3E64 /* PanModalPresentable.swift */,
 				DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */,
 				DC139069216D9458007A3E64 /* PanModalPresentable+UIViewController.swift */,
@@ -540,6 +544,7 @@
 				0F2A2C642239C14E003BDB2F /* PanModalPresentable+Defaults.swift in Sources */,
 				0F2A2C652239C151003BDB2F /* PanModalPresentable+UIViewController.swift in Sources */,
 				0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */,
+				48EE033725FA8E160069DE6C /* PanModalBackgroundInteraction.swift in Sources */,
 				0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */,
 				0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */,
 				0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */,
@@ -587,6 +592,7 @@
 				743CABD322265F2E00634A5A /* ProfileViewController.swift in Sources */,
 				DC139070216D9458007A3E64 /* PanModalPresentationAnimator.swift in Sources */,
 				944EBA2E227BB7F400C4C97B /* FullScreenNavController.swift in Sources */,
+				48EE034025FA8E320069DE6C /* PanModalBackgroundInteraction.swift in Sources */,
 				DCA741AE216D90410021F2F2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

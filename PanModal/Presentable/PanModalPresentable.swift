@@ -45,6 +45,17 @@ public protocol PanModalPresentable: AnyObject {
      */
     var shortFormHeight: PanModalHeight { get }
 
+    
+    /**
+     The height of the pan modal container view
+     when in the mediumForm presentation state.
+
+     This value is capped to .max, if provided value exceeds the space available.
+
+     Default value is the longFormHeight.
+     */
+    var mediumFormHeight: PanModalHeight { get }
+
     /**
      The height of the pan modal container view
      when in the longForm presentation state.
@@ -143,6 +154,13 @@ public protocol PanModalPresentable: AnyObject {
     var allowsTapToDismiss: Bool { get }
 
     /**
+     Describes what happens when the user interacts the background view.
+    
+     Default value is .dismiss.
+     */
+    var backgroundInteraction: PanModalBackgroundInteraction { get }
+    
+    /**
      A flag to toggle user interactions on the container view.
 
      - Note: Return false to forward touches to the presentingViewController.
@@ -150,7 +168,7 @@ public protocol PanModalPresentable: AnyObject {
      Default is true.
     */
     var isUserInteractionEnabled: Bool { get }
-
+    
     /**
      A flag to determine if haptic feedback should be enabled during presentation.
 
