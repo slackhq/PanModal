@@ -112,8 +112,11 @@ extension PanModalPresentable where Self: UIViewController {
 
         guard let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication
             else { return nil }
-
-        return application.keyWindow?.rootViewController
+        if #available(iOS 13.0, *) {
+            return application.windows.first?.rootViewController
+        }else {
+            return application.keyWindow?.rootViewController
+        }
     }
 
 }
