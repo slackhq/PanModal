@@ -535,25 +535,56 @@ private extension PanModalPresentationController {
                  This allows the user to dismiss directly from long form
                  instead of going to the short form state first.
                  */
+                                
+                // Pan up - medium -> long
+                
                 if velocity.y < 0 && presentedView.frame.minY < mediumFormYPosition {
+                    
                     transition(to: .longForm)
-                    
-                } else if velocity.y < 0 && presentedView.frame.minY < shortFormYPosition {
-                    transition(to: .mediumForm)
-
-                } else if (nearest(to: presentedView.frame.minY, inValues: [longFormYPosition, containerView.bounds.height]) == longFormYPosition && presentedView.frame.minY < mediumFormYPosition) {
-                    
-                    transition(to: .mediumForm)
+                    return
                 }
                 
-                else if (nearest(to: presentedView.frame.minY, inValues: [mediumFormYPosition, containerView.bounds.height]) == mediumFormYPosition && presentedView.frame.minY < shortFormYPosition)
-                    || presentable?.allowsDragToDismiss == false
-                {
-                    transition(to: .shortForm)
-
-                } else {
-                    presentedViewController.dismiss(animated: true)
+                // Pan up - short -> medium
+                
+                if velocity.y < 0 {
+                    
+                    transition(to: .mediumForm)
+                    return
                 }
+                
+                // Pan down - long -> medium
+                
+                let isLongFormNearest = nearest(
+                    to: presentedView.frame.minY,
+                    inValues: [longFormYPosition, containerView.bounds.height]
+                ) == longFormYPosition
+                
+                let isTallerThanMediumForm = presentedView.frame.minY < mediumFormYPosition
+                
+                if isLongFormNearest && isTallerThanMediumForm {
+                    
+                    transition(to: .mediumForm)
+                    return
+                }
+                
+                // Pan down - medium -> short
+
+                let isTallerThanShortForm = presentedView.frame.minY < shortFormYPosition
+                
+                let isMediumFormNearest = nearest(
+                    to: presentedView.frame.minY,
+                    inValues: [mediumFormYPosition, longFormYPosition]
+                ) == mediumFormYPosition
+
+                if (isMediumFormNearest && isTallerThanShortForm) || presentable?.allowsDragToDismiss == false {
+
+                    transition(to: .shortForm)
+                    return
+                }
+                
+                // Pan down - short -> dismiss
+
+                presentedViewController.dismiss(animated: true)
 
             } else {
 
@@ -561,7 +592,10 @@ private extension PanModalPresentationController {
                  The `containerView.bounds.height` is used to determine
                  how close the presented view is to the bottom of the screen
                  */
-                let position = nearest(to: presentedView.frame.minY, inValues: [containerView.bounds.height, shortFormYPosition, mediumFormYPosition, longFormYPosition])
+                let position = nearest(
+                    to: presentedView.frame.minY,
+                    inValues: [containerView.bounds.height, shortFormYPosition, mediumFormYPosition, longFormYPosition]
+                )
 
                 if position == longFormYPosition {
                     transition(to: .longForm)
