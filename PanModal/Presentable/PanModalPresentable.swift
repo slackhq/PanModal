@@ -174,6 +174,15 @@ public protocol PanModalPresentable: AnyObject {
     var showDragIndicator: Bool { get }
 
     /**
+     A flag to determine whether view lifecycle methods `view(Will|Did)(A|Disa)ppear` are called on the presenting view controller.
+
+     Since pan modal presentation does not remove the presenting view from the view hierarchy, it may not be desirable to call the relevant methods that are usually associated with removing the presenting view from the view hierarchy.
+
+     Default value is true.
+     */
+    var isAppearanceTransition: Bool { get }
+
+    /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.
      
      Return false to disable movement on the pan modal but maintain gestures on the presented view.
