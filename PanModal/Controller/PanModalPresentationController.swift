@@ -111,19 +111,28 @@ open class PanModalPresentationController: UIPresentationController {
      Background view used as an overlay over the presenting view
      */
     private lazy var backgroundView: DimmedView = {
+        
         let view: DimmedView
+        
         if let color = presentable?.panModalBackgroundColor {
             view = DimmedView(dimColor: color)
         } else {
             view = DimmedView()
         }
+        
         if let backgroundInteraction = self.presentable?.backgroundInteraction {
+            
             switch backgroundInteraction {
-            case .forward:
+            case .forwardToParent:
                 view.hitTestHandler = { [weak self] (point, event) in
                     return self?.presentingViewController.view.hitTest(point, with: event)
                 }
-
+                
+            case .forwardToRoot:
+                view.hitTestHandler = { [weak self] (point, event) in
+                    self?.rootPresentingViewController?.view.hitTest(point, with: event)
+                }
+                
             case .dismiss:
                 view.didTap = { [weak self] _ in
                     self?.presentedViewController.dismiss(animated: true)
@@ -133,8 +142,23 @@ open class PanModalPresentationController: UIPresentationController {
                 break
             }
         }
+        
         return view
     }()
+    
+    private var rootPresentingViewController: UIViewController? {
+        
+        var parentViewController = self.presentingViewController
+        
+        while parentViewController is PanModalPresentable & UIViewController {
+            
+            guard let presenting = parentViewController.presentingViewController else { return nil }
+            
+            parentViewController = presenting
+        }
+        
+        return parentViewController
+    }
 
     /**
      A wrapper around the presented view so that we can modify

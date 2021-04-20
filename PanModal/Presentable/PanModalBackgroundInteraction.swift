@@ -14,7 +14,10 @@ public enum PanModalBackgroundInteraction: Equatable {
     case dismiss
 
     /** Touches are forwarded to the lower window (In most cases it would be the application main window that will handle it */
-    case forward
+    case forwardToParent
+    
+    /** Touches are forwarded to the first view controller that is not a `PanModalPresentable` */
+    case forwardToRoot
 
      /** Absorbs touches. The modal does nothing (Swallows the touch) */
     case none

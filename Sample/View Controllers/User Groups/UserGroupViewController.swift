@@ -84,6 +84,7 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presentPanModal(UserGroupViewController())
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -101,7 +102,9 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
         return .contentHeight(300)
     }
     
-    var backgroundInteraction: PanModalBackgroundInteraction { .forward }
+    var backgroundInteraction: PanModalBackgroundInteraction { .forwardToRoot }
+    
+    var panModalBackgroundColor: UIColor { .clear }
     
     var scrollIndicatorInsets: UIEdgeInsets {
         let bottomOffset = presentingViewController?.bottomLayoutGuide.length ?? 0
@@ -124,5 +127,4 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
         isShortFormEnabled = false
         panModalSetNeedsLayoutUpdate()
     }
-
 }
