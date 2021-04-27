@@ -23,6 +23,7 @@
 		0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */; };
 		0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13906E216D9458007A3E64 /* DimmedView.swift */; };
 		0F2A2C6A2239C165003BDB2F /* PanContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94795C9C21F03368008045A0 /* PanContainerView.swift */; };
+		4803899426387D1900404115 /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803899326387D1900404115 /* ButtonViewController.swift */; };
 		48EE033725FA8E160069DE6C /* PanModalBackgroundInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE033625FA8E160069DE6C /* PanModalBackgroundInteraction.swift */; };
 		48EE034025FA8E320069DE6C /* PanModalBackgroundInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EE033625FA8E160069DE6C /* PanModalBackgroundInteraction.swift */; };
 		743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */; };
@@ -95,6 +96,7 @@
 		0F2A2C512239C119003BDB2F /* PanModal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PanModal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2A2C532239C119003BDB2F /* PanModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PanModal.h; sourceTree = "<group>"; };
 		0F2A2C542239C119003BDB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4803899326387D1900404115 /* ButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewController.swift; sourceTree = "<group>"; };
 		48EE033625FA8E160069DE6C /* PanModalBackgroundInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalBackgroundInteraction.swift; sourceTree = "<group>"; };
 		743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
 		743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupHeaderView.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				DC139060216D93ED007A3E64 /* SampleViewController.swift */,
 				DC139079216D9AAA007A3E64 /* View Controllers */,
 				DC13905F216D93AB007A3E64 /* Resources */,
+				4803899326387D1900404115 /* ButtonViewController.swift */,
 			);
 			path = Sample;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				743CB2AA222660D100665A55 /* StackedProfileViewController.swift in Sources */,
 				943904EB2226354100859537 /* BasicViewController.swift in Sources */,
 				DC139073216D9458007A3E64 /* PanModalPresenter.swift in Sources */,
+				4803899426387D1900404115 /* ButtonViewController.swift in Sources */,
 				943904EF2226383700859537 /* NavigationController.swift in Sources */,
 				DC3B2EBE222A58C9000C8A4A /* AlertView.swift in Sources */,
 				74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */,

@@ -125,12 +125,16 @@ open class PanModalPresentationController: UIPresentationController {
             switch backgroundInteraction {
             case .forwardToParent:
                 view.hitTestHandler = { [weak self] (point, event) in
-                    return self?.presentingViewController.view.hitTest(point, with: event)
+                    guard let viewController = self?.presentingViewController else { return nil }
+                    let converted = viewController.view.convert(point, from: view)
+                    return viewController.view.hitTest(converted, with: event)
                 }
-                
+                            
             case .forwardToRoot:
                 view.hitTestHandler = { [weak self] (point, event) in
-                    self?.rootPresentingViewController?.view.hitTest(point, with: event)
+                    guard let viewController = self?.rootPresentingViewController else { return nil }
+                    let converted = viewController.view.convert(point, from: view)
+                    return viewController.view.hitTest(converted, with: event)
                 }
                 
             case .dismiss:

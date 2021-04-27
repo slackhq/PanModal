@@ -73,6 +73,7 @@ private extension SampleViewController {
         case userGroups
         case stacked
         case navController
+        case button
 
 
         var presentable: RowPresentable {
@@ -84,6 +85,7 @@ private extension SampleViewController {
             case .userGroups: return UserGroup()
             case .stacked: return Stacked()
             case .navController: return Navigation()
+            case .button: return Button()
             }
         }
 
@@ -120,6 +122,11 @@ private extension SampleViewController {
         struct Stacked: RowPresentable {
             let string: String = "User Groups (Stacked)"
             let rowVC: PanModalPresentable.LayoutType = UserGroupStackedViewController()
+        }
+        
+        struct Button: RowPresentable {
+            let string: String = "Button"
+            let rowVC: PanModalPresentable.LayoutType = ButtonViewController()
         }
     }
 }
