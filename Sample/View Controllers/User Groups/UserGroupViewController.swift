@@ -104,7 +104,7 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     
     var backgroundInteraction: PanModalBackgroundInteraction { .forwardToRoot }
     
-    var panModalBackgroundColor: UIColor { .clear }
+    var panModalBackgroundColor: UIColor { .black }
     
     var scrollIndicatorInsets: UIEdgeInsets {
         let bottomOffset = presentingViewController?.bottomLayoutGuide.length ?? 0

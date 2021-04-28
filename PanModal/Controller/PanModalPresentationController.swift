@@ -227,13 +227,14 @@ open class PanModalPresentationController: UIPresentationController {
         configureScrollViewInsets()
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
-            backgroundView.dimState = .max
+            backgroundView.dimState = shortFormYPosition == longFormYPosition ? .max : .off
             return
         }
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
-            self?.backgroundView.dimState = .max
-            self?.presentedViewController.setNeedsStatusBarAppearanceUpdate()
+            guard let self = self else { return }
+            self.backgroundView.dimState = self.shortFormYPosition == self.longFormYPosition ? .max : .off
+            self.presentedViewController.setNeedsStatusBarAppearanceUpdate()
         })
     }
 
@@ -746,18 +747,20 @@ private extension PanModalPresentationController {
     func adjust(toYPosition yPos: CGFloat) {
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
         
-        guard presentedView.frame.origin.y > shortFormYPosition else {
+        guard presentedView.frame.origin.y >= longFormYPosition else {
             backgroundView.dimState = .max
             return
         }
 
-        let yDisplacementFromShortForm = presentedView.frame.origin.y - shortFormYPosition
-
+        let yDisplacementRange = longFormYPosition - shortFormYPosition
+        let yDisplacementFromLongForm = presentedView.frame.origin.y - longFormYPosition
+        let yDisplacementRatio = abs(yDisplacementFromLongForm / yDisplacementRange)
+        
         /**
          Once presentedView is translated below shortForm, calculate yPos relative to bottom of screen
          and apply percentage to backgroundView alpha
          */
-        backgroundView.dimState = .percent(1.0 - (yDisplacementFromShortForm / presentedView.frame.height))
+        backgroundView.dimState = .percent(1.0 - yDisplacementRatio)
     }
 
     /**
