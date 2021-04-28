@@ -95,16 +95,14 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     }
 
     var shortFormHeight: PanModalHeight {
-        return .contentHeight(100)
-    }
-    
-    var mediumFormHeight: PanModalHeight {
         return .contentHeight(300)
     }
     
     var backgroundInteraction: PanModalBackgroundInteraction { .forwardToRoot }
     
     var panModalBackgroundColor: UIColor { .black }
+    
+    var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { .fixed }
     
     var scrollIndicatorInsets: UIEdgeInsets {
         let bottomOffset = presentingViewController?.bottomLayoutGuide.length ?? 0

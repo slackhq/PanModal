@@ -227,15 +227,28 @@ open class PanModalPresentationController: UIPresentationController {
         configureScrollViewInsets()
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
-            backgroundView.dimState = shortFormYPosition == longFormYPosition ? .max : .off
+            
+            backgroundView.dimState = presentationDimState
             return
         }
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
             guard let self = self else { return }
-            self.backgroundView.dimState = self.shortFormYPosition == self.longFormYPosition ? .max : .off
+            self.backgroundView.dimState = self.presentationDimState
             self.presentedViewController.setNeedsStatusBarAppearanceUpdate()
         })
+    }
+    
+    private var presentationDimState: DimmedView.DimState {
+        
+        guard let behaviour = presentable?.backgroundDimBehaviour else { return .off }
+        
+        switch behaviour {
+        case .fixed:
+            return .max
+        case .dynamic:
+            return shortFormYPosition == longFormYPosition ? .max : .off
+        }
     }
 
     override public func presentationTransitionDidEnd(_ completed: Bool) {
@@ -749,6 +762,12 @@ private extension PanModalPresentationController {
         
         guard presentedView.frame.origin.y >= longFormYPosition else {
             backgroundView.dimState = .max
+            return
+        }
+        
+        guard presentable?.backgroundDimBehaviour == .dynamic else {
+            let yDisplacementFromShortForm = presentedView.frame.origin.y - shortFormYPosition
+            backgroundView.dimState = .percent(1.0 - (yDisplacementFromShortForm / presentedView.frame.height))
             return
         }
 

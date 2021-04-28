@@ -161,6 +161,13 @@ public protocol PanModalPresentable: AnyObject {
     var backgroundInteraction: PanModalBackgroundInteraction { get }
     
     /**
+     Describes how the background dims according the sheet's position
+     
+     Default value is `.dynamic`
+     */
+    var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { get }
+    
+    /**
      A flag to toggle user interactions on the container view.
 
      - Note: Return false to forward touches to the presentingViewController.
