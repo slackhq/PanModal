@@ -24,7 +24,7 @@ import UIKit
  the presented view can define its layout configuration & presentation.
  */
 open class PanModalPresentationController: UIPresentationController {
-
+    
     /**
      Enum representing the possible presentation states
      */
@@ -229,12 +229,14 @@ open class PanModalPresentationController: UIPresentationController {
         guard let coordinator = presentedViewController.transitionCoordinator else {
             
             backgroundView.dimState = presentationDimState
+            updateProgress(for: shortFormYPosition)
             return
         }
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
             guard let self = self else { return }
             self.backgroundView.dimState = self.presentationDimState
+            self.updateProgress(for: self.shortFormYPosition)
             self.presentedViewController.setNeedsStatusBarAppearanceUpdate()
         })
     }
@@ -262,6 +264,7 @@ open class PanModalPresentationController: UIPresentationController {
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
             backgroundView.dimState = .off
+            updateProgress(for: 0)
             return
         }
 
@@ -272,6 +275,7 @@ open class PanModalPresentationController: UIPresentationController {
         coordinator.animate(alongsideTransition: { [weak self] _ in
             self?.dragIndicatorView.alpha = 0.0
             self?.backgroundView.dimState = .off
+            self?.updateProgress(for: 0)
             self?.presentingViewController.setNeedsStatusBarAppearanceUpdate()
         })
     }
@@ -424,7 +428,7 @@ private extension PanModalPresentationController {
      Reduce height of presentedView so that it sits at the bottom of the screen
      */
     func adjustPresentedViewFrame() {
-
+        
         guard let frame = containerView?.frame
             else { return }
 
@@ -762,24 +766,33 @@ private extension PanModalPresentationController {
         
         guard presentedView.frame.origin.y >= longFormYPosition else {
             backgroundView.dimState = .max
+            updateProgress(for: longFormYPosition)
             return
         }
         
+        updateProgress(for: presentedView.frame.origin.y)
+
         guard presentable?.backgroundDimBehaviour == .dynamic else {
             let yDisplacementFromShortForm = presentedView.frame.origin.y - shortFormYPosition
-            backgroundView.dimState = .percent(1.0 - (yDisplacementFromShortForm / presentedView.frame.height))
+            let yDisplacementFromShortFormRatio = 1.0 - (yDisplacementFromShortForm / presentedView.frame.height)
+            backgroundView.dimState = .percent(yDisplacementFromShortFormRatio)
             return
         }
 
-        let yDisplacementRange = longFormYPosition - shortFormYPosition
-        let yDisplacementFromLongForm = presentedView.frame.origin.y - longFormYPosition
-        let yDisplacementRatio = abs(yDisplacementFromLongForm / yDisplacementRange)
-        
         /**
          Once presentedView is translated below shortForm, calculate yPos relative to bottom of screen
          and apply percentage to backgroundView alpha
          */
-        backgroundView.dimState = .percent(1.0 - yDisplacementRatio)
+        let yDisplacementFromLongForm = presentedView.frame.origin.y - longFormYPosition
+        let yDisplacementFromLongFormRatio = 1.0 - (yDisplacementFromLongForm / presentedView.frame.height)
+        backgroundView.dimState = .percent(yDisplacementFromLongFormRatio)
+    }
+    
+    func updateProgress(for originY: CGFloat) {
+        
+        let yDisplacementFromLongForm = presentedView.frame.origin.y - longFormYPosition
+        let yDisplacementFromLongFormRatio = 1.0 - (yDisplacementFromLongForm / presentedView.frame.height)
+        presentable?.updatedProgress(to: Double(yDisplacementFromLongFormRatio))
     }
 
     /**

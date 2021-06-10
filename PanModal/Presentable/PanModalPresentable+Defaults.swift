@@ -128,6 +128,10 @@ public extension PanModalPresentable where Self: UIViewController {
     func willTransition(to state: PanModalPresentationController.PresentationState) {
 
     }
+    
+    func updatedProgress(to percentage: Double) {
+        
+    }
 
     func panModalWillDismiss() {
 

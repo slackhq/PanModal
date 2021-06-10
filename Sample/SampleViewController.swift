@@ -9,7 +9,7 @@
 import UIKit
 
 class SampleViewController: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
