@@ -103,7 +103,7 @@ public protocol PanModalPresentable: AnyObject {
     var dragIndicatorBackgroundColor: UIColor { get }
 
     /**
-     We configure the panScrollable's scrollIndicatorInsets interally so override this value
+     We configure the panScrollable's scrollIndicatorInsets internally so override this value
      to set custom insets.
 
      - Note: Use `panModalSetNeedsLayoutUpdate()` when updating insets.
