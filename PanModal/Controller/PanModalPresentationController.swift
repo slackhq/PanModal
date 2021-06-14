@@ -791,7 +791,8 @@ private extension PanModalPresentationController {
     func updateProgress(for originY: CGFloat) {
         
         let yDisplacementFromLongForm = presentedView.frame.origin.y - longFormYPosition
-        let yDisplacementFromLongFormRatio = 1.0 - (yDisplacementFromLongForm / presentedView.frame.height)
+        let movementDelta = shortFormYPosition - longFormYPosition
+        let yDisplacementFromLongFormRatio = 1.0 - (yDisplacementFromLongForm / movementDelta)
         presentable?.updatedProgress(to: Double(yDisplacementFromLongFormRatio))
     }
 
