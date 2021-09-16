@@ -22,4 +22,6 @@ class UserGroupStackedViewController: UserGroupViewController {
     override var shortFormHeight: PanModalHeight {
         return mediumFormHeight
     }
+    
+    override var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { .fixed }
 }
