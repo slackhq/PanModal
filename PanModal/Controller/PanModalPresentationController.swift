@@ -499,6 +499,20 @@ private extension PanModalPresentationController {
                 presentable?.willTransition(to: .longForm)
             }
 
+        case .cancelled,
+             .failed:
+            /**
+             When gesture is cancelled, transition to nearest position.
+             */
+            let position = nearest(to: presentedView.frame.minY, inValues: [shortFormYPosition, longFormYPosition])
+            switch position {
+            case shortFormYPosition:
+                transition(to: .shortForm)
+
+            default:
+                transition(to: .longForm)
+            }
+
         default:
 
             /**
