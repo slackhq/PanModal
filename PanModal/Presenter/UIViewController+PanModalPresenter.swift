@@ -38,7 +38,7 @@ extension UIViewController: PanModalPresenter {
 
      - Note: sourceView & sourceRect are only required for presentation on an iPad.
      */
-    public func presentPanModal(_ viewControllerToPresent: PanModalPresentable.LayoutType, sourceView: UIView? = nil, sourceRect: CGRect = .zero) {
+    public func presentPanModal(_ viewControllerToPresent: PanModalPresentable.LayoutType, sourceView: UIView? = nil, sourceRect: CGRect = .zero, completion: (() -> Void)?) {
 
         /**
          Here, we deliberately do not check for size classes. More info in `PanModalPresentationDelegate`
@@ -55,7 +55,7 @@ extension UIViewController: PanModalPresenter {
             viewControllerToPresent.transitioningDelegate = PanModalPresentationDelegate.default
         }
 
-        present(viewControllerToPresent, animated: true, completion: nil)
+        present(viewControllerToPresent, animated: true, completion: completion)
     }
 
 }
