@@ -110,18 +110,33 @@ extension PanModalPresentable where Self: UIViewController {
         switch from {
         case .maxHeight:
             return 0.0
+            
         case .maxHeightWithTopInset(let inset):
             return inset
+            
         case .contentHeight(let height):
             return bottomYPos - (height + bottomLayoutOffset)
+            
         case .contentHeightIgnoringSafeArea(let height):
             return bottomYPos - height
+            
         case .intrinsicHeight:
             view.layoutIfNeeded()
-            let targetSize = CGSize(width: (presentedVC?.containerView?.bounds ?? UIScreen.main.bounds).width,
-                                    height: UIView.layoutFittingCompressedSize.height)
+            let targetSize = CGSize(
+                width: (presentedVC?.containerView?.bounds ?? UIScreen.main.bounds).width,
+                height: UIView.layoutFittingCompressedSize.height
+            )
             let intrinsicHeight = view.systemLayoutSizeFitting(targetSize).height
             return bottomYPos - (intrinsicHeight + bottomLayoutOffset)
+            
+        case .intrinsicHeightIgnoringSafeArea:
+            view.layoutIfNeeded()
+            let targetSize = CGSize(
+                width: (presentedVC?.containerView?.bounds ?? UIScreen.main.bounds).width,
+                height: UIView.layoutFittingCompressedSize.height
+            )
+            let intrinsicHeight = view.systemLayoutSizeFitting(targetSize).height
+            return bottomYPos - intrinsicHeight
         }
     }
 
@@ -130,7 +145,7 @@ extension PanModalPresentable where Self: UIViewController {
         guard let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication
             else { return nil }
 
-        return application.keyWindow?.rootViewController
+        return application.windows.filter(\.isKeyWindow).first?.rootViewController
     }
 
 }
