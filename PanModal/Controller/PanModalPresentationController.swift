@@ -484,6 +484,28 @@ private extension PanModalPresentationController {
                 return
         }
 
+        let transitionForPosition = { [weak self] in
+            guard let me = self else { return }
+            let shortFormYPosition = me.shortFormYPosition
+            let longFormYPosition = me.longFormYPosition
+
+            /**
+             The `containerView.bounds.height` is used to determine
+             how close the presented view is to the bottom of the screen
+             */
+            let position = me.nearest(to: me.presentedView.frame.minY, inValues: [containerView.bounds.height, shortFormYPosition, longFormYPosition])
+
+            if position == longFormYPosition {
+                me.transition(to: .longForm)
+
+            } else if position == shortFormYPosition || me.presentable?.allowsDragToDismiss == false {
+                me.transition(to: .shortForm)
+
+            } else {
+                me.presentedViewController.dismiss(animated: true)
+            }
+        }
+
         switch recognizer.state {
         case .began, .changed:
 
@@ -504,14 +526,7 @@ private extension PanModalPresentationController {
             /**
              When gesture is cancelled, transition to nearest position.
              */
-            let position = nearest(to: presentedView.frame.minY, inValues: [shortFormYPosition, longFormYPosition])
-            switch position {
-            case shortFormYPosition:
-                transition(to: .shortForm)
-
-            default:
-                transition(to: .longForm)
-            }
+            transitionForPosition()
 
         default:
 
@@ -541,22 +556,7 @@ private extension PanModalPresentationController {
                 }
 
             } else {
-
-                /**
-                 The `containerView.bounds.height` is used to determine
-                 how close the presented view is to the bottom of the screen
-                 */
-                let position = nearest(to: presentedView.frame.minY, inValues: [containerView.bounds.height, shortFormYPosition, longFormYPosition])
-
-                if position == longFormYPosition {
-                    transition(to: .longForm)
-
-                } else if position == shortFormYPosition || presentable?.allowsDragToDismiss == false {
-                    transition(to: .shortForm)
-
-                } else {
-                    presentedViewController.dismiss(animated: true)
-                }
+                transitionForPosition()
             }
         }
     }
