@@ -91,10 +91,11 @@ public class PanModalPresentationAnimator: NSObject {
 
         PanModalAnimator.animate({
             panView.frame.origin.y = yPos
-        }, config: presentable) { [weak self] didComplete in
+        }, config: presentable) { [weak self] _ in
             // Calls viewDidAppear and viewDidDisappear
             fromVC.endAppearanceTransition()
-            transitionContext.completeTransition(didComplete)
+            // Regardless of animation canceling, complete transition
+            transitionContext.completeTransition(true)
             self?.feedbackGenerator = nil
         }
     }
@@ -117,11 +118,12 @@ public class PanModalPresentationAnimator: NSObject {
 
         PanModalAnimator.animate({
             panView.frame.origin.y = transitionContext.containerView.frame.height
-        }, config: presentable) { didComplete in
+        }, config: presentable) { _ in
             fromVC.view.removeFromSuperview()
             // Calls viewDidAppear and viewDidDisappear
             toVC.endAppearanceTransition()
-            transitionContext.completeTransition(didComplete)
+            // Regardless of animation canceling, complete transition
+            transitionContext.completeTransition(true)
         }
     }
 
