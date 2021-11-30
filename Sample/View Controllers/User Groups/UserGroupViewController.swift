@@ -104,11 +104,10 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     
     var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { .dynamic }
     
-    var scrollIndicatorInsets: UIEdgeInsets {
-        let bottomOffset = presentingViewController?.bottomLayoutGuide.length ?? 0
-        return UIEdgeInsets(top: headerView.frame.size.height, left: 0, bottom: bottomOffset, right: 0)
-    }
-
+    var scrollBottomInset: CGFloat { 300 }
+    
+    var shouldShowVerticalScrollIndicator: Bool { false }
+        
     var anchorModalToLongForm: Bool {
         return false
     }

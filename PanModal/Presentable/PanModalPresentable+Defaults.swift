@@ -61,8 +61,12 @@ public extension PanModalPresentable where Self: UIViewController {
 
     var scrollIndicatorInsets: UIEdgeInsets {
         let top = shouldRoundTopCorners ? cornerRadius : 0
-        return UIEdgeInsets(top: CGFloat(top), left: 0, bottom: bottomLayoutOffset, right: 0)
+        return UIEdgeInsets(top: CGFloat(top), left: 0, bottom: 0, right: 0)
     }
+    
+    var scrollBottomInset: CGFloat { 0 }
+    
+    var shouldShowVerticalScrollIndicator: Bool { true }
 
     var anchorModalToLongForm: Bool {
         return true

@@ -120,6 +120,20 @@ public protocol PanModalPresentable: AnyObject {
      - Note: Use `panModalSetNeedsLayoutUpdate()` when updating insets.
      */
     var scrollIndicatorInsets: UIEdgeInsets { get }
+    
+    /**
+     The amount of bottom inset to apply to the scroll view.
+
+     - Note: Use `panModalSetNeedsLayoutUpdate()` when updating scrollBottomInset.
+     */
+    var scrollBottomInset: CGFloat { get }
+    
+    /**
+     If it should show the vertical scroll indicator.
+
+     - Note: Use `panModalSetNeedsLayoutUpdate()` when updating shouldShowVerticalScrollIndicator.
+     */
+    var shouldShowVerticalScrollIndicator: Bool { get }
 
     /**
      A flag to determine if scrolling should be limited to the longFormHeight.
