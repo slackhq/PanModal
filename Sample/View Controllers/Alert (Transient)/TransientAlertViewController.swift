@@ -51,10 +51,6 @@ class TransientAlertViewController: AlertViewController {
 
     // MARK: - Pan Modal Presentable
 
-    override var showDragIndicator: Bool {
-        return false
-    }
-
     override var anchorModalToLongForm: Bool {
         return true
     }

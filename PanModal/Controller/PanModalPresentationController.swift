@@ -175,16 +175,6 @@ open class PanModalPresentationController: UIPresentationController {
     }()
 
     /**
-     Drag Indicator View
-     */
-    private lazy var dragIndicatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = presentable?.dragIndicatorBackgroundColor
-        view.layer.cornerRadius = Constants.dragIndicatorSize.height / 2.0
-        return view
-    }()
-
-    /**
      Override presented view to return the pan container wrapper
      */
     public override var presentedView: UIView {
@@ -273,8 +263,8 @@ open class PanModalPresentationController: UIPresentationController {
          so hiding it on view dismiss means avoiding visual bugs
          */
         coordinator.animate(alongsideTransition: { [weak self] _ in
-            self?.dragIndicatorView.alpha = 0.0
             self?.backgroundView.dimState = .off
+            self?.presentedView.layer.shadowOpacity = 0
             self?.updateProgress(for: 0)
             self?.presentingViewController.setNeedsStatusBarAppearanceUpdate()
         })
@@ -299,8 +289,20 @@ open class PanModalPresentationController: UIPresentationController {
                 else { return }
 
             self.adjustPresentedViewFrame()
+            
             if presentable.shouldRoundTopCorners {
+                
                 self.addRoundedCorners(to: self.presentedView)
+                
+            } else if presentable.shouldShowShadow {
+                
+                self.addShadow(
+                    to: self.presentedView,
+                    opacity: presentable.shadowOpacity,
+                    color: presentable.shadowColor,
+                    offset: presentable.shadowOffset,
+                    radius: presentable.shadowRadius
+                )
             }
         })
     }
@@ -412,12 +414,19 @@ private extension PanModalPresentationController {
         containerView.addSubview(presentedView)
         containerView.addGestureRecognizer(panGestureRecognizer)
 
-        if presentable.showDragIndicator {
-            addDragIndicatorView(to: presentedView)
-        }
-
         if presentable.shouldRoundTopCorners {
-            addRoundedCorners(to: presentedView)
+
+            self.addRoundedCorners(to: self.presentedView)
+
+        } else if presentable.shouldShowShadow {
+
+            self.addShadow(
+                to: self.presentedView,
+                opacity: presentable.shadowOpacity,
+                color: presentable.shadowColor,
+                offset: presentable.shadowOffset,
+                radius: presentable.shadowRadius
+            )
         }
 
         setNeedsLayoutUpdate()
@@ -467,19 +476,6 @@ private extension PanModalPresentationController {
         backgroundView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         backgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         backgroundView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-    }
-
-    /**
-     Adds the drag indicator view to the view hierarchy
-     & configures its layout constraints.
-     */
-    func addDragIndicatorView(to view: UIView) {
-        view.addSubview(dragIndicatorView)
-        dragIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        dragIndicatorView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: -Constants.indicatorYOffset).isActive = true
-        dragIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        dragIndicatorView.widthAnchor.constraint(equalToConstant: Constants.dragIndicatorSize.width).isActive = true
-        dragIndicatorView.heightAnchor.constraint(equalToConstant: Constants.dragIndicatorSize.height).isActive = true
     }
 
     /**
@@ -975,19 +971,16 @@ private extension PanModalPresentationController {
     /**
      Draws top rounded corners on a given view
      We have to set a custom path for corner rounding
-     because we render the dragIndicator outside of view bounds
+     because we render the dragIndicator outside of view bounds.
      */
     func addRoundedCorners(to view: UIView) {
+        
         let radius = presentable?.cornerRadius ?? 0
-        let path = UIBezierPath(roundedRect: view.bounds,
-                                byRoundingCorners: [.topLeft, .topRight],
-                                cornerRadii: CGSize(width: radius, height: radius))
-
-        // Draw around the drag indicator view, if displayed
-        if presentable?.showDragIndicator == true {
-            let indicatorLeftEdgeXPos = view.bounds.width/2.0 - Constants.dragIndicatorSize.width/2.0
-            drawAroundDragIndicator(currentPath: path, indicatorLeftEdgeXPos: indicatorLeftEdgeXPos)
-        }
+        let path = UIBezierPath(
+            roundedRect: view.bounds,
+            byRoundingCorners: [.topLeft, .topRight],
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
 
         // Set path as a mask to display optional drag indicator view & rounded corners
         let mask = CAShapeLayer()
@@ -998,19 +991,14 @@ private extension PanModalPresentationController {
         view.layer.shouldRasterize = true
         view.layer.rasterizationScale = UIScreen.main.scale
     }
-
-    /**
-     Draws a path around the drag indicator view
-     */
-    func drawAroundDragIndicator(currentPath path: UIBezierPath, indicatorLeftEdgeXPos: CGFloat) {
-
-        let totalIndicatorOffset = Constants.indicatorYOffset + Constants.dragIndicatorSize.height
-
-        // Draw around drag indicator starting from the left
-        path.addLine(to: CGPoint(x: indicatorLeftEdgeXPos, y: path.currentPoint.y))
-        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y - totalIndicatorOffset))
-        path.addLine(to: CGPoint(x: path.currentPoint.x + Constants.dragIndicatorSize.width, y: path.currentPoint.y))
-        path.addLine(to: CGPoint(x: path.currentPoint.x, y: path.currentPoint.y + totalIndicatorOffset))
+    
+    func addShadow(to view: UIView, opacity: Float, color: UIColor, offset: CGSize, radius: CGFloat) {
+        
+        view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
+        view.layer.shadowOpacity = opacity
+        view.layer.shadowColor = color.cgColor
+        view.layer.shadowOffset = offset
+        view.layer.shadowRadius = radius
     }
 }
 

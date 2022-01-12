@@ -12,7 +12,7 @@ class BasicViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.1019607843, green: 0.1137254902, blue: 0.1294117647, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
     }
 }
 
@@ -33,4 +33,14 @@ extension BasicViewController: PanModalPresentable {
     var anchorModalToLongForm: Bool {
         return false
     }
+    
+    var panModalBackgroundColor: UIColor { .clear }
+    
+    var shouldRoundTopCorners: Bool { false }
+    
+    var shouldShowShadow: Bool { true }
+    
+    var shadowColor: UIColor { .green }
+    
+    var shadowOpacity: Float { 0.7 }
 }

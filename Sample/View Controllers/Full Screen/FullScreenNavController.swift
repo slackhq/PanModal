@@ -42,10 +42,6 @@ extension FullScreenNavController: PanModalPresentable {
         return false
     }
 
-    var showDragIndicator: Bool {
-        return false
-    }
-    
     func updatedProgress(to percentage: Double) {
         (viewControllers.first as? FullScreenViewController)?.textLabel.alpha = CGFloat(percentage)
     }
@@ -58,7 +54,6 @@ private class FullScreenViewController: UIViewController {
         label.text = "Drag downwards to dismiss"
         label.font = UIFont(name: "Lato-Bold", size: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .blue
         return label
     }()
 

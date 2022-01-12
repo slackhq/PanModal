@@ -107,13 +107,6 @@ public protocol PanModalPresentable: AnyObject {
     var panModalBackgroundColor: UIColor { get }
 
     /**
-     The drag indicator view color.
-
-     Default value is light gray.
-    */
-    var dragIndicatorBackgroundColor: UIColor { get }
-
-    /**
      We configure the panScrollable's scrollIndicatorInsets interally so override this value
      to set custom insets.
 
@@ -198,19 +191,26 @@ public protocol PanModalPresentable: AnyObject {
     var isHapticFeedbackEnabled: Bool { get }
 
     /**
-     A flag to determine if the top corners should be rounded.
+     A flag to determine if the top corners should be rounded. Does not work in conjunction with shadow.
 
      Default value is true.
      */
     var shouldRoundTopCorners: Bool { get }
-
+    
     /**
-     A flag to determine if a drag indicator should be shown
-     above the pan modal container view.
+     A flag to determine if the sheet shows a shadow. Does not work in conjunction with rounded corners.
 
      Default value is true.
      */
-    var showDragIndicator: Bool { get }
+    var shouldShowShadow: Bool { get }
+    
+    var shadowOpacity: Float { get }
+    
+    var shadowColor: UIColor { get }
+    
+    var shadowOffset: CGSize { get }
+    
+    var shadowRadius: CGFloat { get }
 
     /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.

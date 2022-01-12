@@ -54,10 +54,6 @@ class AlertViewController: UIViewController, PanModalPresentable {
         return false
     }
 
-    var showDragIndicator: Bool {
-        return true
-    }
-
     var anchorModalToLongForm: Bool {
         return false
     }
