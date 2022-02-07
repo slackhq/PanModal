@@ -111,13 +111,55 @@ open class PanModalPresentationController: UIPresentationController {
         } else {
             view = DimmedView()
         }
-        view.didTap = { [weak self] _ in
-            if self?.presentable?.allowsTapToDismiss == true {
-                self?.presentedViewController.dismiss(animated: true)
+        
+        if let backgroundInteraction = presentable?.backgroundInteraction {
+            switch backgroundInteraction {
+            case .dismiss:
+                
+                view.didTap = { [weak self] _ in
+                    self?.presentedViewController.dismiss(animated: true)
+                }
+            
+            case .forwardToParent:
+                
+                view.hitTestHandler = { [weak self] (point, event) in
+                    
+                    guard let viewController = self?.presentingViewController else { return nil }
+                    
+                    let converted = viewController.view.convert(point, from: view)
+                    return viewController.view.hitTest(converted, with: event)
+                }
+                
+            case .forwardToRoot:
+                
+                view.hitTestHandler = { [weak self] (point, event) in
+                    guard let viewController = self?.rootPresentingViewController else { return nil }
+                    
+                    let converted = viewController.view.convert(point, from: view)
+                    return viewController.view.hitTest(converted, with: event)
+                }
+            
+            case .none:
+                break
             }
         }
+        
         return view
     }()
+    
+    private var rootPresentingViewController: UIViewController? {
+        
+        var parentViewController = self.presentingViewController
+        
+        while parentViewController is PanModalPresentable & UIViewController {
+            
+            guard let presenting = parentViewController.presentingViewController else { return nil }
+            
+            parentViewController = presenting
+        }
+        
+        return parentViewController
+    }
 
     /**
      A wrapper around the presented view so that we can modify

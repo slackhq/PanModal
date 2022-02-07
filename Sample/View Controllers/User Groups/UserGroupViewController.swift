@@ -84,6 +84,7 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presentPanModal(UserGroupViewController())
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -105,6 +106,8 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     var anchorModalToLongForm: Bool {
         return false
     }
+    
+    var backgroundInteraction: PanModalBackgroundInteraction { .forwardToRoot }
 
     func shouldPrioritize(panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         let location = panModalGestureRecognizer.location(in: view)

@@ -141,6 +141,13 @@ public protocol PanModalPresentable: AnyObject {
      Default value is true.
      */
     var allowsTapToDismiss: Bool { get }
+    
+    /**
+     Describes what happens when the user interacts the background view.
+     
+     Default value is .dismiss.
+     */
+    var backgroundInteraction: PanModalBackgroundInteraction { get }
 
     /**
      A flag to toggle user interactions on the container view.
