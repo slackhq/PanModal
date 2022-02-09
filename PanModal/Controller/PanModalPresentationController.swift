@@ -78,6 +78,13 @@ open class PanModalPresentationController: UIPresentationController {
     /**
      The y value for the short form presentation state
      */
+    private var dynamicBackgroundFadeYPosition: CGFloat = 0
+
+    // store the y positions so we don't have to keep re-calculating
+
+    /**
+     The y value for the short form presentation state
+     */
     private var shortFormYPosition: CGFloat = 0
     
     /**
@@ -265,12 +272,17 @@ open class PanModalPresentationController: UIPresentationController {
     private var presentationDimState: DimmedView.DimState {
         
         guard let behaviour = presentable?.backgroundDimBehaviour else { return .off }
-        
+                
         switch behaviour {
         case .fixed:
             return .max
+        case .dynamic where shortFormYPosition == longFormYPosition:
+            return .max
         case .dynamic:
-            return shortFormYPosition == longFormYPosition ? .max : .off
+            let yDistanceFromLongToBackgroundFadeForm = dynamicBackgroundFadeYPosition - longFormYPosition
+            let yDisplacementFromLongForm = yDistanceFromLongToBackgroundFadeForm - (dynamicBackgroundFadeYPosition - presentedView.frame.origin.y)
+            let yDisplacementFromLongFormRatio = 1.0 - (yDisplacementFromLongForm / yDistanceFromLongToBackgroundFadeForm)
+            return .percent(yDisplacementFromLongFormRatio)
         }
     }
 
@@ -517,6 +529,7 @@ private extension PanModalPresentationController {
         guard let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType
             else { return }
 
+        dynamicBackgroundFadeYPosition = layoutPresentable.dynamicBackgroundFadeYPosition
         shortFormYPosition = layoutPresentable.shortFormYPos
         mediumFormYPosition = layoutPresentable.mediumFormYPos
         longFormYPosition = layoutPresentable.longFormYPos
@@ -817,9 +830,9 @@ private extension PanModalPresentationController {
          and apply percentage to backgroundView alpha
          */
         
-        let yDistanceFromLongToShortForm = shortFormYPosition - longFormYPosition
-        let yDisplacementFromLongForm = yDistanceFromLongToShortForm - (shortFormYPosition - presentedView.frame.origin.y)        
-        let yDisplacementFromLongFormRatio = 1.0 - (yDisplacementFromLongForm / yDistanceFromLongToShortForm)
+        let yDistanceFromLongToBackgroundFadeForm = dynamicBackgroundFadeYPosition - longFormYPosition
+        let yDisplacementFromLongForm = yDistanceFromLongToBackgroundFadeForm - (dynamicBackgroundFadeYPosition - presentedView.frame.origin.y)
+        let yDisplacementFromLongFormRatio = 1.0 - (yDisplacementFromLongForm / yDistanceFromLongToBackgroundFadeForm)
         backgroundView.dimState = .percent(yDisplacementFromLongFormRatio)
     }
     

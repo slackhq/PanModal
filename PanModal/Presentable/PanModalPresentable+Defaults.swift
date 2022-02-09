@@ -93,6 +93,8 @@ public extension PanModalPresentable where Self: UIViewController {
         .dynamic
     }
     
+    var dynamicBackgroundFadeStartHeight: PanModalHeight { shortFormHeight }
+
     var isUserInteractionEnabled: Bool {
         return true
     }

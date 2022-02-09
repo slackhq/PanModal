@@ -19,11 +19,11 @@ class UserGroupStackedViewController: UserGroupViewController {
         presentPanModal(viewController)
     }
 
-    override var shortFormHeight: PanModalHeight {
-        return mediumFormHeight
-    }
+    override var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { .dynamic }
     
-    override var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { .fixed }
+    override var allowsDragToDismiss: Bool { false }
     
-    override var backgroundInteraction: PanModalBackgroundInteraction { .transitionToShortForm }
+    override var shortFormHeight: PanModalHeight { .contentHeight(100) }
+    
+    override var backgroundInteraction: PanModalBackgroundInteraction { .transitionToShortFormOrForwardToRoot }
 }

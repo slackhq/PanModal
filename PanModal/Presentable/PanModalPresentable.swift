@@ -44,7 +44,6 @@ public protocol PanModalPresentable: AnyObject {
      Default value is the longFormHeight.
      */
     var shortFormHeight: PanModalHeight { get }
-
     
     /**
      The height of the pan modal container view
@@ -174,6 +173,15 @@ public protocol PanModalPresentable: AnyObject {
      */
     var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { get }
     
+    /**
+     The height where the backgroundView should start fading in for dynamic dim behaviours.
+
+     This value is capped to .max, if provided value exceeds the space available.
+
+     Default value is the shortFormHeight.
+     */
+    var dynamicBackgroundFadeStartHeight: PanModalHeight { get }
+
     /**
      A flag to toggle user interactions on the container view.
 

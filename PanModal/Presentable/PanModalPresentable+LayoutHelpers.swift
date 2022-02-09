@@ -47,6 +47,23 @@ extension PanModalPresentable where Self: UIViewController {
     }
 
     /**
+     Returns the Y position where the background should start fading in
+
+     - Note: If voiceover is on, the `longFormYPos` is returned.
+     We do not support short form when voiceover is on as it would make it difficult for user to navigate.
+     */
+    var dynamicBackgroundFadeYPosition: CGFloat {
+        
+        guard !UIAccessibility.isVoiceOverRunning
+            else { return longFormYPos }
+
+        let dynamicBackgroundFadeYPosition = topMargin(from: dynamicBackgroundFadeStartHeight) + topOffset
+
+        // dynamicBackgroundFadeYPosition shouldn't exceed longForm
+        return max(dynamicBackgroundFadeYPosition, longFormYPos)
+    }
+    
+    /**
      Returns the short form Y position
 
      - Note: If voiceover is on, the `longFormYPos` is returned.

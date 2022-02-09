@@ -93,8 +93,10 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     var panScrollable: UIScrollView? {
         return tableView
     }
+    
+    var dynamicBackgroundFadeStartHeight: PanModalHeight { .contentHeight(100) }
 
-    var shortFormHeight: PanModalHeight { .contentHeight(100) }
+    var shortFormHeight: PanModalHeight { mediumFormHeight }
     
     var mediumFormHeight: PanModalHeight { .contentHeight(300) }
     
@@ -107,6 +109,8 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     var scrollBottomInset: CGFloat { 300 }
     
     var shouldShowVerticalScrollIndicator: Bool { false }
+    
+    var allowsDragToDismiss: Bool { true }
         
     var anchorModalToLongForm: Bool {
         return false

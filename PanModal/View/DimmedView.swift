@@ -32,11 +32,11 @@ public class DimmedView: UIView {
         didSet {
             switch dimState {
             case .max:
-                alpha = 1.0
+                backgroundColor = dimColor
             case .off:
-                alpha = 0.0
+                backgroundColor = .clear
             case .percent(let percentage):
-                alpha = max(0.0, min(1.0, percentage))
+                backgroundColor = dimColor.withAlphaComponent(max(0.0, min(1.0, percentage)))
             }
         }
     }
@@ -66,12 +66,14 @@ public class DimmedView: UIView {
         return UITapGestureRecognizer(target: self, action: #selector(didTapView))
     }()
 
+    private let dimColor: UIColor
+    
     // MARK: - Initializers
 
     init(dimColor: UIColor = UIColor.black.withAlphaComponent(0.7)) {
+        self.dimColor = dimColor
         super.init(frame: .zero)
-        alpha = 0.0
-        backgroundColor = dimColor
+        backgroundColor = dimColor.withAlphaComponent(0)
         addGestureRecognizer(tapGesture)
     }
 
