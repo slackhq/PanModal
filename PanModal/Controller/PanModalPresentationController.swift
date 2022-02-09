@@ -141,8 +141,14 @@ open class PanModalPresentationController: UIPresentationController {
                 view.didTap = { [weak self] _ in
                     self?.presentedViewController.dismiss(animated: true)
                 }
+                
+            case .transitionToShortForm:
+                view.didTap = { [weak self] _ in
+                    guard let self = self else { return }
+                    self.snap(toYPosition: self.shortFormYPosition)
+                }
 
-            default:
+            case .none:
                 break
             }
         }

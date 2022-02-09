@@ -24,4 +24,6 @@ class UserGroupStackedViewController: UserGroupViewController {
     }
     
     override var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { .fixed }
+    
+    override var backgroundInteraction: PanModalBackgroundInteraction { .transitionToShortForm }
 }

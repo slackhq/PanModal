@@ -12,6 +12,9 @@ public enum PanModalBackgroundInteraction: Equatable {
 
     /** Taps dismiss the modal immediately */
     case dismiss
+    
+    /** Taps transition the modal to its short form */
+    case transitionToShortForm
 
     /** Touches are forwarded to the lower window (In most cases it would be the application main window that will handle it */
     case forwardToParent
