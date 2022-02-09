@@ -142,7 +142,32 @@ open class PanModalPresentationController: UIPresentationController {
                     self?.presentedViewController.dismiss(animated: true)
                 }
                 
-            case .transitionToShortForm:
+            case .transitionToShortFormOrForwardToParent:
+                view.hitTestHandler = { [weak self] (point, event) in
+                    guard
+                        let self = self,
+                        self.presentedView.frame.origin.y == self.shortFormYPosition
+                    else { return nil }
+                    let converted = self.presentingViewController.view.convert(point, from: view)
+                    return self.presentingViewController.view.hitTest(converted, with: event)
+                }
+
+                view.didTap = { [weak self] _ in
+                    guard let self = self else { return }
+                    self.snap(toYPosition: self.shortFormYPosition)
+                }
+                
+            case .transitionToShortFormOrForwardToRoot:
+                view.hitTestHandler = { [weak self] (point, event) in
+                    guard
+                        let self = self,
+                        self.presentedView.frame.origin.y == self.shortFormYPosition,
+                        let viewController = self.rootPresentingViewController
+                    else { return nil }
+                    let converted = viewController.view.convert(point, from: view)
+                    return viewController.view.hitTest(converted, with: event)
+                }
+
                 view.didTap = { [weak self] _ in
                     guard let self = self else { return }
                     self.snap(toYPosition: self.shortFormYPosition)
