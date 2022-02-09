@@ -102,7 +102,7 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
     
     var backgroundInteraction: PanModalBackgroundInteraction { .forwardToRoot }
     
-    var panModalBackgroundColor: UIColor { .black }
+    var panModalBackgroundColor: UIColor { .black.withAlphaComponent(0.8) }
     
     var backgroundDimBehaviour: PanModalBackgroundDimBehaviour { .dynamic }
     
