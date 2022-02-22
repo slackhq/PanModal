@@ -8,7 +8,28 @@
 
 import UIKit
 
+/// Allow touches to go through containerView which `isUserInteractionEnabled` is false.
+private class HitTestView: UITableView {
+    weak var hitTestDelegateView: UIView?
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if let delegateView = hitTestDelegateView, delegateView.superview != nil {
+            if let view = delegateView.hitTest(convert(point, to: delegateView), with: event) {
+                return view
+            }
+        }
+
+        return super.hitTest(point, with: event)
+    }
+}
+
 class SampleViewController: UITableViewController {
+
+    private let hitTestView = HitTestView()
+
+    override func loadView() {
+        self.tableView = hitTestView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +75,9 @@ class SampleViewController: UITableViewController {
             return
         }
         dismiss(animated: true, completion: nil)
-        presentPanModal(rowType.presentable.rowVC)
+        let vc = rowType.presentable.rowVC
+        hitTestView.hitTestDelegateView = vc.view
+        presentPanModal(vc)
     }
 }
 
