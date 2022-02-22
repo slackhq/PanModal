@@ -106,6 +106,9 @@ class UserGroupViewController: UITableViewController, PanModalPresentable {
         return false
     }
 
+    let panModalBackgroundColor: UIColor = .clear
+    let isUserInteractionEnabled: Bool = false
+
     func shouldPrioritize(panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         let location = panModalGestureRecognizer.location(in: view)
         return headerView.frame.contains(location)
