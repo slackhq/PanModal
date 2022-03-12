@@ -197,6 +197,13 @@ open class PanModalPresentationController: UIPresentationController {
 
         backgroundView.removeFromSuperview()
     }
+ 
+    open override func containerViewDidLayoutSubviews() {
+        super.containerViewDidLayoutSubviews()
+        if self.presentable?.shouldRoundTopCorners ?? false {
+            self.addRoundedCorners(to: self.presentedView)
+        }
+    }
 
     override public func dismissalTransitionWillBegin() {
         presentable?.panModalWillDismiss()
