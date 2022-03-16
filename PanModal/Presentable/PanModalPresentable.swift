@@ -268,6 +268,13 @@ public protocol PanModalPresentable: AnyObject {
     func willTransition(to state: PanModalPresentationController.PresentationState)
     
     /**
+     Notifies the delegate that the pan modal transitioned to a new state.
+
+     Default value is an empty implementation.
+     */
+    func didTransition(to state: PanModalPresentationController.PresentationState)
+
+    /**
      Notifies the delegate when the pan modal progress changes.
      
      Default value is an empty implementation.

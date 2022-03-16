@@ -367,13 +367,15 @@ public extension PanModalPresentationController {
 
         presentable?.willTransition(to: state)
 
+        let completion: () -> Void = { [weak self] in self?.presentable?.didTransition(to: state) }
+        
         switch state {
         case .shortForm:
-            snap(toYPosition: shortFormYPosition)
+            snap(toYPosition: shortFormYPosition, completion: completion)
         case .mediumForm:
-            snap(toYPosition: mediumFormYPosition)
+            snap(toYPosition: mediumFormYPosition, completion: completion)
         case .longForm:
-            snap(toYPosition: longFormYPosition)
+            snap(toYPosition: longFormYPosition, completion: completion)
         }
     }
 
@@ -609,6 +611,7 @@ private extension PanModalPresentationController {
              */
             if presentedView.frame.origin.y == anchoredYPosition && extendsPanScrolling {
                 presentable?.willTransition(to: .longForm)
+                presentable?.didTransition(to: .longForm)
             }
 
         default:
@@ -795,12 +798,16 @@ private extension PanModalPresentationController {
         return (abs(velocity) - (1000 * (1 - Constants.snapMovementSensitivity))) > 0
     }
 
-    func snap(toYPosition yPos: CGFloat) {
-        PanModalAnimator.animate({ [weak self] in
-            self?.adjust(toYPosition: yPos)
-            self?.isPresentedViewAnimating = true
-        }, config: presentable) { [weak self] didComplete in
+    func snap(toYPosition yPos: CGFloat, completion: (() -> Void)? = nil) {
+        PanModalAnimator.animate(
+            { [weak self] in
+                self?.adjust(toYPosition: yPos)
+                self?.isPresentedViewAnimating = true
+            },
+            config: presentable
+        ) { [weak self] didComplete in
             self?.isPresentedViewAnimating = !didComplete
+            if didComplete { completion?() }
         }
     }
 
