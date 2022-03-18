@@ -33,7 +33,9 @@ class PanContainerView: UIView {
         var shouldPerforEscape: Bool = true
         if let panModalPresentable = presentedViewController as? PanModalPresentable {
             shouldPerforEscape = panModalPresentable.allowsDragToDismiss || panModalPresentable.allowsTapToDismiss
-            presentedViewController?.dismiss(animated: true, completion: nil)
+            if shouldPerforEscape {
+                presentedViewController?.dismiss(animated: true, completion: nil)
+            }
         }
         return shouldPerforEscape
     }
