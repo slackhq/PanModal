@@ -15,10 +15,13 @@ import UIKit
  having to do those changes directly on the view
  */
 class PanContainerView: UIView {
+    
+    private weak var presentedViewController: UIViewController?
 
     init(presentedView: UIView, frame: CGRect) {
         super.init(frame: frame)
         addSubview(presentedView)
+        presentedViewController = presentedView.parentViewController
     }
 
     @available(*, unavailable)
@@ -26,6 +29,22 @@ class PanContainerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func accessibilityPerformEscape() -> Bool {
+        var shouldPerforEscape: Bool = true
+        if let panModalPresentable = presentedViewController as? PanModalPresentable {
+            shouldPerforEscape = panModalPresentable.allowsDragToDismiss || panModalPresentable.allowsTapToDismiss
+            if shouldPerforEscape {
+                presentedViewController?.dismiss(animated: true, completion: nil)
+            }
+        }
+        return shouldPerforEscape
+    }
+}
+
+private extension UIResponder {
+    var parentViewController: UIViewController? {
+        return next as? UIViewController ?? next?.parentViewController
+    }
 }
 
 extension UIView {

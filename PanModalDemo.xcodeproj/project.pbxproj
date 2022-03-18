@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0800056627E406A200EF6459 /* UIAccessiblityPerformEscapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800056527E406A200EF6459 /* UIAccessiblityPerformEscapeTests.swift */; };
 		0F2A2C552239C119003BDB2F /* PanModal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F2A2C532239C119003BDB2F /* PanModal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0F2A2C582239C119003BDB2F /* PanModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2A2C512239C119003BDB2F /* PanModal.framework */; };
 		0F2A2C592239C119003BDB2F /* PanModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2A2C512239C119003BDB2F /* PanModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -90,6 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0800056527E406A200EF6459 /* UIAccessiblityPerformEscapeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAccessiblityPerformEscapeTests.swift; sourceTree = "<group>"; };
 		0F2A2C512239C119003BDB2F /* PanModal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PanModal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2A2C532239C119003BDB2F /* PanModal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PanModal.h; sourceTree = "<group>"; };
 		0F2A2C542239C119003BDB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		743CABC52226171500634A5A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				0800056527E406A200EF6459 /* UIAccessiblityPerformEscapeTests.swift */,
 				743CABC62226171500634A5A /* PanModalTests.swift */,
 				743CABC82226171500634A5A /* Info.plist */,
 			);
@@ -552,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				743CABC72226171500634A5A /* PanModalTests.swift in Sources */,
+				0800056627E406A200EF6459 /* UIAccessiblityPerformEscapeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
