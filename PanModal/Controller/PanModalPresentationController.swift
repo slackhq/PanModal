@@ -140,7 +140,7 @@ open class PanModalPresentationController: UIPresentationController {
         }
         view.didTap = { [weak self] _ in
             if self?.presentable?.allowsTapToDismiss == true {
-                self?.dismissPresentedViewController()
+                self?.presentedViewController.dismiss(animated: true)
             }
         }
         return view
@@ -219,7 +219,14 @@ open class PanModalPresentationController: UIPresentationController {
         })
     }
 
+    override public func presentationTransitionDidEnd(_ completed: Bool) {
+        if completed { return }
+
+        backgroundView.removeFromSuperview()
+    }
+
     override public func dismissalTransitionWillBegin() {
+        presentable?.panModalWillDismiss()
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
             backgroundView.dimState = .off
@@ -237,10 +244,10 @@ open class PanModalPresentationController: UIPresentationController {
         })
     }
 
-    override public func presentationTransitionDidEnd(_ completed: Bool) {
-        if completed { return }
-
-        backgroundView.removeFromSuperview()
+    override public func dismissalTransitionDidEnd(_ completed: Bool) {
+        if !completed { return }
+        
+        presentable?.panModalDidDismiss()
     }
 
     /**
@@ -397,7 +404,7 @@ private extension PanModalPresentationController {
     var isPresentedViewAnchored: Bool {
         if !isPresentedViewAnimating
             && extendsPanScrolling
-            && presentedView.frame.minY <= anchoredYPosition {
+            && presentedView.frame.minY.rounded() <= anchoredYPosition.rounded() {
             return true
         }
 
@@ -453,7 +460,8 @@ private extension PanModalPresentationController {
         if ![shortFormYPosition, longFormYPosition].contains(panFrame.origin.y) {
             // if the container is already in the correct position, no need to adjust positioning
             // (rotations & size changes cause positioning to be out of sync)
-            adjust(toYPosition: panFrame.origin.y - panFrame.height + frame.height)
+            let yPosition = panFrame.origin.y - panFrame.height + frame.height
+            presentedView.frame.origin.y = max(yPosition, anchoredYPosition)
         }
         panContainerView.frame.origin.x = frame.origin.x
         presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
@@ -601,7 +609,7 @@ private extension PanModalPresentationController {
                     transition(to: .shortForm)
 
                 } else {
-                    dismissPresentedViewController()
+                    presentedViewController.dismiss(animated: true)
                 }
 
             } else {
@@ -619,7 +627,7 @@ private extension PanModalPresentationController {
                     transition(to: .shortForm)
 
                 } else {
-                    dismissPresentedViewController()
+                    presentedViewController.dismiss(animated: true)
                 }
             }
         }
@@ -757,16 +765,6 @@ private extension PanModalPresentationController {
         guard let nearestVal = values.min(by: { abs(number - $0) < abs(number - $1) })
             else { return number }
         return nearestVal
-    }
-
-    /**
-     Dismiss presented view
-     */
-    func dismissPresentedViewController() {
-        presentable?.panModalWillDismiss()
-        presentedViewController.dismiss(animated: true) { [weak self] in
-            self?.presentable?.panModalDidDismiss()
-        }
     }
 }
 

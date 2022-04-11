@@ -54,7 +54,7 @@ pod 'PanModal'
 github "slackhq/PanModal"
 ```
 
-* Swift Package Manager, add the following line to your Package.swift:
+* <a href="https://swift.org/package-manager/" target="_blank">Swift Package Manager</a>:
 
 ```swift
 dependencies: [
@@ -147,7 +147,7 @@ We will only be fixing critical bugs, thus, for any non-critical issues or featu
 
 ## Authors
 
-[Stephen Sowole](https://github.com/tun57) • [Tosin Afolabi](https://github.com/tosinaf)
+[Stephen Sowole](https://github.com/ste57) • [Tosin Afolabi](https://github.com/tosinaf)
 
 ## License
 
