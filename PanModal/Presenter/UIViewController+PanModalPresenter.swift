@@ -24,7 +24,8 @@ extension UIViewController: PanModalPresenter {
      the presentationController is referenced here and called too early resulting in
      a strong reference to this view controller and in turn, creating a memory leak.
      */
-    public var isPanModalPresented: Bool {
+    @objc
+    open var isPanModalPresented: Bool {
         return (transitioningDelegate as? PanModalPresentationDelegate) != nil
     }
 
