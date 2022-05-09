@@ -759,10 +759,13 @@ private extension PanModalPresentationController {
      Halts the scroll of a given scroll view & anchors it at the `scrollViewYOffset`
      */
     func haltScrolling(_ scrollView: UIScrollView) {
-        let point = CGPoint(x: 0, y: min(scrollViewYOffset.rounded(), scrollView.contentSize.height))
-        if presentedViewController.isPanModalPresented && point != scrollView.contentOffset {
-            scrollView.setContentOffset(point, animated: false)
-            scrollView.showsVerticalScrollIndicator = false
+        if scrollView.frame.isEmpty == false {
+            let maxY = max(scrollView.contentSize.height - scrollView.bounds.height, 0)
+            let point = CGPoint(x: 0, y: min(scrollViewYOffset.rounded(), maxY))
+            if presentedViewController.isPanModalPresented && point != scrollView.contentOffset {
+                scrollView.setContentOffset(point, animated: false)
+                scrollView.showsVerticalScrollIndicator = false
+            }
         }
     }
 
