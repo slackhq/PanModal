@@ -167,12 +167,12 @@ open class PanModalPresentationController: UIPresentationController {
 
     // MARK: - Lifecycle
 
-    override public func containerViewWillLayoutSubviews() {
+    override open func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
         configureViewLayout()
     }
 
-    override public func presentationTransitionWillBegin() {
+    override open func presentationTransitionWillBegin() {
 
         guard let containerView = containerView
             else { return }
@@ -192,13 +192,13 @@ open class PanModalPresentationController: UIPresentationController {
         })
     }
 
-    override public func presentationTransitionDidEnd(_ completed: Bool) {
+    override open func presentationTransitionDidEnd(_ completed: Bool) {
         if completed { return }
 
         backgroundView.removeFromSuperview()
     }
 
-    override public func dismissalTransitionWillBegin() {
+    override open func dismissalTransitionWillBegin() {
         presentable?.panModalWillDismiss()
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
@@ -217,7 +217,7 @@ open class PanModalPresentationController: UIPresentationController {
         })
     }
 
-    override public func dismissalTransitionDidEnd(_ completed: Bool) {
+    override open func dismissalTransitionDidEnd(_ completed: Bool) {
         if !completed { return }
         
         presentable?.panModalDidDismiss()
@@ -226,7 +226,7 @@ open class PanModalPresentationController: UIPresentationController {
     /**
      Update presented view size in response to size class changes
      */
-    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
