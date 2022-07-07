@@ -67,6 +67,8 @@ open class PanModalPresentationController: UIPresentationController {
      */
     private var scrollViewYOffset: CGFloat = 0.0
 
+    private var scrollView: UIScrollView?
+
     /**
      An observer for the scroll view content offset
      */
@@ -219,7 +221,7 @@ open class PanModalPresentationController: UIPresentationController {
 
     override public func dismissalTransitionDidEnd(_ completed: Bool) {
         if !completed { return }
-        
+
         presentable?.panModalDidDismiss()
     }
 
@@ -303,7 +305,7 @@ public extension PanModalPresentationController {
         configureViewLayout()
         adjustPresentedViewFrame()
         observe(scrollView: presentable?.panScrollable)
-        configureScrollViewInsets()
+//        configureScrollViewInsets()
     }
 
 }
@@ -370,7 +372,7 @@ private extension PanModalPresentationController {
         let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
         let panFrame = panContainerView.frame
         panContainerView.frame.size = frame.size
-        
+
         if ![shortFormYPosition, longFormYPosition].contains(panFrame.origin.y) {
             // if the container is already in the correct position, no need to adjust positioning
             // (rotations & size changes cause positioning to be out of sync)
@@ -429,6 +431,7 @@ private extension PanModalPresentationController {
         longFormYPosition = layoutPresentable.longFormYPos
         anchorModalToLongForm = layoutPresentable.anchorModalToLongForm
         extendsPanScrolling = layoutPresentable.allowsExtendedPanScrolling
+        scrollView = layoutPresentable.panScrollable
 
         containerView?.isUserInteractionEnabled = layoutPresentable.isUserInteractionEnabled
     }
@@ -582,9 +585,25 @@ private extension PanModalPresentationController {
         if presentedView.frame.origin.y < longFormYPosition {
             yDisplacement /= 2.0
         }
+
+        var contentOffset = scrollView?.contentOffset ?? .zero
         adjust(toYPosition: presentedView.frame.origin.y + yDisplacement)
+        keyboardView(value: yDisplacement)
 
         panGestureRecognizer.setTranslation(.zero, in: presentedView)
+    }
+
+    func keyboardView(value: CGFloat) {
+        let windows = UIApplication.shared.windows
+
+        if let keyboardWindow = windows
+            .first(where: { NSStringFromClass($0.classForCoder) == "UIRemoteKeyboardWindow" }) {
+
+            var frame = keyboardWindow.frame ?? .zero
+            frame.origin.y = max(value + frame.origin.y, .zero)
+
+            keyboardWindow.frame = frame ?? .zero
+        }
     }
 
     /**
@@ -653,7 +672,7 @@ private extension PanModalPresentationController {
      */
     func adjust(toYPosition yPos: CGFloat) {
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
-        
+
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max
             return
@@ -828,7 +847,7 @@ extension PanModalPresentationController: UIGestureRecognizerDelegate {
      is the pan scrollable view
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return otherGestureRecognizer.view == presentable?.panScrollable
+        return true//otherGestureRecognizer.view == presentable?.panScrollable
     }
 }
 

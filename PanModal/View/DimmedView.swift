@@ -32,11 +32,11 @@ public class DimmedView: UIView {
         didSet {
             switch dimState {
             case .max:
-                alpha = 0.2
+                alpha = 1.0
             case .off:
                 alpha = 0.0
             case .percent(let percentage):
-                alpha = 0.2
+                alpha = max(0.0, min(1.0, percentage))
             }
         }
     }
@@ -55,7 +55,7 @@ public class DimmedView: UIView {
 
     // MARK: - Initializers
 
-    init(dimColor: UIColor = UIColor.black.withAlphaComponent(0.2)) {
+    init(dimColor: UIColor = UIColor.black.withAlphaComponent(0.7)) {
         super.init(frame: .zero)
         alpha = 0.0
         backgroundColor = dimColor
