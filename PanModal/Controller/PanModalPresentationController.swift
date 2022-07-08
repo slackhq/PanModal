@@ -86,6 +86,8 @@ open class PanModalPresentationController: UIPresentationController {
      */
     private var longFormYPosition: CGFloat = 0
 
+    private var enableCustomInteractiveKeyboard: Bool = true
+
     /**
      Determine anchored Y postion based on the `anchorModalToLongForm` flag
      */
@@ -305,7 +307,6 @@ public extension PanModalPresentationController {
         configureViewLayout()
         adjustPresentedViewFrame()
         observe(scrollView: presentable?.panScrollable)
-//        configureScrollViewInsets()
     }
 
 }
@@ -432,6 +433,7 @@ private extension PanModalPresentationController {
         anchorModalToLongForm = layoutPresentable.anchorModalToLongForm
         extendsPanScrolling = layoutPresentable.allowsExtendedPanScrolling
         scrollView = layoutPresentable.panScrollable
+        enableCustomInteractiveKeyboard = layoutPresentable.enableCustomInteractiveKeyboard
 
         containerView?.isUserInteractionEnabled = layoutPresentable.isUserInteractionEnabled
     }
@@ -588,12 +590,15 @@ private extension PanModalPresentationController {
 
         var contentOffset = scrollView?.contentOffset ?? .zero
         adjust(toYPosition: presentedView.frame.origin.y + yDisplacement)
-        keyboardView(value: yDisplacement)
+
+        if enableCustomInteractiveKeyboard {
+            moveKeyboardView(displacement: yDisplacement)
+        }
 
         panGestureRecognizer.setTranslation(.zero, in: presentedView)
     }
 
-    func keyboardView(value: CGFloat) {
+    func moveKeyboardView(displacement: CGFloat) {
         let windows = UIApplication.shared.windows
 
         if let keyboardWindow = windows
@@ -662,6 +667,11 @@ private extension PanModalPresentationController {
         PanModalAnimator.animate({ [weak self] in
             self?.adjust(toYPosition: yPos)
             self?.isPresentedViewAnimating = true
+
+            if self?.enableCustomInteractiveKeyboard ?? false {
+                self?.moveKeyboardView(displacement: -.greatestFiniteMagnitude)
+            }
+
         }, config: presentable) { [weak self] didComplete in
             self?.isPresentedViewAnimating = !didComplete
         }
