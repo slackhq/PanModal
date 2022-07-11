@@ -605,7 +605,7 @@ private extension PanModalPresentationController {
             .first(where: { NSStringFromClass($0.classForCoder) == "UIRemoteKeyboardWindow" }) {
 
             var frame = keyboardWindow.frame ?? .zero
-            frame.origin.y = max(value + frame.origin.y, .zero)
+            frame.origin.y = max(displacement + frame.origin.y, .zero)
 
             keyboardWindow.frame = frame ?? .zero
         }
