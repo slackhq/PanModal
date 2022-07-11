@@ -3,17 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E391F2415A5726AC9E18186 /* PanModalKeyboardPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F2FF2E7898D35F82E277D6 /* PanModalKeyboardPresentable+Defaults.swift */; };
 		1D34D9B02EB1AC010D28A788 /* PanModalHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF65B3D44F3AC87AC56675B /* PanModalHeight.swift */; };
 		2D12137F8718A3970F14AFA1 /* PanModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247F269CB9E79F921797C868 /* PanModalAnimator.swift */; };
-		397E8D08287694BE00550BA3 /* PanModalKeyboardPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E8D07287694BE00550BA3 /* PanModalKeyboardPresentable.swift */; };
-		397E8D0B2876956C00550BA3 /* PanModalKeyboardPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E8D0A2876956C00550BA3 /* PanModalKeyboardPresentable+Defaults.swift */; };
-		397E8D0D2876962D00550BA3 /* PanModalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397E8D0C2876962D00550BA3 /* PanModalNavigationController.swift */; };
 		3FE4AC79C0FFC08A763B73CA /* PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88988866B1E9B8041D8CDBC /* PanModalPresenter.swift */; };
 		4ADB47FF2175663ADCA39476 /* PanModalPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF747134DCC92CD1E6B1A1C /* PanModalPresentable.swift */; };
+		564E41966241D7803EA68C20 /* PanModalKeyboardPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99DE1EC61D2721C1D5BD49E /* PanModalKeyboardPresentable.swift */; };
 		568E31FE1C634747DF96BF89 /* PanModalPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE33C1773BA187DC156A1573 /* PanModalPresentationAnimator.swift */; };
 		7F6A9D4296C19BBC01898E49 /* PanModalPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BE99A40E84171281F1D649 /* PanModalPresentable+Defaults.swift */; };
 		847DF45F2EE236DC6632D86B /* PanContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182FE3A8D6D219CE0CDCCCF /* PanContainerView.swift */; };
@@ -21,6 +20,7 @@
 		A7D3582C1ADA0E60361A9B30 /* UIViewController+PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9105024A9438C1AC2D8D29 /* UIViewController+PanModalPresenter.swift */; };
 		B9E8259F773D27BAA416DCDB /* PanModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F1F9245FCF277E33A16FE /* PanModalPresentationController.swift */; };
 		BD2A2F384AA6A669BB094AFE /* DimmedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9359135D025D85DF75DE4F5 /* DimmedView.swift */; };
+		C5212562E96EB66723FA4AF5 /* PanModalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAE1B81D3CE5D181BF9FEC5 /* PanModalNavigationController.swift */; };
 		DF004916923A0853BE2A6EF3 /* PanModalPresentable+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6D777902F927D45E55BD58 /* PanModalPresentable+UIViewController.swift */; };
 		EB726BFFEE56C0BF9E060581 /* PanModalPresentationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666A2C96EA5A339D2BF1AFD7 /* PanModalPresentationDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -41,14 +41,13 @@
 /* Begin PBXFileReference section */
 		20E8316EBC147D20D0D4AFCC /* PanModal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PanModal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		247F269CB9E79F921797C868 /* PanModalAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalAnimator.swift; sourceTree = "<group>"; };
-		397E8D07287694BE00550BA3 /* PanModalKeyboardPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalKeyboardPresentable.swift; sourceTree = "<group>"; };
-		397E8D0A2876956C00550BA3 /* PanModalKeyboardPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalKeyboardPresentable+Defaults.swift"; sourceTree = "<group>"; };
-		397E8D0C2876962D00550BA3 /* PanModalNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalNavigationController.swift; sourceTree = "<group>"; };
 		5D4E1B52C8DEB3611236C530 /* PanModal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PanModal-Info.plist"; sourceTree = "<group>"; };
 		6182FE3A8D6D219CE0CDCCCF /* PanContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanContainerView.swift; sourceTree = "<group>"; };
 		666A2C96EA5A339D2BF1AFD7 /* PanModalPresentationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalPresentationDelegate.swift; sourceTree = "<group>"; };
 		6E9105024A9438C1AC2D8D29 /* UIViewController+PanModalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PanModalPresenter.swift"; sourceTree = "<group>"; };
+		82F2FF2E7898D35F82E277D6 /* PanModalKeyboardPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalKeyboardPresentable+Defaults.swift"; sourceTree = "<group>"; };
 		9A6D777902F927D45E55BD58 /* PanModalPresentable+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+UIViewController.swift"; sourceTree = "<group>"; };
+		9BAE1B81D3CE5D181BF9FEC5 /* PanModalNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalNavigationController.swift; sourceTree = "<group>"; };
 		ABF65B3D44F3AC87AC56675B /* PanModalHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalHeight.swift; sourceTree = "<group>"; };
 		B3BE99A40E84171281F1D649 /* PanModalPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+Defaults.swift"; sourceTree = "<group>"; };
 		B88988866B1E9B8041D8CDBC /* PanModalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalPresenter.swift; sourceTree = "<group>"; };
@@ -57,6 +56,7 @@
 		CEF747134DCC92CD1E6B1A1C /* PanModalPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalPresentable.swift; sourceTree = "<group>"; };
 		D58F1F9245FCF277E33A16FE /* PanModalPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalPresentationController.swift; sourceTree = "<group>"; };
 		D9359135D025D85DF75DE4F5 /* DimmedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmedView.swift; sourceTree = "<group>"; };
+		F99DE1EC61D2721C1D5BD49E /* PanModalKeyboardPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanModalKeyboardPresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +76,15 @@
 				20E8316EBC147D20D0D4AFCC /* PanModal.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1EE8AF31D3AD6ADAE5A2F5B4 /* KeyboardPresentable */ = {
+			isa = PBXGroup;
+			children = (
+				F99DE1EC61D2721C1D5BD49E /* PanModalKeyboardPresentable.swift */,
+				82F2FF2E7898D35F82E277D6 /* PanModalKeyboardPresentable+Defaults.swift */,
+			);
+			path = KeyboardPresentable;
 			sourceTree = "<group>";
 		};
 		1FDDFE36812B21100970C573 = {
@@ -101,15 +110,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		397E8D092876954A00550BA3 /* KeyboardPresentable */ = {
-			isa = PBXGroup;
-			children = (
-				397E8D07287694BE00550BA3 /* PanModalKeyboardPresentable.swift */,
-				397E8D0A2876956C00550BA3 /* PanModalKeyboardPresentable+Defaults.swift */,
-			);
-			path = KeyboardPresentable;
 			sourceTree = "<group>";
 		};
 		50511DA5F1A1D1544D4692A1 /* InfoPlists */ = {
@@ -153,8 +153,8 @@
 		72C84C35A71A983A26D3CC70 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9BAE1B81D3CE5D181BF9FEC5 /* PanModalNavigationController.swift */,
 				D58F1F9245FCF277E33A16FE /* PanModalPresentationController.swift */,
-				397E8D0C2876962D00550BA3 /* PanModalNavigationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -170,10 +170,10 @@
 		CBC53B798DC85A88A0F37788 /* PanModal */ = {
 			isa = PBXGroup;
 			children = (
-				397E8D092876954A00550BA3 /* KeyboardPresentable */,
 				26D371B632C7963B57350947 /* Animator */,
 				72C84C35A71A983A26D3CC70 /* Controller */,
 				C5E5E974319C26486287CE0D /* Delegate */,
+				1EE8AF31D3AD6ADAE5A2F5B4 /* KeyboardPresentable */,
 				5741396B55D075D098E40E92 /* Presentable */,
 				5B2E705D3A9A0381ED241E6A /* Presenter */,
 				6230FC53F41790705FFE9704 /* View */,
@@ -226,6 +226,8 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = CCC9A83A9BFD2A0A523DC090 /* Build configuration list for PBXProject "PanModal" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -261,12 +263,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D12137F8718A3970F14AFA1 /* PanModalAnimator.swift in Sources */,
-				397E8D0D2876962D00550BA3 /* PanModalNavigationController.swift in Sources */,
 				568E31FE1C634747DF96BF89 /* PanModalPresentationAnimator.swift in Sources */,
-				397E8D0B2876956C00550BA3 /* PanModalKeyboardPresentable+Defaults.swift in Sources */,
+				C5212562E96EB66723FA4AF5 /* PanModalNavigationController.swift in Sources */,
 				B9E8259F773D27BAA416DCDB /* PanModalPresentationController.swift in Sources */,
 				EB726BFFEE56C0BF9E060581 /* PanModalPresentationDelegate.swift in Sources */,
-				397E8D08287694BE00550BA3 /* PanModalKeyboardPresentable.swift in Sources */,
+				0E391F2415A5726AC9E18186 /* PanModalKeyboardPresentable+Defaults.swift in Sources */,
+				564E41966241D7803EA68C20 /* PanModalKeyboardPresentable.swift in Sources */,
 				1D34D9B02EB1AC010D28A788 /* PanModalHeight.swift in Sources */,
 				7F6A9D4296C19BBC01898E49 /* PanModalPresentable+Defaults.swift in Sources */,
 				A5E91380A4091F2092B662CE /* PanModalPresentable+LayoutHelpers.swift in Sources */,
@@ -537,7 +539,10 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					SWIFT_PACKAGE,
+				);
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SUPPRESS_WARNINGS = YES;
@@ -585,7 +590,10 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					SWIFT_PACKAGE,
+				);
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SUPPRESS_WARNINGS = YES;
@@ -633,7 +641,10 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					SWIFT_PACKAGE,
+				);
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SUPPRESS_WARNINGS = YES;
@@ -681,7 +692,11 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG SWIFT_PACKAGE";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+					SWIFT_PACKAGE,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SUPPRESS_WARNINGS = YES;
