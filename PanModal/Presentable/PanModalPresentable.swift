@@ -126,6 +126,7 @@ public protocol PanModalPresentable: AnyObject {
      */
     var allowsExtendedPanScrolling: Bool { get }
 
+    var enableCustomInteractiveKeyboard: Bool { get }
     /**
      A flag to determine if dismissal should be initiated when swiping down on the presented view.
 
@@ -233,5 +234,11 @@ public protocol PanModalPresentable: AnyObject {
      Default value is an empty implementation.
      */
     func panModalDidDismiss()
+
+    var titleView: UIView? { get }
+
+    func updatePanModal()
+
+    func updatePanModal(toState state: PanModalPresentationController.PresentationState)
 }
 #endif
