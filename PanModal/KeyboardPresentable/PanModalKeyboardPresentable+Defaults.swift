@@ -17,19 +17,15 @@ public extension PanModalKeyboardPresentable where Self: UIViewController  {
         .zero
     }
 
+    var keyboardScrollView: UIScrollView? {
+        self.panScrollable
+    }
+
     var contentWithKeyboardHeight: CGFloat {
-        let height = self.keyboardScrollView.contentSize.height +
+        let height = (self.keyboardScrollView?.contentSize.height ?? .zero) +
             (self.titleView?.frame.height ?? .zero) +
             self.keyboardHeight +
             self.extrasHeight
         return max(height, self.minimumHeight)
-    }
-
-    func updatePanModal() {
-        self.updatePanModal(toState: .longForm)
-    }
-
-    func updatePanModal(toState state: PanModalPresentationController.PresentationState) {
-        (self.navigationController as? PanModalNavController)?.updatePanModal(toState: state)
     }
 }

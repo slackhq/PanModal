@@ -234,5 +234,11 @@ public protocol PanModalPresentable: AnyObject {
      Default value is an empty implementation.
      */
     func panModalDidDismiss()
+
+    var titleView: UIView? { get }
+
+    func updatePanModal()
+
+    func updatePanModal(toState state: PanModalPresentationController.PresentationState)
 }
 #endif
