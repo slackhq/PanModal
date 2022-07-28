@@ -39,7 +39,7 @@ open class PanModalNavController: UINavigationController, PanModalPresentable {
 
     open var longFormHeight: PanModalHeight {
         guard let panScrollable = self.presentViewController as? PanModalKeyboardPresentable else {
-            return .contentHeight(.zero)
+            return self.presentViewController.longFormHeight
         }
 
         let height = panScrollable.contentWithKeyboardHeight
