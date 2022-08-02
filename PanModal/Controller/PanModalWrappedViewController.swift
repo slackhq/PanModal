@@ -397,13 +397,6 @@ private extension PanModalWrappedViewController {
         scrollView.scrollIndicatorInsets = presentable?.scrollIndicatorInsets ?? .zero
 
         /**
-         Set the appropriate contentInset as the configuration within this class
-         offsets it
-         */
-
-        scrollView.contentInset.bottom = view.safeAreaInsets.bottom
-
-        /**
          As we adjust the bounds during `handleScrollViewTopBounce`
          we should assume that contentInsetAdjustmentBehavior will not be correct
          */
@@ -479,7 +472,7 @@ private extension PanModalWrappedViewController {
                 let position = nearest(to: presentedView.frame.minY, inValues: [containerVC.view.bounds.height, shortFormYPosition, longFormYPosition])
 
                 if position == longFormYPosition {
-                    transition(to: .shortForm)
+                    transition(to: .longForm)
 
                 } else if position == shortFormYPosition || presentable?.allowsDragToDismiss == false {
                     transition(to: .shortForm)
@@ -760,7 +753,7 @@ extension PanModalWrappedViewController: UIGestureRecognizerDelegate {
      Do not require any other gesture recognizers to fail
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        return false
     }
 
     /**
