@@ -272,6 +272,7 @@ public extension PanModalWrappedViewController {
      */
     func setNeedsLayoutUpdate() {
         configureViewLayout(presentedVC)
+        adjustPresentedViewFrame()
         observe(scrollView: presentable?.panScrollable)
         configureScrollViewInsets()
     }
@@ -319,6 +320,21 @@ private extension PanModalWrappedViewController {
         }
 
         setNeedsLayoutUpdate()
+    }
+    
+    /**
+     Reduce height of presentedView so that it sits at the bottom of the screen
+     */
+    func adjustPresentedViewFrame() {
+        let adjustedPoint = CGPoint(
+            x: .zero,
+            y: presentedVC.shortFormYPos
+        )
+        
+        presentedVC.view.frame = CGRect(
+            origin: adjustedPoint,
+            size: presentedVC.view.frame.size
+        )
     }
 
     func layoutContainer() {
