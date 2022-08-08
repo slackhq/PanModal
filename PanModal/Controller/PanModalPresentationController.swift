@@ -608,6 +608,17 @@ private extension PanModalPresentationController {
             frame.origin.y = max(displacement + frame.origin.y, .zero)
 
             keyboardWindow.frame = frame ?? .zero
+
+            let accessoryView = windows
+                .first(where: { NSStringFromClass($0.classForCoder) == "UITextEffectsWindow" })
+
+            var accessoryFrame = accessoryView?.frame ?? .zero
+            accessoryFrame.origin.y = max(
+                displacement + (accessoryFrame.origin.y ?? .zero),
+                .zero
+            )
+
+            accessoryView?.frame = accessoryFrame ?? .zero
         }
     }
 
