@@ -321,14 +321,20 @@ private extension PanModalWrappedViewController {
 
         setNeedsLayoutUpdate()
     }
-
+    
     /**
      Reduce height of presentedView so that it sits at the bottom of the screen
      */
     func adjustPresentedViewFrame() {
-        let frame = containerVC.view.frame
-        let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
-        presentedVC.view.frame = CGRect(origin: .zero, size: adjustedSize)
+        let adjustedPoint = CGPoint(
+            x: .zero,
+            y: presentedVC.shortFormYPos
+        )
+        
+        presentedVC.view.frame = CGRect(
+            origin: adjustedPoint,
+            size: presentedVC.view.frame.size
+        )
     }
 
     func layoutContainer() {
@@ -395,13 +401,6 @@ private extension PanModalWrappedViewController {
          */
         scrollView.showsVerticalScrollIndicator = false
         scrollView.scrollIndicatorInsets = presentable?.scrollIndicatorInsets ?? .zero
-
-        /**
-         Set the appropriate contentInset as the configuration within this class
-         offsets it
-         */
-
-        scrollView.contentInset.bottom = view.safeAreaInsets.bottom
 
         /**
          As we adjust the bounds during `handleScrollViewTopBounce`
@@ -479,7 +478,7 @@ private extension PanModalWrappedViewController {
                 let position = nearest(to: presentedView.frame.minY, inValues: [containerVC.view.bounds.height, shortFormYPosition, longFormYPosition])
 
                 if position == longFormYPosition {
-                    transition(to: .shortForm)
+                    transition(to: .longForm)
 
                 } else if position == shortFormYPosition || presentable?.allowsDragToDismiss == false {
                     transition(to: .shortForm)
@@ -709,7 +708,7 @@ private extension PanModalWrappedViewController {
      */
     func trackScrolling(_ scrollView: UIScrollView) {
         scrollViewYOffset = max(scrollView.contentOffset.y, 0)
-        scrollView.showsVerticalScrollIndicator = true
+        scrollView.showsVerticalScrollIndicator = false
     }
 
     /**
@@ -760,7 +759,7 @@ extension PanModalWrappedViewController: UIGestureRecognizerDelegate {
      Do not require any other gesture recognizers to fail
      */
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        return false
     }
 
     /**
