@@ -331,9 +331,21 @@ private extension PanModalWrappedViewController {
             y: presentedVC.shortFormYPos
         )
         
+        guard let frame = containerVC?.view.frame else { return }
+        
+        var adjustedSize: CGSize = .zero
+        if frame.height > frame.height - presentedVC.longFormYPos + presentedVC.topOffset {
+            adjustedSize = presentedVC.view.frame.size
+        } else {
+            adjustedSize = CGSize(
+                width: frame.size.width,
+                height: frame.size.height - anchoredYPosition
+            )
+        }
+        
         presentedVC.view.frame = CGRect(
             origin: adjustedPoint,
-            size: presentedVC.view.frame.size
+            size: adjustedSize
         )
     }
 
