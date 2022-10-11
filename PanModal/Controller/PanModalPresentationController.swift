@@ -643,6 +643,7 @@ private extension PanModalPresentationController {
         PanModalAnimator.animate({ [weak self] in
             self?.adjust(toYPosition: yPos)
             self?.isPresentedViewAnimating = true
+            self?.presentable?.pinnedView?.transform = .identity
         }, config: presentable) { [weak self] didComplete in
             self?.isPresentedViewAnimating = !didComplete
         }
@@ -652,7 +653,12 @@ private extension PanModalPresentationController {
      Sets the y position of the presentedView & adjusts the backgroundView.
      */
     func adjust(toYPosition yPos: CGFloat) {
-        presentedView.frame.origin.y = max(yPos, anchoredYPosition)
+        let yResultTranslation = max(yPos, anchoredYPosition)
+        presentedView.frame.origin.y = yResultTranslation
+        
+        if let pinned = presentable?.pinnedView {
+            pinned.transform.ty = -yResultTranslation + anchoredYPosition
+        }
         
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max

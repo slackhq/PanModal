@@ -13,6 +13,10 @@ import UIKit
  */
 public extension PanModalPresentable where Self: UIViewController {
 
+    var pinnedView: UIView? {
+        nil
+    }
+    
     var topOffset: CGFloat {
         return topLayoutOffset + 21.0
     }

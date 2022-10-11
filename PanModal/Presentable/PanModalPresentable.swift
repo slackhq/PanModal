@@ -22,6 +22,12 @@ import UIKit
 public protocol PanModalPresentable: AnyObject {
 
     /**
+     The  view embedded in the view controller.
+     Setting this value allows to pin it during transition.
+     */
+    var pinnedView: UIView? { get }
+    
+    /**
      The scroll view embedded in the view controller.
      Setting this value allows for seamless transition scrolling between the embedded scroll view
      and the pan modal container view.
