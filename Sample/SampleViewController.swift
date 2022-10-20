@@ -15,6 +15,10 @@ class SampleViewController: UITableViewController {
         setupView()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+
     private func setupView() {
         title = "PanModal"
 
