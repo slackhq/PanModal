@@ -259,11 +259,15 @@ public extension PanModalPresentationController {
 
         presentable?.willTransition(to: state)
 
+        let completion: () -> Void = { [weak self] in
+            self?.presentable?.didTransition(to: state)
+        }
+
         switch state {
         case .shortForm:
-            snap(toYPosition: shortFormYPosition)
+            snap(toYPosition: shortFormYPosition, completion: completion)
         case .longForm:
-            snap(toYPosition: longFormYPosition)
+            snap(toYPosition: longFormYPosition, completion: completion)
         }
     }
 
@@ -454,7 +458,11 @@ private extension PanModalPresentationController {
          Set the appropriate contentInset as the configuration within this class
          offsets it
          */
-        scrollView.contentInset.bottom = presentingViewController.bottomLayoutGuide.length
+        if #available(iOS 11.0, *) {
+            scrollView.contentInset.bottom = presentingViewController.view.safeAreaInsets.bottom
+        } else {
+            scrollView.contentInset.bottom = presentingViewController.bottomLayoutGuide.length
+        }
 
         /**
          As we adjust the bounds during `handleScrollViewTopBounce`
@@ -639,12 +647,15 @@ private extension PanModalPresentationController {
         return (abs(velocity) - (1000 * (1 - Constants.snapMovementSensitivity))) > 0
     }
 
-    func snap(toYPosition yPos: CGFloat) {
+    func snap(toYPosition yPos: CGFloat, completion: (() -> Void)? = nil) {
         PanModalAnimator.animate({ [weak self] in
             self?.adjust(toYPosition: yPos)
             self?.isPresentedViewAnimating = true
         }, config: presentable) { [weak self] didComplete in
             self?.isPresentedViewAnimating = !didComplete
+            if didComplete {
+                completion?()
+            }
         }
     }
 
