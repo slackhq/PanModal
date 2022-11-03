@@ -356,6 +356,7 @@ private extension PanModalPresentationController {
         }
 
         setNeedsLayoutUpdate()
+		adjustPinnedIfNeeded()
         adjustPanContainerBackgroundColor()
     }
 
@@ -390,6 +391,13 @@ private extension PanModalPresentationController {
         panContainerView.backgroundColor = presentedViewController.view.backgroundColor
             ?? presentable?.panScrollable?.backgroundColor
     }
+
+	func adjustPinnedIfNeeded() {
+		if let pinned = presentable?.pinnedView,
+		   let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType {
+			pinned.transform.ty = layoutPresentable.longFormYPos - layoutPresentable.shortFormYPos
+		}
+	}
 
     /**
      Adds the background view to the view hierarchy
@@ -643,7 +651,6 @@ private extension PanModalPresentationController {
         PanModalAnimator.animate({ [weak self] in
             self?.adjust(toYPosition: yPos)
             self?.isPresentedViewAnimating = true
-            self?.presentable?.pinnedView?.transform = .identity
         }, config: presentable) { [weak self] didComplete in
             self?.isPresentedViewAnimating = !didComplete
         }
