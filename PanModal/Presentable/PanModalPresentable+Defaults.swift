@@ -101,6 +101,10 @@ public extension PanModalPresentable where Self: UIViewController {
         return shouldRoundTopCorners
     }
 
+	var keyboardPolicy: KeyboardPolicy {
+		return .switchToLongForm(includePinnedView: true)
+	}
+
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return true
     }

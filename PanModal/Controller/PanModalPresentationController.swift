@@ -84,6 +84,8 @@ open class PanModalPresentationController: UIPresentationController {
      */
     private var longFormYPosition: CGFloat = 0
 
+	private lazy var kbObserver: KeyboardObserverInterface = KeyboardObserver()
+
     /**
      Determine anchored Y postion based on the `anchorModalToLongForm` flag
      */
@@ -91,6 +93,9 @@ open class PanModalPresentationController: UIPresentationController {
         let defaultTopOffset = presentable?.topOffset ?? 0
         return anchorModalToLongForm ? longFormYPosition : defaultTopOffset
     }
+
+	private(set) var pinnedViewAnchoredYPosition: CGFloat = 0
+	private var kbHeight: CGFloat = 0
 
     /**
      Configuration object for PanModalPresentationController
@@ -180,6 +185,7 @@ open class PanModalPresentationController: UIPresentationController {
         layoutBackgroundView(in: containerView)
         layoutPresentedView(in: containerView)
         configureScrollViewInsets()
+		setupKeyboardObserver()
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
             backgroundView.dimState = .max
@@ -395,7 +401,9 @@ private extension PanModalPresentationController {
 	func adjustPinnedIfNeeded() {
 		if let pinned = presentable?.pinnedView,
 		   let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType {
-			pinned.transform.ty = layoutPresentable.longFormYPos - layoutPresentable.shortFormYPos
+			let pinnedY = layoutPresentable.longFormYPos - layoutPresentable.shortFormYPos
+			pinned.transform.ty = pinnedY
+			pinnedViewAnchoredYPosition = pinnedY
 		}
 	}
 
@@ -472,6 +480,32 @@ private extension PanModalPresentationController {
             scrollView.contentInsetAdjustmentBehavior = .never
         }
     }
+
+	func setupKeyboardObserver() {
+		kbObserver.observe { [weak self] event in
+			guard let self = self,
+				  let presentable = self.presentable else {
+				return
+			}
+			self.kbHeight = event.keyboardFrameEnd.height
+			switch event.type {
+			case .willShow:
+				switch presentable.keyboardPolicy {
+				case .switchToLongForm:
+					self.transition(to: .longForm)
+				case .ignore:
+					break
+				}
+			case .willHide:
+				if case let .switchToLongForm(includePinned) = presentable.keyboardPolicy,
+				   includePinned {
+					presentable.pinnedView?.transform.ty = self.pinnedViewAnchoredYPosition + event.keyboardFrameBegin.height
+				}
+			case .didHide, .didShow, .willChangeFrame, .didChangeFrame:
+				break
+			}
+		}
+	}
 
 }
 
@@ -664,7 +698,12 @@ private extension PanModalPresentationController {
         presentedView.frame.origin.y = yResultTranslation
         
         if let pinned = presentable?.pinnedView {
-            pinned.transform.ty = -yResultTranslation + anchoredYPosition
+			var pinnedTranslationY = anchoredYPosition - yResultTranslation
+			if case let .switchToLongForm(includePinnedView) =   presentable?.keyboardPolicy, includePinnedView {
+				pinnedTranslationY -= kbHeight
+			}
+			pinnedViewAnchoredYPosition = pinnedTranslationY
+            pinned.transform.ty = pinnedTranslationY
         }
         
         guard presentedView.frame.origin.y > shortFormYPosition else {

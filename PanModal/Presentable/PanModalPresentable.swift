@@ -179,6 +179,13 @@ public protocol PanModalPresentable: AnyObject {
      */
     var showDragIndicator: Bool { get }
 
+	/**
+	 Behavior of content on keyboard appearance
+
+	 Default value is .switchToLongForm(includePinnedView: true).
+	 */
+	var keyboardPolicy: KeyboardPolicy { get }
+
     /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.
      

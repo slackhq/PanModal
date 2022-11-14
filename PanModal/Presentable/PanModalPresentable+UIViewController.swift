@@ -59,5 +59,13 @@ public extension PanModalPresentable where Self: UIViewController {
         PanModalAnimator.animate(animationBlock, config: self, completion)
     }
 
+	func pinPinnedView() {
+		pinnedView?.transform.ty = presentedVC?.pinnedViewAnchoredYPosition ?? 0
+	}
+
+	func unpinPinnedView() {
+		pinnedView?.transform = .identity
+	}
+
 }
 #endif
