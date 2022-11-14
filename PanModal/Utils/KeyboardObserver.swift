@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public enum KeyboardEventType: CaseIterable {
+enum KeyboardEventType: CaseIterable {
 	case willShow
 	case didShow
 	case willHide
@@ -17,7 +17,7 @@ public enum KeyboardEventType: CaseIterable {
 	case willChangeFrame
 	case didChangeFrame
 
-	public var notificationName: NSNotification.Name {
+	var notificationName: NSNotification.Name {
 		switch self {
 		case .willShow:
 			return UIResponder.keyboardWillShowNotification
@@ -57,18 +57,18 @@ public enum KeyboardEventType: CaseIterable {
 		allCases.map { $0.notificationName }
 	}
 
-	public static var basicEvents: [KeyboardEventType] {
+	static var basicEvents: [KeyboardEventType] {
 		[.willShow, .willHide, .didChangeFrame]
 	}
 }
 
-public struct KeyboardEvent {
-	public let type: KeyboardEventType
-	public let keyboardFrameBegin: CGRect
-	public let keyboardFrameEnd: CGRect
-	public let curve: UIView.AnimationCurve
-	public let duration: TimeInterval
-	public var isLocal: Bool?
+struct KeyboardEvent {
+	let type: KeyboardEventType
+	let keyboardFrameBegin: CGRect
+	let keyboardFrameEnd: CGRect
+	let curve: UIView.AnimationCurve
+	let duration: TimeInterval
+	var isLocal: Bool?
 
 	public var options: UIView.AnimationOptions {
 		UIView.AnimationOptions(rawValue: UInt(curve.rawValue << 16))
@@ -95,7 +95,7 @@ public struct KeyboardEvent {
 	}
 }
 
-public enum KeyboardState {
+enum KeyboardState {
 	case initial
 	case showing
 	case shown
@@ -104,15 +104,15 @@ public enum KeyboardState {
 	case changing
 }
 
-public typealias KeyboardEventClosure = (_ event: KeyboardEvent) -> Void
+typealias KeyboardEventClosure = (_ event: KeyboardEvent) -> Void
 
-public protocol KeyboardObserverInterface {
+protocol KeyboardObserverInterface {
 	func observe(_ event: @escaping KeyboardEventClosure)
 	func clearObservers()
 }
 
-open class KeyboardObserver: KeyboardObserverInterface {
-	open var isEnabled = true
+final class KeyboardObserver: KeyboardObserverInterface {
+	var isEnabled = true
 	public private(set) var state = KeyboardState.initial
 	fileprivate var eventClosures = [KeyboardEventClosure]()
 
@@ -123,7 +123,7 @@ open class KeyboardObserver: KeyboardObserverInterface {
 		}
 	}
 
-	public init() {
+	init() {
 		KeyboardEventType.allEventNames().forEach {
 			NotificationCenter.default.addObserver(
 				self,
@@ -134,7 +134,7 @@ open class KeyboardObserver: KeyboardObserverInterface {
 		}
 	}
 
-	public init(events: KeyboardEventType...) {
+	init(events: KeyboardEventType...) {
 		events.forEach {
 			NotificationCenter.default.addObserver(
 				self,
@@ -145,11 +145,11 @@ open class KeyboardObserver: KeyboardObserverInterface {
 		}
 	}
 
-	open func observe(_ event: @escaping KeyboardEventClosure) {
+	func observe(_ event: @escaping KeyboardEventClosure) {
 		eventClosures.append(event)
 	}
 
-	open func clearObservers() {
+	func clearObservers() {
 		eventClosures.removeAll()
 	}
 }
