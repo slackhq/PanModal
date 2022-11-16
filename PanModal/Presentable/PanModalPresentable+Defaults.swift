@@ -125,6 +125,10 @@ public extension PanModalPresentable where Self: UIViewController {
 
     }
 
+	func willChangeVisibleFrame(to frame: CGRect) {
+		
+	}
+
     func panModalWillDismiss() {
 
     }

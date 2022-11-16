@@ -233,6 +233,11 @@ public protocol PanModalPresentable: AnyObject {
      */
     func willTransition(to state: PanModalPresentationController.PresentationState)
 
+	/**
+	 Notifies the delegate that the pan modal will change Visible Container frame.
+	 */
+	func willChangeVisibleFrame(to frame: CGRect)
+
     /**
      Notifies the delegate that the pan modal is about to be dismissed.
 

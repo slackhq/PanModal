@@ -705,7 +705,11 @@ private extension PanModalPresentationController {
 			pinnedViewAnchoredYPosition = pinnedTranslationY
             pinned.transform.ty = pinnedTranslationY
         }
-        
+		
+		if presentedView.frame.origin.y > longFormYPosition {
+			presentable?.willChangeVisibleFrame(to: presentedView.frame)
+		}
+
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max
             return
