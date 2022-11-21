@@ -102,7 +102,7 @@ public extension PanModalPresentable where Self: UIViewController {
     }
 
 	var keyboardPolicy: KeyboardPolicy {
-		return .switchToLongForm(includePinnedView: true)
+		return .switchToLongForm
 	}
 
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {

@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 public enum KeyboardPolicy {
 	case ignore
-	case switchToLongForm(includePinnedView: Bool)
+	case switchToLongForm
+	case switchToLongFormWithPinndedView(additionOffset: CGFloat)
 }

@@ -94,9 +94,6 @@ open class PanModalPresentationController: UIPresentationController {
         return anchorModalToLongForm ? longFormYPosition : defaultTopOffset
     }
 
-	private(set) var pinnedViewAnchoredYPosition: CGFloat = 0
-	private var kbHeight: CGFloat = 0
-
     /**
      Configuration object for PanModalPresentationController
      */
@@ -133,7 +130,16 @@ open class PanModalPresentationController: UIPresentationController {
         let frame = containerView?.frame ?? .zero
         return PanContainerView(presentedView: presentedViewController.view, frame: frame)
     }()
+    
+	private lazy var visibleContainer: UIView = {
+        let view = PassthroughView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = presentable?.cornerRadius ?? 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
+	private weak var pinBottomConstraint: NSLayoutConstraint?
     /**
      Drag Indicator View
      */
@@ -184,6 +190,7 @@ open class PanModalPresentationController: UIPresentationController {
 
         layoutBackgroundView(in: containerView)
         layoutPresentedView(in: containerView)
+		layoutVisibleView(in: containerView)
         configureScrollViewInsets()
 		setupKeyboardObserver()
 
@@ -400,10 +407,27 @@ private extension PanModalPresentationController {
 
 	func adjustPinnedIfNeeded() {
 		if let pinned = presentable?.pinnedView,
-		   let layoutPresentable = presentedViewController as? PanModalPresentable.LayoutType {
-			let pinnedY = layoutPresentable.longFormYPos - layoutPresentable.shortFormYPos
-			pinned.transform.ty = pinnedY
-			pinnedViewAnchoredYPosition = pinnedY
+		   let pinnedParent = pinned.superview {
+
+			let pinnedConstraints = pinnedParent.constraints.filter({
+				$0.firstItem as? UIView == pinned
+			})
+
+			var newConstraints: [NSLayoutConstraint] = pinnedConstraints.map({
+				let constraint = NSLayoutConstraint(item: $0.firstItem as Any, attribute: $0.firstAttribute, relatedBy: $0.relation, toItem: visibleContainer, attribute: $0.secondAttribute, multiplier: $0.multiplier, constant: $0.constant)
+				if constraint.firstAttribute == .bottom {
+					self.pinBottomConstraint = constraint
+					constraint.priority = .defaultHigh
+				}
+				return constraint
+			})
+
+			newConstraints.append(
+				.init(item: pinned, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: visibleContainer, attribute: .top, multiplier: 1, constant: 0))
+
+			pinned.removeFromSuperview()
+			visibleContainer.addSubview(pinned)
+			NSLayoutConstraint.activate(newConstraints)
 		}
 	}
 
@@ -419,6 +443,16 @@ private extension PanModalPresentationController {
         backgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         backgroundView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
+
+	func layoutVisibleView(in containerView: UIView) {
+		containerView.addSubview(visibleContainer)
+		NSLayoutConstraint.activate([
+			visibleContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+			visibleContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+			visibleContainer.topAnchor.constraint(equalTo: panContainerView.topAnchor),
+			visibleContainer.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+		])
+	}
 
     /**
      Adds the drag indicator view to the view hierarchy
@@ -487,19 +521,26 @@ private extension PanModalPresentationController {
 				  let presentable = self.presentable else {
 				return
 			}
-			self.kbHeight = event.keyboardFrameEnd.height
 			switch event.type {
 			case .willShow:
 				switch presentable.keyboardPolicy {
 				case .switchToLongForm:
 					self.transition(to: .longForm)
+				case let .switchToLongFormWithPinndedView(additionOffset):
+					self.transition(to: .longForm)
+					self.pinBottomConstraint?.constant = -(event.keyboardFrameEnd.height + additionOffset)
+					UIView.animate(withDuration: event.duration, delay: 0, options: event.options) {
+						self.visibleContainer.layoutIfNeeded()
+					}
 				case .ignore:
 					break
 				}
 			case .willHide:
-				if case let .switchToLongForm(includePinned) = presentable.keyboardPolicy,
-				   includePinned {
-					presentable.pinnedView?.transform.ty = self.pinnedViewAnchoredYPosition + event.keyboardFrameBegin.height
+				if case .switchToLongFormWithPinndedView = presentable.keyboardPolicy {
+					self.pinBottomConstraint?.constant = 0
+					UIView.animate(withDuration: event.duration, delay: 0, options: event.options) {
+						self.visibleContainer.layoutIfNeeded()
+					}
 				}
 			case .didHide, .didShow, .willChangeFrame, .didChangeFrame:
 				break
@@ -696,15 +737,6 @@ private extension PanModalPresentationController {
     func adjust(toYPosition yPos: CGFloat) {
         let yResultTranslation = max(yPos, anchoredYPosition)
         presentedView.frame.origin.y = yResultTranslation
-        
-        if let pinned = presentable?.pinnedView {
-			var pinnedTranslationY = anchoredYPosition - yResultTranslation
-			if case let .switchToLongForm(includePinnedView) =   presentable?.keyboardPolicy, includePinnedView {
-				pinnedTranslationY -= kbHeight
-			}
-			pinnedViewAnchoredYPosition = pinnedTranslationY
-            pinned.transform.ty = pinnedTranslationY
-        }
 		
 		if presentedView.frame.origin.y > longFormYPosition {
 			presentable?.willChangeVisibleFrame(to: presentedView.frame)
