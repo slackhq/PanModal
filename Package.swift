@@ -7,11 +7,11 @@ let package = Package(
     name: "PanModal",
     platforms: [.iOS(.v10)],
     products: [
+//         .library(
+//             name: "PanModal",
+//             targets: ["PanModal"]),
         .library(
-            name: "PanModal",
-            targets: ["PanModal"]),
-        .library(
-            name: "PanModalDynamic", 
+            name: "PanModal", 
             type: .dynamic, 
             targets: ["PanModal"]
         ),
