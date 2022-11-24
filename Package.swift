@@ -9,8 +9,12 @@ let package = Package(
     products: [
         .library(
             name: "PanModal",
-            type: .dynamic,
             targets: ["PanModal"]),
+        .library(
+            name: "PanModalDynamic", 
+            type: .dynamic, 
+            targets: ["PanModal"]
+        ),
     ],
     dependencies: [],
     targets: [
