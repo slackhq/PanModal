@@ -7,15 +7,15 @@ let package = Package(
     name: "PanModal",
     platforms: [.iOS(.v10)],
     products: [
-        .library(
-            name: "PanModal",
-            targets: ["PanModal"]
-        ),
 //         .library(
-//             name: "PanModal", 
-//             type: .dynamic, 
+//             name: "PanModal",
 //             targets: ["PanModal"]
 //         ),
+        .library(
+            name: "PanModal", 
+            type: .dynamic, 
+            targets: ["PanModal"]
+        ),
     ],
     dependencies: [],
     targets: [
