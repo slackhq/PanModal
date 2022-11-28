@@ -58,6 +58,8 @@
 		DCC0EE7C21917F2500208DBC /* PanModalPresentable+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */; };
 		E72954E9292B9B39003D39FC /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72954E8292B9B39003D39FC /* PassthroughView.swift */; };
 		E72954EB292B9B6A003D39FC /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72954E8292B9B39003D39FC /* PassthroughView.swift */; };
+		E74A6E582935302500D9DEE9 /* DropWay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A6E572935302500D9DEE9 /* DropWay.swift */; };
+		E74A6E592935309400D9DEE9 /* DropWay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74A6E572935302500D9DEE9 /* DropWay.swift */; };
 		E7A81DB4291934D600910177 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB3291934D600910177 /* KeyboardObserver.swift */; };
 		E7A81DB52919371300910177 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB3291934D600910177 /* KeyboardObserver.swift */; };
 		E7A81DB72919395B00910177 /* KeyboardPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB62919395B00910177 /* KeyboardPolicy.swift */; };
@@ -137,6 +139,7 @@
 		DCA741B9216D90420021F2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanModalPresentable+Defaults.swift"; sourceTree = "<group>"; };
 		E72954E8292B9B39003D39FC /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
+		E74A6E572935302500D9DEE9 /* DropWay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropWay.swift; sourceTree = "<group>"; };
 		E7A81DB3291934D600910177 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		E7A81DB62919395B00910177 /* KeyboardPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPolicy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -315,6 +318,7 @@
 				DC139069216D9458007A3E64 /* PanModalPresentable+UIViewController.swift */,
 				74C072A6220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift */,
 				E7A81DB62919395B00910177 /* KeyboardPolicy.swift */,
+				E74A6E572935302500D9DEE9 /* DropWay.swift */,
 			);
 			path = Presentable;
 			sourceTree = "<group>";
@@ -561,6 +565,7 @@
 				0F2A2C632239C14B003BDB2F /* PanModalPresentable.swift in Sources */,
 				E7A81DB72919395B00910177 /* KeyboardPolicy.swift in Sources */,
 				0F2A2C642239C14E003BDB2F /* PanModalPresentable+Defaults.swift in Sources */,
+				E74A6E582935302500D9DEE9 /* DropWay.swift in Sources */,
 				0F2A2C652239C151003BDB2F /* PanModalPresentable+UIViewController.swift in Sources */,
 				0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */,
 				0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */,
@@ -583,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3B2EBA222A560A000C8A4A /* TransientAlertViewController.swift in Sources */,
+				E74A6E592935309400D9DEE9 /* DropWay.swift in Sources */,
 				743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */,
 				74C072A3220BA6E500124CE1 /* PanModalAnimator.swift in Sources */,
 				E72954EB292B9B6A003D39FC /* PassthroughView.swift in Sources */,

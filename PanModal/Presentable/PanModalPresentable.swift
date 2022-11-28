@@ -257,6 +257,6 @@ public protocol PanModalPresentable: AnyObject {
 
 	 Default value is an empty implementation.
 	 */
-	func panModalWillDrop()
+	func panModalWillDrop(dropWay: DropWay)
 }
 #endif
