@@ -115,6 +115,7 @@ open class PanModalPresentationController: UIPresentationController {
         }
         view.didTap = { [weak self] _ in
             if self?.presentable?.allowsTapToDismiss == true {
+				self?.presentable?.panModalWillDrop()
                 self?.presentedViewController.dismiss(animated: true)
             }
         }
@@ -606,6 +607,7 @@ private extension PanModalPresentationController {
                     transition(to: .shortForm)
 
                 } else {
+					presentable?.panModalWillDrop()
                     presentedViewController.dismiss(animated: true)
                 }
 
@@ -624,6 +626,7 @@ private extension PanModalPresentationController {
                     transition(to: .shortForm)
 
                 } else {
+					presentable?.panModalWillDrop()
                     presentedViewController.dismiss(animated: true)
                 }
             }
