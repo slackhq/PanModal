@@ -266,7 +266,7 @@ public extension PanModalPresentationController {
      Transition the PanModalPresentationController
      to the given presentation state
      */
-    func transition(to state: PresentationState) {
+	func transition(to state: PresentationState, animated: Bool = true) {
 
         guard presentable?.shouldTransition(to: state) == true
             else { return }
@@ -275,9 +275,9 @@ public extension PanModalPresentationController {
 
         switch state {
         case .shortForm:
-            snap(toYPosition: shortFormYPosition)
+			snap(toYPosition: shortFormYPosition, animated: animated)
         case .longForm:
-            snap(toYPosition: longFormYPosition)
+			snap(toYPosition: longFormYPosition, animated: animated)
         }
     }
 
@@ -725,13 +725,17 @@ private extension PanModalPresentationController {
         return (abs(velocity) - (1000 * (1 - Constants.snapMovementSensitivity))) > 0
     }
 
-    func snap(toYPosition yPos: CGFloat) {
-        PanModalAnimator.animate({ [weak self] in
-            self?.adjust(toYPosition: yPos)
-            self?.isPresentedViewAnimating = true
-        }, config: presentable) { [weak self] didComplete in
-            self?.isPresentedViewAnimating = !didComplete
-        }
+	func snap(toYPosition yPos: CGFloat, animated: Bool = true) {
+		if animated {
+			PanModalAnimator.animate({ [weak self] in
+				self?.adjust(toYPosition: yPos)
+				self?.isPresentedViewAnimating = true
+			}, config: presentable) { [weak self] didComplete in
+				self?.isPresentedViewAnimating = !didComplete
+			}
+		} else {
+			adjust(toYPosition: yPos)
+		}
     }
 
     /**
