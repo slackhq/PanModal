@@ -423,8 +423,12 @@ private extension PanModalPresentationController {
 				return constraint
 			})
 
-			newConstraints.append(
-				.init(item: pinned, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: visibleContainer, attribute: .top, multiplier: 1, constant: 0))
+			if (presentable?.pinnedViewСlampedInside ?? true) {
+				newConstraints.append(
+					.init(item: pinned, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: visibleContainer, attribute: .top, multiplier: 1, constant: 0))
+			} else {
+				visibleContainer.clipsToBounds = false
+			}
 
 			pinned.removeFromSuperview()
 			visibleContainer.addSubview(pinned)

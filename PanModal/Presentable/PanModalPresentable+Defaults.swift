@@ -16,6 +16,10 @@ public extension PanModalPresentable where Self: UIViewController {
     var pinnedView: UIView? {
         nil
     }
+
+	var pinnedViewСlampedInside: Bool {
+		true
+	}
     
     var topOffset: CGFloat {
         return topLayoutOffset + 21.0

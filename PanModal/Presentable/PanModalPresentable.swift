@@ -26,7 +26,12 @@ public protocol PanModalPresentable: AnyObject {
      Setting this value allows to pin it during transition.
      */
     var pinnedView: UIView? { get }
-    
+
+	/**
+	 Whether the pinned view is clamped inside visible container
+	 */
+	var pinnedViewСlampedInside: Bool { get }
+
     /**
      The scroll view embedded in the view controller.
      Setting this value allows for seamless transition scrolling between the embedded scroll view
