@@ -63,6 +63,8 @@
 		E7A81DB4291934D600910177 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB3291934D600910177 /* KeyboardObserver.swift */; };
 		E7A81DB52919371300910177 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB3291934D600910177 /* KeyboardObserver.swift */; };
 		E7A81DB72919395B00910177 /* KeyboardPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB62919395B00910177 /* KeyboardPolicy.swift */; };
+		E7C43D0229D47A3700201106 /* PreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C43D0129D47A3700201106 /* PreviewContainerView.swift */; };
+		E7C43D0729D4DAEF00201106 /* PreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C43D0129D47A3700201106 /* PreviewContainerView.swift */; };
 		E7EE4E07291E5E5100627C80 /* KeyboardPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB62919395B00910177 /* KeyboardPolicy.swift */; };
 /* End PBXBuildFile section */
 
@@ -142,6 +144,7 @@
 		E74A6E572935302500D9DEE9 /* DropWay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropWay.swift; sourceTree = "<group>"; };
 		E7A81DB3291934D600910177 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		E7A81DB62919395B00910177 /* KeyboardPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPolicy.swift; sourceTree = "<group>"; };
+		E7C43D0129D47A3700201106 /* PreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +340,7 @@
 				DC13906E216D9458007A3E64 /* DimmedView.swift */,
 				94795C9C21F03368008045A0 /* PanContainerView.swift */,
 				E72954E8292B9B39003D39FC /* PassthroughView.swift */,
+				E7C43D0129D47A3700201106 /* PreviewContainerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -570,6 +574,7 @@
 				0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */,
 				0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */,
 				0F2A2C682239C15D003BDB2F /* UIViewController+PanModalPresenter.swift in Sources */,
+				E7C43D0229D47A3700201106 /* PreviewContainerView.swift in Sources */,
 				0F2A2C692239C162003BDB2F /* DimmedView.swift in Sources */,
 				0F2A2C6A2239C165003BDB2F /* PanContainerView.swift in Sources */,
 			);
@@ -618,6 +623,7 @@
 				DC139075216D9458007A3E64 /* DimmedView.swift in Sources */,
 				743CABD322265F2E00634A5A /* ProfileViewController.swift in Sources */,
 				DC139070216D9458007A3E64 /* PanModalPresentationAnimator.swift in Sources */,
+				E7C43D0729D4DAEF00201106 /* PreviewContainerView.swift in Sources */,
 				944EBA2E227BB7F400C4C97B /* FullScreenNavController.swift in Sources */,
 				DCA741AE216D90410021F2F2 /* AppDelegate.swift in Sources */,
 			);
@@ -652,7 +658,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PanModal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -681,7 +687,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PanModal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -864,7 +870,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6UF7FN999R;
 				INFOPLIST_FILE = "$(SRCROOT)/Sample/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -885,7 +891,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6UF7FN999R;
 				INFOPLIST_FILE = "$(SRCROOT)/Sample/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
