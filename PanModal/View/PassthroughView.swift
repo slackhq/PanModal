@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PassthroughView: UIView {
+final class PassthroughView: UIView {
   override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 	return subviews.contains(where: {
 	  !$0.isHidden
