@@ -143,7 +143,7 @@ open class PanModalPresentationController: UIPresentationController {
 
 	private lazy var previewContainer: PreviewContainerView = {
 		let view = PreviewContainerView()
-		view.backgroundColor = .clear
+		view.backgroundColor = .red
 		return view
 	}()
 
@@ -401,6 +401,7 @@ private extension PanModalPresentationController {
 			// TODO: Improve with options (PreviewOptions)
 //			previewCopy.leadingAnchor.constraint(equalTo: previewContainer.leadingAnchor),
 //			previewCopy.trailingAnchor.constraint(equalTo: previewContainer.trailingAnchor),
+
 			previewCopy.centerXAnchor.constraint(equalTo: previewContainer.centerXAnchor),
 			previewCopy.bottomAnchor.constraint(equalTo: previewContainer.bottomAnchor),
 		])
@@ -429,7 +430,7 @@ private extension PanModalPresentationController {
         }
         panContainerView.frame.origin.x = frame.origin.x
 		previewContainer.frame = .init(
-			origin: presentedView.frame.origin,
+			origin: .init(x: 0, y: anchoredYPosition),
 			size: .init(
 				width: presentedView.frame.width,
 				height: adjustedSize.height
