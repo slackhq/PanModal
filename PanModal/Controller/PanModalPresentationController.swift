@@ -40,6 +40,7 @@ open class PanModalPresentationController: UIPresentationController {
         static let indicatorYOffset = CGFloat(8.0)
         static let snapMovementSensitivity = CGFloat(0.7)
         static let dragIndicatorSize = CGSize(width: 36.0, height: 5.0)
+		static let previewContainerBottomSpacing = CGFloat(30.0)
     }
 
     // MARK: - Properties
@@ -140,6 +141,12 @@ open class PanModalPresentationController: UIPresentationController {
         return view
     }()
 
+	private lazy var previewContainer: PreviewContainerView = {
+		let view = PreviewContainerView()
+		view.backgroundColor = .clear
+		return view
+	}()
+
 	private weak var pinBottomConstraint: NSLayoutConstraint?
     /**
      Drag Indicator View
@@ -191,6 +198,7 @@ open class PanModalPresentationController: UIPresentationController {
 
         layoutBackgroundView(in: containerView)
         layoutPresentedView(in: containerView)
+		layoutPreviewView(in: containerView)
 		layoutVisibleView(in: containerView)
         configureScrollViewInsets()
 		setupKeyboardObserver()
@@ -374,6 +382,33 @@ private extension PanModalPresentationController {
         adjustPanContainerBackgroundColor()
     }
 
+	func layoutPreviewView(in containerView: UIView) {
+		guard let previewView = presentable?.previewView else {
+			return
+		}
+		containerView.addSubview(previewContainer)
+		let previewCopy: UIView
+		if let previewView = previewView as? UIImageView {
+			previewCopy = UIImageView(image: previewView.image)
+		} else {
+			previewCopy = previewView.snapshotView(afterScreenUpdates: false) ?? UIView()
+		}
+		previewCopy.translatesAutoresizingMaskIntoConstraints = false
+		previewCopy.contentMode = .scaleAspectFit
+
+		previewContainer.addSubview(previewCopy)
+		NSLayoutConstraint.activate([
+			// TODO: Improve with options (PreviewOptions)
+//			previewCopy.leadingAnchor.constraint(equalTo: previewContainer.leadingAnchor),
+//			previewCopy.trailingAnchor.constraint(equalTo: previewContainer.trailingAnchor),
+			previewCopy.centerXAnchor.constraint(equalTo: previewContainer.centerXAnchor),
+			previewCopy.bottomAnchor.constraint(equalTo: previewContainer.bottomAnchor),
+		])
+		previewView.setNeedsLayout()
+		previewCopy.setNeedsLayout()
+		previewContainer.layoutIfNeeded()
+	}
+
     /**
      Reduce height of presentedView so that it sits at the bottom of the screen
      */
@@ -385,7 +420,7 @@ private extension PanModalPresentationController {
         let adjustedSize = CGSize(width: frame.size.width, height: frame.size.height - anchoredYPosition)
         let panFrame = panContainerView.frame
         panContainerView.frame.size = frame.size
-        
+
         if ![shortFormYPosition, longFormYPosition].contains(panFrame.origin.y) {
             // if the container is already in the correct position, no need to adjust positioning
             // (rotations & size changes cause positioning to be out of sync)
@@ -393,6 +428,16 @@ private extension PanModalPresentationController {
             presentedView.frame.origin.y = max(yPosition, anchoredYPosition)
         }
         panContainerView.frame.origin.x = frame.origin.x
+		previewContainer.frame = .init(
+			origin: presentedView.frame.origin,
+			size: .init(
+				width: presentedView.frame.width,
+				height: adjustedSize.height
+				- presentedView.frame.height
+				+ shortFormYPosition
+				- Constants.previewContainerBottomSpacing
+			)
+		)
         presentedViewController.view.frame = CGRect(origin: .zero, size: adjustedSize)
     }
 
@@ -731,6 +776,7 @@ private extension PanModalPresentationController {
 			PanModalAnimator.animate({ [weak self] in
 				self?.adjust(toYPosition: yPos)
 				self?.isPresentedViewAnimating = true
+				self?.previewContainer.layoutIfNeeded()
 			}, config: presentable) { [weak self] didComplete in
 				self?.isPresentedViewAnimating = !didComplete
 			}
@@ -745,6 +791,10 @@ private extension PanModalPresentationController {
     func adjust(toYPosition yPos: CGFloat) {
         let yResultTranslation = max(yPos, anchoredYPosition)
         presentedView.frame.origin.y = yResultTranslation
+		
+		previewContainer.frame.origin.y = yResultTranslation
+		- previewContainer.bounds.height
+		- Constants.previewContainerBottomSpacing
 		
 		if presentedView.frame.origin.y > longFormYPosition {
 			presentable?.willChangeVisibleFrame(to: presentedView.frame)

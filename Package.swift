@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "PanModal",
-    platforms: [.iOS(.v10)],
+    platforms: [.iOS(.v11)],
     products: [
         .library(
             name: "PanModal",

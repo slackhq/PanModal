@@ -69,6 +69,7 @@ public class PanModalPresentationAnimator: NSObject {
             let fromVC = transitionContext.viewController(forKey: .from)
             else { return }
 
+		let containerView = transitionContext.containerView
         let presentable = panModalLayoutType(from: transitionContext)
 
         // Calls viewWillAppear and viewWillDisappear
@@ -78,21 +79,40 @@ public class PanModalPresentationAnimator: NSObject {
         let yPos: CGFloat = presentable?.shortFormYPos ?? 0.0
 
         // Use panView as presentingView if it already exists within the containerView
-        let panView: UIView = transitionContext.containerView.panContainerView ?? toVC.view
+        let panView: UIView = containerView.panContainerView ?? toVC.view
 
         // Move presented view offscreen (from the bottom)
         panView.frame = transitionContext.finalFrame(for: toVC)
-        panView.frame.origin.y = transitionContext.containerView.frame.height
+        panView.frame.origin.y = containerView.frame.height
 
         // Haptic feedback
         if presentable?.isHapticFeedbackEnabled == true {
             feedbackGenerator?.selectionChanged()
         }
 
+		// Preview
+		let toPreviewView: UIView? = containerView.previewContainerView?.subviews.first
+		let fromPreviewView: UIView? = presentable?.previewView
+		let snapshot: UIView? = fromPreviewView?.snapshotView(afterScreenUpdates: false)
+
+		if let fromPreviewView = fromPreviewView,
+		   let toPreviewView = toPreviewView,
+		   let _snapshot = snapshot
+		{
+			_snapshot.contentMode = fromPreviewView.contentMode
+			toPreviewView.isHidden = true
+			containerView.addSubview(_snapshot)
+			_snapshot.frame = containerView.convert(fromPreviewView.frame, from: fromPreviewView.superview)
+		}
+
         PanModalAnimator.animate({
             panView.frame.origin.y = yPos
+			snapshot?.frame = containerView.convert(toPreviewView?.frame ?? .zero, from: toPreviewView?.superview)
+
         }, config: presentable) { [weak self] didComplete in
             // Calls viewDidAppear and viewDidDisappear
+			snapshot?.removeFromSuperview()
+			toPreviewView?.isHidden = false
             fromVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
             self?.feedbackGenerator = nil
@@ -108,17 +128,33 @@ public class PanModalPresentationAnimator: NSObject {
             let toVC = transitionContext.viewController(forKey: .to),
             let fromVC = transitionContext.viewController(forKey: .from)
             else { return }
-
+		let containerView = transitionContext.containerView
         // Calls viewWillAppear and viewWillDisappear
         toVC.beginAppearanceTransition(true, animated: true)
         
         let presentable = panModalLayoutType(from: transitionContext)
-        let panView: UIView = transitionContext.containerView.panContainerView ?? fromVC.view
+        let panView: UIView = containerView.panContainerView ?? fromVC.view
+
+		// Preview
+		let toPreviewView: UIView? = presentable?.previewView
+		let fromPreviewView: UIView? = containerView.previewContainerView?.subviews.first
+		let snapshot: UIView? = fromPreviewView?.snapshotView(afterScreenUpdates: false)
+
+		if let fromPreviewView = fromPreviewView,
+		   let snapshot = snapshot {
+			snapshot.contentMode = fromPreviewView.contentMode
+			fromPreviewView.isHidden = true
+			containerView.addSubview(snapshot)
+			snapshot.frame = containerView.convert(fromPreviewView.frame, from: fromPreviewView.superview)
+		}
 
         PanModalAnimator.animate({
             panView.frame.origin.y = transitionContext.containerView.frame.height
+			snapshot?.frame = containerView.convert(toPreviewView?.frame ?? .zero, from: toPreviewView?.superview)
+
         }, config: presentable) { didComplete in
             fromVC.view.removeFromSuperview()
+			snapshot?.removeFromSuperview()
             // Calls viewDidAppear and viewDidDisappear
             toVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
