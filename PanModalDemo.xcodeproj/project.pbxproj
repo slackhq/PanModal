@@ -65,6 +65,7 @@
 		E7A81DB4291934D600910177 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB3291934D600910177 /* KeyboardObserver.swift */; };
 		E7A81DB52919371300910177 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB3291934D600910177 /* KeyboardObserver.swift */; };
 		E7A81DB72919395B00910177 /* KeyboardPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB62919395B00910177 /* KeyboardPolicy.swift */; };
+		E7C0839E29D2CA7B0093E82D /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0839D29D2CA7B0093E82D /* ImagePreviewViewController.swift */; };
 		E7C43D0229D47A3700201106 /* PreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C43D0129D47A3700201106 /* PreviewContainerView.swift */; };
 		E7C43D0729D4DAEF00201106 /* PreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C43D0129D47A3700201106 /* PreviewContainerView.swift */; };
 		E7EE4E07291E5E5100627C80 /* KeyboardPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB62919395B00910177 /* KeyboardPolicy.swift */; };
@@ -147,6 +148,7 @@
 		E74A6E572935302500D9DEE9 /* DropWay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropWay.swift; sourceTree = "<group>"; };
 		E7A81DB3291934D600910177 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		E7A81DB62919395B00910177 /* KeyboardPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPolicy.swift; sourceTree = "<group>"; };
+		E7C0839D29D2CA7B0093E82D /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		E7C43D0129D47A3700201106 /* PreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -352,6 +354,7 @@
 		DC139079216D9AAA007A3E64 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E7C0839A29D2CA500093E82D /* ImagePreview */,
 				944EBA2B227BB7D900C4C97B /* Basic */,
 				944EBA2C227BB7E100C4C97B /* Full Screen */,
 				DC3B2EBB222A5882000C8A4A /* Alert */,
@@ -418,6 +421,14 @@
 				E7A81DB3291934D600910177 /* KeyboardObserver.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E7C0839A29D2CA500093E82D /* ImagePreview */ = {
+			isa = PBXGroup;
+			children = (
+				E7C0839D29D2CA7B0093E82D /* ImagePreviewViewController.swift */,
+			);
+			path = ImagePreview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -609,6 +620,7 @@
 				DC139073216D9458007A3E64 /* PanModalPresenter.swift in Sources */,
 				943904EF2226383700859537 /* NavigationController.swift in Sources */,
 				DC3B2EBE222A58C9000C8A4A /* AlertView.swift in Sources */,
+				E7C0839E29D2CA7B0093E82D /* ImagePreviewViewController.swift in Sources */,
 				E70A622C29DD721600909BED /* PreviewOption.swift in Sources */,
 				E7A81DB52919371300910177 /* KeyboardObserver.swift in Sources */,
 				74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */,

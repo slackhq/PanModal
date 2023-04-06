@@ -28,7 +28,10 @@ class SampleViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60.0
+		guard let _ = RowType(rawValue: indexPath.row)?.presentable.image else {
+			return 60.0
+		}
+        return 120.0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,15 +39,20 @@ class SampleViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+
 
         guard let rowType = RowType(rawValue: indexPath.row) else {
-            return cell
+            return UITableViewCell()
         }
-        cell.textLabel?.textAlignment = .center
-        cell.textLabel?.text = rowType.presentable.string
-        cell.textLabel?.font = UIFont(name: "Lato-Regular", size: 17.0)
-        return cell
+
+
+		cell.textLabel?.textAlignment = .center
+		cell.textLabel?.text = rowType.presentable.string
+		cell.textLabel?.font = UIFont(name: "Lato-Regular", size: 17.0)
+		cell.imageView?.image = rowType.presentable.image
+		return cell
+
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -54,13 +62,25 @@ class SampleViewController: UITableViewController {
             return
         }
         dismiss(animated: true, completion: nil)
-        presentPanModal(rowType.presentable.rowVC)
+		if let _ = rowType.presentable.image {
+			let vc = ImagePreviewViewController(previewView: tableView.cellForRow(at: indexPath)?.imageView)
+			presentPanModal(vc)
+		} else {
+			presentPanModal(rowType.presentable.rowVC)
+		}
     }
 }
 
 protocol RowPresentable {
     var string: String { get }
+	var image: UIImage? { get }
     var rowVC: UIViewController & PanModalPresentable { get }
+}
+
+extension RowPresentable {
+	var image: UIImage? {
+		nil
+	}
 }
 
 private extension SampleViewController {
@@ -73,6 +93,7 @@ private extension SampleViewController {
         case userGroups
         case stacked
         case navController
+		case imagePreview
 
 
         var presentable: RowPresentable {
@@ -84,6 +105,7 @@ private extension SampleViewController {
             case .userGroups: return UserGroup()
             case .stacked: return Stacked()
             case .navController: return Navigation()
+			case .imagePreview: return  ImagePreview()
             }
         }
 
@@ -121,5 +143,14 @@ private extension SampleViewController {
             let string: String = "User Groups (Stacked)"
             let rowVC: PanModalPresentable.LayoutType = UserGroupStackedViewController()
         }
+
+		struct ImagePreview: RowPresentable {
+			let string: String = "ImagePreview"
+			let rowVC: PanModalPresentable.LayoutType = ImagePreviewViewController()
+
+			var image: UIImage? {
+				UIImage(named: "WhatsNew")
+			}
+		}
     }
 }
