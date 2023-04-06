@@ -20,6 +20,10 @@ public extension PanModalPresentable where Self: UIViewController {
 	var previewView: UIView? {
 		nil
 	}
+
+	var previewOptions: [PreviewOption] {
+		[]
+	}
     
     var topOffset: CGFloat {
         return topLayoutOffset + 21.0

@@ -32,6 +32,8 @@ public protocol PanModalPresentable: AnyObject {
 	 */
 	var previewView: UIView? { get }
 
+	var previewOptions: [PreviewOption] { get }
+
     /**
      The scroll view embedded in the view controller.
      Setting this value allows for seamless transition scrolling between the embedded scroll view
