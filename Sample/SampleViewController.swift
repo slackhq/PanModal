@@ -23,15 +23,24 @@ class SampleViewController: UITableViewController {
         ]
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
+		tableView.register(VideoTableViewCell.self, forCellReuseIdentifier: String(describing: VideoTableViewCell.self))
+		tableView.register(GifTableViewCell.self, forCellReuseIdentifier: String(describing: GifTableViewCell.self))
         tableView.tableFooterView = UIView()
         tableView.separatorInset = .zero
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		guard let _ = RowType(rawValue: indexPath.row)?.presentable.image else {
-			return 60.0
+		guard let rowType = RowType(rawValue: indexPath.row) else {
+			return 60
 		}
-        return 120.0
+		switch rowType {
+		case .imagePreview, .gifPreview:
+			return 80
+		case .videoPreview:
+			return 120
+		default:
+			return 60
+		}
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,19 +48,27 @@ class SampleViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+		guard let rowType = RowType(rawValue: indexPath.row) else {
+			return UITableViewCell()
+		}
 
+		switch rowType {
+		case .videoPreview:
+			let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: VideoTableViewCell.self), for: indexPath)
+			return cell
+		case .gifPreview:
+			let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: GifTableViewCell.self), for: indexPath) as! GifTableViewCell
+			cell.setUrl("https://gifbin.com/bin/4802swswsw04.gif")
+			return cell
+		default:
+			let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+			cell.textLabel?.textAlignment = .center
+			cell.textLabel?.text = rowType.presentable.string
+			cell.textLabel?.font = UIFont(name: "Lato-Regular", size: 17.0)
+			cell.imageView?.image = rowType.presentable.image
 
-        guard let rowType = RowType(rawValue: indexPath.row) else {
-            return UITableViewCell()
-        }
-
-
-		cell.textLabel?.textAlignment = .center
-		cell.textLabel?.text = rowType.presentable.string
-		cell.textLabel?.font = UIFont(name: "Lato-Regular", size: 17.0)
-		cell.imageView?.image = rowType.presentable.image
-		return cell
+			return cell
+		}
 
     }
 
@@ -94,6 +111,9 @@ private extension SampleViewController {
         case stacked
         case navController
 		case imagePreview
+		case videoPreview
+		case gifPreview
+
 
 
         var presentable: RowPresentable {
@@ -106,6 +126,8 @@ private extension SampleViewController {
             case .stacked: return Stacked()
             case .navController: return Navigation()
 			case .imagePreview: return  ImagePreview()
+			case .videoPreview: return  VideoPreview()
+			case .gifPreview:  return  GifPreview()
             }
         }
 
@@ -145,12 +167,22 @@ private extension SampleViewController {
         }
 
 		struct ImagePreview: RowPresentable {
-			let string: String = "ImagePreview"
+			let string: String = "Image Preview"
 			let rowVC: PanModalPresentable.LayoutType = ImagePreviewViewController()
 
 			var image: UIImage? {
 				UIImage(named: "WhatsNew")
 			}
+		}
+
+		struct VideoPreview: RowPresentable {
+			let string: String = "Video Preview"
+			let rowVC: PanModalPresentable.LayoutType = ImagePreviewViewController()
+		}
+
+		struct GifPreview: RowPresentable {
+			let string: String = "Gif Preview"
+			let rowVC: PanModalPresentable.LayoutType = ImagePreviewViewController()
 		}
     }
 }

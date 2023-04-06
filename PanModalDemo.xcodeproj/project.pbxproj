@@ -65,6 +65,9 @@
 		E7A81DB4291934D600910177 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB3291934D600910177 /* KeyboardObserver.swift */; };
 		E7A81DB52919371300910177 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB3291934D600910177 /* KeyboardObserver.swift */; };
 		E7A81DB72919395B00910177 /* KeyboardPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB62919395B00910177 /* KeyboardPolicy.swift */; };
+		E7B4AE3E29DEE537000B6F02 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4AE3D29DEE537000B6F02 /* VideoTableViewCell.swift */; };
+		E7B4AE4029DEF043000B6F02 /* GifTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4AE3F29DEF043000B6F02 /* GifTableViewCell.swift */; };
+		E7B4AE4329DEF817000B6F02 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4AE4229DEF817000B6F02 /* UIImage+.swift */; };
 		E7C0839E29D2CA7B0093E82D /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0839D29D2CA7B0093E82D /* ImagePreviewViewController.swift */; };
 		E7C43D0229D47A3700201106 /* PreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C43D0129D47A3700201106 /* PreviewContainerView.swift */; };
 		E7C43D0729D4DAEF00201106 /* PreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C43D0129D47A3700201106 /* PreviewContainerView.swift */; };
@@ -148,6 +151,9 @@
 		E74A6E572935302500D9DEE9 /* DropWay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropWay.swift; sourceTree = "<group>"; };
 		E7A81DB3291934D600910177 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		E7A81DB62919395B00910177 /* KeyboardPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPolicy.swift; sourceTree = "<group>"; };
+		E7B4AE3D29DEE537000B6F02 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		E7B4AE3F29DEF043000B6F02 /* GifTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifTableViewCell.swift; sourceTree = "<group>"; };
+		E7B4AE4229DEF817000B6F02 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		E7C0839D29D2CA7B0093E82D /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		E7C43D0129D47A3700201106 /* PreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -409,6 +415,8 @@
 			children = (
 				DCA741AD216D90410021F2F2 /* AppDelegate.swift */,
 				DC139060216D93ED007A3E64 /* SampleViewController.swift */,
+				E7B4AE4129DEF7F4000B6F02 /* Extensions */,
+				E7B4AE3C29DEE500000B6F02 /* Cells */,
 				DC139079216D9AAA007A3E64 /* View Controllers */,
 				DC13905F216D93AB007A3E64 /* Resources */,
 			);
@@ -421,6 +429,23 @@
 				E7A81DB3291934D600910177 /* KeyboardObserver.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E7B4AE3C29DEE500000B6F02 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E7B4AE3D29DEE537000B6F02 /* VideoTableViewCell.swift */,
+				E7B4AE3F29DEF043000B6F02 /* GifTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E7B4AE4129DEF7F4000B6F02 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E7B4AE4229DEF817000B6F02 /* UIImage+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E7C0839A29D2CA500093E82D /* ImagePreview */ = {
@@ -617,6 +642,7 @@
 				743CABB62225FEEE00634A5A /* UserGroupHeaderPresentable.swift in Sources */,
 				743CB2AA222660D100665A55 /* StackedProfileViewController.swift in Sources */,
 				943904EB2226354100859537 /* BasicViewController.swift in Sources */,
+				E7B4AE4329DEF817000B6F02 /* UIImage+.swift in Sources */,
 				DC139073216D9458007A3E64 /* PanModalPresenter.swift in Sources */,
 				943904EF2226383700859537 /* NavigationController.swift in Sources */,
 				DC3B2EBE222A58C9000C8A4A /* AlertView.swift in Sources */,
@@ -628,12 +654,14 @@
 				943904F32226484F00859537 /* UserGroupStackedViewController.swift in Sources */,
 				74C072AA220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift in Sources */,
 				943904ED2226366700859537 /* AlertViewController.swift in Sources */,
+				E7B4AE4029DEF043000B6F02 /* GifTableViewCell.swift in Sources */,
 				E7EE4E07291E5E5100627C80 /* KeyboardPolicy.swift in Sources */,
 				743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */,
 				DC139072216D9458007A3E64 /* PanModalPresentable+UIViewController.swift in Sources */,
 				DC139074216D9458007A3E64 /* PanModalPresentationController.swift in Sources */,
 				DC139071216D9458007A3E64 /* PanModalPresentable.swift in Sources */,
 				DC139061216D93ED007A3E64 /* SampleViewController.swift in Sources */,
+				E7B4AE3E29DEE537000B6F02 /* VideoTableViewCell.swift in Sources */,
 				743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */,
 				DCC0EE7C21917F2500208DBC /* PanModalPresentable+Defaults.swift in Sources */,
 				94795C9D21F03368008045A0 /* PanContainerView.swift in Sources */,
