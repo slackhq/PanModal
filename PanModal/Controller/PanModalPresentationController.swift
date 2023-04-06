@@ -397,14 +397,27 @@ private extension PanModalPresentationController {
 		previewCopy.contentMode = .scaleAspectFit
 
 		previewContainer.addSubview(previewCopy)
-		NSLayoutConstraint.activate([
-			// TODO: Improve with options (PreviewOptions)
-//			previewCopy.leadingAnchor.constraint(equalTo: previewContainer.leadingAnchor),
-//			previewCopy.trailingAnchor.constraint(equalTo: previewContainer.trailingAnchor),
 
+		var constraints: [NSLayoutConstraint] = [
+			previewCopy.centerYAnchor.constraint(equalTo: previewContainer.centerYAnchor),
 			previewCopy.centerXAnchor.constraint(equalTo: previewContainer.centerXAnchor),
-			previewCopy.bottomAnchor.constraint(equalTo: previewContainer.bottomAnchor),
-		])
+		]
+
+		if let options = presentable?.previewOptions {
+		
+			options.forEach({
+				switch $0 {
+				case let .fixedPreviewSize(size):
+						constraints.append(contentsOf: [
+							previewCopy.widthAnchor.constraint(equalToConstant: size.width),
+							previewCopy.heightAnchor.constraint(equalToConstant: size.height),
+						])
+				}
+			})
+		}
+
+		constraints.forEach { $0.isActive = true }
+
 		previewView.setNeedsLayout()
 		previewCopy.setNeedsLayout()
 		previewContainer.layoutIfNeeded()
@@ -429,8 +442,9 @@ private extension PanModalPresentationController {
             presentedView.frame.origin.y = max(yPosition, anchoredYPosition)
         }
         panContainerView.frame.origin.x = frame.origin.x
+		let topOffset = presentable?.topOffset ?? 0
 		previewContainer.frame = .init(
-			origin: .init(x: 0, y: anchoredYPosition),
+			origin: .init(x: 0, y: topOffset),
 			size: .init(
 				width: presentedView.frame.width,
 				height: adjustedSize.height
