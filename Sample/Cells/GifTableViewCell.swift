@@ -10,7 +10,7 @@ import UIKit
 
 class GifTableViewCell: UITableViewCell {
 
-	private let gifView: UIImageView = {
+	private (set) var gifView: UIImageView = {
 		let view = UIImageView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.backgroundColor = .lightGray

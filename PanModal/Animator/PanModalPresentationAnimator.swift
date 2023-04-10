@@ -92,7 +92,7 @@ public class PanModalPresentationAnimator: NSObject {
 
 		// Preview
 		let toPreviewView: UIView? = containerView.previewContainerView?.subviews.first
-		let fromPreviewView: UIView? = presentable?.previewView
+		let fromPreviewView: UIView? = presentable?.preview?.view
 		let snapshot: UIView? = fromPreviewView?.snapshotView(afterScreenUpdates: false)
 
 		if let fromPreviewView = fromPreviewView,
@@ -106,6 +106,9 @@ public class PanModalPresentationAnimator: NSObject {
 		}
 
         PanModalAnimator.animate({
+			if case .loadable = presentable?.preview {
+				snapshot?.alpha = 0
+			}
             panView.frame.origin.y = yPos
 			snapshot?.frame = containerView.convert(toPreviewView?.frame ?? .zero, from: toPreviewView?.superview)
 
@@ -136,7 +139,7 @@ public class PanModalPresentationAnimator: NSObject {
         let panView: UIView = containerView.panContainerView ?? fromVC.view
 
 		// Preview
-		let toPreviewView: UIView? = presentable?.previewView
+		let toPreviewView: UIView? = presentable?.preview?.view
 		let fromPreviewView: UIView? = containerView.previewContainerView?.subviews.first
 		let snapshot: UIView? = fromPreviewView?.snapshotView(afterScreenUpdates: false)
 

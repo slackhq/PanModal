@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SampleViewController: UITableViewController {
 
@@ -54,7 +55,8 @@ class SampleViewController: UITableViewController {
 
 		switch rowType {
 		case .videoPreview:
-			let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: VideoTableViewCell.self), for: indexPath)
+			let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: VideoTableViewCell.self), for: indexPath) as! VideoTableViewCell
+			cell.setImage("maxresdefault")
 			return cell
 		case .gifPreview:
 			let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: GifTableViewCell.self), for: indexPath) as! GifTableViewCell
@@ -79,13 +81,37 @@ class SampleViewController: UITableViewController {
             return
         }
         dismiss(animated: true, completion: nil)
-		if let _ = rowType.presentable.image {
-			let vc = ImagePreviewViewController(previewView: tableView.cellForRow(at: indexPath)?.imageView)
+		switch rowType {
+		case .imagePreview:
+			let vc = PreviewViewController(preview: .image(sourceView: tableView.cellForRow(at: indexPath)!.imageView!))
 			presentPanModal(vc)
-		} else {
+		case .videoPreview:
+			let cell = tableView.cellForRow(at: indexPath) as! VideoTableViewCell
+			let item = AVPlayerItem(url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")!)
+			let vc = PreviewViewController(preview: .video(item: item, sourceView: cell.videoContainer))
+			presentPanModal(vc)
+		case .gifPreview:
+			let cell = tableView.cellForRow(at: indexPath) as! GifTableViewCell
+			let vc = PreviewViewController(preview: .gif(sourceView: cell.gifView))
+			presentPanModal(vc)
+		case .loadable:
+			let cell = tableView.cellForRow(at: indexPath)!
+			let vc = PreviewViewController(preview: .loadable(state: download, sourceView: cell.imageView!))
+			presentPanModal(vc)
+		default:
 			presentPanModal(rowType.presentable.rowVC)
 		}
     }
+
+	private func download(completion: @escaping ((LoadablaItemState) -> Void)) {
+		completion(.loading)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+			let view = UIImageView(image: UIImage(named: "profile_preview"))
+			view.contentMode = .scaleAspectFit
+			completion(.loaded(view))
+		})
+	}
+
 }
 
 protocol RowPresentable {
@@ -113,7 +139,7 @@ private extension SampleViewController {
 		case imagePreview
 		case videoPreview
 		case gifPreview
-
+		case loadable
 
 
         var presentable: RowPresentable {
@@ -128,6 +154,7 @@ private extension SampleViewController {
 			case .imagePreview: return  ImagePreview()
 			case .videoPreview: return  VideoPreview()
 			case .gifPreview:  return  GifPreview()
+			case .loadable: return LoadablePreview()
             }
         }
 
@@ -168,7 +195,7 @@ private extension SampleViewController {
 
 		struct ImagePreview: RowPresentable {
 			let string: String = "Image Preview"
-			let rowVC: PanModalPresentable.LayoutType = ImagePreviewViewController()
+			let rowVC: PanModalPresentable.LayoutType = PreviewViewController()
 
 			var image: UIImage? {
 				UIImage(named: "WhatsNew")
@@ -177,12 +204,21 @@ private extension SampleViewController {
 
 		struct VideoPreview: RowPresentable {
 			let string: String = "Video Preview"
-			let rowVC: PanModalPresentable.LayoutType = ImagePreviewViewController()
+			let rowVC: PanModalPresentable.LayoutType = PreviewViewController()
 		}
 
 		struct GifPreview: RowPresentable {
 			let string: String = "Gif Preview"
-			let rowVC: PanModalPresentable.LayoutType = ImagePreviewViewController()
+			let rowVC: PanModalPresentable.LayoutType = PreviewViewController()
+		}
+
+		struct LoadablePreview: RowPresentable {
+			let string: String = "Loadable Preview"
+			let rowVC: PanModalPresentable.LayoutType = PreviewViewController()
+
+			var image: UIImage? {
+				UIImage(named: "WhatsNew")
+			}
 		}
     }
 }

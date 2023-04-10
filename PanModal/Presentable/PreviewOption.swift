@@ -10,4 +10,6 @@ import Foundation
 
 public enum PreviewOption {
 	case fixedPreviewSize(CGSize)
+	case aspectRatio(CGFloat)
+	case minHorizontalInset(CGFloat)
 }

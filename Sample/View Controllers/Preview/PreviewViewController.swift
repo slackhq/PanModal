@@ -1,5 +1,5 @@
 //
-//  ImagePreviewViewController.swift
+//  PreviewViewController.swift
 //  PanModalDemo
 //
 //  Created by VLADIMIR LEVTSOV on 28.03.2023.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-class ImagePreviewViewController: UIViewController {
+class PreviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		view.backgroundColor = #colorLiteral(red: 0.1019607843, green: 0.1137254902, blue: 0.1294117647, alpha: 1)
     }
     
-	var previewView: UIView?
+	var preview: PreviewItem?
 
-	init(previewView: UIView? = nil) {
-		self.previewView = previewView
+	init(preview: PreviewItem? = nil) {
+		self.preview = preview
 		super.init(nibName: nil, bundle: nil)
 	}
 
@@ -28,7 +28,11 @@ class ImagePreviewViewController: UIViewController {
 
 }
 
-extension ImagePreviewViewController: PanModalPresentable {
+extension PreviewViewController: PanModalPresentable {
+
+	var transitionAnimationOptions: UIView.AnimationOptions {
+		return [.curveEaseInOut, .allowUserInteraction, .beginFromCurrentState, .allowAnimatedContent]
+	}
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
 		return .lightContent
@@ -49,4 +53,21 @@ extension ImagePreviewViewController: PanModalPresentable {
 	var anchorModalToLongForm: Bool {
 		return false
 	}
+
+	var previewOptions: [PreviewOption] {
+		switch preview {
+		case .loadable:
+			return [.fixedPreviewSize(.init(width: 300, height: 300))]
+		case .video:
+			return [
+				.aspectRatio(16.0/9.0),
+				.minHorizontalInset(20)
+			]
+		case let .gif(view):
+			return [.fixedPreviewSize(view.bounds.size)]
+		default:
+			return []
+		}
+	}
+
 }

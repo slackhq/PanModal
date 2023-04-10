@@ -143,7 +143,7 @@ open class PanModalPresentationController: UIPresentationController {
 
 	private lazy var previewContainer: PreviewContainerView = {
 		let view = PreviewContainerView()
-		view.backgroundColor = .red
+		view.backgroundColor = .clear
 		return view
 	}()
 
@@ -383,13 +383,19 @@ private extension PanModalPresentationController {
     }
 
 	func layoutPreviewView(in containerView: UIView) {
-		guard let previewView = presentable?.previewView else {
+		guard let preview = presentable?.preview else {
 			return
 		}
+		let previewView = preview.view
+
 		containerView.addSubview(previewContainer)
 		let previewCopy: UIView
 		if let previewView = previewView as? UIImageView {
-			previewCopy = UIImageView(image: previewView.image)
+			if case .loadable = preview {
+				previewCopy = UIView(frame: previewView.frame)
+			} else {
+				previewCopy = UIImageView(image: previewView.image)
+			}
 		} else {
 			previewCopy = previewView.snapshotView(afterScreenUpdates: false) ?? UIView()
 		}
@@ -401,22 +407,96 @@ private extension PanModalPresentationController {
 		var constraints: [NSLayoutConstraint] = [
 			previewCopy.centerYAnchor.constraint(equalTo: previewContainer.centerYAnchor),
 			previewCopy.centerXAnchor.constraint(equalTo: previewContainer.centerXAnchor),
+			previewCopy.leadingAnchor.constraint(greaterThanOrEqualTo: previewContainer.leadingAnchor)
 		]
 
 		if let options = presentable?.previewOptions {
-		
 			options.forEach({
 				switch $0 {
 				case let .fixedPreviewSize(size):
-						constraints.append(contentsOf: [
-							previewCopy.widthAnchor.constraint(equalToConstant: size.width),
-							previewCopy.heightAnchor.constraint(equalToConstant: size.height),
-						])
+					constraints.append(contentsOf: [
+						previewCopy.widthAnchor.constraint(equalToConstant: size.width),
+						previewCopy.heightAnchor.constraint(equalToConstant: size.height),
+					])
+				case let .aspectRatio(ratio):
+					constraints.append(
+						previewCopy.widthAnchor.constraint(equalTo: previewCopy.heightAnchor, multiplier: ratio)
+					)
+				case let .minHorizontalInset(value):
+					constraints.append(
+						previewCopy.leadingAnchor.constraint(greaterThanOrEqualTo: previewContainer.leadingAnchor, constant: value)
+					)
 				}
 			})
 		}
 
 		constraints.forEach { $0.isActive = true }
+
+		switch preview {
+		case .gif, .image:
+			break
+		case .video(let item, _):
+			let playerView = PlayerView()
+			playerView.translatesAutoresizingMaskIntoConstraints = false
+			playerView.play(item)
+			UIView.transition(
+				with: previewCopy,
+				duration: 0.2,
+				options: [.transitionCrossDissolve]
+			) {
+				previewCopy.addSubview(playerView)
+			}
+			NSLayoutConstraint.activate([
+				playerView.leadingAnchor.constraint(equalTo: previewCopy.leadingAnchor),
+				playerView.trailingAnchor.constraint(equalTo: previewCopy.trailingAnchor),
+				playerView.topAnchor.constraint(equalTo: previewCopy.topAnchor),
+				playerView.bottomAnchor.constraint(equalTo: previewCopy.bottomAnchor),
+			])
+
+		case .loadable(let loadable, _):
+			let activity = UIActivityIndicatorView(style: .large)
+			activity.color = .white
+			activity.translatesAutoresizingMaskIntoConstraints = false
+			activity.hidesWhenStopped = true
+
+			loadable { [weak previewCopy] state in
+				switch state {
+				case .loading:
+					guard let previewCopy = previewCopy else {
+						return
+					}
+					previewCopy.addSubview(activity)
+					(previewCopy as? UIImageView)?.image = nil
+					previewCopy.backgroundColor = .clear
+					activity.startAnimating()
+					NSLayoutConstraint.activate([
+						activity.centerXAnchor.constraint(equalTo: previewCopy.centerXAnchor),
+						activity.centerYAnchor.constraint(equalTo: previewCopy.centerYAnchor),
+					])
+				case .loaded(let view):
+					guard let previewCopy = previewCopy else {
+						return
+					}
+					activity.stopAnimating()
+					view.translatesAutoresizingMaskIntoConstraints = false
+					UIView.transition(
+						with: previewCopy,
+						duration: 0.2,
+						options: [.transitionCrossDissolve]
+					) {
+						previewCopy.addSubview(view)
+					}
+					NSLayoutConstraint.activate([
+						view.leadingAnchor.constraint(equalTo: previewCopy.leadingAnchor),
+						view.trailingAnchor.constraint(equalTo: previewCopy.trailingAnchor),
+						view.topAnchor.constraint(equalTo: previewCopy.topAnchor),
+						view.bottomAnchor.constraint(equalTo: previewCopy.bottomAnchor),
+					])
+				case .failed:
+					break
+				}
+			}
+		}
 
 		previewView.setNeedsLayout()
 		previewCopy.setNeedsLayout()

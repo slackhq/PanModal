@@ -10,10 +10,11 @@ import UIKit
 
 class VideoTableViewCell: UITableViewCell {
 
-	private let videoContainer: UIView = {
-		let view = UIView()
+	private (set) var videoContainer: UIImageView = {
+		let view = UIImageView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.backgroundColor = .lightGray
+		view.contentMode = .scaleAspectFit
 		return view
 	}()
 
@@ -24,6 +25,10 @@ class VideoTableViewCell: UITableViewCell {
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+
+	func setImage(_ name: String) {
+		videoContainer.image = UIImage(named: name)
 	}
 
 	private func commonInit() {

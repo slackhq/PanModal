@@ -17,7 +17,7 @@ public extension PanModalPresentable where Self: UIViewController {
         nil
     }
 
-	var previewView: UIView? {
+	var preview: PreviewItem? {
 		nil
 	}
 

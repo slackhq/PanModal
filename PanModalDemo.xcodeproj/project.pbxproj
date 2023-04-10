@@ -68,9 +68,13 @@
 		E7B4AE3E29DEE537000B6F02 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4AE3D29DEE537000B6F02 /* VideoTableViewCell.swift */; };
 		E7B4AE4029DEF043000B6F02 /* GifTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4AE3F29DEF043000B6F02 /* GifTableViewCell.swift */; };
 		E7B4AE4329DEF817000B6F02 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4AE4229DEF817000B6F02 /* UIImage+.swift */; };
-		E7C0839E29D2CA7B0093E82D /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0839D29D2CA7B0093E82D /* ImagePreviewViewController.swift */; };
+		E7B4AE4529E03623000B6F02 /* PreviewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4AE4429E03623000B6F02 /* PreviewItem.swift */; };
+		E7B4AE4629E03623000B6F02 /* PreviewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4AE4429E03623000B6F02 /* PreviewItem.swift */; };
+		E7C0839E29D2CA7B0093E82D /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0839D29D2CA7B0093E82D /* PreviewViewController.swift */; };
 		E7C43D0229D47A3700201106 /* PreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C43D0129D47A3700201106 /* PreviewContainerView.swift */; };
 		E7C43D0729D4DAEF00201106 /* PreviewContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C43D0129D47A3700201106 /* PreviewContainerView.swift */; };
+		E7D573EC29E4340300E699EF /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D573EB29E4340300E699EF /* PlayerView.swift */; };
+		E7D573ED29E4361100E699EF /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D573EB29E4340300E699EF /* PlayerView.swift */; };
 		E7EE4E07291E5E5100627C80 /* KeyboardPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A81DB62919395B00910177 /* KeyboardPolicy.swift */; };
 /* End PBXBuildFile section */
 
@@ -154,8 +158,10 @@
 		E7B4AE3D29DEE537000B6F02 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		E7B4AE3F29DEF043000B6F02 /* GifTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifTableViewCell.swift; sourceTree = "<group>"; };
 		E7B4AE4229DEF817000B6F02 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		E7C0839D29D2CA7B0093E82D /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
+		E7B4AE4429E03623000B6F02 /* PreviewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewItem.swift; sourceTree = "<group>"; };
+		E7C0839D29D2CA7B0093E82D /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		E7C43D0129D47A3700201106 /* PreviewContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainerView.swift; sourceTree = "<group>"; };
+		E7D573EB29E4340300E699EF /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				74C072A4220BA76D00124CE1 /* PanModalHeight.swift */,
+				E7B4AE4429E03623000B6F02 /* PreviewItem.swift */,
 				E70A622A29DD721200909BED /* PreviewOption.swift */,
 				DC139068216D9458007A3E64 /* PanModalPresentable.swift */,
 				DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */,
@@ -353,6 +360,7 @@
 				94795C9C21F03368008045A0 /* PanContainerView.swift */,
 				E72954E8292B9B39003D39FC /* PassthroughView.swift */,
 				E7C43D0129D47A3700201106 /* PreviewContainerView.swift */,
+				E7D573EB29E4340300E699EF /* PlayerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -360,7 +368,7 @@
 		DC139079216D9AAA007A3E64 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E7C0839A29D2CA500093E82D /* ImagePreview */,
+				E7C0839A29D2CA500093E82D /* Preview */,
 				944EBA2B227BB7D900C4C97B /* Basic */,
 				944EBA2C227BB7E100C4C97B /* Full Screen */,
 				DC3B2EBB222A5882000C8A4A /* Alert */,
@@ -448,12 +456,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		E7C0839A29D2CA500093E82D /* ImagePreview */ = {
+		E7C0839A29D2CA500093E82D /* Preview */ = {
 			isa = PBXGroup;
 			children = (
-				E7C0839D29D2CA7B0093E82D /* ImagePreviewViewController.swift */,
+				E7C0839D29D2CA7B0093E82D /* PreviewViewController.swift */,
 			);
-			path = ImagePreview;
+			path = Preview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -600,6 +608,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F2A2C5E2239C137003BDB2F /* PanModalAnimator.swift in Sources */,
+				E7B4AE4629E03623000B6F02 /* PreviewItem.swift in Sources */,
 				0F2A2C5F2239C139003BDB2F /* PanModalPresentationAnimator.swift in Sources */,
 				E7A81DB4291934D600910177 /* KeyboardObserver.swift in Sources */,
 				E72954E9292B9B39003D39FC /* PassthroughView.swift in Sources */,
@@ -607,6 +616,7 @@
 				0F2A2C612239C140003BDB2F /* PanModalPresentationDelegate.swift in Sources */,
 				E70A622B29DD721200909BED /* PreviewOption.swift in Sources */,
 				0F2A2C622239C148003BDB2F /* PanModalHeight.swift in Sources */,
+				E7D573EC29E4340300E699EF /* PlayerView.swift in Sources */,
 				0F2A2C632239C14B003BDB2F /* PanModalPresentable.swift in Sources */,
 				E7A81DB72919395B00910177 /* KeyboardPolicy.swift in Sources */,
 				0F2A2C642239C14E003BDB2F /* PanModalPresentable+Defaults.swift in Sources */,
@@ -646,7 +656,7 @@
 				DC139073216D9458007A3E64 /* PanModalPresenter.swift in Sources */,
 				943904EF2226383700859537 /* NavigationController.swift in Sources */,
 				DC3B2EBE222A58C9000C8A4A /* AlertView.swift in Sources */,
-				E7C0839E29D2CA7B0093E82D /* ImagePreviewViewController.swift in Sources */,
+				E7C0839E29D2CA7B0093E82D /* PreviewViewController.swift in Sources */,
 				E70A622C29DD721600909BED /* PreviewOption.swift in Sources */,
 				E7A81DB52919371300910177 /* KeyboardObserver.swift in Sources */,
 				74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */,
@@ -654,7 +664,9 @@
 				943904F32226484F00859537 /* UserGroupStackedViewController.swift in Sources */,
 				74C072AA220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift in Sources */,
 				943904ED2226366700859537 /* AlertViewController.swift in Sources */,
+				E7B4AE4529E03623000B6F02 /* PreviewItem.swift in Sources */,
 				E7B4AE4029DEF043000B6F02 /* GifTableViewCell.swift in Sources */,
+				E7D573ED29E4361100E699EF /* PlayerView.swift in Sources */,
 				E7EE4E07291E5E5100627C80 /* KeyboardPolicy.swift in Sources */,
 				743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */,
 				DC139072216D9458007A3E64 /* PanModalPresentable+UIViewController.swift in Sources */,
@@ -704,7 +716,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PanModal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -733,7 +745,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PanModal/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -916,7 +928,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6UF7FN999R;
 				INFOPLIST_FILE = "$(SRCROOT)/Sample/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -937,7 +949,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6UF7FN999R;
 				INFOPLIST_FILE = "$(SRCROOT)/Sample/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

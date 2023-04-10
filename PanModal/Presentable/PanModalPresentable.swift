@@ -30,7 +30,7 @@ public protocol PanModalPresentable: AnyObject {
 	/**
 	 The  view shuld be shown above modal container.
 	 */
-	var previewView: UIView? { get }
+	var preview: PreviewItem? { get }
 
 	var previewOptions: [PreviewOption] { get }
 
