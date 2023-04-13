@@ -12,4 +12,8 @@ public enum PreviewOption {
 	case fixedPreviewSize(CGSize)
 	case aspectRatio(CGFloat)
 	case minHorizontalInset(CGFloat)
+	///the minimum percentage of filling the entire width of the container
+	case fillMinWidthRatio(CGFloat)
+	///the minimum percentage of filling the entire height of the container
+	case fillMinHeightRatio(CGFloat)
 }

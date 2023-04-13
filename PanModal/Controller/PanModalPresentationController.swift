@@ -407,7 +407,8 @@ private extension PanModalPresentationController {
 		var constraints: [NSLayoutConstraint] = [
 			previewCopy.centerYAnchor.constraint(equalTo: previewContainer.centerYAnchor),
 			previewCopy.centerXAnchor.constraint(equalTo: previewContainer.centerXAnchor),
-			previewCopy.leadingAnchor.constraint(greaterThanOrEqualTo: previewContainer.leadingAnchor)
+			previewCopy.leadingAnchor.constraint(greaterThanOrEqualTo: previewContainer.leadingAnchor),
+			previewCopy.topAnchor.constraint(greaterThanOrEqualTo: previewContainer.topAnchor),
 		]
 
 		if let options = presentable?.previewOptions {
@@ -425,6 +426,14 @@ private extension PanModalPresentationController {
 				case let .minHorizontalInset(value):
 					constraints.append(
 						previewCopy.leadingAnchor.constraint(greaterThanOrEqualTo: previewContainer.leadingAnchor, constant: value)
+					)
+				case let .fillMinWidthRatio(value):
+					constraints.append(
+						previewCopy.widthAnchor.constraint(greaterThanOrEqualTo: previewContainer.widthAnchor, multiplier: value)
+					)
+				case let .fillMinHeightRatio(value):
+					constraints.append(
+						previewCopy.heightAnchor.constraint(greaterThanOrEqualTo: previewContainer.heightAnchor, multiplier: value)
 					)
 				}
 			})
