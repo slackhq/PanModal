@@ -435,6 +435,15 @@ private extension PanModalPresentationController {
 					constraints.append(
 						previewCopy.heightAnchor.constraint(greaterThanOrEqualTo: previewContainer.heightAnchor, multiplier: value)
 					)
+				case let .fillByMinSide(mult, ratio):
+					constraints.append(
+						previewCopy.widthAnchor.constraint(equalTo: previewCopy.heightAnchor, multiplier: ratio)
+					)
+					if ratio < 1 {
+						previewCopy.heightAnchor.constraint(greaterThanOrEqualTo: previewContainer.heightAnchor, multiplier: mult).isActive = true
+					} else {
+						previewCopy.widthAnchor.constraint(greaterThanOrEqualTo: previewContainer.widthAnchor, multiplier: mult).isActive = true
+					}
 				}
 			})
 		}

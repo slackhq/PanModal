@@ -16,4 +16,6 @@ public enum PreviewOption {
 	case fillMinWidthRatio(CGFloat)
 	///the minimum percentage of filling the entire height of the container
 	case fillMinHeightRatio(CGFloat)
+	///fill the container by min sides with a given multiple relative to the corresponding side
+	case fillByMinSide(mult: CGFloat, W_HAspoct: CGFloat)
 }
