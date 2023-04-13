@@ -265,5 +265,12 @@ public protocol PanModalPresentable: AnyObject {
 	 Default value is an empty implementation.
 	 */
 	func panModalWillDrop(dropWay: DropWay)
+
+	/**
+	 Notifies the delegate after the pan modal preview is displayed .
+
+	 Default value is an empty implementation.
+	 */
+	func panModalDidDisplayPreview(view: UIView?)
 }
 #endif

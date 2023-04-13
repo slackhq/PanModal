@@ -112,10 +112,11 @@ public class PanModalPresentationAnimator: NSObject {
             panView.frame.origin.y = yPos
 			snapshot?.frame = containerView.convert(toPreviewView?.frame ?? .zero, from: toPreviewView?.superview)
 
-        }, config: presentable) { [weak self] didComplete in
+        }, config: presentable) { [weak self, weak presentable] didComplete in
             // Calls viewDidAppear and viewDidDisappear
 			snapshot?.removeFromSuperview()
 			toPreviewView?.isHidden = false
+			presentable?.panModalDidDisplayPreview(view: toPreviewView)
             fromVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
             self?.feedbackGenerator = nil

@@ -148,5 +148,9 @@ public extension PanModalPresentable where Self: UIViewController {
 	func panModalWillDrop(dropWay: DropWay) {
 		
 	}
+
+	func panModalDidDisplayPreview(view: UIView?) {
+		
+	}
 }
 #endif
