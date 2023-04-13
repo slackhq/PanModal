@@ -83,7 +83,7 @@ class SampleViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
 		switch rowType {
 		case .imagePreview:
-			let vc = PreviewViewController(preview: .image(sourceView: tableView.cellForRow(at: indexPath)!.imageView!))
+			let vc = PreviewViewController(preview: .image(sourceView: tableView.cellForRow(at: indexPath)!.imageView!, url: nil))
 			presentPanModal(vc)
 		case .videoPreview:
 			let cell = tableView.cellForRow(at: indexPath) as! VideoTableViewCell
@@ -92,7 +92,7 @@ class SampleViewController: UITableViewController {
 			presentPanModal(vc)
 		case .gifPreview:
 			let cell = tableView.cellForRow(at: indexPath) as! GifTableViewCell
-			let vc = PreviewViewController(preview: .gif(sourceView: cell.gifView))
+			let vc = PreviewViewController(preview: .gif(sourceView: cell.gifView, url: nil))
 			presentPanModal(vc)
 		case .loadable:
 			let cell = tableView.cellForRow(at: indexPath)!

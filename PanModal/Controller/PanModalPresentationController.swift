@@ -433,7 +433,7 @@ private extension PanModalPresentationController {
 		constraints.forEach { $0.isActive = true }
 
 		switch preview {
-		case .gif, .image:
+		case .gif, .image, .animation:
 			break
 		case .video(let item, _):
 			let playerView = PlayerView()

@@ -11,16 +11,19 @@ import UIKit
 import AVFoundation
 
 public enum PreviewItem {
-	case gif(sourceView: UIView)
-	case image(sourceView: UIView)
+	case gif(sourceView: UIView, url: URL?)
+	case image(sourceView: UIView, url: URL?)
+	case animation(sourceView: UIView, url: URL?)
 	case video(item: AVPlayerItem, sourceView: UIView)
 	case loadable(state: (@escaping ((LoadablaItemState) -> Void)) -> (), sourceView: UIView)
 
 	var view: UIView {
 		switch self {
-		case .gif(let view):
+		case .gif(let view, _):
 			return view
-		case .image(let view):
+		case .image(let view, _):
+			return view
+		case .animation(let view, _):
 			return view
 		case .video(_, let view):
 			return view

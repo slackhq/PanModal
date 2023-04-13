@@ -63,7 +63,7 @@ extension PreviewViewController: PanModalPresentable {
 				.aspectRatio(16.0/9.0),
 				.minHorizontalInset(20)
 			]
-		case let .gif(view):
+		case let .gif(view, _):
 			return [.fixedPreviewSize(view.bounds.size)]
 		default:
 			return []
