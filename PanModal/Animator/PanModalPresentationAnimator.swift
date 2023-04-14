@@ -93,7 +93,13 @@ public class PanModalPresentationAnimator: NSObject {
 		// Preview
 		let toPreviewView: UIView? = containerView.previewContainerView?.subviews.first
 		let fromPreviewView: UIView? = presentable?.preview?.view
-		let snapshot: UIView? = fromPreviewView?.snapshotView(afterScreenUpdates: false)
+		let snapshot: UIView?
+		if let imageView = fromPreviewView as? UIImageView {
+			snapshot = UIImageView(image: imageView.image)
+		} else {
+			snapshot = fromPreviewView?.snapshotView(afterScreenUpdates: false)
+		}
+		snapshot?.clipsToBounds = true
 
 		if let fromPreviewView = fromPreviewView,
 		   let toPreviewView = toPreviewView,
@@ -110,7 +116,11 @@ public class PanModalPresentationAnimator: NSObject {
 				snapshot?.alpha = 0
 			}
             panView.frame.origin.y = yPos
-			snapshot?.frame = containerView.convert(toPreviewView?.frame ?? .zero, from: toPreviewView?.superview)
+			if let toPreviewView {
+				snapshot?.frame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
+				snapshot?.contentMode = toPreviewView.contentMode
+				snapshot?.layoutIfNeeded()
+			}
 
         }, config: presentable) { [weak self, weak presentable] didComplete in
             // Calls viewDidAppear and viewDidDisappear
@@ -143,6 +153,7 @@ public class PanModalPresentationAnimator: NSObject {
 		let toPreviewView: UIView? = presentable?.preview?.view
 		let fromPreviewView: UIView? = containerView.previewContainerView?.subviews.first
 		let snapshot: UIView? = fromPreviewView?.snapshotView(afterScreenUpdates: false)
+		snapshot?.clipsToBounds = true
 
 		if let fromPreviewView = fromPreviewView,
 		   let snapshot = snapshot {
@@ -154,8 +165,11 @@ public class PanModalPresentationAnimator: NSObject {
 
         PanModalAnimator.animate({
             panView.frame.origin.y = transitionContext.containerView.frame.height
-			snapshot?.frame = containerView.convert(toPreviewView?.frame ?? .zero, from: toPreviewView?.superview)
-
+			if let toPreviewView {
+				snapshot?.frame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
+				snapshot?.contentMode = toPreviewView.contentMode
+				snapshot?.layoutIfNeeded()
+			}
         }, config: presentable) { didComplete in
             fromVC.view.removeFromSuperview()
 			snapshot?.removeFromSuperview()
