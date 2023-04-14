@@ -11,7 +11,7 @@ import UIKit
 import AVFoundation
 
 public enum PreviewItem {
-	case gif(sourceView: UIView, url: URL?)
+	case gif(sourceView: UIView, url: URL?, considerParentLayer: Bool)
 	case image(sourceView: UIView, url: URL?)
 	case animation(sourceView: UIView, url: URL?)
 	case video(item: AVPlayerItem, sourceView: UIView)
@@ -19,7 +19,7 @@ public enum PreviewItem {
 
 	var view: UIView {
 		switch self {
-		case .gif(let view, _):
+		case .gif(let view, _, _):
 			return view
 		case .image(let view, _):
 			return view

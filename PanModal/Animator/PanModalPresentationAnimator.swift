@@ -166,7 +166,12 @@ public class PanModalPresentationAnimator: NSObject {
         PanModalAnimator.animate({
             panView.frame.origin.y = transitionContext.containerView.frame.height
 			if let toPreviewView {
-				snapshot?.frame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
+				let toFrame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
+				if toFrame == .zero {
+					snapshot?.alpha = 0
+				} else {
+					snapshot?.frame = toFrame
+				}
 				snapshot?.contentMode = toPreviewView.contentMode
 				snapshot?.layoutIfNeeded()
 			}

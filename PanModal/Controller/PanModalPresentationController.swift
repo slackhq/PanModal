@@ -7,6 +7,8 @@
 
 #if os(iOS)
 import UIKit
+import Kingfisher
+import Lottie
 
 /**
  The PanModalPresentationController is the middle layer between the presentingViewController
@@ -390,14 +392,32 @@ private extension PanModalPresentationController {
 
 		containerView.addSubview(previewContainer)
 		let previewCopy: UIView
-		if let previewView = previewView as? UIImageView {
-			if case .loadable = preview {
-				previewCopy = UIView(frame: previewView.frame)
+		switch preview {
+		case let .image(sourceView, _), let .video(_, sourceView), let .loadable(_, sourceView):
+			if let imageView = sourceView as? UIImageView {
+				previewCopy = UIImageView(image: imageView.image)
 			} else {
-				previewCopy = UIImageView(image: previewView.image)
+				previewCopy = sourceView.snapshotView(afterScreenUpdates: false) ?? UIView()
 			}
-		} else {
-			previewCopy = previewView.snapshotView(afterScreenUpdates: false) ?? UIView()
+		case let .gif(sourceView, url, considerParentLayer):
+			let view = AnimatedImageView()
+			view.startAnimating()
+			view.kf.setImage(
+				with: url,
+				options: [.backgroundDecode]
+			)
+			let superView = sourceView.superview
+			view.layer.cornerRadius = considerParentLayer ? superView?.layer.cornerRadius ?? sourceView.layer.cornerRadius : sourceView.layer.cornerRadius
+			view.layer.maskedCorners = considerParentLayer ? superView?.layer.maskedCorners ?? sourceView.layer.maskedCorners : sourceView.layer.maskedCorners
+			view.clipsToBounds = true
+			previewCopy = view
+		case let .animation(sourceView, url):
+			let view = LottieAnimationView()
+			LottieAnimation.loadedFrom(url: url!) { [weak self, weak view] animation in
+				view?.animation = animation
+				view?.play(toProgress: 1, loopMode: .loop)
+			}
+			previewCopy = view
 		}
 		previewCopy.translatesAutoresizingMaskIntoConstraints = false
 		previewCopy.contentMode = .scaleAspectFit
@@ -440,9 +460,9 @@ private extension PanModalPresentationController {
 						previewCopy.widthAnchor.constraint(equalTo: previewCopy.heightAnchor, multiplier: ratio)
 					)
 					if ratio < 1 {
-						previewCopy.heightAnchor.constraint(greaterThanOrEqualTo: previewContainer.heightAnchor, multiplier: mult).isActive = true
+						previewCopy.heightAnchor.constraint(equalTo: previewContainer.heightAnchor, multiplier: mult).isActive = true
 					} else {
-						previewCopy.widthAnchor.constraint(greaterThanOrEqualTo: previewContainer.widthAnchor, multiplier: mult).isActive = true
+						previewCopy.widthAnchor.constraint(equalTo: previewContainer.widthAnchor, multiplier: mult).isActive = true
 					}
 				}
 			})
