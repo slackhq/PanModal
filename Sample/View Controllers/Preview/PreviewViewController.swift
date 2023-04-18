@@ -54,7 +54,7 @@ extension PreviewViewController: PanModalPresentable {
 		return false
 	}
 
-	var previewOptions: [PreviewOption] {
+	var previewSizeOptions: [PreviewSizeOption] {
 		switch preview {
 		case .loadable:
 			return [.fixedPreviewSize(.init(width: 300, height: 300))]
