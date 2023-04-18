@@ -1,5 +1,5 @@
 //
-//  PreviewOption.swift
+//  PreviewSizeOption.swift
 //  PanModal
 //
 //  Created by VLADIMIR LEVTSOV on 05.04.2023.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum PreviewOption {
+public enum PreviewSizeOption {
 	case fixedPreviewSize(CGSize)
 	case aspectRatio(CGFloat)
 	case minHorizontalInset(CGFloat)

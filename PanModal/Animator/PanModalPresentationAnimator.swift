@@ -101,25 +101,35 @@ public class PanModalPresentationAnimator: NSObject {
 		}
 		snapshot?.clipsToBounds = true
 
-		if let fromPreviewView = fromPreviewView,
-		   let toPreviewView = toPreviewView,
-		   let _snapshot = snapshot
+		if let fromPreviewView,
+		   let toPreviewView,
+		   let snapshot,
+		   let presentable
 		{
-			_snapshot.contentMode = fromPreviewView.contentMode
+			snapshot.contentMode = fromPreviewView.contentMode
 			toPreviewView.isHidden = true
-			containerView.addSubview(_snapshot)
-			_snapshot.frame = containerView.convert(fromPreviewView.frame, from: fromPreviewView.superview)
+			containerView.addSubview(snapshot)
+			if presentable.previewTransitionOptions.contains(.fadeIn) {
+				snapshot.alpha = 0
+			}
+			snapshot.frame = containerView.convert(fromPreviewView.frame, from: fromPreviewView.superview)
 		}
 
         PanModalAnimator.animate({
-			if case .loadable = presentable?.preview {
-				snapshot?.alpha = 0
-			}
-            panView.frame.origin.y = yPos
-			if let toPreviewView {
-				snapshot?.frame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
-				snapshot?.contentMode = toPreviewView.contentMode
-				snapshot?.layoutIfNeeded()
+			panView.frame.origin.y = yPos
+			if let presentable {
+				if case .loadable = presentable.preview {
+					snapshot?.alpha = 0
+				} else if presentable.previewTransitionOptions.contains(.fadeIn) {
+					snapshot?.alpha = 1
+				}
+				if let toPreviewView {
+					if presentable.previewTransitionOptions.contains(.viewToViewIn) {
+						snapshot?.frame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
+					}
+						snapshot?.contentMode = toPreviewView.contentMode
+						snapshot?.layoutIfNeeded()
+				}
 			}
 
         }, config: presentable) { [weak self, weak presentable] didComplete in
@@ -155,8 +165,8 @@ public class PanModalPresentationAnimator: NSObject {
 		let snapshot: UIView? = fromPreviewView?.snapshotView(afterScreenUpdates: false)
 		snapshot?.clipsToBounds = true
 
-		if let fromPreviewView = fromPreviewView,
-		   let snapshot = snapshot {
+		if let fromPreviewView,
+		   let snapshot {
 			snapshot.contentMode = fromPreviewView.contentMode
 			fromPreviewView.isHidden = true
 			containerView.addSubview(snapshot)
@@ -165,12 +175,18 @@ public class PanModalPresentationAnimator: NSObject {
 
         PanModalAnimator.animate({
             panView.frame.origin.y = transitionContext.containerView.frame.height
-			if let toPreviewView {
+			if let toPreviewView,
+			   let presentable {
 				let toFrame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
 				if toFrame == .zero {
 					snapshot?.alpha = 0
 				} else {
-					snapshot?.frame = toFrame
+					if presentable.previewTransitionOptions.contains(.fadeOut) {
+						snapshot?.alpha = 0
+					}
+					if presentable.previewTransitionOptions.contains(.viewToViewOut) {
+						snapshot?.frame = toFrame
+					}
 				}
 				snapshot?.contentMode = toPreviewView.contentMode
 				snapshot?.layoutIfNeeded()

@@ -21,8 +21,14 @@ public extension PanModalPresentable where Self: UIViewController {
 		nil
 	}
 
-	var previewOptions: [PreviewOption] {
+	var previewSizeOptions: [PreviewSizeOption] {
 		[]
+	}
+
+	var previewTransitionOptions: [PreviewTransitionOption] {
+		[.viewToViewIn,
+		 .viewToViewOut
+		]
 	}
     
     var topOffset: CGFloat {

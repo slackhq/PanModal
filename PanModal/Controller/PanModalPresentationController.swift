@@ -431,7 +431,7 @@ private extension PanModalPresentationController {
 			previewCopy.topAnchor.constraint(greaterThanOrEqualTo: previewContainer.topAnchor),
 		]
 
-		if let options = presentable?.previewOptions {
+		if let options = presentable?.previewSizeOptions {
 			options.forEach({
 				switch $0 {
 				case let .fixedPreviewSize(size):

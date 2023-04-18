@@ -32,7 +32,9 @@ public protocol PanModalPresentable: AnyObject {
 	 */
 	var preview: PreviewItem? { get }
 
-	var previewOptions: [PreviewOption] { get }
+	var previewSizeOptions: [PreviewSizeOption] { get }
+
+	var previewTransitionOptions: [PreviewTransitionOption] { get }
 
     /**
      The scroll view embedded in the view controller.
