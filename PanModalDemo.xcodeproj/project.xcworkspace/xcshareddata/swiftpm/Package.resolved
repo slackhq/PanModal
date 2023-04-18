@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "revision" : "644411854d1d4e019317839573b54f8707b0044b",
+        "version" : "5.15.0"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "state" : {
+        "revision" : "a4622b4d6fdbe76cc5487bc27e84029abaf07217",
+        "version" : "4.0.1"
+      }
+    }
+  ],
+  "version" : 2
+}

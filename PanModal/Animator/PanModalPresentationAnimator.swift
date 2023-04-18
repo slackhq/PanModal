@@ -115,32 +115,35 @@ public class PanModalPresentationAnimator: NSObject {
 			snapshot.frame = containerView.convert(fromPreviewView.frame, from: fromPreviewView.superview)
 		}
 
-        PanModalAnimator.animate({
-			panView.frame.origin.y = yPos
-			if let presentable {
-				if case .loadable = presentable.preview {
-					snapshot?.alpha = 0
-				} else if presentable.previewTransitionOptions.contains(.fadeIn) {
-					snapshot?.alpha = 1
-				}
-				if let toPreviewView {
-					if presentable.previewTransitionOptions.contains(.viewToViewIn) {
-						snapshot?.frame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
+        PanModalAnimator.animate(
+			{
+				panView.frame.origin.y = yPos
+				if let presentable {
+					if case .loadable = presentable.preview {
+						snapshot?.alpha = 0
+					} else if presentable.previewTransitionOptions.contains(.fadeIn) {
+						snapshot?.alpha = 1
 					}
+					if let toPreviewView {
+						if presentable.previewTransitionOptions.contains(.viewToViewIn) {
+							snapshot?.frame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
+						}
 						snapshot?.contentMode = toPreviewView.contentMode
 						snapshot?.layoutIfNeeded()
+					}
 				}
-			}
 
-        }, config: presentable) { [weak self, weak presentable] didComplete in
-            // Calls viewDidAppear and viewDidDisappear
+			},
+			config: presentable
+		) { [weak self, weak presentable] didComplete in
+			// Calls viewDidAppear and viewDidDisappear
 			snapshot?.removeFromSuperview()
 			toPreviewView?.isHidden = false
 			presentable?.panModalDidDisplayPreview(view: toPreviewView)
-            fromVC.endAppearanceTransition()
-            transitionContext.completeTransition(didComplete)
-            self?.feedbackGenerator = nil
-        }
+			fromVC.endAppearanceTransition()
+			transitionContext.completeTransition(didComplete)
+			self?.feedbackGenerator = nil
+		}
     }
 
     /**
@@ -173,31 +176,38 @@ public class PanModalPresentationAnimator: NSObject {
 			snapshot.frame = containerView.convert(fromPreviewView.frame, from: fromPreviewView.superview)
 		}
 
-        PanModalAnimator.animate({
-            panView.frame.origin.y = transitionContext.containerView.frame.height
-			if let toPreviewView,
-			   let presentable {
-				let toFrame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
-				if toFrame == .zero {
-					snapshot?.alpha = 0
-				} else {
-					if presentable.previewTransitionOptions.contains(.fadeOut) {
+		PanModalAnimator.animate(
+			{
+				panView.frame.origin.y = transitionContext.containerView.frame.height
+				if let toPreviewView,
+				   let presentable {
+					let toFrame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
+					if toFrame == .zero {
 						snapshot?.alpha = 0
-					}
-					if presentable.previewTransitionOptions.contains(.viewToViewOut) {
+					} else if presentable.previewTransitionOptions.contains(.viewToViewOut) {
 						snapshot?.frame = toFrame
 					}
+					snapshot?.contentMode = toPreviewView.contentMode
+					snapshot?.layoutIfNeeded()
 				}
-				snapshot?.contentMode = toPreviewView.contentMode
-				snapshot?.layoutIfNeeded()
-			}
-        }, config: presentable) { didComplete in
-            fromVC.view.removeFromSuperview()
+			},
+			keyFrameAnimations: [
+				{ [weak presentable, weak snapshot] in
+					if presentable?.previewTransitionOptions.contains(.fadeOut) ?? false {
+						UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 0.2) {
+							snapshot?.alpha = 0
+						}
+					}
+				}
+			],
+			config: presentable
+		) { didComplete in
+			fromVC.view.removeFromSuperview()
 			snapshot?.removeFromSuperview()
-            // Calls viewDidAppear and viewDidDisappear
-            toVC.endAppearanceTransition()
-            transitionContext.completeTransition(didComplete)
-        }
+			// Calls viewDidAppear and viewDidDisappear
+			toVC.endAppearanceTransition()
+			transitionContext.completeTransition(didComplete)
+		}
     }
 
     /**
