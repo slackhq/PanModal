@@ -388,37 +388,11 @@ private extension PanModalPresentationController {
 		guard let preview = presentable?.preview else {
 			return
 		}
-		let previewView = preview.view
 
 		containerView.addSubview(previewContainer)
-		let previewCopy: UIView
-		switch preview {
-		case let .image(sourceView, _), let .video(_, sourceView), let .loadable(_, sourceView):
-			if let imageView = sourceView as? UIImageView {
-				previewCopy = UIImageView(image: imageView.image)
-			} else {
-				previewCopy = sourceView.snapshotView(afterScreenUpdates: false) ?? UIView()
-			}
-		case let .gif(sourceView, url, considerParentLayer):
-			let view = AnimatedImageView()
-			view.startAnimating()
-			view.kf.setImage(
-				with: url,
-				options: [.backgroundDecode]
-			)
-			let superView = sourceView.superview
-			view.layer.cornerRadius = considerParentLayer ? superView?.layer.cornerRadius ?? sourceView.layer.cornerRadius : sourceView.layer.cornerRadius
-			view.layer.maskedCorners = considerParentLayer ? superView?.layer.maskedCorners ?? sourceView.layer.maskedCorners : sourceView.layer.maskedCorners
-			view.clipsToBounds = true
-			previewCopy = view
-		case let .animation(sourceView, url):
-			let view = LottieAnimationView()
-			LottieAnimation.loadedFrom(url: url!) { [weak self, weak view] animation in
-				view?.animation = animation
-				view?.play(toProgress: 1, loopMode: .loop)
-			}
-			previewCopy = view
-		}
+		let previewCopy: UIView = preview.sourceCopy
+		previewCopy.play()
+
 		previewCopy.translatesAutoresizingMaskIntoConstraints = false
 		previewCopy.contentMode = .scaleAspectFit
 
@@ -536,7 +510,6 @@ private extension PanModalPresentationController {
 			}
 		}
 
-		previewView.setNeedsLayout()
 		previewCopy.setNeedsLayout()
 		previewContainer.layoutIfNeeded()
 	}

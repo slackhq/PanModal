@@ -92,13 +92,8 @@ public class PanModalPresentationAnimator: NSObject {
 
 		// Preview
 		let toPreviewView: UIView? = containerView.previewContainerView?.subviews.first
-		let fromPreviewView: UIView? = presentable?.preview?.view
-		let snapshot: UIView?
-		if let imageView = fromPreviewView as? UIImageView {
-			snapshot = UIImageView(image: imageView.image)
-		} else {
-			snapshot = fromPreviewView?.snapshotView(afterScreenUpdates: false)
-		}
+		let fromPreviewView: UIView? = presentable?.preview?.sourceView
+		let snapshot: UIView? = presentable?.preview?.sourceCopy
 		snapshot?.clipsToBounds = true
 
 		if let fromPreviewView,
@@ -125,7 +120,7 @@ public class PanModalPresentationAnimator: NSObject {
 						snapshot?.alpha = 1
 					}
 					if let toPreviewView {
-						if presentable.previewTransitionOptions.contains(.viewToViewIn) {
+						if presentable.previewTransitionOptions.contains(.viewToViewIn) && snapshot?.frame != .zero {
 							snapshot?.frame = containerView.convert(toPreviewView.frame, from: toPreviewView.superview)
 						}
 						snapshot?.contentMode = toPreviewView.contentMode
@@ -163,7 +158,7 @@ public class PanModalPresentationAnimator: NSObject {
         let panView: UIView = containerView.panContainerView ?? fromVC.view
 
 		// Preview
-		let toPreviewView: UIView? = presentable?.preview?.view
+		let toPreviewView: UIView? = presentable?.preview?.sourceView
 		let fromPreviewView: UIView? = containerView.previewContainerView?.subviews.first
 		let snapshot: UIView? = fromPreviewView?.snapshotView(afterScreenUpdates: false)
 		snapshot?.clipsToBounds = true
