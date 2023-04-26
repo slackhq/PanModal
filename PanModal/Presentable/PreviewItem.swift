@@ -17,6 +17,7 @@ public enum PreviewItem {
 	case image(sourceView: UIView, url: URL?)
 	case animation(sourceView: UIView, url: URL?)
 	case video(item: AVPlayerItem, sourceView: UIView)
+	case view(sourceView: UIView)
 	case loadable(state: (@escaping ((LoadablaItemState) -> Void)) -> (), sourceView: UIView)
 
 	var sourceView: UIView {
@@ -30,6 +31,8 @@ public enum PreviewItem {
 		case .video(_, let view):
 			return view
 		case .loadable(_, let view):
+			return view
+		case .view(let view):
 			return view
 		}
 	}
@@ -64,6 +67,8 @@ public enum PreviewItem {
 			} else {
 				return sourceView.snapshotView(afterScreenUpdates: false) ?? UIView()
 			}
+		case .view(let sourceView):
+			return sourceView.snapshotView(afterScreenUpdates: false) ?? UIView()
 		}
 	}
 }

@@ -390,7 +390,13 @@ private extension PanModalPresentationController {
 		}
 
 		containerView.addSubview(previewContainer)
-		let previewCopy: UIView = preview.sourceCopy
+		let previewCopy: UIView
+		switch preview {
+		case .loadable:
+			previewCopy = UIView()
+		case .animation, .gif, .image, .video, .view:
+			previewCopy = preview.sourceCopy
+		}
 		previewCopy.play()
 
 		previewCopy.translatesAutoresizingMaskIntoConstraints = false
@@ -445,7 +451,7 @@ private extension PanModalPresentationController {
 		constraints.forEach { $0.isActive = true }
 
 		switch preview {
-		case .gif, .image, .animation:
+		case .gif, .image, .animation, .view:
 			break
 		case .video(let item, _):
 			let playerView = PlayerView()

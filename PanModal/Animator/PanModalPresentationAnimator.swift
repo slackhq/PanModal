@@ -104,7 +104,9 @@ public class PanModalPresentationAnimator: NSObject {
 			snapshot.contentMode = fromPreviewView.contentMode
 			toPreviewView.isHidden = true
 			containerView.addSubview(snapshot)
-			if presentable.previewTransitionOptions.contains(.fadeIn) {
+			if case .loadable = presentable.preview {
+				snapshot.alpha = 1
+			} else if presentable.previewTransitionOptions.contains(.fadeIn) {
 				snapshot.alpha = 0
 			}
 			snapshot.frame = containerView.convert(fromPreviewView.frame, from: fromPreviewView.superview)
