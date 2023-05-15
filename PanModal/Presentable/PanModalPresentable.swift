@@ -195,6 +195,13 @@ public protocol PanModalPresentable: AnyObject {
 	 */
 	var keyboardPolicy: KeyboardPolicy { get }
 
+	/**
+	 Determines whether the presented controller should notify the presenting of appearance changes (viewWillAppear and viewWillDisappear)
+
+	 Default value is true.
+	 */
+	var shouldNotifyPresentingAppearanceChanges: Bool { get }
+
     /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.
      

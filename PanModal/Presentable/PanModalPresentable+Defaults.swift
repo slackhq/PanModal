@@ -119,6 +119,10 @@ public extension PanModalPresentable where Self: UIViewController {
 		return .switchToLongForm
 	}
 
+	var shouldNotifyPresentingAppearanceChanges: Bool {
+		return true
+	}
+
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return true
     }

@@ -72,8 +72,10 @@ public class PanModalPresentationAnimator: NSObject {
 		let containerView = transitionContext.containerView
         let presentable = panModalLayoutType(from: transitionContext)
 
-        // Calls viewWillAppear and viewWillDisappear
-        fromVC.beginAppearanceTransition(false, animated: true)
+		if (presentable?.shouldNotifyPresentingAppearanceChanges ?? true) {
+			// Calls viewWillAppear and viewWillDisappear
+			fromVC.beginAppearanceTransition(false, animated: true)
+		}
         
         // Presents the view in shortForm position, initially
         let yPos: CGFloat = presentable?.shortFormYPos ?? 0.0
@@ -133,11 +135,13 @@ public class PanModalPresentationAnimator: NSObject {
 			},
 			config: presentable
 		) { [weak self, weak presentable] didComplete in
-			// Calls viewDidAppear and viewDidDisappear
 			snapshot?.removeFromSuperview()
 			toPreviewView?.isHidden = false
 			presentable?.panModalDidDisplayPreview(view: toPreviewView)
-			fromVC.endAppearanceTransition()
+			if (presentable?.shouldNotifyPresentingAppearanceChanges ?? true) {
+				// Calls viewDidAppear and viewDidDisappear
+				fromVC.endAppearanceTransition()
+			}
 			transitionContext.completeTransition(didComplete)
 			self?.feedbackGenerator = nil
 		}
@@ -153,11 +157,14 @@ public class PanModalPresentationAnimator: NSObject {
             let fromVC = transitionContext.viewController(forKey: .from)
             else { return }
 		let containerView = transitionContext.containerView
-        // Calls viewWillAppear and viewWillDisappear
-        toVC.beginAppearanceTransition(true, animated: true)
-        
+
         let presentable = panModalLayoutType(from: transitionContext)
         let panView: UIView = containerView.panContainerView ?? fromVC.view
+
+		if (presentable?.shouldNotifyPresentingAppearanceChanges ?? true) {
+			// Calls viewWillAppear and viewWillDisappear
+			toVC.beginAppearanceTransition(true, animated: true)
+		}
 
 		// Preview
 		let toPreviewView: UIView? = presentable?.preview?.sourceView
@@ -201,8 +208,10 @@ public class PanModalPresentationAnimator: NSObject {
 		) { didComplete in
 			fromVC.view.removeFromSuperview()
 			snapshot?.removeFromSuperview()
-			// Calls viewDidAppear and viewDidDisappear
-			toVC.endAppearanceTransition()
+			if (presentable?.shouldNotifyPresentingAppearanceChanges ?? true) {
+				// Calls viewDidAppear and viewDidDisappear
+				toVC.endAppearanceTransition()
+			}
 			transitionContext.completeTransition(didComplete)
 		}
     }
