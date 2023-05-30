@@ -110,6 +110,20 @@ public protocol PanModalPresentable: AnyObject {
     */
     var panModalBackgroundColor: UIColor { get }
 
+	/**
+	 Background view color for different states. When is nil, used panModalBackgroundColor.
+
+	 Default Value is nil
+	 */
+	var panModalBackgroundColorFormed: PanModalFormParameter<UIColor>? { get }
+
+	/**
+	 Shadow for different states.
+
+	 Default Value is nil
+	 */
+	var panModalShadow: PanModalFormParameter<PanModalShadow>? { get }
+
     /**
      The drag indicator view color.
 
@@ -152,6 +166,7 @@ public protocol PanModalPresentable: AnyObject {
 
     /**
      A flag to determine if dismissal should be initiated when tapping on the dimmed background view.
+		 Need touchDelegate nil
 
      Default value is true.
      */
@@ -165,6 +180,13 @@ public protocol PanModalPresentable: AnyObject {
      Default is true.
     */
     var isUserInteractionEnabled: Bool { get }
+
+	/**
+	 Pass touches from views outside to touch delegate (for passtrought touches)
+
+	 Default Value is nil
+	 */
+	var touchDelegate: UIView? { get }
 
     /**
      A flag to determine if haptic feedback should be enabled during presentation.

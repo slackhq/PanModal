@@ -53,6 +53,8 @@ public class DimmedView: UIView {
         return UITapGestureRecognizer(target: self, action: #selector(didTapView))
     }()
 
+	weak var touchDelegate: UIView?
+
     // MARK: - Initializers
 
     init(dimColor: UIColor = UIColor.black.withAlphaComponent(0.7)) {
@@ -72,5 +74,21 @@ public class DimmedView: UIView {
         didTap?(tapGesture)
     }
 
+	public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+		guard touchDelegate != nil else {
+			return super.hitTest(point, with: event)
+		}
+
+		guard let view = super.hitTest(point, with: event) else {
+			return nil
+		}
+
+		guard view === self,
+						let point = touchDelegate?.convert(point, from: self) else {
+			return view
+		}
+
+		return touchDelegate?.hitTest(point, with: event)
+	}
 }
 #endif
