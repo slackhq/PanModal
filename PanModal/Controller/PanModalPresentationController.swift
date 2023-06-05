@@ -136,8 +136,6 @@ public class PanModalPresentationController: UIPresentationController {
     public override var presentedView: UIView {
         return panContainerView
     }
-    
-    public var customTopView: UIView?
 
     // MARK: - Gesture Recognizers
 
@@ -206,6 +204,7 @@ public class PanModalPresentationController: UIPresentationController {
     override public func presentationTransitionDidEnd(_ completed: Bool) {
         if completed { return }
 
+        presentable?.customTopView?.removeFromSuperview()
         backgroundView.removeFromSuperview()
     }
 
@@ -342,12 +341,7 @@ private extension PanModalPresentationController {
             addDragIndicatorView(to: presentedView)
         }
         
-        if let customTopView = customTopView {
-            containerView.addSubview(customTopView)
-            customTopView.translatesAutoresizingMaskIntoConstraints = false
-            customTopView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-            customTopView.bottomAnchor.constraint(equalTo: dragIndicatorView.topAnchor, constant: -10).isActive = true
-        }
+        addCustomTopViewIfExisted(in: containerView)
 
         setNeedsLayoutUpdate()
         adjustPanContainerBackgroundColor()
@@ -388,6 +382,18 @@ private extension PanModalPresentationController {
         backgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         backgroundView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
+    
+    
+    func addCustomTopViewIfExisted(in containerView: UIView) {
+        guard let customTopView = presentable?.customTopView else { return }
+        containerView.addSubview(customTopView)
+        customTopView.translatesAutoresizingMaskIntoConstraints = false
+        customTopView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        customTopView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+        customTopView.bottomAnchor.constraint(equalTo: dragIndicatorView.topAnchor, constant: -10).isActive = true
+        customTopView.heightAnchor.constraint(equalToConstant: customTopView.frame.height).isActive = true
+    }
+    
     /**
      Adds the drag indicator view to the view hierarchy
      & configures its layout constraints.

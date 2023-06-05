@@ -33,4 +33,36 @@ extension BasicViewController: PanModalPresentable {
     var anchorModalToLongForm: Bool {
         return false
     }
+    
+    var customTopView: CustomTopView? {
+        return TopView()
+    }
+}
+
+extension BasicViewController {
+    final class TopView: CustomTopView {
+        enum Layout {
+            static let size = CGSize(width: UIScreen.main.bounds.width, height: 50)
+        }
+        
+        private let affiliateSwitch = UISwitch()
+        
+        override init(frame: CGRect) {
+            super.init(frame: .init(origin: .zero, size: Layout.size))
+            
+            setupUI()
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        private func setupUI() {
+            addSubview(affiliateSwitch)
+            
+            affiliateSwitch.translatesAutoresizingMaskIntoConstraints = false
+            affiliateSwitch.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            affiliateSwitch.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        }
+    }
 }
