@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CustomTopView: UIView {
+open class CustomTopView: UIView {
     
 }
 
