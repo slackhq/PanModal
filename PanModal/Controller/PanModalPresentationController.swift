@@ -136,6 +136,8 @@ public class PanModalPresentationController: UIPresentationController {
     public override var presentedView: UIView {
         return panContainerView
     }
+    
+    public var customTopView: UIView?
 
     // MARK: - Gesture Recognizers
 
@@ -339,6 +341,13 @@ private extension PanModalPresentationController {
         if presentable.showDragIndicator {
             addDragIndicatorView(to: presentedView)
         }
+        
+        if let customTopView = customTopView {
+            containerView.addSubview(customTopView)
+            customTopView.translatesAutoresizingMaskIntoConstraints = false
+            customTopView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+            customTopView.bottomAnchor.constraint(equalTo: dragIndicatorView.topAnchor, constant: -10).isActive = true
+        }
 
         setNeedsLayoutUpdate()
         adjustPanContainerBackgroundColor()
@@ -379,7 +388,6 @@ private extension PanModalPresentationController {
         backgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         backgroundView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
-
     /**
      Adds the drag indicator view to the view hierarchy
      & configures its layout constraints.
