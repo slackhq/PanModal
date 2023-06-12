@@ -644,6 +644,7 @@ private extension PanModalPresentationController {
      */
     func adjust(toYPosition yPos: CGFloat) {
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
+        presentable?.customTopView?.frame.origin.y = max(yPos, anchoredYPosition) - (presentable?.customTopView?.frame.height ?? 0) * 1.5
         
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max
