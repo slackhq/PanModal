@@ -388,8 +388,8 @@ private extension PanModalPresentationController {
         guard let customTopView = presentable?.customTopView else { return }
         containerView.addSubview(customTopView)
         customTopView.translatesAutoresizingMaskIntoConstraints = false
-        customTopView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        customTopView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+        customTopView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        customTopView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         customTopView.bottomAnchor.constraint(equalTo: dragIndicatorView.topAnchor, constant: -10).isActive = true
         customTopView.heightAnchor.constraint(equalToConstant: customTopView.frame.height).isActive = true
     }
