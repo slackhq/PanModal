@@ -12,6 +12,7 @@ public class PanModalWrappedViewController: UIViewController {
     struct Constants {
         static let snapMovementSensitivity = CGFloat(0.7)
         static let dragIndicatorHeight = CGFloat(16)
+        static let customTopViewOffset = CGFloat(10)
     }
 
     // MARK: - Properties
@@ -607,8 +608,16 @@ private extension PanModalWrappedViewController {
      Sets the y position of the presentedView & adjusts the backgroundView.
      */
     func adjust(toYPosition yPos: CGFloat) {
+        let topViewHeight: CGFloat = {
+            if let topViewHeight = presentable?.customTopView?.frame.height {
+                return topViewHeight + Constants.customTopViewOffset
+            } else {
+                return 0
+            }
+        }()
+        
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
-        presentable?.customTopView?.frame.origin.y = max(yPos, anchoredYPosition) - (presentable?.customTopView?.frame.height ?? 0) * 1.5
+        presentable?.customTopView?.frame.origin.y = max(yPos, anchoredYPosition) - topViewHeight - PanModalPresentationController.Constants.dragIndicatorHeight
         
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max

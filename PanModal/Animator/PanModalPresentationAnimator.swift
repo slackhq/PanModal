@@ -63,7 +63,7 @@ public class PanModalPresentationAnimator: NSObject {
         let topView = transitionContext.containerView.customTopView
         let topViewHeight: CGFloat = {
             if let topViewHeight = topView?.frame.height {
-                return topViewHeight + 10
+                return topViewHeight + PanModalPresentationController.Constants.customTopViewOffset
             } else {
                 return 0
             }
@@ -97,7 +97,7 @@ public class PanModalPresentationAnimator: NSObject {
         let topView = transitionContext.containerView.customTopView
         let topViewHeight: CGFloat = {
             if let topViewHeight = topView?.frame.height {
-                return topViewHeight + 10
+                return topViewHeight + PanModalPresentationController.Constants.customTopViewOffset
             } else {
                 return 0
             }
