@@ -78,7 +78,7 @@ public extension PanModalPresentable where Self: UIViewController {
         return true
     }
     
-    var panCustomTopView: CustomTopView? {
+    var panCustomTopView: PanCustomTopView? {
         return nil
     }
 

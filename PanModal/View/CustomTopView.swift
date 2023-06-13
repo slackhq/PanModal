@@ -1,11 +1,11 @@
 import UIKit
 
-open class CustomTopView: UIView {
+open class PanCustomTopView: UIView {
     
 }
 
 extension UIView {
-    var customTopView: CustomTopView? {
-        return subviews.compactMap({ $0 as? CustomTopView }).first
+    var panCustomTopView: PanCustomTopView? {
+        return subviews.compactMap({ $0 as? PanCustomTopView }).first
     }
 }

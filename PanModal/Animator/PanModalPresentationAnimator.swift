@@ -60,7 +60,7 @@ public class PanModalPresentationAnimator: NSObject {
 
         // Use panView as presentingView if it already exists within the containerView
         let panView: UIView = transitionContext.containerView.panContainerView ?? toVC.view
-        let topView = transitionContext.containerView.customTopView
+        let topView = transitionContext.containerView.panCustomTopView
         let topViewHeight: CGFloat = {
             if let topViewHeight = topView?.frame.height {
                 return topViewHeight + PanModalPresentationController.Constants.customTopViewOffset
@@ -94,7 +94,7 @@ public class PanModalPresentationAnimator: NSObject {
 
         let presentable = fromVC as? PanModalPresentable.LayoutType
         let panView: UIView = transitionContext.containerView.panContainerView ?? fromVC.view
-        let topView = transitionContext.containerView.customTopView
+        let topView = transitionContext.containerView.panCustomTopView
         let topViewHeight: CGFloat = {
             if let topViewHeight = topView?.frame.height {
                 return topViewHeight + PanModalPresentationController.Constants.customTopViewOffset

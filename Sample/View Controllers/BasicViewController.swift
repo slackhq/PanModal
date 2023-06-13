@@ -35,13 +35,13 @@ extension BasicViewController: PanModalPresentable {
         return false
     }
     
-    var panCustomTopView: CustomTopView? {
+    var panCustomTopView: PanCustomTopView? {
         return topView
     }
 }
 
 extension BasicViewController {
-    final class TopView: CustomTopView {
+    final class TopView: PanCustomTopView {
         enum Layout {
             static let size = CGSize(width: UIScreen.main.bounds.width, height: 50)
         }
