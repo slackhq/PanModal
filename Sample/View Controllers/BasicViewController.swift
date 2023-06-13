@@ -9,6 +9,7 @@
 import UIKit
 
 class BasicViewController: UIViewController {
+    private let topView = TopView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ extension BasicViewController: PanModalPresentable {
     }
     
     var customTopView: CustomTopView? {
-        return TopView()
+        return topView
     }
 }
 
@@ -45,7 +46,23 @@ extension BasicViewController {
             static let size = CGSize(width: UIScreen.main.bounds.width, height: 50)
         }
         
+        private let containerView: UIView = {
+            let containerView = UIView()
+            containerView.backgroundColor = .white
+            containerView.layer.cornerRadius = 12
+            containerView.layer.masksToBounds = true
+            
+            return containerView
+        }()
+        
         private let affiliateSwitch = UISwitch()
+        
+        private let titleLabel: UILabel = {
+            let label = UILabel()
+            label.text = "CustomTopView Example"
+            label.textColor = .black
+            return label
+        }()
         
         override init(frame: CGRect) {
             super.init(frame: .init(origin: .zero, size: Layout.size))
@@ -58,11 +75,22 @@ extension BasicViewController {
         }
         
         private func setupUI() {
-            addSubview(affiliateSwitch)
+            containerView.addSubview(titleLabel)
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
+            titleLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
             
+            containerView.addSubview(affiliateSwitch)
             affiliateSwitch.translatesAutoresizingMaskIntoConstraints = false
-            affiliateSwitch.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            affiliateSwitch.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            affiliateSwitch.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10).isActive = true
+            affiliateSwitch.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+            
+            addSubview(containerView)
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+            containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
     }
 }
