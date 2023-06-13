@@ -35,7 +35,7 @@ extension BasicViewController: PanModalPresentable {
         return false
     }
     
-    var customTopView: CustomTopView? {
+    var panCustomTopView: CustomTopView? {
         return topView
     }
 }

@@ -205,7 +205,7 @@ public class PanModalPresentationController: UIPresentationController {
     override public func presentationTransitionDidEnd(_ completed: Bool) {
         if completed { return }
 
-        presentable?.customTopView?.removeFromSuperview()
+        presentable?.panCustomTopView?.removeFromSuperview()
         backgroundView.removeFromSuperview()
     }
 
@@ -386,7 +386,7 @@ private extension PanModalPresentationController {
     
     
     func addCustomTopViewIfExisted(in containerView: UIView) {
-        guard let customTopView = presentable?.customTopView else { return }
+        guard let customTopView = presentable?.panCustomTopView else { return }
         containerView.addSubview(customTopView)
         customTopView.translatesAutoresizingMaskIntoConstraints = false
         customTopView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
@@ -645,7 +645,7 @@ private extension PanModalPresentationController {
      */
     func adjust(toYPosition yPos: CGFloat) {
         let topViewHeight: CGFloat = {
-            if let topViewHeight = presentable?.customTopView?.frame.height {
+            if let topViewHeight = presentable?.panCustomTopView?.frame.height {
                 return topViewHeight + Constants.customTopViewOffset
             } else {
                 return 0
@@ -653,7 +653,7 @@ private extension PanModalPresentationController {
         }()
         
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
-        presentable?.customTopView?.frame.origin.y = max(yPos, anchoredYPosition) - topViewHeight - PanModalPresentationController.Constants.dragIndicatorHeight
+        presentable?.panCustomTopView?.frame.origin.y = max(yPos, anchoredYPosition) - topViewHeight - PanModalPresentationController.Constants.dragIndicatorHeight
         
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max

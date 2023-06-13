@@ -134,7 +134,7 @@ public protocol PanModalPresentable {
      */
     var showDragIndicator: Bool { get }
 
-    var customTopView: CustomTopView? { get }
+    var panCustomTopView: CustomTopView? { get }
 
     /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.

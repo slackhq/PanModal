@@ -609,7 +609,7 @@ private extension PanModalWrappedViewController {
      */
     func adjust(toYPosition yPos: CGFloat) {
         let topViewHeight: CGFloat = {
-            if let topViewHeight = presentable?.customTopView?.frame.height {
+            if let topViewHeight = presentable?.panCustomTopView?.frame.height {
                 return topViewHeight + Constants.customTopViewOffset
             } else {
                 return 0
@@ -617,7 +617,7 @@ private extension PanModalWrappedViewController {
         }()
         
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
-        presentable?.customTopView?.frame.origin.y = max(yPos, anchoredYPosition) - topViewHeight - PanModalPresentationController.Constants.dragIndicatorHeight
+        presentable?.panCustomTopView?.frame.origin.y = max(yPos, anchoredYPosition) - topViewHeight - PanModalPresentationController.Constants.dragIndicatorHeight
         
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max
