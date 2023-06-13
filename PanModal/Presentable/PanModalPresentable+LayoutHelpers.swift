@@ -92,7 +92,9 @@ extension PanModalPresentable where Self: UIViewController {
 
         }
 
-        return container.bounds.size.height - topOffset
+        let customTopViewHeight = panCustomTopView?.frame.height ?? 0
+
+        return container.bounds.size.height - topOffset - customTopViewHeight
     }
 
     /**

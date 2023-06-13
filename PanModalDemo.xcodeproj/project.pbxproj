@@ -26,6 +26,8 @@
 		638A9380256B4DC500A5E00B /* PanModalWrappedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */; };
 		638A9383256B4E3F00A5E00B /* PanModalWrappedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */; };
 		638A938D256BB26E00A5E00B /* EmbedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A9387256BB21800A5E00B /* EmbedViewController.swift */; };
+		6E763B4C2A2E2313002A77E8 /* CustomTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E763B4B2A2E2313002A77E8 /* CustomTopView.swift */; };
+		6E763B4D2A2E25A2002A77E8 /* CustomTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E763B4B2A2E2313002A77E8 /* CustomTopView.swift */; };
 		743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */; };
 		743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */; };
 		743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */; };
@@ -99,6 +101,7 @@
 		0F2A2C542239C119003BDB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalWrappedViewController.swift; sourceTree = "<group>"; };
 		638A9387256BB21800A5E00B /* EmbedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedViewController.swift; sourceTree = "<group>"; };
+		6E763B4B2A2E2313002A77E8 /* CustomTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopView.swift; sourceTree = "<group>"; };
 		743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
 		743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupHeaderView.swift; sourceTree = "<group>"; };
 		743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupMemberPresentable.swift; sourceTree = "<group>"; };
@@ -321,6 +324,7 @@
 				DC13906E216D9458007A3E64 /* DimmedView.swift */,
 				94795C9C21F03368008045A0 /* PanContainerView.swift */,
 				D134CC7022641B350022AA29 /* IndicatorView.swift */,
+				6E763B4B2A2E2313002A77E8 /* CustomTopView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -541,6 +545,7 @@
 				0F2A2C622239C148003BDB2F /* PanModalHeight.swift in Sources */,
 				0F2A2C632239C14B003BDB2F /* PanModalPresentable.swift in Sources */,
 				0F2A2C642239C14E003BDB2F /* PanModalPresentable+Defaults.swift in Sources */,
+				6E763B4C2A2E2313002A77E8 /* CustomTopView.swift in Sources */,
 				0F2A2C652239C151003BDB2F /* PanModalPresentable+UIViewController.swift in Sources */,
 				0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */,
 				0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */,
@@ -587,6 +592,7 @@
 				DC139061216D93ED007A3E64 /* SampleViewController.swift in Sources */,
 				743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */,
 				638A938D256BB26E00A5E00B /* EmbedViewController.swift in Sources */,
+				6E763B4D2A2E25A2002A77E8 /* CustomTopView.swift in Sources */,
 				DCC0EE7C21917F2500208DBC /* PanModalPresentable+Defaults.swift in Sources */,
 				94795C9D21F03368008045A0 /* PanContainerView.swift in Sources */,
 				74C072A7220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift in Sources */,

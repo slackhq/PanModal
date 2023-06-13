@@ -60,13 +60,25 @@ public class PanModalPresentationAnimator: NSObject {
 
         // Use panView as presentingView if it already exists within the containerView
         let panView: UIView = transitionContext.containerView.panContainerView ?? toVC.view
-
+        let topView = transitionContext.containerView.panCustomTopView
+        let topViewHeight: CGFloat = {
+            if let topViewHeight = topView?.frame.height {
+                return topViewHeight + PanModalPresentationController.Constants.customTopViewOffset
+            } else {
+                return 0
+            }
+        }()
+        
         // Move presented view offscreen (from the bottom)
         panView.frame = transitionContext.finalFrame(for: toVC)
-        panView.frame.origin.y = transitionContext.containerView.frame.height
+        panView.frame.origin.y = transitionContext.containerView.frame.height + topViewHeight
+        topView?.alpha = 0
+        topView?.frame.origin.y = transitionContext.containerView.frame.height
 
         PanModalAnimator.animate({
             panView.frame.origin.y = yPos
+            topView?.frame.origin.y = yPos - topViewHeight
+            topView?.alpha = 1
         }, config: presentable) { didComplete in
             transitionContext.completeTransition(didComplete)
         }
@@ -82,9 +94,19 @@ public class PanModalPresentationAnimator: NSObject {
 
         let presentable = fromVC as? PanModalPresentable.LayoutType
         let panView: UIView = transitionContext.containerView.panContainerView ?? fromVC.view
-
+        let topView = transitionContext.containerView.panCustomTopView
+        let topViewHeight: CGFloat = {
+            if let topViewHeight = topView?.frame.height {
+                return topViewHeight + PanModalPresentationController.Constants.customTopViewOffset
+            } else {
+                return 0
+            }
+        }()
+        
         PanModalAnimator.animate({
-            panView.frame.origin.y = transitionContext.containerView.frame.height + PanModalPresentationController.Constants.dragIndicatorHeight
+            panView.frame.origin.y = transitionContext.containerView.frame.height + PanModalPresentationController.Constants.dragIndicatorHeight + topViewHeight
+            topView?.frame.origin.y = transitionContext.containerView.frame.height
+            topView?.alpha = 0.0
         }, config: presentable) { didComplete in
             fromVC.view.removeFromSuperview()
             transitionContext.completeTransition(didComplete)

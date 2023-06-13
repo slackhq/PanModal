@@ -38,6 +38,7 @@ public class PanModalPresentationController: UIPresentationController {
     struct Constants {
         static let snapMovementSensitivity = CGFloat(0.7)
         static let dragIndicatorHeight = CGFloat(16)
+        static let customTopViewOffset = CGFloat(10)
     }
 
     // MARK: - Properties
@@ -204,6 +205,7 @@ public class PanModalPresentationController: UIPresentationController {
     override public func presentationTransitionDidEnd(_ completed: Bool) {
         if completed { return }
 
+        presentable?.panCustomTopView?.removeFromSuperview()
         backgroundView.removeFromSuperview()
     }
 
@@ -339,6 +341,8 @@ private extension PanModalPresentationController {
         if presentable.showDragIndicator {
             addDragIndicatorView(to: presentedView)
         }
+        
+        addCustomTopViewIfExisted(in: containerView)
 
         setNeedsLayoutUpdate()
         adjustPanContainerBackgroundColor()
@@ -379,7 +383,18 @@ private extension PanModalPresentationController {
         backgroundView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         backgroundView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
-
+    
+    
+    func addCustomTopViewIfExisted(in containerView: UIView) {
+        guard let customTopView = presentable?.panCustomTopView else { return }
+        containerView.addSubview(customTopView)
+        customTopView.translatesAutoresizingMaskIntoConstraints = false
+        customTopView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        customTopView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        customTopView.bottomAnchor.constraint(equalTo: dragIndicatorView.topAnchor, constant: -Constants.customTopViewOffset).isActive = true
+        customTopView.heightAnchor.constraint(equalToConstant: customTopView.frame.height).isActive = true
+    }
+    
     /**
      Adds the drag indicator view to the view hierarchy
      & configures its layout constraints.
@@ -629,7 +644,16 @@ private extension PanModalPresentationController {
      Sets the y position of the presentedView & adjusts the backgroundView.
      */
     func adjust(toYPosition yPos: CGFloat) {
+        let topViewHeight: CGFloat = {
+            if let topViewHeight = presentable?.panCustomTopView?.frame.height {
+                return topViewHeight + Constants.customTopViewOffset
+            } else {
+                return 0
+            }
+        }()
+        
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
+        presentable?.panCustomTopView?.frame.origin.y = max(yPos, anchoredYPosition) - topViewHeight - PanModalPresentationController.Constants.dragIndicatorHeight
         
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max

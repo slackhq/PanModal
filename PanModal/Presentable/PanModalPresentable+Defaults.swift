@@ -77,6 +77,10 @@ public extension PanModalPresentable where Self: UIViewController {
     var showDragIndicator: Bool {
         return true
     }
+    
+    var panCustomTopView: PanCustomTopView? {
+        return nil
+    }
 
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return true
