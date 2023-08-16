@@ -42,8 +42,15 @@ public class PanModalPresentationAnimator: NSObject {
     /**
      Haptic feedback generator (during presentation)
      */
-    private var feedbackGenerator: UISelectionFeedbackGenerator?
-
+    private var _feedbackGenerator: Any? = nil
+    @available(iOS 10.0, *)
+    fileprivate var feedbackGenerator: UISelectionFeedbackGenerator? {
+        set {
+            _feedbackGenerator = newValue
+        } get {
+            return _feedbackGenerator as? UISelectionFeedbackGenerator
+        }
+    }
     // MARK: - Initializers
 
     required public init(transitionStyle: TransitionStyle) {
@@ -54,8 +61,12 @@ public class PanModalPresentationAnimator: NSObject {
          Prepare haptic feedback, only during the presentation state
          */
         if case .presentation = transitionStyle {
-            feedbackGenerator = UISelectionFeedbackGenerator()
-            feedbackGenerator?.prepare()
+            if #available(iOS 10.0, *) {
+                feedbackGenerator = UISelectionFeedbackGenerator()
+                feedbackGenerator?.prepare()
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 
@@ -86,7 +97,11 @@ public class PanModalPresentationAnimator: NSObject {
 
         // Haptic feedback
         if presentable?.isHapticFeedbackEnabled == true {
-            feedbackGenerator?.selectionChanged()
+            if #available(iOS 10.0, *) {
+                feedbackGenerator?.selectionChanged()
+            } else {
+                // Fallback on earlier versions
+            }
         }
 
         PanModalAnimator.animate({
@@ -95,7 +110,11 @@ public class PanModalPresentationAnimator: NSObject {
             // Calls viewDidAppear and viewDidDisappear
             fromVC.endAppearanceTransition()
             transitionContext.completeTransition(didComplete)
-            self?.feedbackGenerator = nil
+            if #available(iOS 10.0, *) {
+                self?.feedbackGenerator = nil
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 
