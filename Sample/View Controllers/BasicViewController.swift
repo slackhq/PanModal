@@ -42,6 +42,10 @@ extension BasicViewController: PanModalPresentable {
     var indicatorColor: UIColor {
         return .red
     }
+    
+    var allowsTapToDismiss: Bool {
+        return false
+    }
 }
 
 extension BasicViewController {
