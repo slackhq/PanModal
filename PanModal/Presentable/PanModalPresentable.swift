@@ -140,6 +140,8 @@ public protocol PanModalPresentable {
      Default value is true.
      */
     var showDragIndicator: Bool { get }
+    
+    var indicatorColor: UIColor { get }
 
     var panCustomTopView: PanCustomTopView? { get }
 

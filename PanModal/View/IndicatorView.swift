@@ -1,6 +1,8 @@
 import UIKit
 
 class IndicatorView: UIView {
+    let indicator = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -23,8 +25,6 @@ class IndicatorView: UIView {
     }
 
     private func addIndicatorView() {
-        let indicator = UIView()
-        indicator.backgroundColor = UIColor(red: 241/255.0, green: 243/255.0, blue: 245/255.0, alpha: 1)
         indicator.layer.cornerRadius = 2
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.widthAnchor.constraint(equalToConstant: 40).isActive = true
