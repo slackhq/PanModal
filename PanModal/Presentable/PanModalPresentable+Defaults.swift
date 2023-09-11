@@ -66,6 +66,10 @@ public extension PanModalPresentable where Self: UIViewController {
         return true
     }
     
+    var allowsTapToDismiss: Bool {
+        return true
+    }
+    
     var allowScrollViewDragToDismiss: Bool {
         return true
     }
@@ -80,6 +84,10 @@ public extension PanModalPresentable where Self: UIViewController {
     
     var panCustomTopView: PanCustomTopView? {
         return nil
+    }
+    
+    var indicatorColor: UIColor {
+        return UIColor(red: 241/255.0, green: 243/255.0, blue: 245/255.0, alpha: 1)
     }
 
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {

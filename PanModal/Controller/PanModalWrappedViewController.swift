@@ -376,6 +376,7 @@ private extension PanModalWrappedViewController {
      */
     func addDragIndicatorView(to view: UIView) {
         view.addSubview(dragIndicatorView)
+        dragIndicatorView.indicator.backgroundColor = presentable?.dragIndicatorBackgroundColor
         dragIndicatorView.backgroundColor = presentable?.dragIndicatorBackgroundColor
         dragIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         dragIndicatorView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0.5).isActive = true

@@ -111,6 +111,13 @@ public protocol PanModalPresentable {
      Default value is true.
      */
     var allowsDragToDismiss: Bool { get }
+    
+    /**
+     A flag to determine if dismissal should be initiated when tapping on the dimmed background view.
+     
+     Default value is true.
+     */
+    var allowsTapToDismiss: Bool { get }
 
     /**
      Default value is true
@@ -133,6 +140,8 @@ public protocol PanModalPresentable {
      Default value is true.
      */
     var showDragIndicator: Bool { get }
+    
+    var indicatorColor: UIColor { get }
 
     var panCustomTopView: PanCustomTopView? { get }
 

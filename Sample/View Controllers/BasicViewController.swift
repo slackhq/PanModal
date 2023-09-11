@@ -38,6 +38,14 @@ extension BasicViewController: PanModalPresentable {
     var panCustomTopView: PanCustomTopView? {
         return topView
     }
+    
+    var indicatorColor: UIColor {
+        return .red
+    }
+    
+    var allowsTapToDismiss: Bool {
+        return false
+    }
 }
 
 extension BasicViewController {
