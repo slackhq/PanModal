@@ -52,7 +52,7 @@ extension PanModalPresentationDelegate: UIViewControllerTransitioningDelegate {
      Changes in size class during presentation are handled via the adaptive presentation delegate
      */
     public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        let controller = PanModalPresentationController(presentedViewController: presented, presenting: presenting)
+        let controller = PanModalPresentationController(presentedViewController: presented, presenting: presenting ?? source)
         controller.delegate = self
         return controller
     }
