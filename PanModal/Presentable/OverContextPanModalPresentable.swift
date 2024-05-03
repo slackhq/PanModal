@@ -5,11 +5,11 @@ public protocol OverContextPanModalPresentable: PanModalPresentable {
 }
 
 extension OverContextPanModalPresentable where Self: UIViewController {
-    var presentStyle: PanModalPresentStyle {
+    public var presentStyle: PanModalPresentStyle {
         return .embed
     }
     
-    func panModalDidDismiss() {
+    public func panModalDidDismiss() {
         presentingViewController?.dismiss(animated: false)
     }
 }
