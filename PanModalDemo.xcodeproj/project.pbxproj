@@ -44,6 +44,8 @@
 		74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A4220BA76D00124CE1 /* PanModalHeight.swift */; };
 		74C072A7220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A6220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift */; };
 		74C072AA220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */; };
+		8E3DC78A2BEB24FA00F0A025 /* OverContextNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED0BEA82BE4BA110094D900 /* OverContextNavigationController.swift */; };
+		8E3DC78B2BEB251B00F0A025 /* OverContextPanModalPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED0BEA62BE4B9DF0094D900 /* OverContextPanModalPresentable.swift */; };
 		943904EB2226354100859537 /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EA2226354100859537 /* BasicViewController.swift */; };
 		943904ED2226366700859537 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EC2226366700859537 /* AlertViewController.swift */; };
 		943904EF2226383700859537 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EE2226383700859537 /* NavigationController.swift */; };
@@ -586,9 +588,11 @@
 				743CB2AA222660D100665A55 /* StackedProfileViewController.swift in Sources */,
 				943904EB2226354100859537 /* BasicViewController.swift in Sources */,
 				DC139073216D9458007A3E64 /* PanModalPresenter.swift in Sources */,
+				8E3DC78B2BEB251B00F0A025 /* OverContextPanModalPresentable.swift in Sources */,
 				943904EF2226383700859537 /* NavigationController.swift in Sources */,
 				DC3B2EBE222A58C9000C8A4A /* AlertView.swift in Sources */,
 				74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */,
+				8E3DC78A2BEB24FA00F0A025 /* OverContextNavigationController.swift in Sources */,
 				94795C9B21F0335D008045A0 /* PanModalPresentationDelegate.swift in Sources */,
 				943904F32226484F00859537 /* UserGroupStackedViewController.swift in Sources */,
 				74C072AA220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift in Sources */,

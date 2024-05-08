@@ -59,7 +59,7 @@ extension UIViewController: PanModalPresenter {
 
     }
     
-    public func presentOverContextPanModal(_ viewControllerToPresent: UIViewController & OverContextPanModalPresentable) {
+    public func presentOverContextPanModal(_ viewControllerToPresent: OverContextPanModal) {
         let overContextNavigationViewController = OverContextNavigationController(panModal: viewControllerToPresent)
         
         present(overContextNavigationViewController, animated: false) {
