@@ -28,6 +28,8 @@
 		638A938D256BB26E00A5E00B /* EmbedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A9387256BB21800A5E00B /* EmbedViewController.swift */; };
 		6E763B4C2A2E2313002A77E8 /* CustomTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E763B4B2A2E2313002A77E8 /* CustomTopView.swift */; };
 		6E763B4D2A2E25A2002A77E8 /* CustomTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E763B4B2A2E2313002A77E8 /* CustomTopView.swift */; };
+		6ED0BEA72BE4B9DF0094D900 /* OverContextPanModalPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED0BEA62BE4B9DF0094D900 /* OverContextPanModalPresentable.swift */; };
+		6ED0BEA92BE4BA110094D900 /* OverContextNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED0BEA82BE4BA110094D900 /* OverContextNavigationController.swift */; };
 		743CABB02225FC9F00634A5A /* UserGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */; };
 		743CABB22225FD1100634A5A /* UserGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */; };
 		743CABB42225FE7700634A5A /* UserGroupMemberPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */; };
@@ -42,6 +44,8 @@
 		74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A4220BA76D00124CE1 /* PanModalHeight.swift */; };
 		74C072A7220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A6220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift */; };
 		74C072AA220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C072A9220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift */; };
+		8E3DC78A2BEB24FA00F0A025 /* OverContextNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED0BEA82BE4BA110094D900 /* OverContextNavigationController.swift */; };
+		8E3DC78B2BEB251B00F0A025 /* OverContextPanModalPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED0BEA62BE4B9DF0094D900 /* OverContextPanModalPresentable.swift */; };
 		943904EB2226354100859537 /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EA2226354100859537 /* BasicViewController.swift */; };
 		943904ED2226366700859537 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EC2226366700859537 /* AlertViewController.swift */; };
 		943904EF2226383700859537 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943904EE2226383700859537 /* NavigationController.swift */; };
@@ -102,6 +106,8 @@
 		638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanModalWrappedViewController.swift; sourceTree = "<group>"; };
 		638A9387256BB21800A5E00B /* EmbedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedViewController.swift; sourceTree = "<group>"; };
 		6E763B4B2A2E2313002A77E8 /* CustomTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopView.swift; sourceTree = "<group>"; };
+		6ED0BEA62BE4B9DF0094D900 /* OverContextPanModalPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverContextPanModalPresentable.swift; sourceTree = "<group>"; };
+		6ED0BEA82BE4BA110094D900 /* OverContextNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverContextNavigationController.swift; sourceTree = "<group>"; };
 		743CABAF2225FC9F00634A5A /* UserGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupViewController.swift; sourceTree = "<group>"; };
 		743CABB12225FD1100634A5A /* UserGroupHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupHeaderView.swift; sourceTree = "<group>"; };
 		743CABB32225FE7700634A5A /* UserGroupMemberPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupMemberPresentable.swift; sourceTree = "<group>"; };
@@ -305,6 +311,7 @@
 				DCC0EE7B21917F2500208DBC /* PanModalPresentable+Defaults.swift */,
 				DC139069216D9458007A3E64 /* PanModalPresentable+UIViewController.swift */,
 				74C072A6220BA78800124CE1 /* PanModalPresentable+LayoutHelpers.swift */,
+				6ED0BEA62BE4B9DF0094D900 /* OverContextPanModalPresentable.swift */,
 			);
 			path = Presentable;
 			sourceTree = "<group>";
@@ -314,6 +321,7 @@
 			children = (
 				638A937F256B4DC500A5E00B /* PanModalWrappedViewController.swift */,
 				DC13906C216D9458007A3E64 /* PanModalPresentationController.swift */,
+				6ED0BEA82BE4BA110094D900 /* OverContextNavigationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -541,12 +549,14 @@
 				0F2A2C5E2239C137003BDB2F /* PanModalAnimator.swift in Sources */,
 				0F2A2C5F2239C139003BDB2F /* PanModalPresentationAnimator.swift in Sources */,
 				0F2A2C602239C13C003BDB2F /* PanModalPresentationController.swift in Sources */,
+				6ED0BEA92BE4BA110094D900 /* OverContextNavigationController.swift in Sources */,
 				0F2A2C612239C140003BDB2F /* PanModalPresentationDelegate.swift in Sources */,
 				0F2A2C622239C148003BDB2F /* PanModalHeight.swift in Sources */,
 				0F2A2C632239C14B003BDB2F /* PanModalPresentable.swift in Sources */,
 				0F2A2C642239C14E003BDB2F /* PanModalPresentable+Defaults.swift in Sources */,
 				6E763B4C2A2E2313002A77E8 /* CustomTopView.swift in Sources */,
 				0F2A2C652239C151003BDB2F /* PanModalPresentable+UIViewController.swift in Sources */,
+				6ED0BEA72BE4B9DF0094D900 /* OverContextPanModalPresentable.swift in Sources */,
 				0F2A2C662239C153003BDB2F /* PanModalPresentable+LayoutHelpers.swift in Sources */,
 				0F2A2C672239C157003BDB2F /* PanModalPresenter.swift in Sources */,
 				D134CC7122641B350022AA29 /* IndicatorView.swift in Sources */,
@@ -578,9 +588,11 @@
 				743CB2AA222660D100665A55 /* StackedProfileViewController.swift in Sources */,
 				943904EB2226354100859537 /* BasicViewController.swift in Sources */,
 				DC139073216D9458007A3E64 /* PanModalPresenter.swift in Sources */,
+				8E3DC78B2BEB251B00F0A025 /* OverContextPanModalPresentable.swift in Sources */,
 				943904EF2226383700859537 /* NavigationController.swift in Sources */,
 				DC3B2EBE222A58C9000C8A4A /* AlertView.swift in Sources */,
 				74C072A5220BA76D00124CE1 /* PanModalHeight.swift in Sources */,
+				8E3DC78A2BEB24FA00F0A025 /* OverContextNavigationController.swift in Sources */,
 				94795C9B21F0335D008045A0 /* PanModalPresentationDelegate.swift in Sources */,
 				943904F32226484F00859537 /* UserGroupStackedViewController.swift in Sources */,
 				74C072AA220BA82A00124CE1 /* UIViewController+PanModalPresenter.swift in Sources */,

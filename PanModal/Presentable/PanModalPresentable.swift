@@ -198,5 +198,6 @@ public protocol PanModalPresentable {
      Default value is an empty implementation.
      */
     func panModalWillDismiss()
-
+    
+    func panModalDidDismiss()
 }

@@ -185,6 +185,7 @@ public extension PanModalWrappedViewController {
         }, config: presentable) { [weak self] _ in
             guard let self = self else { return }
 
+            presentable?.panModalDidDismiss()
             self.removeParent(self)
             self.isPresentedViewAnimating = false
         }
