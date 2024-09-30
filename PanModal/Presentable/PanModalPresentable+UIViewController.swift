@@ -26,7 +26,11 @@ public extension PanModalPresentable where Self: UIViewController {
      function in the PanModalPresentationController.
      */
     func panModalTransition(to state: PanModalPresentationState) {
-        presentedVC?.transition(to: state)
+        if let parentPresentable = parentPresentable {
+            parentPresentable.panModalTransition(to: state)
+        } else {
+            presentedVC?.transition(to: state)
+        }
     }
 
     /**
@@ -46,7 +50,11 @@ public extension PanModalPresentable where Self: UIViewController {
      - Note: This should be called whenever any of the values for the PanModalPresentable protocol are changed.
      */
     func panModalSetNeedsLayoutUpdate() {
-        presentedVC?.setNeedsLayoutUpdate()
+        if let parentPresentable = parentPresentable {
+            parentPresentable.panModalSetNeedsLayoutUpdate()
+        } else {
+            presentedVC?.setNeedsLayoutUpdate()
+        }
     }
 
     /**
