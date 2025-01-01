@@ -24,13 +24,12 @@ public extension PanModalPresentable where Self: UIViewController {
     }
 
     var longFormHeight: PanModalHeight {
+        guard let scrollView = panScrollable else { return .maxHeight }
 
-        guard let scrollView = panScrollable
-            else { return .maxHeight }
+        let navigationBarHeight = (navigationController?.navigationBar ?? getCustomNavigationBar())?.frame.height ?? 0
 
-        // called once during presentation and stored
         scrollView.layoutIfNeeded()
-        return .contentHeight(scrollView.contentSize.height)
+        return .contentHeight(scrollView.contentSize.height + navigationBarHeight)
     }
 
     var springDamping: CGFloat {
@@ -116,5 +115,20 @@ public extension PanModalPresentable where Self: UIViewController {
 
     func panModalDidDismiss() {
         
+    }
+    
+    var parentPresentable: PanModalNavigationController? {
+        return navigationController as? PanModalNavigationController
+    }
+}
+
+private extension PanModalPresentable where Self: UIViewController {
+    func getCustomNavigationBar() -> UINavigationBar? {
+        for subview in self.view.subviews {
+            if let navigationBar = subview as? UINavigationBar {
+                return navigationBar
+            }
+        }
+        return nil
     }
 }
