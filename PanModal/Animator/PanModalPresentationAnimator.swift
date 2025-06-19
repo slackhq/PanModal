@@ -43,11 +43,18 @@ public class PanModalPresentationAnimator: NSObject {
      Haptic feedback generator (during presentation)
      */
     private var feedbackGenerator: UISelectionFeedbackGenerator?
+    
+    /**
+     A flag to determine to perform  apperence transaction when
+     presenting or dismissing the view controller.
+     */
+    private let disableAppearanceTransition: Bool
 
     // MARK: - Initializers
 
-    required public init(transitionStyle: TransitionStyle) {
+    required public init(transitionStyle: TransitionStyle, disableAppearanceTransition: Bool) {
         self.transitionStyle = transitionStyle
+        self.disableAppearanceTransition = disableAppearanceTransition
         super.init()
 
         /**
@@ -72,7 +79,9 @@ public class PanModalPresentationAnimator: NSObject {
         let presentable = panModalLayoutType(from: transitionContext)
 
         // Calls viewWillAppear and viewWillDisappear
-        fromVC.beginAppearanceTransition(false, animated: true)
+        if !disableAppearanceTransition {
+            fromVC.beginAppearanceTransition(false, animated: true)
+        }
         
         // Presents the view in shortForm position, initially
         let yPos: CGFloat = presentable?.shortFormYPos ?? 0.0
@@ -93,7 +102,9 @@ public class PanModalPresentationAnimator: NSObject {
             panView.frame.origin.y = yPos
         }, config: presentable) { [weak self] didComplete in
             // Calls viewDidAppear and viewDidDisappear
-            fromVC.endAppearanceTransition()
+            if let self, !self.disableAppearanceTransition {
+                fromVC.endAppearanceTransition()
+            }
             transitionContext.completeTransition(didComplete)
             self?.feedbackGenerator = nil
         }
@@ -110,17 +121,21 @@ public class PanModalPresentationAnimator: NSObject {
             else { return }
 
         // Calls viewWillAppear and viewWillDisappear
-        toVC.beginAppearanceTransition(true, animated: true)
+        if !disableAppearanceTransition {
+            toVC.beginAppearanceTransition(true, animated: true)
+        }
         
         let presentable = panModalLayoutType(from: transitionContext)
         let panView: UIView = transitionContext.containerView.panContainerView ?? fromVC.view
 
         PanModalAnimator.animate({
             panView.frame.origin.y = transitionContext.containerView.frame.height
-        }, config: presentable) { didComplete in
+        }, config: presentable) { [weak self] didComplete in
             fromVC.view.removeFromSuperview()
             // Calls viewDidAppear and viewDidDisappear
-            toVC.endAppearanceTransition()
+            if let self, !self.disableAppearanceTransition {
+                toVC.endAppearanceTransition()
+            }
             transitionContext.completeTransition(didComplete)
         }
     }
