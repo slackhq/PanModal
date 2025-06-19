@@ -172,6 +172,14 @@ public protocol PanModalPresentable: AnyObject {
      Default value is true.
      */
     var showDragIndicator: Bool { get }
+    
+    /**
+     A flag to determine to perform  apperence transaction when
+     presenting or dismissing the view controller.
+
+     Default value is true.
+     */
+    var disableAppearanceTransition: Bool { get }
 
     /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.
