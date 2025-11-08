@@ -32,6 +32,7 @@ protocol PanModalPresenter: AnyObject {
     func presentPanModal(_ viewControllerToPresent: PanModalPresentable.LayoutType,
                          sourceView: UIView?,
                          sourceRect: CGRect,
+                         shouldSeparateForPad: Bool,
                          completion: (() -> Void)?)
 
 }
