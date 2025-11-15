@@ -59,5 +59,18 @@ public extension PanModalPresentable where Self: UIViewController {
         PanModalAnimator.animate(animationBlock, config: self, completion)
     }
 
+    func panModalPresentWithNavController(parentVC: UIViewController?) {
+        let navController = PanModalNavController(rootViewController: self)
+        parentVC?.presentPanModal(navController)
+    }
+
+    func panModalPush(parentVC: UIViewController?, animated: Bool = false) {
+        let navController = parentVC?.navigationController as? PanModalNavController
+
+        DispatchQueue.main.async {
+            navController?.pushViewController(self, animated: animated)
+        }
+    }
+
 }
 #endif
